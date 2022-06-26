@@ -1,0 +1,10 @@
+Keyword
+Whitespace
+VariableName
+Punctuation
+Whitespace
+TypePrimitive
+Whitespace
+Punctuation
+Whitespace
+Numeric

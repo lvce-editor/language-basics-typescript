@@ -1,0 +1,1 @@
+type fn = (callback?: (err: any) => void) => void

@@ -1,0 +1,12 @@
+Keyword
+Whitespace
+Type
+Whitespace
+Punctuation
+Whitespace
+Punctuation
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+TypePrimitive

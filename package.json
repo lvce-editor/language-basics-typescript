@@ -1,0 +1,69 @@
+{
+  "name": "builtin.language-basics-typescript",
+  "version": "0.0.0-dev",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test-syntax-highlighting"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "@lvce-editor/package-extension": "git+https://github.com/lvce-editor/package-extension.git#v0.0.2",
+    "@lvce-editor/test-syntax-highlighting": "git+https://github.com/lvce-editor/test-syntax-highlighting#v0.0.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "test-tokenize": {
+    "skip": [
+      "typescript-Issue11",
+      "typescript-Issue42",
+      "typescript-Issue62",
+      "typescript-Issue66",
+      "typescript-Issue77",
+      "typescript-Issue87",
+      "typescript-Issue88",
+      "typescript-Issue90",
+      "typescript-Issue110",
+      "typescript-Issue112",
+      "typescript-Issue114",
+      "typescript-Issue124",
+      "typescript-Issue143",
+      "typescript-Issue146",
+      "typescript-Issue148",
+      "typescript-Issue152",
+      "typescript-Issue153",
+      "typescript-Issue155",
+      "typescript-Issue157",
+      "typescript-Issue158",
+      "typescript-Issue161",
+      "typescript-Issue178",
+      "typescript-Issue166",
+      "typescript-Issue171",
+      "typescript-Issue172",
+      "typescript-Issue180",
+      "typescript-Issue182",
+      "typescript-Issue186",
+      "typescript-Issue191",
+      "typescript-Issue193",
+      "typescript-Issue198",
+      "typescript-Issue200",
+      "typescript-Issue202",
+      "typescript-Issue206",
+      "typescript-Issue208",
+      "typescript-Issue217",
+      "typescript-Issue219",
+      "typescript-Issue230",
+      "typescript-Issue232",
+      "typescript-Issue235",
+      "typescript-Issue237",
+      "typescript-Issue239"
+    ]
+  }
+}

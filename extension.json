@@ -1,0 +1,12 @@
+{
+  "id": "builtin.language-basics-typescript",
+  "name": "Language Basics TypeScript",
+  "description": "Provides syntax highlighting and bracket matching in TypeScript files.",
+  "languages": [
+    {
+      "id": "typescript",
+      "extensions": [".ts"],
+      "tokenize": "src/tokenizeTypeScript.js"
+    }
+  ]
+}
