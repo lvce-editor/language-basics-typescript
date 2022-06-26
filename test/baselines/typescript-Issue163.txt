@@ -5,7 +5,6 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 VariableName
@@ -15,13 +14,10 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
-Whitespace
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Punctuation
 Punctuation

@@ -6,7 +6,6 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Whitespace
 NewLine
 VariableName
 Whitespace
@@ -18,7 +17,6 @@ Whitespace
 Comment
 Comment
 NewLine
-Whitespace
 NewLine
 VariableName
 Punctuation
@@ -44,7 +42,6 @@ Whitespace
 Comment
 Comment
 NewLine
-Whitespace
 NewLine
 VariableName
 Punctuation
@@ -54,7 +51,6 @@ Punctuation
 Whitespace
 Numeric
 Punctuation
-Whitespace
 NewLine
 VariableName
 Punctuation

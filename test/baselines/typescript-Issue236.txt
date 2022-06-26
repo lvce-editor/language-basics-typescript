@@ -3,7 +3,6 @@ Whitespace
 VariableName
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Keyword
@@ -13,7 +12,6 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Comment
@@ -21,9 +19,7 @@ Comment
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
-Whitespace
 NewLine
 Whitespace
 Keyword
@@ -37,7 +33,6 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Comment
@@ -45,9 +40,7 @@ Comment
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
-Whitespace
 NewLine
 Whitespace
 Keyword
@@ -57,7 +50,6 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Comment
@@ -65,6 +57,5 @@ Comment
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Punctuation

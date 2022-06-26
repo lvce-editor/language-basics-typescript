@@ -12,7 +12,6 @@ VariableName
 Punctuation
 VariableName
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Punctuation
@@ -20,14 +19,11 @@ String
 Punctuation
 Punctuation
 Punctuation
-Whitespace
 NewLine
-Whitespace
 NewLine
 Comment
 Comment
 NewLine
-Whitespace
 NewLine
 VariableName
 Punctuation
@@ -49,7 +45,6 @@ VariableName
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Comment

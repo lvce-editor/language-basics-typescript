@@ -3,7 +3,6 @@ Whitespace
 VariableName
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 VariableName
@@ -11,7 +10,6 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Whitespace
 NewLine
 Whitespace
 VariableName
@@ -25,6 +23,5 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Whitespace
 NewLine
 Punctuation

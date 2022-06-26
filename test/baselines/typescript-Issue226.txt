@@ -7,12 +7,9 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
 NewLine
-Whitespace
 NewLine
 Punctuation
-Whitespace
 NewLine
 Keyword
 Whitespace

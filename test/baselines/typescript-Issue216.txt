@@ -1,10 +1,8 @@
 Keyword
 Whitespace
 VariableName
-Whitespace
 NewLine
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Keyword
@@ -21,11 +19,9 @@ KeywordVoid
 Whitespace
 Punctuation
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Comment
@@ -40,7 +36,6 @@ Punctuation
 Whitespace
 Numeric
 Punctuation
-Whitespace
 NewLine
 Whitespace
 VariableName
@@ -52,10 +47,8 @@ String
 Punctuation
 Punctuation
 Punctuation
-Whitespace
 NewLine
 Whitespace
 Punctuation
-Whitespace
 NewLine
 Punctuation
