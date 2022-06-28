@@ -7,6 +7,11 @@
       "id": "typescript",
       "extensions": [".ts"],
       "tokenize": "src/tokenizeTypeScript.js"
+    },
+    {
+      "id": "typescriptreact",
+      "extensions": [".tsx"],
+      "tokenize": "src/tokenizeTypeScript.js"
     }
   ]
 }
