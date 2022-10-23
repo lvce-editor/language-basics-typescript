@@ -125,6 +125,8 @@ const RE_DOT = /^\./
 const RE_SQUARE_OPEN = /^\[/
 const RE_SQUARE_CLOSE = /^\]/
 
+export const hasArrayReturn = true
+
 /**
  *
  * @param {string} line
@@ -533,11 +535,9 @@ export const tokenizeLine = (line, lineState) => {
         state
         throw new Error('no')
     }
-    index += next[0].length
-    tokens.push({
-      type: token,
-      length: next[0].length,
-    })
+    const tokenLength = next[0].length
+    index += tokenLength
+    tokens.push(token, tokenLength)
   }
   if (state === State.AfterType && stack[0] === State.InsideClass) {
     state = State.InsideClass
