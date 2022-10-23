@@ -21,6 +21,10 @@ const State = {
   AfterTypeExpression: 18,
   AfterVariableName: 19,
   BeforePropertyAccess: 20,
+  AfterKeywordEnum: 21,
+  AfterKeywordEnumAfterVariableName: 22,
+  InsideEnum: 23,
+  InsideEnumAfterVariableName: 24,
 }
 
 /**
@@ -78,6 +82,9 @@ export const TokenMap = {
 
 export const initialLineState = {
   state: State.TopLevelContent,
+  /**
+   * @type {any[]}
+   */
   stack: [],
 }
 
@@ -130,7 +137,7 @@ export const hasArrayReturn = true
 /**
  *
  * @param {string} line
- * @param {object} lineState
+ * @param {any} lineState
  * @returns
  */
 export const tokenizeLine = (line, lineState) => {
@@ -142,13 +149,14 @@ export const tokenizeLine = (line, lineState) => {
   let stack = lineState.stack
   while (index < line.length) {
     const part = line.slice(index)
+    part
+    state
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD))) {
-          next[0] //?
           switch (next[0]) {
             case 'true':
             case 'false':
@@ -275,6 +283,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_KEYWORD_ENUM))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordEnum
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterKeywordDeclaration
@@ -282,6 +293,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else {
+          line
           part
           throw new Error('no')
         }
@@ -431,7 +443,6 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterKeywordDeclare:
-        part
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordDeclare
@@ -443,7 +454,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordDeclare
         } else if ((next = part.match(RE_KEYWORD_ENUM))) {
           token = TokenType.Keyword
-          state = State.AfterKeywordDeclare
+          state = State.AfterKeywordEnum
         } else if ((next = part.match(RE_KEYWORD_CLASS))) {
           token = TokenType.Keyword
           state = State.AfterKeywordClass
@@ -452,6 +463,51 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterVariableName
         } else {
           part
+          throw new Error('no')
+        }
+        break
+
+      case State.AfterKeywordEnum:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordEnum
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Type
+          state = State.AfterKeywordEnumAfterVariableName
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordEnumAfterVariableName:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordEnumAfterVariableName
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideEnum
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideEnum:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideEnum
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideEnumAfterVariableName
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideEnumAfterVariableName:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideEnumAfterVariableName
+        } else if ((next = part.match(RE_EQUAL))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else {
           throw new Error('no')
         }
         break
