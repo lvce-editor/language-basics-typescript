@@ -25,6 +25,10 @@
   "test-tokenize": {
     "skip": [
       "typescript-Abstracts",
+      "typescript-Comments",
+      "typescript-bigint",
+      "typescript-binder",
+      "typescript-constType",
       "typescript-arrow",
       "typescript-arrowInsideCall",
       "typescript-Issue11",
