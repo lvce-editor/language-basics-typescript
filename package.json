@@ -24,6 +24,7 @@
   },
   "test-tokenize": {
     "skip": [
+      "export-const-enum",
       "typescript-Issue11",
       "typescript-Issue42",
       "typescript-Issue62",
