@@ -1,0 +1,9 @@
+KeywordModifier
+Whitespace
+Numeric
+Punctuation
+NewLine
+VariableName
+Whitespace
+Numeric
+Punctuation

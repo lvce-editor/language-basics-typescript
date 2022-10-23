@@ -24,6 +24,9 @@
   },
   "test-tokenize": {
     "skip": [
+      "typescript-Abstracts",
+      "typescript-arrow",
+      "typescript-arrowInsideCall",
       "typescript-Issue11",
       "typescript-Issue42",
       "typescript-Issue62",
