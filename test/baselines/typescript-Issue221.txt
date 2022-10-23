@@ -9,6 +9,7 @@ Whitespace
 VariableName
 Whitespace
 Punctuation
+Whitespace
 NewLine
 Whitespace
 Punctuation
@@ -43,6 +44,7 @@ NewLine
 Whitespace
 KeywordReturn
 Punctuation
+Whitespace
 NewLine
 Whitespace
 Punctuation
