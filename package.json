@@ -25,6 +25,10 @@
   "test-tokenize": {
     "skip": [
       "typescript-Abstracts",
+      "typescript-constants",
+      "typescript-forof",
+      "typescript-readonly",
+      "typescript-readonlyModifier",
       "typescript-Comments",
       "typescript-bigint",
       "typescript-binder",
