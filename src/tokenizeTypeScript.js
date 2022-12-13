@@ -320,6 +320,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideObjectDestructuring
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           line
           part
@@ -681,3 +684,5 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
+
+tokenizeLine(`for (const style of this.style) {}`, initialLineState) //?
