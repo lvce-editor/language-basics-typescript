@@ -785,8 +785,7 @@ export const tokenizeLine = (line, lineState) => {
   if (state === State.AfterType && stack[0] === State.InsideClass) {
     state = State.InsideClass
     stack.pop()
-  }
-  if (state === State.AfterKeywordImportAfterString) {
+  } else if (state === State.AfterKeywordImportAfterString) {
     state = State.TopLevelContent
   }
   return {
