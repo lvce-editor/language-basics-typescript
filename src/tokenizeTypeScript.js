@@ -797,3 +797,5 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
+
+tokenizeLine(`let a: number, b: number`, initialLineState) //?
