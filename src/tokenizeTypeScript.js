@@ -134,6 +134,7 @@ const RE_DOT = /^\./
 const RE_SQUARE_OPEN = /^\[/
 const RE_SQUARE_CLOSE = /^\]/
 const RE_QUESTION_MARK = /^\?/
+const RE_EXCLAMATION_MARK = /^\!/
 
 export const hasArrayReturn = true
 
@@ -253,6 +254,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_EXCLAMATION_MARK))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else {
