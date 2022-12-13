@@ -30,8 +30,8 @@ const State = {
   AfterKeywordImport: 27,
   AfterKeywordImportAfterCurlyOpen: 28,
   AfterKeywordImportAfterKeywordType: 29,
-  AfterKeywordImportAfterCurlyClose: 30,
   AfterKeywordImportAfterString: 30,
+  AfterKeywordImportAfterAssert: 31,
 }
 
 /**
@@ -146,6 +146,7 @@ const RE_ESCAPE = /^\\.?/
 const RE_KEYWORD_TYPE = /^type/
 const RE_KEYWORD_FROM = /^from/
 const RE_KEYWORD_DEFAULT = /^default/
+const RE_KEYWORD_ASSERT = /^assert/
 
 export const hasArrayReturn = true
 
@@ -707,7 +708,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordImportAfterKeywordType
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterKeywordImportAfterCurlyClose
+          state = State.AfterKeywordImport
         } else if ((next = part.match(RE_KEYWORD_DEFAULT))) {
           token = TokenType.Keyword
           state = State.AfterKeywordImportAfterCurlyOpen
@@ -734,13 +735,37 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      case State.AfterKeywordImportAfterCurlyClose:
+      case State.AfterKeywordImportAfterString:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterKeywordImportAfterCurlyClose
-        } else if ((next = part.match(RE_KEYWORD_FROM))) {
-          token = TokenType.KeywordImport
-          state = State.AfterKeywordImport
+          state = State.AfterKeywordImportAfterString
+        } else if ((next = part.match(RE_KEYWORD_ASSERT))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImportAfterAssert
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordImportAfterAssert:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImportAfterAssert
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImportAfterAssert
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImportAfterAssert
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImportAfterAssert
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else {
           part
           throw new Error('no')
@@ -767,13 +792,3 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
-
-// tokenizeLine(
-//   `import json from "./foo.json" assert { type: "json" };`,
-//   initialLineState
-// ) //?
-
-tokenizeLine(
-  `import json from "./foo.json" assert { type: "json" };`,
-  initialLineState
-) //?
