@@ -139,6 +139,8 @@ const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
 const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
+const RE_ANGLE_OPEN = /^</
+const RE_ANGLE_CLOSE = /^>/
 
 export const hasArrayReturn = true
 
@@ -465,6 +467,15 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.AfterType
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Type
+          state = State.AfterType
+        } else if ((next = part.match(RE_ANGLE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterType
         } else {
           // stack.push(State.AfterType)
           part
