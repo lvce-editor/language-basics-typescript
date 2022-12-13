@@ -1,0 +1,15 @@
+KeywordImport
+Whitespace
+Keyword
+Whitespace
+Type
+Whitespace
+Punctuation
+Whitespace
+Type
+Punctuation
+Type
+Punctuation
+TypePrimitive
+Punctuation
+Punctuation
