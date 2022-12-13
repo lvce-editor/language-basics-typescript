@@ -98,8 +98,8 @@ const RE_VARIABLE_NAME = /^[\$a-zA-Z\_]+/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
-const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^']+/
-const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^"]+/
+const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
+const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^\d+/
 const RE_COLON = /^\:/
 const RE_TYPE_PRIMITIVE = /^(?:string|boolean|number|bigint|symbol|void|any)\b/
@@ -138,6 +138,7 @@ const RE_QUESTION_MARK = /^\?/
 const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
 const RE_AS = /^as/
+const RE_ESCAPE = /^\\.?/
 
 export const hasArrayReturn = true
 
@@ -277,6 +278,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_STRING_SINGLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_ESCAPE))) {
+          token = TokenType.String
+          state = State.InsideSingleQuoteString
         } else {
           throw new Error('no')
         }
@@ -286,6 +290,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else if ((next = part.match(RE_STRING_DOUBLE_QUOTE_CONTENT))) {
+          token = TokenType.String
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_ESCAPE))) {
           token = TokenType.String
           state = State.InsideDoubleQuoteString
         } else {
@@ -663,5 +670,3 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
-
-tokenizeLine(`import * as puppeteer from 'puppeteer';`, initialLineState)
