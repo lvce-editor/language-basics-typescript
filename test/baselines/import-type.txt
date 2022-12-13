@@ -1,10 +1,10 @@
 KeywordImport
 Whitespace
 Punctuation
-Whitespace
-KeywordImport
+Keyword
 Whitespace
 VariableName
+Punctuation
 Whitespace
 KeywordImport
 Whitespace

@@ -27,7 +27,11 @@ const State = {
   InsideEnumAfterVariableName: 24,
   InsideObjectDestructuring: 25,
   InsideObjectDestructuringAfterValue: 26,
-  // AfterKeywordImport: 27,
+  AfterKeywordImport: 27,
+  AfterKeywordImportAfterCurlyOpen: 28,
+  AfterKeywordImportAfterKeywordType: 29,
+  AfterKeywordImportAfterCurlyClose: 30,
+  AfterKeywordImportAfterString: 30,
 }
 
 /**
@@ -137,8 +141,11 @@ const RE_SQUARE_CLOSE = /^\]/
 const RE_QUESTION_MARK = /^\?/
 const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
-const RE_AS = /^as/
+const RE_KEYWORD_AS = /^as/
 const RE_ESCAPE = /^\\.?/
+const RE_KEYWORD_TYPE = /^type/
+const RE_KEYWORD_FROM = /^from/
+const RE_KEYWORD_DEFAULT = /^default/
 
 export const hasArrayReturn = true
 
@@ -173,6 +180,9 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'import':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordImport
+              break
             case 'export':
             case 'from':
               token = TokenType.KeywordImport
@@ -274,7 +284,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideSingleQuoteString:
         if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_SINGLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideSingleQuoteString
@@ -288,7 +298,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideDoubleQuoteString:
         if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_DOUBLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideDoubleQuoteString
@@ -324,7 +334,6 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-
       case State.AfterKeywordTypeDeclaration:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -554,7 +563,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideBlockComment
         } else if ((next = part.match(RE_BLOCK_COMMENT_END))) {
           token = TokenType.Comment
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Comment
           state = State.InsideBlockComment
@@ -638,20 +647,105 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      // case State.AfterKeywordImport:
-      //   if ((next = part.match(RE_WHITESPACE))) {
-      //     token = TokenType.Whitespace
-      //     state = State.AfterKeywordImport
-      //   } else if ((next = part.match(RE_STAR))) {
-      //     token = TokenType.Punctuation
-      //     state = State.AfterKeywordImport
-      //   } else if ((next = part.match(RE_AS))) {
-      //     token = TokenType.KeywordImport
-      //     state = State.TopLevelContent
-      //   } else {
-      //     throw new Error('no')
-      //   }
-      //   break
+      case State.AfterKeywordImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_STAR))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_KEYWORD_AS))) {
+          token = TokenType.KeywordImport
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else if ((next = part.match(RE_KEYWORD_FROM))) {
+          token = TokenType.KeywordImport
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          token = TokenType.Comment
+          stack.push(State.AfterKeywordImport)
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          token = TokenType.Punctuation
+          stack.push(State.AfterKeywordImportAfterString)
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          token = TokenType.Punctuation
+          stack.push(State.AfterKeywordImportAfterString)
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_EQUAL))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          token = TokenType.Comment
+          state = State.InsideLineComment
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordImportAfterCurlyOpen:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImportAfterKeywordType
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImportAfterCurlyClose
+        } else if ((next = part.match(RE_KEYWORD_DEFAULT))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else if ((next = part.match(RE_KEYWORD_AS))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordImportAfterKeywordType:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImportAfterKeywordType
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterKeywordImportAfterCurlyOpen
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordImportAfterCurlyClose:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImportAfterCurlyClose
+        } else if ((next = part.match(RE_KEYWORD_FROM))) {
+          token = TokenType.KeywordImport
+          state = State.AfterKeywordImport
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
       default:
         state
         throw new Error('no')
@@ -664,9 +758,22 @@ export const tokenizeLine = (line, lineState) => {
     state = State.InsideClass
     stack.pop()
   }
+  if (state === State.AfterKeywordImportAfterString) {
+    state = State.TopLevelContent
+  }
   return {
     state,
     stack,
     tokens,
   }
 }
+
+// tokenizeLine(
+//   `import json from "./foo.json" assert { type: "json" };`,
+//   initialLineState
+// ) //?
+
+tokenizeLine(
+  `import json from "./foo.json" assert { type: "json" };`,
+  initialLineState
+) //?
