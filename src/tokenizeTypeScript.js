@@ -141,6 +141,7 @@ const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
 const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
+const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^]/
 
 export const hasArrayReturn = true
 
@@ -256,16 +257,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
-        } else if ((next = part.match(RE_VERTICAL_LINE))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
-        } else if ((next = part.match(RE_QUESTION_MARK))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
-        } else if ((next = part.match(RE_EXCLAMATION_MARK))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
-        } else if ((next = part.match(RE_STAR))) {
+        } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else {
@@ -685,4 +677,4 @@ export const tokenizeLine = (line, lineState) => {
   }
 }
 
-tokenizeLine(`for (const style of this.style) {}`, initialLineState) //?
+tokenizeLine(`n % 1 ? n.toFixed(2) : String(n);`, initialLineState) //?
