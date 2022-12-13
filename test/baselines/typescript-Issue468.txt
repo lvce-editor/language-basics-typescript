@@ -3,10 +3,13 @@ Punctuation
 Whitespace
 Punctuation
 String
+String
 Punctuation
+Punctuation
+Whitespace
 Punctuation
 String
 Punctuation
-VariableName
+Whitespace
 Punctuation
-String
+Punctuation
