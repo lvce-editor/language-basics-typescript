@@ -1,0 +1,1 @@
+for (const style of this.style) {}
