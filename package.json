@@ -24,6 +24,8 @@
   },
   "test-tokenize": {
     "skip": [
+      "import-assertion",
+      "import-type",
       "typescript-Abstracts",
       "typescript-constants",
       "typescript-forof",
