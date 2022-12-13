@@ -27,6 +27,7 @@ const State = {
   InsideEnumAfterVariableName: 24,
   InsideObjectDestructuring: 25,
   InsideObjectDestructuringAfterValue: 26,
+  // AfterKeywordImport: 27,
 }
 
 /**
@@ -135,6 +136,8 @@ const RE_SQUARE_OPEN = /^\[/
 const RE_SQUARE_CLOSE = /^\]/
 const RE_QUESTION_MARK = /^\?/
 const RE_EXCLAMATION_MARK = /^\!/
+const RE_STAR = /^\*/
+const RE_AS = /^as/
 
 export const hasArrayReturn = true
 
@@ -257,6 +260,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else if ((next = part.match(RE_EXCLAMATION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_STAR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else {
@@ -625,6 +631,20 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      // case State.AfterKeywordImport:
+      //   if ((next = part.match(RE_WHITESPACE))) {
+      //     token = TokenType.Whitespace
+      //     state = State.AfterKeywordImport
+      //   } else if ((next = part.match(RE_STAR))) {
+      //     token = TokenType.Punctuation
+      //     state = State.AfterKeywordImport
+      //   } else if ((next = part.match(RE_AS))) {
+      //     token = TokenType.KeywordImport
+      //     state = State.TopLevelContent
+      //   } else {
+      //     throw new Error('no')
+      //   }
+      //   break
       default:
         state
         throw new Error('no')
@@ -643,3 +663,5 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
+
+tokenizeLine(`import * as puppeteer from 'puppeteer';`, initialLineState)
