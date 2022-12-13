@@ -25,6 +25,8 @@ const State = {
   AfterKeywordEnumAfterVariableName: 22,
   InsideEnum: 23,
   InsideEnumAfterVariableName: 24,
+  InsideObjectDestructuring: 25,
+  InsideObjectDestructuringAfterValue: 26,
 }
 
 /**
@@ -296,6 +298,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideObjectDestructuring
         } else {
           line
           part
@@ -588,6 +593,28 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else {
           part
+          throw new Error('no')
+        }
+        break
+      case State.InsideObjectDestructuring:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideObjectDestructuring
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideObjectDestructuringAfterValue
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideObjectDestructuringAfterValue:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideObjectDestructuringAfterValue
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordDeclaration
+        } else {
           throw new Error('no')
         }
         break
