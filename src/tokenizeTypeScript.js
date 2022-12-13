@@ -768,9 +768,12 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordImportAfterAssert
         } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
+          stack.push(State.AfterKeywordImportAfterAssert)
           state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
-          part
           throw new Error('no')
         }
         break
