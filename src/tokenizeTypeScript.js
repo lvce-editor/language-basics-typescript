@@ -260,6 +260,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           part //?
           throw new Error('no')
