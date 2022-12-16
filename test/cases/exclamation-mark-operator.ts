@@ -1,0 +1,1 @@
+const values = schema.items.allOf[0].properties!.command.anyOf[1].enum!;
