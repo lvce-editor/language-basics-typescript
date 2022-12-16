@@ -169,11 +169,6 @@ export const tokenizeLine = (line, lineState) => {
   let stack = lineState.stack
   while (index < line.length) {
     const part = line.slice(index)
-    part
-    // if (part.startsWith('number')) {
-    //   debugger
-    // }
-    state
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
@@ -708,6 +703,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+          stack.push(State.InsideTypeObject)
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
         } else {
           part
           throw new Error('no')
