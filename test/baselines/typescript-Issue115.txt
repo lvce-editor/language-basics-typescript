@@ -133,7 +133,6 @@ Whitespace
 VariableName
 Whitespace
 VariableName
-Numeric
 Punctuation
 VariableName
 Punctuation

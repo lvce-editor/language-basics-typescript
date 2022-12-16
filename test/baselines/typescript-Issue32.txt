@@ -7,14 +7,14 @@ NewLine
 NewLine
 Keyword
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace

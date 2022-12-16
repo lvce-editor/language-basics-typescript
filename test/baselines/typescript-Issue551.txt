@@ -17,7 +17,6 @@ NewLine
 Keyword
 Whitespace
 VariableName
-Numeric
 Whitespace
 Keyword
 Whitespace

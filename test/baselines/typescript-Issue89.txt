@@ -75,12 +75,10 @@ Whitespace
 Keyword
 Whitespace
 VariableName
-Numeric
 Whitespace
 Keyword
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 NewLine

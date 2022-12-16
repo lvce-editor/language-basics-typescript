@@ -21,7 +21,6 @@ Punctuation
 Whitespace
 Numeric
 VariableName
-Numeric
 Punctuation
 NewLine
 Keyword
@@ -32,7 +31,6 @@ Punctuation
 Whitespace
 Numeric
 VariableName
-Numeric
 Punctuation
 NewLine
 Keyword
@@ -43,7 +41,6 @@ Punctuation
 Whitespace
 Numeric
 VariableName
-Numeric
 Punctuation
 NewLine
 Keyword
@@ -54,7 +51,6 @@ Punctuation
 Whitespace
 Numeric
 VariableName
-Numeric
 Punctuation
 NewLine
 Keyword
@@ -65,6 +61,5 @@ Punctuation
 Whitespace
 Numeric
 VariableName
-Numeric
 Punctuation
 NewLine

@@ -16,7 +16,6 @@ Punctuation
 Punctuation
 Whitespace
 VariableName
-Numeric
 Punctuation
 Whitespace
 Punctuation
@@ -57,7 +56,6 @@ Punctuation
 Punctuation
 Whitespace
 VariableName
-Numeric
 Punctuation
 Whitespace
 Punctuation
