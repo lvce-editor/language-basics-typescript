@@ -9,5 +9,5 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 NewLine

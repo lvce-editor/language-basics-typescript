@@ -338,24 +338,24 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.BeforeType:
-        part
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.BeforeType
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           part
           token = TokenType.TypePrimitive
-          state = State.AfterType
+          state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           part
           token = TokenType.Type
-          state = State.AfterType
+          state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeExpression
+          stack.push(State.AfterTypeExpression)
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -374,14 +374,12 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.InsideTypeExpression:
-        part
         if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = State.AfterTypeExpression
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterVariableName
-          stack.push(State.InsideTypeExpression)
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideTypeExpression
@@ -399,6 +397,12 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterTypeExpression
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeExpression
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.AfterTypeExpression
         } else {
           part
           throw new Error('no')
@@ -427,7 +431,6 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterType:
-        part
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -446,7 +449,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.BeforeType
+          state = stack.pop() || State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -617,6 +620,9 @@ export const tokenizeLine = (line, lineState) => {
           stack
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.InsideClass
         } else {
           part
           throw new Error('no')
@@ -676,5 +682,3 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
-
-tokenizeLine(`@injectable()`, initialLineState) //?
