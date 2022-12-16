@@ -1,6 +1,6 @@
 Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine
@@ -8,21 +8,21 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
@@ -130,7 +130,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace
@@ -139,7 +138,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace
@@ -150,7 +148,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace
@@ -169,13 +166,11 @@ NewLine
 Keyword
 Whitespace
 VariableName
-Numeric
 Punctuation
 Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace
@@ -184,7 +179,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace
@@ -195,7 +189,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Whitespace
 Punctuation
 Whitespace

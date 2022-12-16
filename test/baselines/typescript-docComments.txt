@@ -17,14 +17,12 @@ Whitespace
 VariableName
 Punctuation
 VariableName
-Numeric
 Punctuation
 Whitespace
 VariableName
 Punctuation
 Whitespace
 VariableName
-Numeric
 Punctuation
 Whitespace
 VariableName

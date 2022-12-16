@@ -21,7 +21,6 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Numeric
 Punctuation
 Whitespace
 Numeric

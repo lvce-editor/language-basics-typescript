@@ -1,5 +1,4 @@
 VariableName
-Numeric
 Whitespace
 Keyword
 Whitespace
@@ -13,7 +12,6 @@ LanguageConstant
 Punctuation
 NewLine
 VariableName
-Numeric
 Whitespace
 Keyword
 Whitespace
@@ -31,7 +29,6 @@ LanguageConstant
 Punctuation
 NewLine
 VariableName
-Numeric
 Whitespace
 Keyword
 Punctuation
@@ -50,7 +47,6 @@ LanguageConstant
 Punctuation
 NewLine
 VariableName
-Numeric
 Whitespace
 Keyword
 Whitespace

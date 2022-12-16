@@ -1,6 +1,6 @@
 Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine
@@ -8,7 +8,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -19,9 +19,8 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Punctuation
