@@ -57,11 +57,11 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
-Keyword
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
-Keyword
+KeywordControl
 Punctuation
 Punctuation
 Whitespace
