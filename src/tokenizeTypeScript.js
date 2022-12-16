@@ -92,7 +92,7 @@ export const initialLineState = {
 }
 
 const RE_KEYWORD =
-  /^(?:yield|with|while|void|var|typeof|type|true|try|throw|this|static|switch|super|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|class|catch|case|break|await)\b/
+  /^(?:yield|with|while|void|var|typeof|type|true|try|throw|this|static|switch|super|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|class|catch|case|break|await|async)\b/
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\$a-zA-Z\_]+/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+]/

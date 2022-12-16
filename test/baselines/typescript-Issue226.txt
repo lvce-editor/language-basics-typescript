@@ -1,4 +1,4 @@
-VariableName
+KeywordModifier
 Whitespace
 Keyword
 Whitespace
@@ -17,7 +17,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Punctuation
 Punctuation
