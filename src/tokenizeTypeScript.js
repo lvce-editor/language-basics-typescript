@@ -141,7 +141,7 @@ const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
 const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
-const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^]/
+const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 
 export const hasArrayReturn = true
 
@@ -677,4 +677,4 @@ export const tokenizeLine = (line, lineState) => {
   }
 }
 
-tokenizeLine(`n % 1 ? n.toFixed(2) : String(n);`, initialLineState) //?
+tokenizeLine(`@injectable()`, initialLineState) //?
