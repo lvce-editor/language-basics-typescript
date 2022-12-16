@@ -3,7 +3,7 @@ Punctuation
 Numeric
 Punctuation
 NewLine
-VariableName
+KeywordModifier
 Punctuation
 Numeric
 Punctuation

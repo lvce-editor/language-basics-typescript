@@ -9,7 +9,7 @@ Regex
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Keyword
 Whitespace
