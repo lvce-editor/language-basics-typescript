@@ -116,6 +116,7 @@ const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^\d+/
 const RE_COLON = /^\:/
+const RE_COLON_OPTIONAL = /^\??\:/
 const RE_TYPE_PRIMITIVE = /^(?:string|boolean|number|bigint|symbol|void|any)\b/
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
@@ -746,7 +747,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
-        } else if ((next = part.match(RE_COLON))) {
+        } else if ((next = part.match(RE_COLON_OPTIONAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.InsideTypeObject)
