@@ -35,6 +35,7 @@ const State = {
   AfterMethodParameters: 32,
   AfterPropertyDot: 33,
   InsideBacktickString: 34,
+  AfterInterfaceName: 35,
   // AfterKeywordImport: 27,
 }
 
@@ -165,6 +166,7 @@ const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
 const RE_QUOTE_BACKTICK = /^`/
 const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
+const RE_KEYWORD_EXTENDS = /^extends/
 
 export const hasArrayReturn = true
 
@@ -537,6 +539,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
           state = State.AfterType
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
         } else {
           // stack.push(State.AfterType)
           part
@@ -719,7 +724,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordInterface
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
-          state = State.BeforeType
+          state = State.AfterInterfaceName
         } else {
           throw new Error('no')
         }
@@ -835,6 +840,24 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.String
           state = State.InsideBacktickString
         } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterInterfaceName:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterInterfaceName
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
+        } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordModifier
+          state = State.AfterInterfaceName
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Type
+          state = State.AfterInterfaceName
+        } else {
+          part
           throw new Error('no')
         }
         break
