@@ -1,14 +1,10 @@
-Keyword
-Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
-Whitespace
-KeywordModifier
-Whitespace
 VariableName
 Punctuation
-Function
+VariableName
 Punctuation
+Whitespace
 Punctuation
 Punctuation

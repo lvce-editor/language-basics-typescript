@@ -1,6 +1,6 @@
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Numeric
 Punctuation
@@ -14,7 +14,7 @@ NewLine
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Numeric
 Punctuation
@@ -24,7 +24,7 @@ Punctuation
 NewLine
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Numeric
 Punctuation

@@ -17,9 +17,9 @@ Punctuation
 Punctuation
 Punctuation
 Punctuation
-Keyword
-Punctuation
 VariableName
+Punctuation
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -31,9 +31,9 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-Keyword
-Punctuation
 VariableName
+Punctuation
+Function
 Punctuation
 Punctuation
 Punctuation

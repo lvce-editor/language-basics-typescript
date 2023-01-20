@@ -12,7 +12,7 @@ Punctuation
 NewLine
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String

@@ -33,6 +33,7 @@ const State = {
   InsideMethodParameters: 30,
   InsideMethodParametersAfterVariableName: 31,
   AfterMethodParameters: 32,
+  AfterPropertyDot: 33,
   // AfterKeywordImport: 27,
 }
 
@@ -63,6 +64,7 @@ export const TokenType = {
   StorageModifier: 18,
   KeywordVoid: 19,
   Function: 20,
+  FunctionName: 21,
 }
 
 export const TokenMap = {
@@ -89,6 +91,7 @@ export const TokenMap = {
   [TokenType.StorageModifier]: 'StorageModifier',
   [TokenType.KeywordVoid]: 'KeywordVoid',
   [TokenType.Function]: 'Function',
+  [TokenType.FunctionName]: 'Function',
 }
 
 export const initialLineState = {
@@ -99,6 +102,7 @@ export const initialLineState = {
   stack: [],
 }
 
+const RE_LINE_COMMENT = /^\/\/[^\n]*/
 const RE_KEYWORD =
   /^(?:yield|with|while|void|var|typeof|type|true|try|throw|this|static|switch|super|readonly|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|constructor|class|catch|case|break|await|async|abstract)\b/
 const RE_WHITESPACE = /^\s+/
@@ -151,6 +155,12 @@ const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
+const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
+const RE_NUMERIC_2 =
+  /^(?:(?:[0-9][0-9_]*(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)(n)?\B)|(?:(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(n)?\b(?!\.))|(?:0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b)|(?:0(?:b|B)[01][01_]*(n)?\b)|(?:0(?:o|O)?[0-7][0-7_]*(n)?\b))/ // 1.1E+3
+const RE_NUMERIC_HEX = /0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
+const RE_NUMERIC_BINARY = /0(?:b|B)[01][01_]*(n)?\b/
+const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
 
 export const hasArrayReturn = true
 
@@ -254,9 +264,6 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
-        } else if ((next = part.match(RE_PUNCTUATION))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
         } else if ((next = part.match(RE_SLASH))) {
           if ((next = part.match(RE_BLOCK_COMMENT_START))) {
             token = TokenType.Comment
@@ -272,9 +279,20 @@ export const tokenizeLine = (line, lineState) => {
             token = TokenType.Punctuation
             state = State.TopLevelContent
           }
-        } else if ((next = part.match(RE_NUMERIC))) {
+        }
+        //  else if ((next = part.match(RE_NUMERIC))) {
+        //   token = TokenType.Numeric
+        //   state = State.TopLevelContent
+        // }
+        else if ((next = part.match(RE_NUMERIC_2))) {
           token = TokenType.Numeric
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+          if (next[0] === '.') {
+            state = State.AfterPropertyDot
+          }
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
@@ -772,6 +790,29 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.InsideTypeObject)
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterPropertyDot:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterPropertyDot
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.FunctionName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.InsideLineComment
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           throw new Error('no')
         }

@@ -9,7 +9,7 @@ Punctuation
 String
 Punctuation
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -19,7 +19,7 @@ Punctuation
 NewLine
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -39,7 +39,7 @@ Punctuation
 String
 Punctuation
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -49,7 +49,7 @@ Punctuation
 NewLine
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String

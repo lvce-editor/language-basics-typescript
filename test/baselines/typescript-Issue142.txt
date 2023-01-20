@@ -18,13 +18,13 @@ NewLine
 Whitespace
 Keyword
 Punctuation
-VariableName
+Function
 Punctuation
 Keyword
 Punctuation
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

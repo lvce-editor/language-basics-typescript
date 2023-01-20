@@ -16,7 +16,7 @@ Punctuation
 Whitespace
 Regex
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
