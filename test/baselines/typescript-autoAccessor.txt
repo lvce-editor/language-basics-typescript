@@ -24,7 +24,7 @@ Numeric
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Whitespace

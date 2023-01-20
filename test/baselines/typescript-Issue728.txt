@@ -2,7 +2,7 @@ KeywordImport
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Keyword
 Whitespace

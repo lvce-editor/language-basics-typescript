@@ -19,7 +19,7 @@ VariableName
 Punctuation
 Keyword
 Punctuation
-VariableName
+Keyword
 Punctuation
 VariableName
 Punctuation
