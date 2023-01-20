@@ -34,6 +34,7 @@ const State = {
   InsideMethodParametersAfterVariableName: 31,
   AfterMethodParameters: 32,
   AfterPropertyDot: 33,
+  InsideBacktickString: 34,
   // AfterKeywordImport: 27,
 }
 
@@ -161,6 +162,9 @@ const RE_NUMERIC_2 =
 const RE_NUMERIC_HEX = /0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
 const RE_NUMERIC_BINARY = /0(?:b|B)[01][01_]*(n)?\b/
 const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
+const RE_QUOTE_BACKTICK = /^`/
+const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
+const RE_STRING_ESCAPE = /^\\./
 
 export const hasArrayReturn = true
 
@@ -299,6 +303,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_QUOTE_BACKTICK))) {
+          token = TokenType.Punctuation
+          state = State.InsideBacktickString
         } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -813,6 +820,20 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideBacktickString:
+        if ((next = part.match(RE_QUOTE_BACKTICK))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_STRING_BACKTICK_QUOTE_CONTENT))) {
+          token = TokenType.String
+          state = State.InsideBacktickString
+        } else if ((next = part.match(RE_STRING_ESCAPE))) {
+          token = TokenType.String
+          state = State.InsideBacktickString
         } else {
           throw new Error('no')
         }
