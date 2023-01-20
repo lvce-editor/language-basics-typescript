@@ -185,7 +185,7 @@ export const tokenizeLine = (line, lineState) => {
   let tokens = []
   let token = TokenType.None
   let state = lineState.state
-  let stack = lineState.stack
+  let stack = [...lineState.stack]
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
@@ -495,6 +495,7 @@ export const tokenizeLine = (line, lineState) => {
         } else {
           tokens
           part
+          console.log({ part, tokens, lineState })
           throw new Error('no')
         }
         break
@@ -899,3 +900,8 @@ export const tokenizeLine = (line, lineState) => {
     tokens,
   }
 }
+
+// tokenizeLine(`export function testFunctionOverload(p: number): new() => any`, {
+//   state: 18,
+//   stack: [],
+// }) //?
