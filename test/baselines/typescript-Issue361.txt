@@ -8,7 +8,7 @@ VariableName
 Punctuation
 VariableName
 Punctuation
-Keyword
+VariableName
 Punctuation
 NewLine
 Whitespace

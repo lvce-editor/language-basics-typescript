@@ -2,7 +2,7 @@ VariableName
 Punctuation
 VariableName
 Punctuation
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace

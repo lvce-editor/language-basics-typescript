@@ -18,7 +18,7 @@ NewLine
 Whitespace
 Keyword
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -48,7 +48,7 @@ NewLine
 Whitespace
 Keyword
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String

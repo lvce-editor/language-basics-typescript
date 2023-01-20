@@ -15,11 +15,11 @@ NewLine
 Whitespace
 VariableName
 Punctuation
+Function
+Punctuation
+Keyword
+Punctuation
 VariableName
-Punctuation
-Keyword
-Punctuation
-Keyword
 Punctuation
 VariableName
 Punctuation

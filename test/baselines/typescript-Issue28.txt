@@ -20,7 +20,6 @@ Whitespace
 Punctuation
 Whitespace
 Numeric
-VariableName
 Punctuation
 NewLine
 Keyword
@@ -30,7 +29,6 @@ Whitespace
 Punctuation
 Whitespace
 Numeric
-VariableName
 Punctuation
 NewLine
 Keyword
@@ -40,7 +38,6 @@ Whitespace
 Punctuation
 Whitespace
 Numeric
-VariableName
 Punctuation
 NewLine
 Keyword
@@ -50,7 +47,6 @@ Whitespace
 Punctuation
 Whitespace
 Numeric
-VariableName
 Punctuation
 NewLine
 Keyword
@@ -60,6 +56,5 @@ Whitespace
 Punctuation
 Whitespace
 Numeric
-VariableName
 Punctuation
 NewLine

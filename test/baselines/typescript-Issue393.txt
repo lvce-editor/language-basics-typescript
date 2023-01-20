@@ -41,7 +41,7 @@ Keyword
 Punctuation
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 Keyword
 Punctuation

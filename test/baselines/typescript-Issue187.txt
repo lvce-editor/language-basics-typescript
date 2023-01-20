@@ -17,11 +17,11 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -37,7 +37,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace
@@ -53,11 +53,11 @@ KeywordReturn
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
