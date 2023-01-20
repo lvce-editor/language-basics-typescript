@@ -117,7 +117,8 @@ const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
-const RE_TYPE_PRIMITIVE = /^(?:string|boolean|number|bigint|symbol|void|any)\b/
+const RE_TYPE_PRIMITIVE =
+  /^(?:string|boolean|number|bigint|symbol|void|any|undefined)\b/
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
@@ -168,6 +169,7 @@ const RE_QUOTE_BACKTICK = /^`/
 const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
 const RE_KEYWORD_EXTENDS = /^extends/
+const RE_KEYWORD_READONLY = /^readonly/
 
 export const hasArrayReturn = true
 
@@ -396,11 +398,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.BeforeType
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
-          part
           token = TokenType.TypePrimitive
-          state = stack.pop() || State.AfterType
+          state = State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
-          part
           token = TokenType.Type
           state = State.AfterType
         } else if ((next = part.match(RE_SEMICOLON))) {
@@ -445,6 +445,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.InsideTypeExpression
         } else {
+          part
           throw new Error('no')
         }
         break
@@ -467,6 +468,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterVariableName
         } else {
           part
           throw new Error('no')
@@ -751,6 +755,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_METHOD_NAME))) {
           token = TokenType.Function
           state = State.AfterMethodName
+        } else if ((next = part.match(RE_KEYWORD_READONLY))) {
+          token = TokenType.KeywordModifier
+          state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideTypeObject
