@@ -603,6 +603,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideEnumAfterVariableName
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
         } else {
           throw new Error('no')
         }
@@ -614,7 +617,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideEnum
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
         } else {
+          part
           throw new Error('no')
         }
         break
