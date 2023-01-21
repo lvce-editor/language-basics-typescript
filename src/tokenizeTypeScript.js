@@ -391,6 +391,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           line
           part
