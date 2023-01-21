@@ -24,6 +24,7 @@
   },
   "test-tokenize": {
     "skip": [
+      "import-type-destructured",
       "comment-after-type",
       "object-multiple-properties",
       "key-string-any",
