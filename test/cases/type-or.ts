@@ -1,0 +1,1 @@
+let hash: string | null
