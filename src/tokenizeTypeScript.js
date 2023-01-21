@@ -172,6 +172,7 @@ const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
 const RE_KEYWORD_EXTENDS = /^extends/
 const RE_KEYWORD_TYPE = /^type/
+const RE_KEYWORD_IN = /^in/
 
 export const hasArrayReturn = true
 
@@ -373,6 +374,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_ENUM))) {
           token = TokenType.Keyword
           state = State.AfterKeywordEnum
+        } else if ((next = part.match(RE_KEYWORD_IN))) {
+          token = TokenType.KeywordOperator
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterKeywordDeclaration
