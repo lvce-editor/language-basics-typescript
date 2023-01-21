@@ -5,9 +5,9 @@ Keyword
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
-VariableName
+Keyword
 Punctuation
 VariableName
 Punctuation
