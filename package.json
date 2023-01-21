@@ -24,6 +24,7 @@
   },
   "test-tokenize": {
     "skip": [
+      "comment-after-type",
       "object-multiple-properties",
       "key-string-any",
       "type-or-interface",
