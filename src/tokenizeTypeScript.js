@@ -298,17 +298,15 @@ export const tokenizeLine = (line, lineState) => {
           } else if ((next = part.match(RE_LINE_COMMENT_START))) {
             token = TokenType.Comment
             state = State.InsideLineComment
+          } else if ((next = part.match(RE_PUNCTUATION))) {
+            token = TokenType.Punctuation
+            state = State.TopLevelContent
           } else {
-            next = part.match(RE_PUNCTUATION)
+            next = part.match(RE_SLASH)
             token = TokenType.Punctuation
             state = State.TopLevelContent
           }
-        }
-        //  else if ((next = part.match(RE_NUMERIC))) {
-        //   token = TokenType.Numeric
-        //   state = State.TopLevelContent
-        // }
-        else if ((next = part.match(RE_NUMERIC_2))) {
+        } else if ((next = part.match(RE_NUMERIC_2))) {
           token = TokenType.Numeric
           state = State.TopLevelContent
         } else if ((next = part.match(RE_PUNCTUATION))) {
