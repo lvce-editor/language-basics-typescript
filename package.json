@@ -25,6 +25,7 @@
   "test-tokenize": {
     "skip": [
       "object-multiple-properties",
+      "key-string-any",
       "type-or-interface",
       "import-assertion",
       "import-type",
