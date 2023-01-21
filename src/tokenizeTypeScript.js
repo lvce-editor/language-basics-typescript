@@ -68,6 +68,7 @@ export const TokenType = {
   KeywordVoid: 19,
   Function: 20,
   FunctionName: 21,
+  KeywordOperator: 22,
 }
 
 export const TokenMap = {
@@ -95,6 +96,7 @@ export const TokenMap = {
   [TokenType.KeywordVoid]: 'KeywordVoid',
   [TokenType.Function]: 'Function',
   [TokenType.FunctionName]: 'Function',
+  [TokenType.KeywordOperator]: 'KeywordOperator',
 }
 
 export const initialLineState = {
@@ -267,6 +269,11 @@ export const tokenizeLine = (line, lineState) => {
             case 'override':
             case 'abstract':
               token = TokenType.KeywordModifier
+              state = State.TopLevelContent
+              break
+            case 'in':
+            case 'of':
+              token = TokenType.KeywordOperator
               state = State.TopLevelContent
               break
             default:
