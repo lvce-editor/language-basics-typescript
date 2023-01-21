@@ -112,7 +112,7 @@ const RE_KEYWORD =
   /^(?:yield|with|while|void|var|typeof|type|true|try|throw|this|static|switch|super|readonly|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|constructor|class|catch|case|break|await|async|abstract)\b/
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
-const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+]/
+const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
 const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
@@ -164,7 +164,7 @@ const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
 const RE_NUMERIC_2 =
   /^(?:(?:[0-9][0-9_]*(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)(n)?\B)|(?:(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(n)?\b(?!\.))|(?:0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b)|(?:0(?:b|B)[01][01_]*(n)?\b)|(?:0(?:o|O)?[0-7][0-7_]*(n)?\b))/ // 1.1E+3
-const RE_NUMERIC_HEX = /0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
+const RE_NUMERIC_HEX = /0(?:x|XN)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
 const RE_NUMERIC_BINARY = /0(?:b|B)[01][01_]*(n)?\b/
 const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
 const RE_QUOTE_BACKTICK = /^`/
@@ -176,7 +176,6 @@ const RE_KEYWORD_OF = /^of\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
 
 export const hasArrayReturn = true
-
 /**
  *
  * @param {string} line
