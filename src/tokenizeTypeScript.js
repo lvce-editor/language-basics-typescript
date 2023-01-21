@@ -448,6 +448,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
           stack.push(State.BeforeType)
+        } else if ((next = part.match(RE_VERTICAL_LINE))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else {
           part
           throw new Error('no')
