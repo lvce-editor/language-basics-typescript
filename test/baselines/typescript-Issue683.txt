@@ -9,7 +9,7 @@ Punctuation
 Whitespace
 Numeric
 Whitespace
-Keyword
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
