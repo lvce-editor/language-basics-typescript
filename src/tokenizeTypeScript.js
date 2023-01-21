@@ -170,9 +170,9 @@ const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
 const RE_QUOTE_BACKTICK = /^`/
 const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
-const RE_KEYWORD_EXTENDS = /^extends/
-const RE_KEYWORD_TYPE = /^type/
-const RE_KEYWORD_IN = /^in/
+const RE_KEYWORD_TYPE = /^type\b/
+const RE_KEYWORD_IN = /^in\b/
+const RE_KEYWORD_EXTENDS = /^extends\b/
 
 export const hasArrayReturn = true
 
