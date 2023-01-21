@@ -36,6 +36,7 @@ const State = {
   AfterPropertyDot: 33,
   InsideBacktickString: 34,
   AfterInterfaceName: 35,
+  AfterKeywordImport: 36,
   // AfterKeywordImport: 27,
 }
 
@@ -168,6 +169,7 @@ const RE_QUOTE_BACKTICK = /^`/
 const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
 const RE_KEYWORD_EXTENDS = /^extends/
+const RE_KEYWORD_TYPE = /^type/
 
 export const hasArrayReturn = true
 
@@ -200,6 +202,9 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'import':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordImport
+              break
             case 'export':
             case 'from':
               token = TokenType.KeywordImport
@@ -870,6 +875,38 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterInterfaceName
         } else {
           part
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_STAR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.AfterPropertyDot
+        } else {
           throw new Error('no')
         }
         break
