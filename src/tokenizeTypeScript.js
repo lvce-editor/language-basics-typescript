@@ -273,6 +273,8 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'in':
             case 'of':
+            case 'typeof':
+            case 'instanceof':
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
               break

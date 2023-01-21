@@ -1,6 +1,6 @@
 VariableName
 Whitespace
-Keyword
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
@@ -13,7 +13,7 @@ Punctuation
 NewLine
 VariableName
 Whitespace
-Keyword
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -30,7 +30,7 @@ Punctuation
 NewLine
 VariableName
 Whitespace
-Keyword
+KeywordOperator
 Punctuation
 VariableName
 Punctuation
@@ -48,7 +48,7 @@ Punctuation
 NewLine
 VariableName
 Whitespace
-Keyword
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
