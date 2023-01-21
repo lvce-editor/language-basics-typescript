@@ -1,10 +1,16 @@
 KeywordImport
 Whitespace
+Keyword
+Whitespace
+Punctuation
+Whitespace
 VariableName
+Whitespace
+Punctuation
 Whitespace
 KeywordImport
 Whitespace
 Punctuation
 String
 Punctuation
-Punctuation
+NewLine
