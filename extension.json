@@ -5,7 +5,7 @@
   "languages": [
     {
       "id": "typescript",
-      "extensions": [".ts"],
+      "extensions": [".ts", ".mts", ".cts"],
       "tokenize": "src/tokenizeTypeScript.js"
     },
     {
