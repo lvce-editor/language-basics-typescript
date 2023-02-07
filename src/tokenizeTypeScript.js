@@ -174,6 +174,7 @@ const RE_KEYWORD_TYPE = /^type\b/
 const RE_KEYWORD_IN = /^in\b/
 const RE_KEYWORD_OF = /^of\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
+const RE_SHEBANG = /^\#\!\/.*/
 
 export const hasArrayReturn = true
 /**
@@ -284,6 +285,9 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
           }
+        } else if (index === 0 && (next = part.match(RE_SHEBANG))) {
+          token = TokenType.Comment
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
