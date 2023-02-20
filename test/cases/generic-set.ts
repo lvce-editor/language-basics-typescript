@@ -1,0 +1,1 @@
+const instances = new Set<Object>();

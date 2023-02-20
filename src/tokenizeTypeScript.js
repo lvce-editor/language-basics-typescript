@@ -174,6 +174,7 @@ const RE_KEYWORD_TYPE = /^type\b/
 const RE_KEYWORD_IN = /^in\b/
 const RE_KEYWORD_OF = /^of\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
+const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 
 export const hasArrayReturn = true
@@ -781,6 +782,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_METHOD_NAME))) {
           token = TokenType.Function
           state = State.AfterMethodName
+        } else if ((next = part.match(RE_KEYWORD_READONLY))) {
+          token = TokenType.KeywordModifier
+          state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideTypeObject
@@ -800,6 +804,12 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_SQUARE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
+        } else if ((next = part.match(RE_SQUARE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
         } else {
           part
           throw new Error('no')
@@ -810,6 +820,12 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideMethodParameters
           // stack.push()
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.AfterMethodName
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterMethodName
         } else {
           throw new Error('no')
         }
@@ -846,6 +862,12 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.InsideTypeObject)
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterMethodParameters
+        } else if ((next = part.match(RE_ARROW))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else {
           throw new Error('no')
         }
