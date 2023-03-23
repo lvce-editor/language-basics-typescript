@@ -5,7 +5,7 @@ cd ..
 
 rm -rf .tmp
 
-COMMIT="b1ba1b2f8fb58805c3c8b2a3e337e4610340c0b5"
+COMMIT="3e973af7b51f939e07624f7002a668e54e6220b6"
 
 git clone https://github.com/microsoft/TypeScript-TmLanguage .tmp/typescript-tm-language
 
