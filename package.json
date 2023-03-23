@@ -315,7 +315,7 @@
       "typescript-typeparameterDefault",
       "typescript-variableBindingPattern",
       "typescript-varianceAnnotations",
-      "typescript-AsConstSatiesfies",
+      "typescript-AsConstSatisfies",
       "typescript-constTypeParameter",
       "typescript-issue907",
       "typescript-issue935",
