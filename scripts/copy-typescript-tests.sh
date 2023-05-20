@@ -3,11 +3,12 @@
 cd $(dirname "$0")
 cd ..
 
+REPO=https://github.com/microsoft/TypeScript-TmLanguage
+COMMIT="167ef9b6fd42439eb6a1ea43b22ea2bf1bae934c"
+
 rm -rf .tmp
 
-COMMIT="3e973af7b51f939e07624f7002a668e54e6220b6"
-
-git clone https://github.com/microsoft/TypeScript-TmLanguage .tmp/typescript-tm-language
+git clone $REPO .tmp/typescript-tm-language
 
 cd .tmp/typescript-tm-language
 
