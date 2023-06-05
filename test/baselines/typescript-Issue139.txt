@@ -6,7 +6,7 @@ VariableName
 Punctuation
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace

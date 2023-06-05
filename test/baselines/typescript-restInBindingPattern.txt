@@ -53,7 +53,7 @@ Punctuation
 NewLine
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -85,7 +85,7 @@ Punctuation
 NewLine
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -109,7 +109,7 @@ Punctuation
 NewLine
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -148,7 +148,7 @@ Punctuation
 NewLine
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

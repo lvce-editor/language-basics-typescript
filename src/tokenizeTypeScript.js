@@ -37,6 +37,7 @@ const State = {
   InsideBacktickString: 34,
   AfterInterfaceName: 35,
   AfterKeywordImport: 36,
+  AfterKeywordFunction: 37,
   // AfterKeywordImport: 27,
 }
 
@@ -281,6 +282,10 @@ export const tokenizeLine = (line, lineState) => {
             case 'instanceof':
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
+              break
+            case 'function':
+              token = TokenType.Keyword
+              state = State.AfterKeywordFunction
               break
             default:
               token = TokenType.Keyword
@@ -983,6 +988,20 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.AfterPropertyDot
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordFunction:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordFunction
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.FunctionName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           throw new Error('no')
         }

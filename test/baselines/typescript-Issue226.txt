@@ -2,7 +2,7 @@ KeywordModifier
 Whitespace
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace

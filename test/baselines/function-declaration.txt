@@ -1,10 +1,7 @@
-KeywordVoid
-Whitespace
 Keyword
 Whitespace
 Function
 Punctuation
 Punctuation
-Whitespace
 Punctuation
 Punctuation
