@@ -14,7 +14,7 @@ Comment
 NewLine
 Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
