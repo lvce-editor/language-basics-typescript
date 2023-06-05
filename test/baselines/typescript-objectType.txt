@@ -3,5 +3,5 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
