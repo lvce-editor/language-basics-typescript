@@ -668,7 +668,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -742,7 +742,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -2673,7 +2673,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2681,7 +2681,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2699,7 +2699,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -2720,7 +2720,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2728,7 +2728,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2752,7 +2752,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -2860,7 +2860,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2868,7 +2868,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2886,7 +2886,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -2907,7 +2907,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2915,7 +2915,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
@@ -2939,7 +2939,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

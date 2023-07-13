@@ -33,9 +33,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-Punctuation
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

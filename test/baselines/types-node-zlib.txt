@@ -1249,7 +1249,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1374,7 +1374,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1499,7 +1499,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1624,7 +1624,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1749,7 +1749,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1874,7 +1874,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -1999,7 +1999,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -2124,7 +2124,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -2249,7 +2249,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine

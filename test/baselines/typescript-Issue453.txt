@@ -27,10 +27,10 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation

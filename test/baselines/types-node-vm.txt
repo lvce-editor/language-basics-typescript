@@ -2072,7 +2072,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -2697,7 +2697,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

@@ -4,4 +4,3 @@ VariableName
 Punctuation
 Whitespace
 TypePrimitive
-Punctuation

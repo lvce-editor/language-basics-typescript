@@ -4,7 +4,7 @@ VariableName
 Punctuation
 Whitespace
 TypePrimitive
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

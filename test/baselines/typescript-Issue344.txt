@@ -6,14 +6,11 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
-Punctuation
-Whitespace
-Comment
-Comment
+Text
 NewLine
 NewLine
 Keyword

@@ -38,6 +38,7 @@ const State = {
   AfterInterfaceName: 35,
   AfterKeywordImport: 36,
   AfterKeywordFunction: 37,
+  InsideGeneric: 38,
   // AfterKeywordImport: 27,
 }
 
@@ -129,7 +130,7 @@ const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
 const RE_TYPE_PRIMITIVE =
-  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined)\b/
+  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false)\b/
 
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
@@ -168,8 +169,8 @@ const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
 const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
-const RE_ANGLE_OPEN = /^</
-const RE_ANGLE_CLOSE = /^>/
+const RE_ANGLE_OPEN = /^\</
+const RE_ANGLE_CLOSE = /^\>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
@@ -325,7 +326,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = State.TopLevelContent
+          state = State.AfterVariableName
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
@@ -333,12 +334,12 @@ export const tokenizeLine = (line, lineState) => {
           if ((next = part.match(RE_BLOCK_COMMENT_START))) {
             token = TokenType.Comment
             state = State.InsideBlockComment
-          } else if ((next = part.match(RE_REGEX))) {
-            token = TokenType.Regex
-            state = State.TopLevelContent
           } else if ((next = part.match(RE_LINE_COMMENT_START))) {
             token = TokenType.Comment
             state = State.InsideLineComment
+          } else if ((next = part.match(RE_REGEX))) {
+            token = TokenType.Regex
+            state = State.TopLevelContent
           } else if ((next = part.match(RE_PUNCTUATION))) {
             token = TokenType.Punctuation
             state = State.TopLevelContent
@@ -470,6 +471,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = stack.pop() || State.TopLevelContent
@@ -489,7 +494,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Class
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
-          part
           token = TokenType.Type
           state = State.AfterType
         } else if ((next = part.match(RE_SEMICOLON))) {
@@ -571,6 +575,68 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.InsideGeneric:
+        if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_ANGLE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_BUILTIN_CLASS))) {
+          token = TokenType.Class
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
+          token = TokenType.TypePrimitive
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD))) {
+          token = TokenType.Keyword
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Type
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_SQUARE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_SQUARE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_VERTICAL_LINE))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
+        } else {
+          throw new Error('no')
+        }
+        break
       case State.AfterTypeExpression:
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
@@ -605,6 +671,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.InsideTypeExpression
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -632,9 +701,18 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_VERTICAL_LINE))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else {
           tokens
           part
@@ -652,7 +730,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
-          next
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_COLON))) {
@@ -694,6 +771,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -727,7 +807,6 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-
       case State.AfterKeywordEnum:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace

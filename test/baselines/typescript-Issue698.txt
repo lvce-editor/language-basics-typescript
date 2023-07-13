@@ -13,10 +13,10 @@ Class
 Punctuation
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

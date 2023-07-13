@@ -1021,7 +1021,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -1826,7 +1826,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1860,7 +1862,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1908,7 +1912,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1922,12 +1928,12 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace
@@ -5324,7 +5330,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
@@ -5396,7 +5402,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation

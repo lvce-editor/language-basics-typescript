@@ -20,7 +20,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -28,15 +28,7 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
-VariableName
-Punctuation
-Punctuation
-Punctuation
-VariableName
-Punctuation
-Punctuation
-Punctuation
+Text
 NewLine
 NewLine
 Keyword
@@ -97,7 +89,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -136,7 +128,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace

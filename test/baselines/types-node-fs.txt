@@ -1344,11 +1344,11 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
