@@ -331,7 +331,9 @@
       "types-node-http2",
       "types-node-stream",
       "types-node-string_decoder",
-      "types-node-crypto"
+      "types-node-crypto",
+      "typescript-awaitUsing",
+      "typescript-using"
     ]
   }
 }
