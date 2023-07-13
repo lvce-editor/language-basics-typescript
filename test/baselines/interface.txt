@@ -16,11 +16,8 @@ TypePrimitive
 Punctuation
 Punctuation
 Whitespace
-Type
-Punctuation
-TypePrimitive
-Punctuation
-Punctuation
+Class
+Text
 NewLine
 Punctuation
 NewLine

@@ -562,10 +562,9 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Punctuation
-Punctuation
-Whitespace
+Class
 Type
 Punctuation
 TypePrimitive

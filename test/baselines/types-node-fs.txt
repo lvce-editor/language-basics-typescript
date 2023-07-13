@@ -149,11 +149,12 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+Class
 Type
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Punctuation
 NewLine
 Whitespace

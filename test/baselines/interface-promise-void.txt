@@ -13,7 +13,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Punctuation
 TypePrimitive
 Punctuation

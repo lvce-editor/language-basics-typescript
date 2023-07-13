@@ -1125,7 +1125,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Whitespace
 Punctuation
 Whitespace

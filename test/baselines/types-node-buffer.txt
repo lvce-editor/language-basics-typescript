@@ -391,6 +391,7 @@ Comment
 Comment
 NewLine
 Whitespace
+Class
 Type
 Whitespace
 Type
