@@ -242,6 +242,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'catch':
             case 'finally':
             case 'for':
+            case 'do':
               token = TokenType.KeywordControl
               state = State.TopLevelContent
               break
