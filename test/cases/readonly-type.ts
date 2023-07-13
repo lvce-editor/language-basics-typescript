@@ -1,0 +1,1 @@
+let stats: readonly LoaderEvent[] = [];
