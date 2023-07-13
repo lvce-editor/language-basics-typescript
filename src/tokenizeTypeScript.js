@@ -187,9 +187,9 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
-  /(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent)\b/
+  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent)\b/
 
-const RE_KEYWORD_IMPLEMENTS = /implements/
+const RE_KEYWORD_IMPLEMENTS = /^implements/
 
 export const hasArrayReturn = true
 /**
@@ -315,6 +315,9 @@ export const tokenizeLine = (line, lineState) => {
           }
         } else if (index === 0 && (next = part.match(RE_SHEBANG))) {
           token = TokenType.Comment
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_BUILTIN_CLASS))) {
+          token = TokenType.Class
           state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
