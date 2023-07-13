@@ -94,7 +94,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Whitespace

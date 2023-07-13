@@ -16,11 +16,11 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Punctuation

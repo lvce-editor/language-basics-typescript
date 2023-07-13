@@ -1,5 +1,5 @@
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation

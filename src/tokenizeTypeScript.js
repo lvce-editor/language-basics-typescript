@@ -71,6 +71,7 @@ export const TokenType = {
   FunctionName: 21,
   KeywordOperator: 22,
   Text: 23,
+  KeywordThis: 24,
 }
 
 export const TokenMap = {
@@ -100,6 +101,7 @@ export const TokenMap = {
   [TokenType.FunctionName]: 'Function',
   [TokenType.KeywordOperator]: 'KeywordOperator',
   [TokenType.Text]: 'Text',
+  [TokenType.KeywordThis]: 'KeywordThis',
 }
 
 export const initialLineState = {
@@ -295,6 +297,10 @@ export const tokenizeLine = (line, lineState) => {
             case 'function':
               token = TokenType.Keyword
               state = State.AfterKeywordFunction
+              break
+            case 'this':
+              token = TokenType.KeywordThis
+              state = State.TopLevelContent
               break
             default:
               token = TokenType.Keyword

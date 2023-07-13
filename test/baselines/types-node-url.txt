@@ -2547,14 +2547,14 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
 Punctuation
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Whitespace
 VariableName

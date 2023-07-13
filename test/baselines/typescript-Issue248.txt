@@ -34,7 +34,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
@@ -82,7 +82,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
@@ -130,7 +130,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
@@ -178,7 +178,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
@@ -226,7 +226,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
@@ -274,7 +274,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Punctuation
 VariableName
