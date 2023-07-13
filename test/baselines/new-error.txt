@@ -1,0 +1,10 @@
+KeywordControl
+Whitespace
+KeywordNew
+Whitespace
+Class
+Punctuation
+Punctuation
+String
+Punctuation
+Punctuation
