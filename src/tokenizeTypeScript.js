@@ -230,19 +230,20 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'as':
-            case 'switch':
-            case 'default':
-            case 'case':
-            case 'else':
-            case 'if':
             case 'break':
-            case 'throw':
-            case 'while':
-            case 'try':
+            case 'case':
             case 'catch':
+            case 'continue':
+            case 'default':
+            case 'do':
+            case 'else':
             case 'finally':
             case 'for':
-            case 'do':
+            case 'if':
+            case 'switch':
+            case 'throw':
+            case 'try':
+            case 'while':
               token = TokenType.KeywordControl
               state = State.TopLevelContent
               break
