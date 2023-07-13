@@ -5,7 +5,7 @@ Punctuation
 Whitespace
 Type
 Punctuation
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace

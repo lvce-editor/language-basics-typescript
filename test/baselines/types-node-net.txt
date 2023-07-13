@@ -197,7 +197,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -335,7 +335,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -367,7 +367,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3548,7 +3548,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3673,7 +3673,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -6498,7 +6498,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

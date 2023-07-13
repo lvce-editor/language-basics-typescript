@@ -262,7 +262,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -1728,7 +1728,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -1932,7 +1932,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
