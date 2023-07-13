@@ -129,7 +129,7 @@ const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
 const RE_TYPE_PRIMITIVE =
-  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined)\b/
+  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false)\b/
 
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
