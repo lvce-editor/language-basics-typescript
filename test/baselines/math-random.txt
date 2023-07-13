@@ -4,10 +4,8 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Punctuation
 Function
-Punctuation
-Punctuation
 Punctuation
 Punctuation

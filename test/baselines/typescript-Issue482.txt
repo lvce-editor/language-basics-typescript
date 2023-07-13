@@ -16,7 +16,7 @@ Whitespace
 Punctuation
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Keyword

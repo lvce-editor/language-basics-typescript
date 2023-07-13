@@ -73,7 +73,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -5022,7 +5022,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Whitespace
 VariableName
@@ -5062,7 +5062,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Whitespace
 VariableName
@@ -5163,7 +5163,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Whitespace
 VariableName
@@ -5203,7 +5203,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Whitespace
 VariableName
