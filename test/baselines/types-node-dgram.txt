@@ -54,7 +54,7 @@ NewLine
 Comment
 Comment
 NewLine
-Type
+KeywordDeclare
 Whitespace
 Type
 Whitespace
