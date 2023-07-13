@@ -705,7 +705,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -736,7 +736,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -760,7 +760,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Whitespace
@@ -907,7 +907,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -2380,7 +2380,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2408,7 +2408,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2436,7 +2436,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2464,7 +2464,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2492,7 +2492,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2518,7 +2518,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2546,7 +2546,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2574,7 +2574,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2816,7 +2816,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2842,7 +2842,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -2869,7 +2869,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
