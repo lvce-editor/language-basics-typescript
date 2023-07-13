@@ -939,11 +939,11 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Whitespace
@@ -3385,11 +3385,11 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Whitespace

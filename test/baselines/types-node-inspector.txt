@@ -8223,11 +8223,11 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
@@ -8243,7 +8243,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 Punctuation
 Punctuation

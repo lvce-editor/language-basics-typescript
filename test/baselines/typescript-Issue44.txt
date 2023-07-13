@@ -24,9 +24,13 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
+Text
 NewLine
-Comment
+Whitespace
+VariableName
+Whitespace
+VariableName
 NewLine
-Comment
+Punctuation
+Punctuation
 NewLine

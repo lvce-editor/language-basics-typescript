@@ -6,7 +6,7 @@ Comment
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Punctuation

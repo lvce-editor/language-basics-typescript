@@ -2,13 +2,13 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-Keyword
+Class
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Whitespace
