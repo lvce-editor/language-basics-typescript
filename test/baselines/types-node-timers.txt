@@ -281,11 +281,11 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
@@ -311,7 +311,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -404,11 +404,11 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
@@ -432,7 +432,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

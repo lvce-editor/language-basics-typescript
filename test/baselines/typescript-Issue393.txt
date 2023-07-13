@@ -1,10 +1,10 @@
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Whitespace

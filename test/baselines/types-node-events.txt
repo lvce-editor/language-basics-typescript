@@ -428,12 +428,12 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 VariableName
 Punctuation

@@ -16,12 +16,12 @@ NewLine
 NewLine
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace

@@ -33,7 +33,7 @@ KeywordVoid
 NewLine
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace

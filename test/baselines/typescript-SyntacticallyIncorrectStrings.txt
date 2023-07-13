@@ -4,14 +4,12 @@ NewLine
 NewLine
 Keyword
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
 Whitespace
-Punctuation
-String
-Punctuation
+Text
 NewLine
 Punctuation
 NewLine

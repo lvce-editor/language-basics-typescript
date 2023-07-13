@@ -1,13 +1,13 @@
 Keyword
 Whitespace
-VariableName
+Class
 NewLine
 Punctuation
 NewLine
 Whitespace
-KeywordModifier
+StorageModifier
 Whitespace
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace

@@ -4,7 +4,7 @@ Comment
 Comment
 NewLine
 NewLine
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
