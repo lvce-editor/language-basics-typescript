@@ -4,7 +4,7 @@ Type
 Punctuation
 Type
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation

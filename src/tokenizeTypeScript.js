@@ -130,7 +130,7 @@ const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
 const RE_TYPE_PRIMITIVE =
-  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false)\b/
+  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false|unknown)\b/
 
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
@@ -492,7 +492,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = stack.pop() || State.AfterType
+          state = State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType
@@ -591,6 +591,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideGeneric
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordModifier
           state = State.InsideGeneric
         } else if ((next = part.match(RE_KEYWORD))) {
           token = TokenType.Keyword
@@ -1284,7 +1287,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           stack.push(State.AfterInterfaceName)
           token = TokenType.Punctuation
-          state = State.BeforeType
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
           token = TokenType.Punctuation
           state = State.AfterInterfaceName

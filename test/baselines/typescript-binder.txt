@@ -61,11 +61,14 @@ VariableName
 Punctuation
 Whitespace
 Class
-Text
+Punctuation
+TypePrimitive
+Punctuation
+Punctuation
 NewLine
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Punctuation
