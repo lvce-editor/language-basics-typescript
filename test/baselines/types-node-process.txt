@@ -1021,7 +1021,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
