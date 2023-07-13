@@ -379,7 +379,8 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+Class
+VariableName
 Punctuation
 NewLine
 Whitespace
@@ -392,7 +393,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Whitespace
 Punctuation
 Whitespace

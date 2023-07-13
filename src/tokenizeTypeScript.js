@@ -126,6 +126,7 @@ const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
 const RE_TYPE_PRIMITIVE =
   /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined)\b/
+
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
@@ -183,7 +184,8 @@ const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
-const RE_BUILTIN_TYPE = /a/
+const RE_BUILTIN_CLASS =
+  /(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function)\b/
 
 export const hasArrayReturn = true
 /**
@@ -455,8 +457,10 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.BeforeType
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
-          part
           token = TokenType.TypePrimitive
+          state = stack.pop() || State.AfterType
+        } else if ((next = part.match(RE_BUILTIN_CLASS))) {
+          token = TokenType.Class
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           part
