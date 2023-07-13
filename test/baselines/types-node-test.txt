@@ -5858,7 +5858,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
