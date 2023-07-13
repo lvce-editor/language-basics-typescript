@@ -112,7 +112,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

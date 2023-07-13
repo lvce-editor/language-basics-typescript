@@ -3263,7 +3263,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3386,7 +3386,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3414,7 +3414,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3434,7 +3434,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3455,7 +3455,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3531,7 +3531,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3670,7 +3670,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3701,7 +3701,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3754,11 +3754,11 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -3766,7 +3766,7 @@ Type
 Punctuation
 NewLine
 Whitespace
-Type
+Keyword
 Whitespace
 Type
 Punctuation
@@ -3783,7 +3783,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Type
 Whitespace
@@ -3792,20 +3792,20 @@ Whitespace
 Type
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
-Type
+Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
-Type
+Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -3814,7 +3814,7 @@ VariableName
 Punctuation
 Whitespace
 Punctuation
-Type
+VariableName
 Punctuation
 Whitespace
 VariableName
@@ -4892,7 +4892,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -4980,7 +4980,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Whitespace
 Text
@@ -5007,7 +5007,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

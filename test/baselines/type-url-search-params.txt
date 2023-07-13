@@ -1,7 +1,6 @@
 Keyword
 Whitespace
 VariableName
-Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+Type

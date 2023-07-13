@@ -124,7 +124,8 @@ const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
-const RE_TYPE_PRIMITIVE = /^(?:string|boolean|number|bigint|symbol|void|any)\b/
+const RE_TYPE_PRIMITIVE =
+  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined)\b/
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
@@ -182,6 +183,7 @@ const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
+const RE_BUILTIN_TYPE = /a/
 
 export const hasArrayReturn = true
 /**

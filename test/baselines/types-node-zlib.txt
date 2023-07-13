@@ -234,7 +234,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -408,7 +408,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -554,7 +554,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -1149,10 +1149,19 @@ Type
 Whitespace
 Punctuation
 Whitespace
+TypePrimitive
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
 Type
 Punctuation
 Whitespace
-Text
+Punctuation
+Whitespace
+TypePrimitive
+Punctuation
 NewLine
 Whitespace
 Comment
