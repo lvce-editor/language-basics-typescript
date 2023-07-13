@@ -633,6 +633,16 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideTypeObject
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideTypeExpression
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_ARROW))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else {
           throw new Error('no')
         }
@@ -713,6 +723,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUESTION_MARK))) {
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterVariableName
         } else {
           tokens
           part
