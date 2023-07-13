@@ -72,6 +72,7 @@ export const TokenType = {
   KeywordOperator: 22,
   Text: 23,
   KeywordThis: 24,
+  KeywordAwait: 25,
 }
 
 export const TokenMap = {
@@ -102,6 +103,7 @@ export const TokenMap = {
   [TokenType.KeywordOperator]: 'KeywordOperator',
   [TokenType.Text]: 'Text',
   [TokenType.KeywordThis]: 'KeywordThis',
+  [TokenType.KeywordAwait]: 'KeywordAwait',
 }
 
 export const initialLineState = {
@@ -248,8 +250,11 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'async':
-            case 'await':
               token = TokenType.KeywordModifier
+              state = State.TopLevelContent
+              break
+            case 'await':
+              token = TokenType.KeywordAwait
               state = State.TopLevelContent
               break
             case 'return':
