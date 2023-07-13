@@ -2010,7 +2010,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -2020,7 +2020,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Punctuation
