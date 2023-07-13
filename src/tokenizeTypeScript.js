@@ -646,6 +646,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if ((next = part.match(RE_EQUAL))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else {
           throw new Error('no')
         }
