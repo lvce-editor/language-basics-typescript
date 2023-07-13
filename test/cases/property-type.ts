@@ -1,0 +1,3 @@
+const object = {
+  type: 'amd'
+}
