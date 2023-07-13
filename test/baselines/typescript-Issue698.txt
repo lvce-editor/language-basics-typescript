@@ -11,7 +11,7 @@ VariableName
 Punctuation
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
