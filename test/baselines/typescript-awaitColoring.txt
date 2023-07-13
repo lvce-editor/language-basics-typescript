@@ -1,4 +1,4 @@
-KeywordModifier
+KeywordAwait
 Whitespace
 Numeric
 Punctuation

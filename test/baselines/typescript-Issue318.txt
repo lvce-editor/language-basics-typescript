@@ -41,7 +41,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-KeywordModifier
+KeywordAwait
 Whitespace
 VariableName
 Punctuation
