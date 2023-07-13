@@ -31,7 +31,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Punctuation

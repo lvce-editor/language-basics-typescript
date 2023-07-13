@@ -52,7 +52,7 @@ NewLine
 Whitespace
 VariableName
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Whitespace
 Punctuation

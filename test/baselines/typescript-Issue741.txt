@@ -53,7 +53,7 @@ NewLine
 Whitespace
 KeywordReturn
 Whitespace
-Keyword
+KeywordThis
 NewLine
 Whitespace
 Punctuation

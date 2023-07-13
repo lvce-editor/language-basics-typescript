@@ -5366,7 +5366,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 NewLine
 Whitespace
@@ -6800,7 +6800,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 NewLine
 Whitespace

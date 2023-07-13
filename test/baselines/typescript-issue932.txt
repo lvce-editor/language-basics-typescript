@@ -32,7 +32,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Punctuation

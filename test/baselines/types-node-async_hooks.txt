@@ -799,7 +799,7 @@ Whitespace
 Keyword
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Whitespace
 VariableName
@@ -918,7 +918,7 @@ VariableName
 Punctuation
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Whitespace
 VariableName
@@ -986,7 +986,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 NewLine
 Whitespace

@@ -11,7 +11,7 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation

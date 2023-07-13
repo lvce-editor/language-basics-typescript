@@ -17,7 +17,7 @@ VariableName
 Punctuation
 Function
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Punctuation

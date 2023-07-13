@@ -33,7 +33,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Whitespace
@@ -44,14 +44,14 @@ Whitespace
 Punctuation
 Punctuation
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Whitespace
 Punctuation
 Punctuation
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 VariableName
 Whitespace

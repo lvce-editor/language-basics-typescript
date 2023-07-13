@@ -13,7 +13,7 @@ Punctuation
 Whitespace
 NewLine
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation
@@ -24,7 +24,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation
@@ -35,7 +35,7 @@ Punctuation
 Whitespace
 NewLine
 Whitespace
-Keyword
+KeywordThis
 Punctuation
 Function
 Punctuation

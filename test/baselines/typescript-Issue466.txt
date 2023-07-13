@@ -2,7 +2,7 @@ Keyword
 Whitespace
 Function
 Punctuation
-Keyword
+KeywordThis
 Punctuation
 Whitespace
 VariableName
