@@ -1,10 +1,8 @@
 Comment
 Comment
 NewLine
-Regex
-VariableName
-Punctuation
-Regex
+Comment
+Comment
 NewLine
 Comment
 Comment
