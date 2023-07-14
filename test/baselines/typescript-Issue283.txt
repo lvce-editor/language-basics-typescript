@@ -81,7 +81,7 @@ VariableName
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Whitespace
