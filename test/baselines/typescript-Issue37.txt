@@ -211,7 +211,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 NewLine

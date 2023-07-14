@@ -15,10 +15,10 @@ Whitespace
 Class
 NewLine
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 Class
 NewLine
-Punctuation
+Text
 NewLine

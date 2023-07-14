@@ -33,7 +33,7 @@ Type
 Punctuation
 Punctuation
 NewLine
-Punctuation
+Text
 NewLine
 NewLine
 Keyword

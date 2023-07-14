@@ -5,7 +5,7 @@ Punctuation
 Whitespace
 TypePrimitive
 NewLine
-VariableName
+Type
 Punctuation
 VariableName
 NewLine
@@ -20,6 +20,6 @@ Punctuation
 Whitespace
 TypePrimitive
 NewLine
-VariableName
+Type
 Punctuation
 VariableName

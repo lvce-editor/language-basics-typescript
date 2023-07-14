@@ -9,5 +9,5 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
