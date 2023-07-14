@@ -38,6 +38,7 @@ const State = {
   AfterInterfaceName: 35,
   AfterKeywordImport: 36,
   AfterKeywordFunction: 37,
+  InsideGeneric: 38,
   AfterTypeAfterNewLine: 39,
 }
 
