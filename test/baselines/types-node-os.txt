@@ -546,14 +546,14 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
 Punctuation
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 NewLine
 Whitespace
