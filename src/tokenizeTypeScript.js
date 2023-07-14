@@ -41,6 +41,7 @@ const State = {
   InsideGeneric: 38,
   AfterTypeAfterNewLine: 39,
   AfterKeywordInstanceOf: 40,
+  AfterKeywordNew: 41,
 }
 
 /**
@@ -265,7 +266,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'new':
               token = TokenType.KeywordNew
-              state = State.TopLevelContent
+              state = State.AfterKeywordNew
               break
             case 'let':
             case 'const':
@@ -1448,6 +1449,26 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordNew:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordInstanceOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Class
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.AfterPropertyDot
         } else {
           throw new Error('no')
         }

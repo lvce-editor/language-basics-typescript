@@ -19,7 +19,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -31,7 +31,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine

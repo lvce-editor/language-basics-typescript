@@ -1,6 +1,6 @@
 KeywordNew
 Whitespace
-KeywordNew
+Class
 Whitespace
 VariableName
 Punctuation

@@ -353,7 +353,7 @@ Function
 Punctuation
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation

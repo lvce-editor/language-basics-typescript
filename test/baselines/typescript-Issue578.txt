@@ -29,7 +29,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation

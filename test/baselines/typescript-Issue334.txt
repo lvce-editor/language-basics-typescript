@@ -104,7 +104,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Punctuation
@@ -118,7 +118,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Punctuation
