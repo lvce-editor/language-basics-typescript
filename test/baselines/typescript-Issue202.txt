@@ -36,9 +36,9 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine

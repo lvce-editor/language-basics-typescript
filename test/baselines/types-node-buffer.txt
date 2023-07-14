@@ -1170,9 +1170,9 @@ Comment
 Comment
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine

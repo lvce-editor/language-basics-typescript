@@ -10,9 +10,9 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
