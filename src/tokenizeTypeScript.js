@@ -983,6 +983,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUESTION_MARK))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.AfterType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -1130,6 +1133,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.AfterTypeAfterNewLine
         } else {
           throw new Error('no')
         }
@@ -1527,6 +1533,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.InsideMethodParameters
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = stack.pop() || State.TopLevelContent
         } else {
           part
           console.log({ part })
@@ -1649,8 +1658,12 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.AfterInterfaceName
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = stack.pop() || State.TopLevelContent
         } else {
           part
+          console.log({ part })
           throw new Error('no')
         }
         break

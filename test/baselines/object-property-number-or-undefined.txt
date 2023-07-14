@@ -17,5 +17,10 @@ Punctuation
 Whitespace
 TypePrimitive
 NewLine
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Punctuation
+Punctuation
 NewLine

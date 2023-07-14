@@ -1,0 +1,2 @@
+interface HeapStatistics {}
+interface HeapSpaceStatistics {}
