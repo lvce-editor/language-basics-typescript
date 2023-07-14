@@ -169,8 +169,8 @@ const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
 const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
-const RE_ANGLE_OPEN = /^\</
-const RE_ANGLE_CLOSE = /^\>/
+const RE_ANGLE_OPEN = /^</
+const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
