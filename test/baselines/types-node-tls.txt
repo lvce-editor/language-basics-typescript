@@ -5537,7 +5537,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

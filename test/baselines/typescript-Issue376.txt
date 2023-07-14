@@ -14,7 +14,6 @@ String
 Punctuation
 Whitespace
 Comment
-Comment
 NewLine
 Whitespace
 Punctuation
@@ -24,7 +23,6 @@ String
 Punctuation
 Whitespace
 Comment
-Comment
 NewLine
 Whitespace
 Punctuation
@@ -33,7 +31,6 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
 Comment
 NewLine
 Whitespace
@@ -58,7 +55,6 @@ String
 Punctuation
 Whitespace
 Comment
-Comment
 NewLine
 Whitespace
 Punctuation
@@ -67,7 +63,6 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
 Comment
 NewLine
 Whitespace

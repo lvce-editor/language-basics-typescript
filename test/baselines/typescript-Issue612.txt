@@ -8,13 +8,7 @@ Whitespace
 Punctuation
 String
 Punctuation
-Punctuation
-Punctuation
-Punctuation
-Punctuation
-Whitespace
-KeywordVoid
-Punctuation
+Text
 NewLine
 Punctuation
 NewLine

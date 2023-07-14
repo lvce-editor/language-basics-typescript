@@ -10,10 +10,7 @@ Punctuation
 String
 Punctuation
 Punctuation
-Punctuation
-Punctuation
-Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 KeywordThis
