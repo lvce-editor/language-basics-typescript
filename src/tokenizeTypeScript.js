@@ -379,7 +379,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideSingleQuoteString:
         if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_SINGLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideSingleQuoteString
@@ -393,7 +393,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideDoubleQuoteString:
         if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_DOUBLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideDoubleQuoteString
@@ -489,7 +489,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Class
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
-          part
           token = TokenType.Type
           state = State.AfterType
         } else if ((next = part.match(RE_SEMICOLON))) {
@@ -515,9 +514,13 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(State.AfterType)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
-          stack.push(State.BeforeType)
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(State.AfterType)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -652,7 +655,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.TopLevelContent
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
-          next
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_COLON))) {
@@ -694,6 +696,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.AfterType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -841,6 +846,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.AfterTypeAfterNewLine
         } else {
           throw new Error('no')
         }
@@ -1239,6 +1247,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.InsideMethodParameters
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = stack.pop() || State.TopLevelContent
         } else {
           part
           throw new Error('no')
@@ -1360,8 +1371,12 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.AfterInterfaceName
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = stack.pop() || State.TopLevelContent
         } else {
           part
+          console.log({ part })
           throw new Error('no')
         }
         break

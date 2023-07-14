@@ -235,7 +235,7 @@ Punctuation
 Text
 NewLine
 NewLine
-Class
+VariableName
 Punctuation
 VariableName
 Whitespace
