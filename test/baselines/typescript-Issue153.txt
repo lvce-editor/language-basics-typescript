@@ -291,7 +291,7 @@ KeywordControl
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 String
@@ -474,7 +474,7 @@ KeywordControl
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 String

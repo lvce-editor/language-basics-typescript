@@ -40,7 +40,6 @@ const State = {
   AfterKeywordFunction: 37,
   InsideGeneric: 38,
   AfterTypeAfterNewLine: 39,
-  // AfterKeywordImport: 27,
 }
 
 /**
@@ -191,7 +190,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
-  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap)\b/
+  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError)\b/
 
 const RE_KEYWORD_IMPLEMENTS = /^implements/
 
@@ -990,6 +989,148 @@ export const tokenizeLine = (line, lineState) => {
         } else {
           // stack.push(State.AfterType)
           part
+          throw new Error('no')
+        }
+        break
+      case State.AfterTypeAfterNewLine:
+        if ((next = part.match(RE_KEYWORD))) {
+          switch (next[0]) {
+            case 'true':
+            case 'false':
+            case 'null':
+              token = TokenType.LanguageConstant
+              state = State.TopLevelContent
+              break
+            case 'import':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordImport
+              break
+            case 'export':
+            case 'from':
+              token = TokenType.KeywordImport
+              state = State.TopLevelContent
+              break
+            case 'as':
+            case 'break':
+            case 'case':
+            case 'catch':
+            case 'continue':
+            case 'default':
+            case 'do':
+            case 'else':
+            case 'finally':
+            case 'for':
+            case 'if':
+            case 'switch':
+            case 'throw':
+            case 'try':
+            case 'while':
+              token = TokenType.KeywordControl
+              state = State.TopLevelContent
+              break
+            case 'async':
+              token = TokenType.KeywordModifier
+              state = State.TopLevelContent
+              break
+            case 'await':
+              token = TokenType.KeywordAwait
+              state = State.TopLevelContent
+              break
+            case 'return':
+              token = TokenType.KeywordReturn
+              state = State.TopLevelContent
+              break
+            case 'new':
+              token = TokenType.KeywordNew
+              state = State.TopLevelContent
+              break
+            case 'let':
+            case 'const':
+            case 'var':
+              token = TokenType.Keyword
+              state = State.AfterKeywordDeclaration
+              break
+            case 'type':
+              token = TokenType.Keyword
+              state = State.AfterKeywordTypeDeclaration
+              break
+            case 'declare':
+              token = TokenType.KeywordDeclare
+              state = State.AfterKeywordDeclare
+              break
+            case 'void':
+              token = TokenType.KeywordVoid
+              state = State.TopLevelContent
+              break
+            case 'interface':
+              token = TokenType.Keyword
+              state = State.AfterKeywordInterface
+              break
+            case 'private':
+            case 'protected':
+            case 'readonly':
+            case 'public':
+            case 'override':
+            case 'abstract':
+              token = TokenType.KeywordModifier
+              state = State.TopLevelContent
+              break
+            case 'in':
+            case 'of':
+            case 'typeof':
+            case 'instanceof':
+              token = TokenType.KeywordOperator
+              state = State.TopLevelContent
+              break
+            case 'function':
+              token = TokenType.Keyword
+              state = State.AfterKeywordFunction
+              break
+            case 'this':
+              token = TokenType.KeywordThis
+              state = State.TopLevelContent
+              break
+            case 'class':
+              token = TokenType.Keyword
+              state = State.AfterKeywordClass
+              break
+            default:
+              token = TokenType.Keyword
+              state = State.TopLevelContent
+              break
+          }
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterTypeAfterNewLine
+        } else if ((next = part.match(RE_EQUAL))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_VERTICAL_LINE))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_OPERATOR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else {
           throw new Error('no')
         }
         break
