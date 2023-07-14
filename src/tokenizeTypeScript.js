@@ -1529,6 +1529,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideMethodParameters
         } else {
           part
+          console.log({ part })
           throw new Error('no')
         }
         break
