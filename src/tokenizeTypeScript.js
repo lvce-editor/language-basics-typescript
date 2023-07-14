@@ -40,6 +40,7 @@ const State = {
   AfterKeywordFunction: 37,
   InsideGeneric: 38,
   AfterTypeAfterNewLine: 39,
+  AfterKeywordInstanceOf: 40,
 }
 
 /**
@@ -300,9 +301,12 @@ export const tokenizeLine = (line, lineState) => {
             case 'in':
             case 'of':
             case 'typeof':
-            case 'instanceof':
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
+              break
+            case 'instanceof':
+              token = TokenType.KeywordOperator
+              state = State.AfterKeywordInstanceOf
               break
             case 'function':
               token = TokenType.Keyword
@@ -798,6 +802,10 @@ export const tokenizeLine = (line, lineState) => {
             case 'instanceof':
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
+              break
+            case 'instanceof':
+              token = TokenType.KeywordOperator
+              state = State.AfterKeywordInstanceOf
               break
             case 'function':
               token = TokenType.Keyword
@@ -1377,7 +1385,6 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else {
           part
-          console.log({ part })
           throw new Error('no')
         }
         break
@@ -1427,6 +1434,20 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordInstanceOf:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordInstanceOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Class
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           throw new Error('no')
         }
