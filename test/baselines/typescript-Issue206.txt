@@ -215,13 +215,13 @@ Punctuation
 Whitespace
 Type
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Whitespace
 Punctuation
@@ -243,7 +243,9 @@ Whitespace
 Type
 NewLine
 Whitespace
-Text
+Punctuation
+Whitespace
+VariableName
 NewLine
 Whitespace
 Punctuation
@@ -260,7 +262,9 @@ Whitespace
 Type
 NewLine
 Whitespace
-Text
+Punctuation
+Whitespace
+VariableName
 NewLine
 Whitespace
 Punctuation

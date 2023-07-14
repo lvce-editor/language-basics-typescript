@@ -28,7 +28,15 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Text
+Punctuation
+VariableName
+Punctuation
+Punctuation
+Punctuation
+VariableName
+Punctuation
+Punctuation
+Punctuation
 NewLine
 NewLine
 Keyword

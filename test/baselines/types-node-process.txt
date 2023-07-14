@@ -817,7 +817,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-Type
+Keyword
 Whitespace
 Type
 Whitespace
@@ -827,9 +827,8 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

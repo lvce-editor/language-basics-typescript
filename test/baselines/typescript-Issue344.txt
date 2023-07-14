@@ -10,7 +10,10 @@ TypePrimitive
 Punctuation
 Punctuation
 Punctuation
-Text
+Punctuation
+Whitespace
+Comment
+Comment
 NewLine
 NewLine
 Keyword

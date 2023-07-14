@@ -380,7 +380,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideSingleQuoteString:
         if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_SINGLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideSingleQuoteString
@@ -394,7 +394,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideDoubleQuoteString:
         if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_DOUBLE_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideDoubleQuoteString
@@ -519,9 +519,13 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(State.AfterType)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
-          stack.push(State.BeforeType)
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(State.AfterType)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -778,6 +782,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.AfterType)
+        } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordModifier
+          state = State.BeforeType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType
@@ -792,6 +799,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
         } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {

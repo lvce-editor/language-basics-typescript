@@ -404,7 +404,7 @@ NewLine
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Type
 Whitespace

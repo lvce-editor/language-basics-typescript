@@ -7,9 +7,9 @@ NewLine
 Comment
 NewLine
 NewLine
-Type
+Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace

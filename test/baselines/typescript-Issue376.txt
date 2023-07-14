@@ -13,8 +13,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Whitespace
 Punctuation
@@ -23,8 +22,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Whitespace
 Punctuation

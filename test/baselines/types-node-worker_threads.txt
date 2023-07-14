@@ -4529,7 +4529,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 NewLine
@@ -4588,7 +4588,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 NewLine
@@ -4647,7 +4647,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 NewLine
