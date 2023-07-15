@@ -831,7 +831,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
