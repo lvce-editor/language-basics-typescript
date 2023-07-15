@@ -331,7 +331,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = State.AfterVariableName
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
@@ -497,7 +497,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = State.AfterType
+          state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType

@@ -661,11 +661,11 @@ Punctuation
 Whitespace
 Class
 Punctuation
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Punctuation
 Whitespace
@@ -762,7 +762,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Punctuation
 NewLine
@@ -883,11 +883,11 @@ Punctuation
 Whitespace
 Class
 Punctuation
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Punctuation
 Whitespace

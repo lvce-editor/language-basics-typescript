@@ -22,17 +22,6 @@ Punctuation
 Punctuation
 Whitespace
 Class
-Punctuation
-Class
-Punctuation
-TypePrimitive
-Punctuation
-Whitespace
-Type
-Punctuation
-Punctuation
-Whitespace
-Punctuation
 Text
 NewLine
 Whitespace

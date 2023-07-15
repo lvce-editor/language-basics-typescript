@@ -211,7 +211,7 @@ Class
 Punctuation
 Class
 Punctuation
-VariableName
+Function
 Punctuation
 KeywordNew
 Whitespace

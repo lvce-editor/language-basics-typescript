@@ -6,6 +6,6 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation

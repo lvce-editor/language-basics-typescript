@@ -23,7 +23,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-Type
+VariableName
 Punctuation
 Whitespace
 Punctuation
@@ -49,9 +49,7 @@ Whitespace
 Punctuation
 String
 Punctuation
-Punctuation
-Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

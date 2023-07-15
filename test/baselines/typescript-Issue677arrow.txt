@@ -15,7 +15,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Whitespace
 Punctuation
@@ -84,7 +84,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Whitespace
 Punctuation

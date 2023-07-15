@@ -39,4 +39,10 @@ Whitespace
 Type
 Punctuation
 NewLine
-Text
+Punctuation
+Punctuation
+VariableName
+Whitespace
+VariableName
+Punctuation
+Punctuation

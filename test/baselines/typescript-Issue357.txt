@@ -39,7 +39,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation

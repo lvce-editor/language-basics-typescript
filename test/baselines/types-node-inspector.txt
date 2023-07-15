@@ -8016,11 +8016,7 @@ VariableName
 Punctuation
 Whitespace
 Class
-Punctuation
-Punctuation
-Punctuation
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation
