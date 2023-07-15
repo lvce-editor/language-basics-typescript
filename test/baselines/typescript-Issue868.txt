@@ -12,7 +12,5 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
-Punctuation
 NewLine
 Punctuation

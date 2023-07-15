@@ -9,16 +9,7 @@ Keyword
 Punctuation
 NewLine
 Whitespace
-Punctuation
-VariableName
-Whitespace
-KeywordModifier
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

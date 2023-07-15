@@ -10,10 +10,6 @@ Function
 Punctuation
 Punctuation
 Punctuation
-KeywordReturn
-Whitespace
-LanguageConstant
-Punctuation
 NewLine
 Whitespace
 VariableName
