@@ -8228,7 +8228,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 Punctuation
 Punctuation

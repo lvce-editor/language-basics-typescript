@@ -413,7 +413,7 @@ NewLine
 Whitespace
 StorageModifier
 Whitespace
-Function
+Keyword
 Punctuation
 VariableName
 Punctuation

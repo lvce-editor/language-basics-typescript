@@ -187,6 +187,7 @@ const RE_STRING_ESCAPE = /^\\./
 const RE_KEYWORD_TYPE = /^type\b/
 const RE_KEYWORD_IN = /^in\b/
 const RE_KEYWORD_OF = /^of\b/
+const RE_KEYWORD_CONSTRUCTOR = /^constructor\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -1044,6 +1045,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_CLASS_PROPERTY_MODIFIER))) {
           token = TokenType.StorageModifier
           state = State.InsideClass
+        } else if ((next = part.match(RE_KEYWORD_CONSTRUCTOR))) {
+          token = TokenType.Keyword
+          state = State.AfterVariableName
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
           state = State.AfterVariableName

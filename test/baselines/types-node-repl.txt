@@ -3030,7 +3030,7 @@ Class
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 VariableName
 Punctuation
