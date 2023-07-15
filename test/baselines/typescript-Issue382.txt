@@ -6,7 +6,7 @@ Class
 Punctuation
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Type
 Punctuation

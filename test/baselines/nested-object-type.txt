@@ -43,8 +43,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName
@@ -56,14 +55,14 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Punctuation
 Punctuation

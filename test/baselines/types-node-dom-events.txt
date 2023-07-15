@@ -40,7 +40,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace
@@ -341,7 +341,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace
@@ -676,7 +676,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace
@@ -760,7 +760,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace

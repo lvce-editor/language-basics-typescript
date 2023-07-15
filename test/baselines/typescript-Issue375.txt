@@ -106,13 +106,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Punctuation
-VariableName
-Punctuation
-Punctuation
-Punctuation
-Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 KeywordNew

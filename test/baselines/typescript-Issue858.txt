@@ -101,7 +101,14 @@ Type
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
+TypePrimitive
+Punctuation
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Keyword
 Whitespace

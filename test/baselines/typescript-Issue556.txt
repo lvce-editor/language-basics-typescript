@@ -16,12 +16,10 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Whitespace
-Numeric
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

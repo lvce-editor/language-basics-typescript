@@ -29,7 +29,7 @@ Type
 Punctuation
 Punctuation
 NewLine
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
