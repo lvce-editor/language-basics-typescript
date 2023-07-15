@@ -37,7 +37,7 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation
