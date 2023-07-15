@@ -13,3 +13,4 @@ Class
 Text
 NewLine
 Punctuation
+NewLine
