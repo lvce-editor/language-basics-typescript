@@ -5,7 +5,7 @@ NewLine
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 Punctuation
 NewLine

@@ -6001,7 +6001,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 NewLine
 Whitespace
@@ -8041,7 +8041,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 VariableName
 Punctuation

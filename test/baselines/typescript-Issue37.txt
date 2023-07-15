@@ -299,7 +299,7 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 VariableName
 Punctuation

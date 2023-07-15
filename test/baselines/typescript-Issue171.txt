@@ -5,11 +5,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 NewLine
 Whitespace
-Text
+Punctuation
 NewLine
 Whitespace
 KeywordModifier
