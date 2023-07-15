@@ -23,7 +23,7 @@ Whitespace
 Text
 NewLine
 Whitespace
-VariableName
+LanguageConstant
 NewLine
 Punctuation
 Whitespace

@@ -119,7 +119,7 @@ export const initialLineState = {
 
 const RE_LINE_COMMENT = /^\/\/[^\n]*/
 const RE_KEYWORD =
-  /^(?:yield|with|while|void|var|typeof|type|true|try|throw|this|static|switch|super|readonly|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|constructor|class|catch|case|break|await|async|abstract)\b/
+  /^(?:yield|with|while|void|var|undefined|typeof|type|true|try|throw|this|static|switch|super|readonly|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|constructor|class|catch|case|break|await|async|abstract)\b/
 
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
@@ -224,6 +224,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'true':
             case 'false':
             case 'null':
+            case 'undefined':
               token = TokenType.LanguageConstant
               state = State.TopLevelContent
               break
@@ -725,6 +726,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'true':
             case 'false':
             case 'null':
+            case 'undefined':
               token = TokenType.LanguageConstant
               state = State.TopLevelContent
               break

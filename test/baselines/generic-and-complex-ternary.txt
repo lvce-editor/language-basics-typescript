@@ -53,7 +53,7 @@ VariableName
 Whitespace
 Keyword
 Whitespace
-VariableName
+LanguageConstant
 Whitespace
 Punctuation
 Whitespace
