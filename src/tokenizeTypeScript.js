@@ -17,8 +17,8 @@ const State = {
   AfterKeywordClassAfterClassName: 14,
   InsideClass: 15,
   AfterType: 16,
-  InsideTypeExpression: 17,
-  AfterTypeExpression: 18,
+  InsideTypeExpressionOrFunctionDeclaration: 17,
+  AfterTypeExpressionOrFunctionDeclaration: 18,
   AfterVariableName: 19,
   BeforePropertyAccess: 20,
   AfterKeywordEnum: 21,
@@ -502,8 +502,8 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-          stack.push(State.AfterTypeExpression)
+          state = State.InsideTypeExpressionOrFunctionDeclaration
+          // stack.push(State.AfterTypeExpression)
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -557,30 +557,31 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      case State.InsideTypeExpression:
+      case State.InsideTypeExpressionOrFunctionDeclaration:
         if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterTypeExpression
+          state = State.AfterTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          stack.push(state)
           token = TokenType.VariableName
           state = State.AfterVariableName
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_SQUARE_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else {
           throw new Error('no')
         }
         break
-      case State.AfterTypeExpression:
+      case State.AfterTypeExpressionOrFunctionDeclaration:
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -589,13 +590,13 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterTypeExpression
+          state = State.AfterTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.AfterTypeExpression
+          state = stack.pop() || State.AfterTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -604,16 +605,16 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_SQUARE_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideTypeExpressionOrFunctionDeclaration
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent

@@ -25,6 +25,5 @@ NewLine
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-VariableName
+TypePrimitive
