@@ -409,7 +409,7 @@ KeywordVoid
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -424,7 +424,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -443,7 +443,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -454,7 +454,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -469,7 +469,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 VariableName
 Punctuation

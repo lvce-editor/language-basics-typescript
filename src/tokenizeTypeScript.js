@@ -299,6 +299,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'public':
             case 'override':
             case 'abstract':
+            case 'static':
               token = TokenType.KeywordModifier
               state = State.TopLevelContent
               break
