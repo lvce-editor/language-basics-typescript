@@ -72,7 +72,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 Punctuation
 NewLine
