@@ -8,7 +8,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Punctuation
 Punctuation

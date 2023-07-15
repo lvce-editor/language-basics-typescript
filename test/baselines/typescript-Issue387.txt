@@ -156,7 +156,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Whitespace
 Punctuation

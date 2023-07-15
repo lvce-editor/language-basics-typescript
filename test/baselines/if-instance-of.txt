@@ -10,17 +10,7 @@ Function
 Whitespace
 Punctuation
 VariableName
-<<<<<<< HEAD
 Text
-=======
-Whitespace
-KeywordOperator
-Whitespace
-Class
-Punctuation
-Whitespace
-Punctuation
->>>>>>> origin/main
 NewLine
 NewLine
 Text

@@ -91,13 +91,9 @@ Type
 Punctuation
 NewLine
 Whitespace
-<<<<<<< HEAD
-Type
+Class
 Whitespace
 KeywordModifier
-=======
-Class
->>>>>>> origin/main
 Whitespace
 Keyword
 Whitespace
@@ -115,13 +111,9 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-<<<<<<< HEAD
-Type
+Class
 Whitespace
 KeywordModifier
-=======
-Class
->>>>>>> origin/main
 Whitespace
 Keyword
 Whitespace
@@ -355,13 +347,9 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-<<<<<<< HEAD
-Type
+Class
 Whitespace
 KeywordModifier
-=======
-Class
->>>>>>> origin/main
 Whitespace
 Keyword
 Whitespace
@@ -416,15 +404,11 @@ NewLine
 Whitespace
 Class
 Whitespace
-<<<<<<< HEAD
 KeywordModifier
-=======
-Keyword
->>>>>>> origin/main
 Whitespace
-Class
+Type
 Whitespace
-Class
+Type
 Punctuation
 VariableName
 Whitespace
@@ -440,9 +424,9 @@ NewLine
 Whitespace
 Class
 Whitespace
-Keyword
+VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Punctuation
@@ -4502,9 +4486,9 @@ NewLine
 Whitespace
 Class
 Whitespace
-Keyword
+VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Punctuation
@@ -4522,9 +4506,9 @@ NewLine
 Whitespace
 Class
 Whitespace
-Keyword
+VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Punctuation
@@ -4576,9 +4560,9 @@ NewLine
 Whitespace
 Class
 Whitespace
-Keyword
+VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Punctuation
@@ -4596,9 +4580,9 @@ NewLine
 Whitespace
 Class
 Whitespace
-Keyword
+VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Punctuation
