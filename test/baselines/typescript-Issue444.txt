@@ -25,7 +25,10 @@ Numeric
 Punctuation
 Punctuation
 Whitespace
-Regex
+Punctuation
+Whitespace
+Punctuation
+VariableName
 Punctuation
 Function
 Punctuation
@@ -64,8 +67,11 @@ Punctuation
 Numeric
 Punctuation
 Punctuation
-Regex
+Punctuation
+Punctuation
 VariableName
+Punctuation
+Function
 Punctuation
 Regex
 Punctuation

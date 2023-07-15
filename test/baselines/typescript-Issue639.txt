@@ -69,8 +69,10 @@ Punctuation
 Punctuation
 Regex
 Punctuation
-Regex
+Punctuation
 VariableName
+Punctuation
+Keyword
 Punctuation
 Punctuation
 Punctuation
