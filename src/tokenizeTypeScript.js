@@ -195,6 +195,7 @@ const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
   /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|Headers|Response|Request|Buffer)\b/
 
+const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements/
 
 export const hasArrayReturn = true
@@ -1463,7 +1464,10 @@ export const tokenizeLine = (line, lineState) => {
       case State.AfterKeywordNew:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterKeywordInstanceOf
+          state = State.AfterKeywordNew
+        } else if ((next = part.match(RE_KEYWORD_NEW))) {
+          token = TokenType.KeywordNew
+          state = State.AfterKeywordNew
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Class
           state = State.TopLevelContent

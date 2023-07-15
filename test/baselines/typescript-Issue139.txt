@@ -1,8 +1,8 @@
 KeywordNew
 Whitespace
-Class
+KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Keyword
 Whitespace
