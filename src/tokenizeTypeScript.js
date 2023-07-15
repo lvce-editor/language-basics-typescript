@@ -978,7 +978,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.AfterKeywordClass
         } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
-          token = TokenType.Keyword
+          token = TokenType.KeywordModifier
           state = State.AfterKeywordClass
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Class
@@ -1000,7 +1000,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideClass
         } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
-          token = TokenType.Keyword
+          token = TokenType.KeywordModifier
           state = State.AfterKeywordClass
         } else if ((next = part.match(RE_KEYWORD_IMPLEMENTS))) {
           token = TokenType.Keyword

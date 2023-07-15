@@ -2245,7 +2245,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation
@@ -3873,7 +3873,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation
