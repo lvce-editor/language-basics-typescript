@@ -1155,7 +1155,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Whitespace
 Punctuation
@@ -1249,7 +1249,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1286,7 +1286,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1374,7 +1374,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1411,7 +1411,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1499,7 +1499,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1536,7 +1536,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1624,7 +1624,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1661,7 +1661,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1749,7 +1749,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1786,7 +1786,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1874,7 +1874,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -1911,7 +1911,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1999,7 +1999,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -2036,7 +2036,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -2124,7 +2124,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -2161,7 +2161,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -2249,7 +2249,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -2286,7 +2286,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
