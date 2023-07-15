@@ -29,10 +29,10 @@ Punctuation
 String
 Punctuation
 Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
-Function
+VariableName
 Punctuation
 Punctuation
 String

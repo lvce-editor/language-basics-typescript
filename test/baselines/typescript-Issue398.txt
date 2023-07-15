@@ -26,5 +26,4 @@ Punctuation
 Whitespace
 TypePrimitive
 Whitespace
-Punctuation
-Punctuation
+Text

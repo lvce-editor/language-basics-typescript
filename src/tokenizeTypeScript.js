@@ -490,7 +490,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
-          state = stack.pop() || State.AfterType
+          state = State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
           state = stack.pop() || State.AfterType
@@ -842,7 +842,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1164,9 +1164,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_COLON_OPTIONAL))) {
+          stack.push(State.InsideTypeObject)
           token = TokenType.Punctuation
           state = State.BeforeType
-          stack.push(State.InsideTypeObject)
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject

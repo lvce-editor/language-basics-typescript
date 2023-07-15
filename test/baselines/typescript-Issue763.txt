@@ -34,13 +34,6 @@ Punctuation
 Whitespace
 TypePrimitive
 Whitespace
-Punctuation
-Punctuation
-Whitespace
-Punctuation
-Punctuation
-Whitespace
-VariableName
 Text
 NewLine
-Text
+Punctuation

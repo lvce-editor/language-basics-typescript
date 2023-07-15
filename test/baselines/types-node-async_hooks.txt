@@ -648,13 +648,12 @@ NewLine
 Whitespace
 VariableName
 Punctuation
+Whitespace
+TypePrimitive
+Whitespace
 Punctuation
 Whitespace
-VariableName
-Whitespace
-Punctuation
-Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

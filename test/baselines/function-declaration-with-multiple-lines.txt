@@ -15,12 +15,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-VariableName
-Punctuation
-Whitespace
-TypePrimitive
-Punctuation
-Punctuation
+Text
 NewLine
 Punctuation
 Whitespace

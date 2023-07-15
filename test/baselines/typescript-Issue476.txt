@@ -32,7 +32,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -40,9 +40,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Punctuation
-String
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

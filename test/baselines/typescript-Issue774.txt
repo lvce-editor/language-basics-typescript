@@ -8,7 +8,7 @@ Punctuation
 String
 Punctuation
 NewLine
-KeywordImport
+Keyword
 Whitespace
 VariableName
 Whitespace
@@ -18,8 +18,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
-Comment
+Text
 NewLine
 NewLine
 Keyword

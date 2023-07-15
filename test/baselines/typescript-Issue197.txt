@@ -25,11 +25,7 @@ String
 Punctuation
 Punctuation
 Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 KeywordModifier
