@@ -2309,7 +2309,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
