@@ -64,7 +64,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Function
 Punctuation

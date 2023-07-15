@@ -179,7 +179,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation
@@ -220,7 +220,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation
@@ -261,7 +261,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation
@@ -362,7 +362,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation
@@ -403,7 +403,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation
@@ -444,7 +444,7 @@ KeywordReturn
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 KeywordThis
 Punctuation

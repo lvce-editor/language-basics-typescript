@@ -55,7 +55,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -163,7 +163,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -192,7 +192,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation
@@ -207,7 +207,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Class
 Punctuation
@@ -215,7 +215,7 @@ VariableName
 Punctuation
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Punctuation

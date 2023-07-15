@@ -19,7 +19,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -31,7 +31,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -40,7 +40,7 @@ VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Punctuation
@@ -50,13 +50,13 @@ VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 NewLine
 VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -64,13 +64,13 @@ VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 NewLine
 VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -78,4 +78,4 @@ VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class

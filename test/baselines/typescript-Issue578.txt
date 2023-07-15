@@ -16,7 +16,7 @@ VariableName
 Whitespace
 KeywordOperator
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Whitespace
@@ -29,7 +29,7 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 VariableName
 Punctuation

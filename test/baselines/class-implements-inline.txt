@@ -6,11 +6,11 @@ Punctuation
 Whitespace
 KeywordNew
 Whitespace
+Class
+Whitespace
 Keyword
 Whitespace
-Class
-Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 Punctuation

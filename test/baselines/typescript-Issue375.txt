@@ -111,7 +111,7 @@ NewLine
 Whitespace
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 String
@@ -169,7 +169,7 @@ VariableName
 Punctuation
 KeywordNew
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 String

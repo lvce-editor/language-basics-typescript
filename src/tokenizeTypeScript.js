@@ -40,6 +40,8 @@ const State = {
   AfterKeywordFunction: 37,
   InsideGeneric: 38,
   AfterTypeAfterNewLine: 39,
+  AfterKeywordInstanceOf: 40,
+  AfterKeywordNew: 41,
 }
 
 /**
@@ -190,7 +192,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
-  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError)\b/
+  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|Headers|Response|Request)\b/
 
 const RE_KEYWORD_IMPLEMENTS = /^implements/
 
@@ -264,7 +266,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'new':
               token = TokenType.KeywordNew
-              state = State.TopLevelContent
+              state = State.AfterKeywordNew
               break
             case 'let':
             case 'const':
@@ -300,9 +302,12 @@ export const tokenizeLine = (line, lineState) => {
             case 'in':
             case 'of':
             case 'typeof':
-            case 'instanceof':
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
+              break
+            case 'instanceof':
+              token = TokenType.KeywordOperator
+              state = State.AfterKeywordInstanceOf
               break
             case 'function':
               token = TokenType.Keyword
@@ -1085,6 +1090,10 @@ export const tokenizeLine = (line, lineState) => {
               token = TokenType.KeywordOperator
               state = State.TopLevelContent
               break
+            case 'instanceof':
+              token = TokenType.KeywordOperator
+              state = State.AfterKeywordInstanceOf
+              break
             case 'function':
               token = TokenType.Keyword
               state = State.AfterKeywordFunction
@@ -1663,7 +1672,6 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else {
           part
-          console.log({ part })
           throw new Error('no')
         }
         break
@@ -1713,6 +1721,40 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordInstanceOf:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordInstanceOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Class
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordNew:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordInstanceOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Class
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.AfterPropertyDot
         } else {
           throw new Error('no')
         }
