@@ -10,14 +10,13 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
-Punctuation
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

@@ -12,10 +12,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
-Comment
 Comment
 NewLine
 Whitespace
@@ -26,11 +25,9 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Whitespace
-Comment
 Comment
 NewLine
 Whitespace

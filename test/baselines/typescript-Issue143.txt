@@ -147,14 +147,5 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Whitespace
-VariableName
-Punctuation
-Function
-Punctuation
-Punctuation
-Punctuation
-Whitespace
-Punctuation
 NewLine
 Punctuation
