@@ -149,7 +149,7 @@ const RE_BLOCK_COMMENT_END = /^\*\//
 const RE_SLASH = /^\//
 // copied from https://github.com/PrismJS/prism/blob/master/components/prism-javascript.js#L57
 const RE_REGEX =
-  /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/
+  /((?:^|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/
 const RE_ANYTHING_UNTIL_END = /^.+/s
 const RE_CURLY_OPEN = /^\{/
 const RE_CURLY_CLOSE = /^\}/
