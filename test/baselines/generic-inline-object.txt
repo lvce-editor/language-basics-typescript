@@ -22,3 +22,4 @@ TypePrimitive
 NewLine
 Punctuation
 Punctuation
+NewLine

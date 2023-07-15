@@ -31,3 +31,4 @@ Whitespace
 Punctuation
 Whitespace
 Type
+NewLine
