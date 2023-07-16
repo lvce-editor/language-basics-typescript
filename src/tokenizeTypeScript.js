@@ -458,6 +458,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_EXCLAMATION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.AfterVariableName
         } else {
           line
           part
