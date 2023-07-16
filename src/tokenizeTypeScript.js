@@ -160,6 +160,7 @@ const RE_VERTICAL_LINE = /^\|/
 const RE_ROUND_OPEN = /^\(/
 const RE_ROUND_CLOSE = /^\)/
 const RE_QUESTION_MARK_COLON = /^\?\:/
+const RE_EXLAMATION_MARK_COLON = /^\!\:/
 const RE_ARROW = /^\=\>/
 const RE_AMPERSAND = /^\&/
 const RE_COMMA = /^\,/
@@ -636,6 +637,12 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_EXLAMATION_MARK_COLON))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterVariableName
@@ -1098,6 +1105,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_EXLAMATION_MARK_COLON))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
