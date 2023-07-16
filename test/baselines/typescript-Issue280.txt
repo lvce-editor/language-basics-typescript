@@ -86,9 +86,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Punctuation
-VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

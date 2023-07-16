@@ -8,10 +8,10 @@ NewLine
 Comment
 Comment
 NewLine
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Numeric
+Text

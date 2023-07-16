@@ -9,8 +9,7 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
-VariableName
+Function
 Punctuation
 VariableName
-Punctuation
-Punctuation
+Text

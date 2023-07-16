@@ -7,4 +7,4 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Numeric
+Text

@@ -8,8 +8,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-Comment
-Comment
+Text
 NewLine
 KeywordImport
 Whitespace

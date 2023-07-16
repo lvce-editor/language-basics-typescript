@@ -17,9 +17,9 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Type
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine

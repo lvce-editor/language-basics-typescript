@@ -14,12 +14,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Numeric
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
+Text
 NewLine
 Punctuation
 Punctuation

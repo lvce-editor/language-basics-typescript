@@ -2,7 +2,7 @@ Comment
 Comment
 Comment
 NewLine
-Keyword
+VariableName
 Whitespace
 Function
 Punctuation
@@ -11,7 +11,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 NewLine
@@ -27,7 +27,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Punctuation
@@ -41,15 +41,14 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
-Punctuation
-Punctuation
+Type
+Text
 NewLine
 Whitespace
 VariableName

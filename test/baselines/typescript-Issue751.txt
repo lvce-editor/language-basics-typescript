@@ -12,7 +12,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -25,10 +25,10 @@ Class
 Punctuation
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace

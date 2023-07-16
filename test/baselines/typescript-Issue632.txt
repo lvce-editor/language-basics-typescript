@@ -46,8 +46,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation
@@ -155,8 +154,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

@@ -23,13 +23,13 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Numeric
+Text
 NewLine
 Whitespace
 KeywordControl

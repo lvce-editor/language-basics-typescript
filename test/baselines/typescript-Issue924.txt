@@ -12,6 +12,4 @@ Punctuation
 String
 Punctuation
 Whitespace
-Punctuation
-Punctuation
-Punctuation
+Text

@@ -6,13 +6,4 @@ Punctuation
 String
 Punctuation
 Whitespace
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Punctuation
-Whitespace
-Comment
-Comment
+Text

@@ -224,14 +224,6 @@ Punctuation
 Punctuation
 VariableName
 Punctuation
-Punctuation
-String
-Punctuation
-Punctuation
-Punctuation
-Punctuation
-Keyword
-Punctuation
 Text
 NewLine
 NewLine

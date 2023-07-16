@@ -23,9 +23,4 @@ Whitespace
 Comment
 Comment
 Whitespace
-Punctuation
-VariableName
-Whitespace
-Punctuation
-Punctuation
-Punctuation
+Text

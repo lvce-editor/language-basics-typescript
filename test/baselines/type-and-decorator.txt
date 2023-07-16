@@ -19,10 +19,7 @@ Type
 Punctuation
 NewLine
 NewLine
-Punctuation
-VariableName
-Punctuation
-Punctuation
+Text
 NewLine
 KeywordImport
 Whitespace

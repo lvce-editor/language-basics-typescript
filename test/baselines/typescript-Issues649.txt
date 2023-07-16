@@ -23,5 +23,4 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
-Punctuation
-Punctuation
+Text

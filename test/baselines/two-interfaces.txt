@@ -5,9 +5,9 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Punctuation

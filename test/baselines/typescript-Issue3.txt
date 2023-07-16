@@ -7,5 +7,4 @@ Whitespace
 Comment
 Comment
 Whitespace
-Regex
-Punctuation
+Text

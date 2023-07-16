@@ -37,14 +37,14 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+VariableName
 Whitespace
-LanguageConstant
+VariableName
 Punctuation
 NewLine
 Whitespace

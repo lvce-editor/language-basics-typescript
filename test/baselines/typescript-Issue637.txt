@@ -6,13 +6,13 @@ Punctuation
 Punctuation
 NewLine
 NewLine
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

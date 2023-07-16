@@ -89,10 +89,7 @@ Punctuation
 NewLine
 VariableName
 Punctuation
-Punctuation
-String
-Punctuation
-Punctuation
+Text
 NewLine
 NewLine
 Keyword

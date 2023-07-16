@@ -34,13 +34,10 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
+Text

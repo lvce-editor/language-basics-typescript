@@ -94,7 +94,7 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace
@@ -108,8 +108,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-Numeric
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

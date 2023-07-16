@@ -31,7 +31,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -47,7 +47,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Whitespace

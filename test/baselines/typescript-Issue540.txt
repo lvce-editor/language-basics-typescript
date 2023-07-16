@@ -33,8 +33,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -77,8 +76,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -113,8 +111,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -148,8 +145,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -190,8 +186,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -230,8 +225,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation
 NewLine
@@ -276,7 +270,6 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Punctuation

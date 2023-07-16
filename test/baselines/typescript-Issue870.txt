@@ -14,11 +14,7 @@ Type
 Text
 NewLine
 Whitespace
-Numeric
-Punctuation
-Whitespace
-Numeric
-Punctuation
+Text
 NewLine
 Whitespace
 Numeric

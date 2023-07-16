@@ -38,10 +38,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Comment
