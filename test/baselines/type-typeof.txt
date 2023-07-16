@@ -3,7 +3,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
+VariableName
 NewLine

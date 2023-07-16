@@ -205,14 +205,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
-Whitespace
-Type
-Whitespace
-Punctuation
+KeywordControl
 Whitespace
 VariableName
-Punctuation
+Whitespace
+Text
 NewLine
 NewLine
 Keyword

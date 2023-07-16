@@ -42,6 +42,7 @@ const State = {
   AfterTypeAfterNewLine: 39,
   AfterKeywordInstanceOf: 40,
   AfterKeywordNew: 41,
+  AfterKeywordTypeOf: 42,
 }
 
 /**
@@ -197,7 +198,8 @@ const RE_BUILTIN_CLASS =
   /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|Headers|Response|Request|Buffer|MessagePort|FileHandle|X509Certificate|Blob)\b/
 
 const RE_KEYWORD_NEW = /^new\b/
-const RE_KEYWORD_IMPLEMENTS = /^implements/
+const RE_KEYWORD_IMPLEMENTS = /^implements\b/
+const RE_KEYWORD_TYPE_OF = /^typeof\b/
 
 export const hasArrayReturn = true
 /**
@@ -502,6 +504,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
           state = stack.pop() || State.AfterType
+        } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
+          stack.push(state)
+          token = TokenType.KeywordControl
+          state = State.AfterKeywordTypeOf
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType
@@ -1501,6 +1507,17 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.AfterPropertyDot
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordTypeOf:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordTypeOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = stack.pop() || State.TopLevelContent
         } else {
           throw new Error('no')
         }

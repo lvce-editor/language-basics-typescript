@@ -82,13 +82,10 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
-Punctuation
 VariableName
-Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 KeywordOperator
