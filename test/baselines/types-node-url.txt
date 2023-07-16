@@ -33,7 +33,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 VariableName
 Whitespace
