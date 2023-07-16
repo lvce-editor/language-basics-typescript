@@ -508,6 +508,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.KeywordOperator
           state = State.AfterKeywordTypeOf
+        } else if ((next = part.match(RE_KEYWORD_READONLY))) {
+          token = TokenType.KeywordModifier
+          state = State.BeforeType
         } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
           token = TokenType.KeywordOperator
           state = State.BeforeType
