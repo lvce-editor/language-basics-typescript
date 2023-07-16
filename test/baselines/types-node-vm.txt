@@ -2443,9 +2443,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordModifier
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
