@@ -9,7 +9,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
+String
+Punctuation
 NewLine
 Punctuation
 NewLine
