@@ -1149,7 +1149,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
@@ -1159,9 +1159,8 @@ Class
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

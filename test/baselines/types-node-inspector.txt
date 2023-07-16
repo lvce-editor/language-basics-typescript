@@ -7905,7 +7905,11 @@ VariableName
 Punctuation
 Whitespace
 Class
-Text
+Punctuation
+Punctuation
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Punctuation
