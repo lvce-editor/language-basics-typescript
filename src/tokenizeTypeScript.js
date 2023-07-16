@@ -1129,6 +1129,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
