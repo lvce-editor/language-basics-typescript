@@ -151,7 +151,6 @@ const RE_SLASH = /^\//
 const RE_REGEX =
   /((?:^|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/
 const RE_ANYTHING_UNTIL_END = /^.+/s
-const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_CURLY_OPEN = /^\{/
 const RE_CURLY_CLOSE = /^\}/
 const RE_KEYWORD_CLASS_PROPERTY_MODIFIER =
@@ -200,6 +199,7 @@ const RE_BUILTIN_CLASS =
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
+const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 
 export const hasArrayReturn = true
 /**
@@ -872,12 +872,18 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
-        } else if ((next = part.match(RE_OPERATOR))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterTypeAfterNewLine
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_OPERATOR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ANYTHING_BUT_SEMICOLON_UNTIL_END))) {
+          token = TokenType.Text
+          state = State.AfterType
         } else {
           throw new Error('no')
         }
