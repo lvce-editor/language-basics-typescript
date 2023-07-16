@@ -1,0 +1,9 @@
+VariableName
+Punctuation
+Numeric
+Regex
+Punctuation
+Function
+Punctuation
+Punctuation
+NewLine
