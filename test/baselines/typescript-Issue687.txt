@@ -23,5 +23,7 @@ Whitespace
 Type
 Punctuation
 Text
+Punctuation
+Whitespace
 NewLine
 Punctuation

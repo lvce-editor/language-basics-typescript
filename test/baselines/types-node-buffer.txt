@@ -1033,6 +1033,7 @@ Whitespace
 Type
 Whitespace
 Text
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1047,7 +1048,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordImport
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -1149,9 +1150,9 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Text
 NewLine
 Whitespace
@@ -1191,7 +1192,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Type
+Keyword
 Whitespace
 Type
 Whitespace
