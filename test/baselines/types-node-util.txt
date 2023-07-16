@@ -2195,9 +2195,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 Whitespace
@@ -6365,9 +6365,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
+VariableName
 Whitespace
 Type
 Whitespace
@@ -6424,9 +6424,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
+VariableName
 Whitespace
 Type
 Whitespace

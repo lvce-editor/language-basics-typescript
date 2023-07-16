@@ -4,9 +4,9 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+KeywordControl
 Whitespace
-Type
+VariableName
 Whitespace
 Type
 Whitespace
