@@ -217,7 +217,6 @@ export const tokenizeLine = (line, lineState) => {
   let stack = lineState.stack
   while (index < line.length) {
     const part = line.slice(index)
-    // console.log({ part, state, stack: [...stack] })
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
@@ -1258,7 +1257,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.InsideMethodParameters
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
-          // console.log({ stack: [...stack] })
           token = TokenType.Punctuation
           state = stack.pop() || State.AfterMethodParameters
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
