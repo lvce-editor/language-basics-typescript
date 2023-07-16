@@ -35,7 +35,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -1724,7 +1724,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
@@ -1752,7 +1752,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 Whitespace
