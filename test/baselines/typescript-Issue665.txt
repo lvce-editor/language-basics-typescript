@@ -13,7 +13,7 @@ String
 Punctuation
 Punctuation
 NewLine
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -21,14 +21,14 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 String
 Punctuation
 Punctuation
 NewLine
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -36,7 +36,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 String

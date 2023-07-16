@@ -3,9 +3,9 @@ Whitespace
 Type
 Text
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Text
 NewLine
 Keyword

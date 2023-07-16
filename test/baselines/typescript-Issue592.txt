@@ -18,7 +18,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordReturn
 Whitespace
 Punctuation
 Punctuation

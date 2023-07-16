@@ -68,13 +68,14 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Text
+Numeric
+Punctuation
 NewLine
 Keyword
 Whitespace

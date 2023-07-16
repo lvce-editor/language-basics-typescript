@@ -12,11 +12,10 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
 Class
 Punctuation
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

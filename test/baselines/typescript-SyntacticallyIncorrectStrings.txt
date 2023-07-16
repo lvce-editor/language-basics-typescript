@@ -16,10 +16,12 @@ NewLine
 Punctuation
 NewLine
 NewLine
-VariableName
+Keyword
 Whitespace
 VariableName
 Whitespace
-Text
+Punctuation
+String
+Punctuation
 NewLine
 NewLine

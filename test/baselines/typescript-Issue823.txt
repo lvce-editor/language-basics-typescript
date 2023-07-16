@@ -6,13 +6,13 @@ Keyword
 Text
 NewLine
 Whitespace
-VariableName
+KeywordReturn
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
-VariableName
+Type
 Whitespace
 Text
 NewLine

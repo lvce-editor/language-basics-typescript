@@ -30,4 +30,8 @@ VariableName
 Punctuation
 Function
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation

@@ -67,7 +67,8 @@ Punctuation
 Punctuation
 NewLine
 NewLine
-Text
+Comment
+Comment
 NewLine
 Keyword
 Whitespace
@@ -76,7 +77,7 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation

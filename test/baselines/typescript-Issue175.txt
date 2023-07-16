@@ -8,7 +8,7 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 VariableName
 Whitespace

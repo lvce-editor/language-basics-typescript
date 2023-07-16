@@ -23,7 +23,7 @@ String
 Punctuation
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation

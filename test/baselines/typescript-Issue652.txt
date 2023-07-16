@@ -12,4 +12,10 @@ Punctuation
 Whitespace
 NewLine
 Whitespace
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Whitespace
+VariableName
+Punctuation

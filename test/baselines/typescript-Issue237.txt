@@ -8,8 +8,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
-Comment
 Comment

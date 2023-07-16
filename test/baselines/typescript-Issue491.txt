@@ -13,14 +13,15 @@ NewLine
 VariableName
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Whitespace
 Punctuation
 Whitespace
 VariableName
 Punctuation
 Whitespace
-Text
+Comment
+Comment
 NewLine
 VariableName
 Punctuation

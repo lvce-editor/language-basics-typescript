@@ -2,11 +2,11 @@ Comment
 Comment
 Comment
 NewLine
-VariableName
+KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

@@ -8,7 +8,7 @@ TypePrimitive
 NewLine
 NewLine
 Punctuation
-Function
+KeywordModifier
 Whitespace
 Punctuation
 Punctuation
@@ -19,7 +19,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -28,7 +28,7 @@ TypePrimitive
 NewLine
 NewLine
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 NewLine
@@ -37,7 +37,9 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-Text
+Punctuation
+String
+Punctuation
 NewLine
 Whitespace
 Punctuation

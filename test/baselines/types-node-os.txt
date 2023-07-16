@@ -18,9 +18,9 @@ NewLine
 Comment
 Comment
 NewLine
-VariableName
+KeywordDeclare
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 String
@@ -29,9 +29,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

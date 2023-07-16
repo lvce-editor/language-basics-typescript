@@ -72,9 +72,9 @@ NewLine
 Comment
 Comment
 NewLine
-VariableName
+KeywordDeclare
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 String
@@ -83,7 +83,8 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
 Comment
@@ -244,7 +245,8 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
 Keyword
@@ -292,7 +294,8 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
 Keyword

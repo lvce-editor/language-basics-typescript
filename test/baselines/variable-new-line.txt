@@ -6,7 +6,7 @@ NewLine
 Whitespace
 TypePrimitive
 NewLine
-Function
+KeywordControl
 Whitespace
 Punctuation
 Punctuation

@@ -21,6 +21,8 @@ Comment
 Punctuation
 Whitespace
 Punctuation
-Text
+Numeric
+Punctuation
+Punctuation
 NewLine
 Punctuation

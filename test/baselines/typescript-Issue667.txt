@@ -53,4 +53,8 @@ Punctuation
 Punctuation
 Punctuation
 VariableName
-Text
+Punctuation
+Punctuation
+VariableName
+Punctuation
+Punctuation

@@ -11,7 +11,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 VariableName
 Whitespace
@@ -29,9 +29,9 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
