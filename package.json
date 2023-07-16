@@ -112,7 +112,8 @@
       "types-node-string_decoder",
       "types-node-crypto",
       "typescript-awaitUsing",
-      "typescript-using"
+      "typescript-using",
+      "type-assignment-to-function-with-parameters-missing-comma"
     ]
   }
 }
