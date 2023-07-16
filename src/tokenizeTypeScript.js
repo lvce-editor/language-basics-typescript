@@ -894,12 +894,18 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
-        } else if ((next = part.match(RE_OPERATOR))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterTypeAfterNewLine
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_OPERATOR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_ANYTHING_BUT_SEMICOLON_UNTIL_END))) {
+          token = TokenType.Text
+          state = State.AfterType
         } else {
           throw new Error('no')
         }
