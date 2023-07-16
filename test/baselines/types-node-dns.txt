@@ -282,11 +282,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

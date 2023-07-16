@@ -478,6 +478,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Type
           state = State.AfterKeywordTypeDeclaration
         } else if ((next = part.match(RE_EQUAL))) {
+          stack.push(State.AfterType)
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_COLON))) {
@@ -716,6 +717,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterType
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_BUT_SEMICOLON_UNTIL_END))) {
           token = TokenType.Text
           state = State.AfterType
@@ -1193,6 +1197,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
+          stack.pop()
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_COLON_OPTIONAL))) {
           token = TokenType.Punctuation

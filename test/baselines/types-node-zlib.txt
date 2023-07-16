@@ -492,12 +492,13 @@ NewLine
 Whitespace
 VariableName
 Punctuation
+Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Punctuation
 NewLine
 Whitespace

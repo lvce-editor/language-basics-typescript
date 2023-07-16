@@ -1447,7 +1447,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -1459,7 +1459,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 Whitespace

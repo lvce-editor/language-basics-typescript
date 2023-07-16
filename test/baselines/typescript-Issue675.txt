@@ -13,4 +13,15 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+TypePrimitive
+Whitespace
+Punctuation
+Punctuation
