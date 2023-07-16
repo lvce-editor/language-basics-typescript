@@ -23,7 +23,7 @@ Punctuation
 Whitespace
 Type
 Punctuation
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text

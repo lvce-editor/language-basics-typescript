@@ -1011,11 +1011,11 @@ Type
 Whitespace
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Punctuation
 Whitespace
@@ -1191,7 +1191,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Keyword
+Type
 Whitespace
 Type
 Whitespace
@@ -7610,11 +7610,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Punctuation
 NewLine
@@ -7640,7 +7640,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Whitespace
 Punctuation

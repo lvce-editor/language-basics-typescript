@@ -124,7 +124,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -135,7 +135,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -146,7 +146,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -157,7 +157,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -168,7 +168,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -179,7 +179,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Text
@@ -678,7 +678,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -871,7 +871,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -1056,7 +1056,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Punctuation

@@ -2195,7 +2195,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -6365,11 +6365,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Punctuation
 NewLine
@@ -6395,7 +6395,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Whitespace
 Punctuation
@@ -6424,11 +6424,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Punctuation
 NewLine
@@ -6454,7 +6454,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Whitespace
 Punctuation
