@@ -2167,15 +2167,14 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine

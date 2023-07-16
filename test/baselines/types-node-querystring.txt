@@ -56,9 +56,8 @@ TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation

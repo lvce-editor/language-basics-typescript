@@ -6,8 +6,4 @@ Punctuation
 Whitespace
 Punctuation
 VariableName
-Whitespace
-Punctuation
-Whitespace
-VariableName
-Punctuation
+Text

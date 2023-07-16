@@ -4036,9 +4036,8 @@ TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -4060,13 +4059,12 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

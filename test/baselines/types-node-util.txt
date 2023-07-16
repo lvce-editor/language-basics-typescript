@@ -1997,8 +1997,6 @@ TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -2008,9 +2006,8 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

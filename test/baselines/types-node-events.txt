@@ -273,8 +273,6 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -321,8 +319,6 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Punctuation
-Punctuation
 Punctuation
 Punctuation
 VariableName
@@ -1342,8 +1338,6 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -1444,8 +1438,6 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -1542,8 +1534,6 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -1746,8 +1736,6 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -1792,8 +1780,6 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Punctuation
-Punctuation
 Punctuation
 Punctuation
 VariableName

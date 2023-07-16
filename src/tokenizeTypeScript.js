@@ -217,7 +217,6 @@ export const tokenizeLine = (line, lineState) => {
   let stack = lineState.stack
   while (index < line.length) {
     const part = line.slice(index)
-    console.log({ part, state })
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
@@ -496,7 +495,6 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.BeforeType:
-        // console.log({ part })
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.BeforeType
@@ -504,11 +502,8 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.TypePrimitive
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
-          console.log('BUITLIN CLASS', part)
-          console.log({ stack: [...stack] })
           token = TokenType.Class
           state = State.AfterType
-          // console.log('state', state)
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
           stack.push(state)
           token = TokenType.KeywordOperator
@@ -666,7 +661,6 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterType:
-        console.log({ part })
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -684,13 +678,11 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
+          stack.pop()
           state = stack.pop() || State.BeforeType
-          console.log('pop', state, part)
         } else if ((next = part.match(RE_COMMA))) {
-          console.log({ stack: [...stack] })
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
-          console.log('pop', state)
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.BeforePropertyAccess

@@ -32,9 +32,9 @@ NewLine
 Comment
 Comment
 NewLine
-KeywordDeclare
+Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 String
