@@ -499,13 +499,15 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace

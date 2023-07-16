@@ -207,7 +207,13 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Type
+Whitespace
+Punctuation
+Whitespace
+Type
 NewLine
 Keyword
 Whitespace

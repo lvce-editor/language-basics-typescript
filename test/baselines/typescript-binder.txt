@@ -53,9 +53,10 @@ Whitespace
 Type
 Whitespace
 Text
+Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Punctuation

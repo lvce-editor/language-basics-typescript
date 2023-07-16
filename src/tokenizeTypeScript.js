@@ -200,6 +200,7 @@ const RE_BUILTIN_CLASS =
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
+const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 
 export const hasArrayReturn = true
 /**
@@ -737,6 +738,12 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideSingleQuoteString
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
+          state = State.AfterType
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_ANYTHING_BUT_SEMICOLON_UNTIL_END))) {
+          token = TokenType.Text
           state = State.AfterType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
