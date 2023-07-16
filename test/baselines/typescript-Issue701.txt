@@ -20,7 +20,12 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 VariableName
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Numeric
+Punctuation

@@ -32,9 +32,9 @@ NewLine
 Comment
 Comment
 NewLine
-VariableName
+KeywordDeclare
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 String
@@ -43,15 +43,19 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 VariableName
 Whitespace
 Punctuation
 Whitespace
-Function
+VariableName
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Comment
@@ -69,6 +73,7 @@ Comment
 Comment
 NewLine
 Whitespace
+<<<<<<< HEAD
 VariableName
 Whitespace
 VariableName
@@ -76,6 +81,15 @@ Whitespace
 VariableName
 Whitespace
 VariableName
+=======
+Keyword
+Whitespace
+Class
+Whitespace
+KeywordModifier
+Whitespace
+Class
+>>>>>>> origin/main
 Whitespace
 Punctuation
 NewLine
@@ -96,15 +110,24 @@ Punctuation
 Whitespace
 Class
 Punctuation
+<<<<<<< HEAD
 Type
 Whitespace
 Punctuation
 Whitespace
 Type
+=======
+VariableName
+Whitespace
+Punctuation
+Whitespace
+VariableName
+>>>>>>> origin/main
 Punctuation
 VariableName
 Punctuation
 Punctuation
+<<<<<<< HEAD
 NewLine
 Whitespace
 Comment
@@ -244,6 +267,8 @@ NewLine
 Whitespace
 VariableName
 Text
+=======
+>>>>>>> origin/main
 NewLine
 Whitespace
 Comment

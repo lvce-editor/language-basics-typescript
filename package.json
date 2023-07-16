@@ -14,7 +14,7 @@
   "devDependencies": {
     "@lvce-editor/package-extension": "^0.0.5",
     "@lvce-editor/server": "^0.16.13",
-    "@lvce-editor/test-syntax-highlighting": "^0.2.0",
+    "@lvce-editor/test-syntax-highlighting": "^0.2.1",
     "got": "^13.0.0",
     "prettier": "^2.8.8",
     "tar-fs": "^3.0.4",
