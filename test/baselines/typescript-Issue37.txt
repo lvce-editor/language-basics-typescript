@@ -205,7 +205,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordOperator
 Whitespace
 VariableName
 Whitespace

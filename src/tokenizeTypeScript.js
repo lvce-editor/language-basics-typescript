@@ -506,8 +506,12 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
           stack.push(state)
-          token = TokenType.KeywordControl
+          token = TokenType.KeywordOperator
           state = State.AfterKeywordTypeOf
+        } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.BeforeType
+          stack.push(state)
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType
@@ -563,6 +567,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
