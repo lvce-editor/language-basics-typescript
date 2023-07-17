@@ -434,6 +434,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_OF))) {
           token = TokenType.KeywordOperator
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.FunctionName
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterKeywordVariableDeclaration
