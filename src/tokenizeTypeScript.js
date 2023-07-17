@@ -6,7 +6,7 @@ const State = {
   TopLevelContent: 1,
   InsideSingleQuoteString: 2,
   InsideDoubleQuoteString: 3,
-  AfterKeywordDeclaration: 4,
+  AfterKeywordVariableDeclaration: 4,
   BeforeValue: 5,
   AfterKeywordTypeDeclaration: 8,
   BeforeType: 9,
@@ -279,7 +279,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'const':
             case 'var':
               token = TokenType.Keyword
-              state = State.AfterKeywordDeclaration
+              state = State.AfterKeywordVariableDeclaration
               break
             case 'type':
               token = TokenType.Keyword
@@ -418,10 +418,10 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      case State.AfterKeywordDeclaration:
+      case State.AfterKeywordVariableDeclaration:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterKeywordDeclaration
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -436,7 +436,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
-          state = State.AfterKeywordDeclaration
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -451,10 +451,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.AfterKeywordDeclaration
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
-          state = State.AfterKeywordDeclaration
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
@@ -815,7 +815,7 @@ export const tokenizeLine = (line, lineState) => {
             case 'const':
             case 'var':
               token = TokenType.Keyword
-              state = State.AfterKeywordDeclaration
+              state = State.AfterKeywordVariableDeclaration
               break
             case 'type':
               token = TokenType.Keyword
@@ -1182,7 +1182,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideObjectDestructuringAfterValue
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterKeywordDeclaration
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.InsideObjectDestructuringAfterValue
