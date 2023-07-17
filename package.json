@@ -38,7 +38,6 @@
       "typescript-forof",
       "typescript-readonly",
       "typescript-readonlyModifier",
-      "typescript-Comments",
       "typescript-bigint",
       "typescript-constType",
       "typescript-arrowInsideCall",
