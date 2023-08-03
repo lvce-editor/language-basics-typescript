@@ -95,7 +95,7 @@ NewLine
 NewLine
 KeywordVoid
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

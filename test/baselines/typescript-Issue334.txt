@@ -3,7 +3,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -16,7 +16,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -29,7 +29,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String

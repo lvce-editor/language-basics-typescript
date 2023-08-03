@@ -178,6 +178,7 @@ const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
+
 const RE_NUMERIC_2 =
   /^(?:(?:[0-9][0-9_]*(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)(n)?\B)|(?:(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(n)?\b(?!\.))|(?:0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b)|(?:0(?:b|B)[01][01_]*(n)?\b)|(?:0(?:o|O)?[0-7][0-7_]*(n)?\b))/ // 1.1E+3
 const RE_NUMERIC_HEX = /0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
@@ -339,6 +340,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.Function
           state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName

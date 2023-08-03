@@ -39,7 +39,7 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace

@@ -20,7 +20,7 @@ Punctuation
 NewLine
 NewLine
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 NewLine

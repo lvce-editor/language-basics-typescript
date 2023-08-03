@@ -1,7 +1,7 @@
 Comment
 Comment
 NewLine
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace
@@ -38,7 +38,7 @@ NewLine
 Punctuation
 NewLine
 NewLine
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace
@@ -89,7 +89,7 @@ NewLine
 Comment
 Comment
 NewLine
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace

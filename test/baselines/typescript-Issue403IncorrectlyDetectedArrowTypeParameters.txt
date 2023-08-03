@@ -35,7 +35,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 KeywordThis
 Punctuation

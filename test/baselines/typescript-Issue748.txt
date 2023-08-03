@@ -126,7 +126,7 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -134,7 +134,7 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
-VariableName
+Function
 Punctuation
 Numeric
 Punctuation

@@ -40,7 +40,7 @@ Punctuation
 Whitespace
 KeywordAwait
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Whitespace
