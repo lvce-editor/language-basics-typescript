@@ -39,6 +39,6 @@ Whitespace
 Type
 Punctuation
 Whitespace
-Text
+Comment
 NewLine
 Punctuation
