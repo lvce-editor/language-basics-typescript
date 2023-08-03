@@ -17,7 +17,6 @@ const State = {
   AfterKeywordClassAfterClassName: 14,
   InsideClass: 15,
   AfterType: 16,
-  InsideTypeExpression: 17,
   AfterTypeExpression: 18,
   AfterVariableName: 19,
   BeforePropertyAccess: 20,
@@ -482,6 +481,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Type
           state = State.AfterKeywordTypeDeclaration
         } else if ((next = part.match(RE_EQUAL))) {
+          stack.push(State.AfterType)
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_COLON))) {
@@ -507,7 +507,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = stack.pop() || State.AfterType
+          state = State.AfterType
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
           stack.push(state)
           token = TokenType.KeywordOperator
@@ -527,7 +527,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
           stack.push(State.AfterTypeExpression)
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
@@ -585,29 +585,6 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      case State.InsideTypeExpression:
-        if ((next = part.match(RE_ROUND_CLOSE))) {
-          token = TokenType.Punctuation
-          state = State.AfterTypeExpression
-        } else if ((next = part.match(RE_VARIABLE_NAME))) {
-          token = TokenType.VariableName
-          state = State.AfterVariableName
-        } else if ((next = part.match(RE_WHITESPACE))) {
-          token = TokenType.Whitespace
-          state = State.InsideTypeExpression
-        } else if ((next = part.match(RE_PUNCTUATION))) {
-          token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-        } else if ((next = part.match(RE_SQUARE_OPEN))) {
-          token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-        } else if ((next = part.match(RE_SQUARE_CLOSE))) {
-          token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-        } else {
-          throw new Error('no')
-        }
-        break
       case State.AfterTypeExpression:
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
@@ -620,7 +597,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterTypeExpression
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.AfterTypeExpression
@@ -632,16 +609,16 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_SQUARE_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterTypeExpression
@@ -705,6 +682,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
+          stack.pop()
           state = stack.pop() || State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
@@ -1235,10 +1213,12 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.KeywordModifier
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          stack.push(state)
           token = TokenType.VariableName
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
+          stack.pop()
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_COLON_OPTIONAL))) {
           token = TokenType.Punctuation
@@ -1304,7 +1284,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideMethodParameters
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterMethodParameters
+          state = stack.pop() || State.AfterMethodParameters
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1344,13 +1324,13 @@ export const tokenizeLine = (line, lineState) => {
         break
       case State.InsideMethodParametersAfterVariableName:
         if ((next = part.match(RE_COLON))) {
+          stack.push(State.InsideMethodParameters)
           token = TokenType.Punctuation
           state = State.BeforeType
-          stack.push(State.InsideMethodParameters)
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
+          stack.push(State.InsideMethodParameters)
           token = TokenType.Punctuation
           state = State.BeforeType
-          stack.push(State.InsideMethodParameters)
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.InsideMethodParametersAfterVariableName

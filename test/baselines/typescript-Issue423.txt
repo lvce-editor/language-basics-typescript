@@ -24,7 +24,6 @@ Type
 Punctuation
 Whitespace
 Comment
-Comment
 NewLine
 Keyword
 Whitespace

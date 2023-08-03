@@ -24,10 +24,10 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -88,5 +88,5 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+VariableName
 Punctuation

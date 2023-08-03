@@ -152,9 +152,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+VariableName
 Whitespace
-KeywordThis
+VariableName
 Punctuation
 VariableName
 Punctuation

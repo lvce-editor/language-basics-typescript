@@ -21,7 +21,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Punctuation
