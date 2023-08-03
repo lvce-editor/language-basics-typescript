@@ -1,12 +1,14 @@
 Keyword
 Whitespace
-Punctuation
 VariableName
-Punctuation
 Whitespace
 Punctuation
 Whitespace
-Function
+KeywordModifier
+Whitespace
+Keyword
+Whitespace
+Punctuation
 Punctuation
 Punctuation
 Punctuation

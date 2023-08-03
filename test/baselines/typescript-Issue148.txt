@@ -22,7 +22,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -39,7 +39,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-VariableName
+Function
 Punctuation
 Punctuation
 String

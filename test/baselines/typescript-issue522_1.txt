@@ -136,7 +136,7 @@ NewLine
 Whitespace
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

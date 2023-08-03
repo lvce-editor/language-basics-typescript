@@ -60,7 +60,7 @@ Whitespace
 KeywordControl
 Whitespace
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -186,7 +186,7 @@ Whitespace
 KeywordControl
 Whitespace
 Punctuation
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation

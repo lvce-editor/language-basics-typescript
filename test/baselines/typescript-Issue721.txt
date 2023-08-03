@@ -23,7 +23,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 KeywordThis
 Punctuation
@@ -33,7 +33,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 KeywordThis
 Punctuation

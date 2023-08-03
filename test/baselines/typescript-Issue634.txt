@@ -1,7 +1,7 @@
 VariableName
 Punctuation
 NewLine
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
