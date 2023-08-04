@@ -700,7 +700,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterType
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -1120,7 +1120,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
-          stack
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_SEMICOLON))) {
@@ -1161,6 +1160,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          stack.push(State.AfterMethodParameters)
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -1375,6 +1378,8 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterMethodParameters
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
+          // TODO depending on whether this is a type function
+          // this can be either a type or a value
           state = State.BeforeType
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Punctuation
