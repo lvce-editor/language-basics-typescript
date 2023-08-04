@@ -1,0 +1,1 @@
+emoji.querySelector('img')?.getAttribute('alt') ?? '';
