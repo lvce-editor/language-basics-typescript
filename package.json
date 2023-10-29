@@ -112,7 +112,17 @@
       "types-node-crypto",
       "typescript-awaitUsing",
       "typescript-using",
-      "type-assignment-to-function-with-parameters-missing-comma"
+      "type-assignment-to-function-with-parameters-missing-comma",
+      "babel-parser-expression",
+      "babel-parser-parse-error-standard-errors",
+      "babel-parser-parser-expression",
+      "babel-parser-plugins-flow-index",
+      "babel-parser-plugins-typescript-index",
+      "babel-parser-production-parameter",
+      "babel-parser-scopeflags",
+      "babel-parser-standard-errors",
+      "babel-parser-util-production-parameter",
+      "babel-parser-util-scopeflags"
     ]
   }
 }
