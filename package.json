@@ -12,13 +12,13 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@lvce-editor/package-extension": "^0.0.5",
-    "@lvce-editor/server": "^0.16.22",
+    "@lvce-editor/package-extension": "^0.1.0",
+    "@lvce-editor/server": "^0.19.1",
     "@lvce-editor/test-syntax-highlighting": "^0.2.1",
     "got": "^13.0.0",
     "prettier": "^2.8.8",
     "tar-fs": "^3.0.4",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "prettier": {
     "semi": false,
