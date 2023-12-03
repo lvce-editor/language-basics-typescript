@@ -472,6 +472,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_EXCLAMATION_MARK))) {
           token = TokenType.Punctuation
           state = State.AfterVariableName
+        } else if ((next = part.match(RE_NUMERIC))) {
+          token = TokenType.Numeric
+          state = State.TopLevelContent
         } else {
           line
           part
