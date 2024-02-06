@@ -146,7 +146,8 @@
       "rollup-src-utils-collapsesourcemaps",
       "rollup-src-utils-getstaticdependencies",
       "rollup-src-utils-plugindriver",
-      "rollup-src-utils-timers"
+      "rollup-src-utils-timers",
+      "readonly-keyof"
     ]
   }
 }
