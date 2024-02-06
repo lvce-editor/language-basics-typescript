@@ -1,0 +1,1 @@
+const TIMED_PLUGIN_HOOKS: readonly (keyof PluginHooks)[] = []
