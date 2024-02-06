@@ -4,7 +4,7 @@ cd $(dirname "$0")
 cd ..
 
 REPO=https://github.com/microsoft/TypeScript-TmLanguage
-COMMIT="f1d3d951d15282612d1f4b922f6519d6f405daee"
+COMMIT="84540abddbbf27f5a2df71b28aa0e1093bad555d"
 
 rm -rf .tmp
 
