@@ -1,5 +1,7 @@
 # Language Basics TypeScript
 
+> TypeScript syntax highlighting for Lvce Editor.
+
 ## Contributing
 
 ```sh
