@@ -19,6 +19,7 @@ const getTestName = (baseName) => {
       .replaceAll('/', '-')
       .replaceAll(',', '')
       .replaceAll('_', '-')
+      .replaceAll('-.', '-')
   )
 }
 

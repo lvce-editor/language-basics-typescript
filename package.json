@@ -122,7 +122,31 @@
       "babel-parser-scopeflags",
       "babel-parser-standard-errors",
       "babel-parser-util-production-parameter",
-      "babel-parser-util-scopeflags"
+      "babel-parser-util-scopeflags",
+      "rollup-docs-repl-helpers-editor",
+      "rollup-docs-repl-stores-options",
+      "rollup-docs-vitepress-verify-anchors",
+      "rollup-src-ast-nodes-arrayexpression",
+      "rollup-src-ast-nodes-arraypattern",
+      "rollup-src-ast-nodes-assignmentpattern",
+      "rollup-src-ast-nodes-callexpression",
+      "rollup-src-ast-nodes-classbody",
+      "rollup-src-ast-nodes-identifier",
+      "rollup-src-ast-nodes-importdeclaration",
+      "rollup-src-ast-nodes-objectexpression",
+      "rollup-src-ast-nodes-objectpattern",
+      "rollup-src-ast-nodes-property",
+      "rollup-src-ast-nodes-restelement",
+      "rollup-src-ast-nodes-shared-bitflags",
+      "rollup-src-ast-nodes-shared-pattern",
+      "rollup-src-ast-nodes-shared-variablekinds",
+      "rollup-src-ast-nodes-unaryexpression",
+      "rollup-src-chunk",
+      "rollup-src-utils-chunkassignment",
+      "rollup-src-utils-collapsesourcemaps",
+      "rollup-src-utils-getstaticdependencies",
+      "rollup-src-utils-plugindriver",
+      "rollup-src-utils-timers"
     ]
   }
 }
