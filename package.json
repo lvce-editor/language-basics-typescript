@@ -147,7 +147,9 @@
       "rollup-src-utils-getstaticdependencies",
       "rollup-src-utils-plugindriver",
       "rollup-src-utils-timers",
-      "readonly-keyof"
+      "readonly-keyof",
+      "type-fest-source-package-json",
+      "type-fest-source-tsconfig-json"
     ]
   }
 }
