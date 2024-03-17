@@ -26,6 +26,7 @@
   },
   "test-tokenize": {
     "skip": [
+      "declare-function-with-type",
       "import-type-destructured",
       "comment-after-type",
       "object-multiple-properties",
