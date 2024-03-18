@@ -1249,6 +1249,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           throw new Error('no')
         }
