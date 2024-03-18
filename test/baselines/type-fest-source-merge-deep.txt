@@ -131,6 +131,8 @@ Comment
 NewLine
 Comment
 NewLine
+KeywordImport
+Whitespace
 Keyword
 Whitespace
 Type
