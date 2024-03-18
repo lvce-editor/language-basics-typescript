@@ -1,0 +1,6 @@
+KeywordDeclare
+Whitespace
+Type
+Whitespace
+Text
+NewLine
