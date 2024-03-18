@@ -77,7 +77,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Text
+Punctuation
 NewLine
 NewLine
 Whitespace

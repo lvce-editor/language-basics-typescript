@@ -5,9 +5,9 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+Keyword
 Whitespace
-Type
+Class
 Punctuation
 Type
 Punctuation

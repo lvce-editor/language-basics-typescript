@@ -221,7 +221,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 NewLine
 Whitespace

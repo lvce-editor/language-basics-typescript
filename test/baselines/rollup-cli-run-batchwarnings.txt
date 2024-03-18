@@ -2912,7 +2912,9 @@ Punctuation
 Punctuation
 String
 Punctuation
-Text
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 KeywordControl
