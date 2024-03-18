@@ -8,11 +8,10 @@ export const UnparenthesizedPipeBodyDescriptions = new Set([
   "YieldExpression",
 ] as const);
 
-type GetSetMemberType<T extends Set<any>> = T extends Set<infer M>
-  ? M
-  : unknown;
+type GetSetMemberType<T extends Set<any>> =
+  T extends Set<infer M> ? M : unknown;
 
-type UnparenthesizedPipeBodyTypes = GetSetMemberType<
+export type UnparenthesizedPipeBodyTypes = GetSetMemberType<
   typeof UnparenthesizedPipeBodyDescriptions
 >;
 

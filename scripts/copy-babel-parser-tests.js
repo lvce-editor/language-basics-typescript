@@ -1,13 +1,13 @@
 import { execaCommand } from 'execa'
 import { cp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
-import path, { basename, dirname, join } from 'node:path'
+import path, { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 
 const REPO = 'https://github.com/babel/babel'
-const COMMIT = 'c446ff85c28e117ebf3cd72cd34ef358f1077aa8'
+const COMMIT = '3a255c885e98b3d16a23a3d1ee6962e6a61382a9'
 
 const getTestName = (baseName) => {
   return (
