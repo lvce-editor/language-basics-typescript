@@ -27,7 +27,6 @@
   "test-tokenize": {
     "skip": [
       "babel-parser-expression",
-      "type-multiple-expression",
       "babel-parser-parse-error-standard-errors",
       "babel-parser-parser-expression",
       "babel-parser-plugins-flow-index",
