@@ -64,7 +64,7 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Punctuation
@@ -81,7 +81,7 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Punctuation

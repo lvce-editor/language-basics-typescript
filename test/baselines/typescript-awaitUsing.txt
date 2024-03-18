@@ -201,7 +201,7 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-Class
+Keyword
 Whitespace
 Class
 Whitespace

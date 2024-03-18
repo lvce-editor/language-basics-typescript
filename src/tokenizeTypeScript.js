@@ -742,7 +742,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterType
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterType
+          state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject

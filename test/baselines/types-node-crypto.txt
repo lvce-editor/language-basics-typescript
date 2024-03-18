@@ -1974,7 +1974,7 @@ Whitespace
 Punctuation
 Whitespace
 TypePrimitive
-Text
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -9951,7 +9951,7 @@ Whitespace
 Punctuation
 Whitespace
 TypePrimitive
-Text
+Punctuation
 NewLine
 Whitespace
 VariableName

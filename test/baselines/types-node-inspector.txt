@@ -108,9 +108,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Type
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -124,9 +124,9 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

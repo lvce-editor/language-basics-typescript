@@ -491,7 +491,7 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Whitespace
@@ -512,7 +512,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Type
 Punctuation
@@ -529,7 +529,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Type
 Punctuation
@@ -553,7 +553,7 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Whitespace
@@ -567,7 +567,7 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-Type
+Keyword
 Whitespace
 Type
 Whitespace

@@ -154,7 +154,9 @@ Whitespace
 Punctuation
 Whitespace
 TypePrimitive
-Text
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 VariableName
