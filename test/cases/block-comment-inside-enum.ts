@@ -1,0 +1,3 @@
+const enum A {
+  /* test */
+}
