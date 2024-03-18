@@ -1,0 +1,12 @@
+Keyword
+Whitespace
+Keyword
+Whitespace
+Type
+Whitespace
+Punctuation
+NewLine
+Whitespace
+Comment
+NewLine
+Punctuation
