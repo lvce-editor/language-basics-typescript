@@ -34,7 +34,6 @@
       "babel-parser-production-parameter",
       "babel-parser-standard-errors",
       "babel-parser-tokenizer-state",
-      "readonly-keyof",
       "rollup-docs-repl-helpers-editor",
       "rollup-docs-repl-stores-options",
       "rollup-docs-vitepress-verify-anchors",
