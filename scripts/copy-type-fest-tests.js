@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 
 const REPO = 'https://github.com/sindresorhus/type-fest'
-const COMMIT = '3ef12b0bdc7c29321daa304abf7a70ed49b9aa7d'
+const COMMIT = 'bc4957763a49212339a6c5bbd13f3115d658fda7'
 
 const getTestName = (line) => {
   return (
