@@ -727,7 +727,8 @@ Whitespace
 Punctuation
 String
 Punctuation
-Text
+Punctuation
+Punctuation
 NewLine
 Whitespace
 VariableName

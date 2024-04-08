@@ -372,7 +372,9 @@ Whitespace
 Punctuation
 String
 Punctuation
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 Keyword

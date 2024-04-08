@@ -7,13 +7,6 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
+Text
 NewLine
 Punctuation

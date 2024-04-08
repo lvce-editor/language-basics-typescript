@@ -735,7 +735,7 @@ Whitespace
 Text
 NewLine
 Whitespace
-Punctuation
+Text
 Punctuation
 NewLine
 Whitespace
@@ -848,7 +848,16 @@ Whitespace
 Punctuation
 String
 Punctuation
-Text
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Whitespace
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Punctuation

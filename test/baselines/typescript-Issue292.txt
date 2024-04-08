@@ -12,11 +12,11 @@ Punctuation
 NewLine
 Whitespace
 VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName

@@ -5,13 +5,4 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Punctuation
-String
-Punctuation
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Punctuation
+Text

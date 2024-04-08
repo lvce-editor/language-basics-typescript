@@ -1919,13 +1919,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Punctuation
-Punctuation
-Punctuation
-VariableName
-Punctuation
-VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 VariableName
