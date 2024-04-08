@@ -87,7 +87,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
 Punctuation
@@ -101,7 +101,7 @@ Punctuation
 Text
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
 VariableName

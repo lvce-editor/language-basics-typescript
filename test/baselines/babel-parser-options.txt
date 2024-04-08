@@ -218,7 +218,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
 VariableName
