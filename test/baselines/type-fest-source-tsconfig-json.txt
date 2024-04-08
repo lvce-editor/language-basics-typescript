@@ -464,6 +464,10 @@ Punctuation
 NewLine
 NewLine
 Whitespace
+Comment
+Comment
+NewLine
+Whitespace
 KeywordImport
 Whitespace
 Keyword
