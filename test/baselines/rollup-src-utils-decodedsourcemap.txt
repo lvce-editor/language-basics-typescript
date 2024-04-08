@@ -661,13 +661,13 @@ Whitespace
 Text
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
-Text
+Comment
 NewLine
 Whitespace
 VariableName
