@@ -98,7 +98,7 @@ export type BuiltIns = Primitive | void | Date | RegExp;
 /**
 Matches non-recursive types.
 */
-export type NonRecursiveType = BuiltIns | Function | (new (...args: any[]) => unknown);
+export type NonRecursiveType = BuiltIns | Function | (new (...arguments_: any[]) => unknown);
 
 /**
 Returns a boolean for whether the given type is a plain key-value object.
@@ -416,9 +416,11 @@ Multiple call signatures cannot currently be supported due to a TypeScript limit
 @see https://github.com/microsoft/TypeScript/issues/29732
 */
 export type HasMultipleCallSignatures<T extends (...arguments_: any[]) => unknown> =
-	T extends {(...arguments_: infer A): unknown; (...arguments_: any[]): unknown}
-		? unknown[] extends A
-			? false
+	T extends {(...arguments_: infer A): unknown; (...arguments_: infer B): unknown}
+		? B extends A
+			? A extends B
+				? false
+				: true
 			: true
 		: false;
 
