@@ -37,14 +37,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Punctuation
-String
-Punctuation
-Punctuation
-Punctuation
-Whitespace
-VariableName
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation

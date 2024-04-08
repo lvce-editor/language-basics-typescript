@@ -43,6 +43,7 @@ const State = {
   AfterKeywordInstanceOf: 40,
   AfterKeywordNew: 41,
   AfterKeywordTypeOf: 42,
+  InsideObject: 43,
 }
 
 /**
@@ -203,6 +204,7 @@ const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
+const RE_ENDS_WITH_EQUAL = /\=\s+$/
 
 export const hasArrayReturn = true
 /**
@@ -374,6 +376,15 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
           if (next[0] === '.') {
             state = State.AfterPropertyDot
+          }
+          if (
+            next[0] === '{' &&
+            line.slice(0, index).match(RE_ENDS_WITH_EQUAL)
+          ) {
+            state = State.InsideObject
+          }
+          if (next[0] === '}') {
+            state = stack.pop() || State.TopLevelContent
           }
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
@@ -1605,6 +1616,36 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = stack.pop() || State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideObject:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideObject
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.FunctionName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideObject
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          stack.push(state)
+          state = State.InsideObject
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.InsideObject
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = State.InsideObject
         } else {
           throw new Error('no')
         }

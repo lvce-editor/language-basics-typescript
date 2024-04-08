@@ -3269,7 +3269,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 VariableName
 Whitespace
@@ -3277,7 +3277,11 @@ Punctuation
 Whitespace
 Function
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 KeywordImport

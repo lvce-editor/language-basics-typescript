@@ -20,7 +20,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Keyword
+VariableName
 Whitespace
 Punctuation
 Punctuation

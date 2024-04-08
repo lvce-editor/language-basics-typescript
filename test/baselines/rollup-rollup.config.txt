@@ -596,8 +596,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
+Text
 NewLine
 Whitespace
 VariableName

@@ -691,12 +691,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+VariableName
 Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
+Text
 NewLine
 Whitespace
 Punctuation
@@ -719,7 +716,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -739,7 +736,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 Punctuation
 VariableName
@@ -787,7 +784,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+Function
 Whitespace
 Punctuation
 NewLine

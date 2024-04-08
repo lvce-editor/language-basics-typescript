@@ -457,7 +457,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 Punctuation
 Whitespace

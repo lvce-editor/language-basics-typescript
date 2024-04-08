@@ -7,9 +7,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Punctuation
 Whitespace
-Text
+Punctuation
+String
+Punctuation
 NewLine
 Punctuation

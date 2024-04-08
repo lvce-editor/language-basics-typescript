@@ -18454,10 +18454,7 @@ Whitespace
 VariableName
 NewLine
 Whitespace
-Punctuation
-Whitespace
-LanguageConstant
-Punctuation
+Text
 NewLine
 Whitespace
 Comment
@@ -18585,7 +18582,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Keyword
+KeywordImport
 Whitespace
 Keyword
 Whitespace

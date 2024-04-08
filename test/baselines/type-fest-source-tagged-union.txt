@@ -128,7 +128,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-KeywordOperator
+VariableName
 Whitespace
 VariableName
 Whitespace

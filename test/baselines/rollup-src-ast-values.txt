@@ -174,11 +174,11 @@ NewLine
 Punctuation
 NewLine
 NewLine
-KeywordImport
+VariableName
 Whitespace
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -197,9 +197,9 @@ NewLine
 Punctuation
 NewLine
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine
