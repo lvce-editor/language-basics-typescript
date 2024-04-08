@@ -4084,10 +4084,6 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
-NewLine
-Whitespace
 VariableName
 Punctuation
 VariableName
@@ -4477,7 +4473,12 @@ Punctuation
 Whitespace
 KeywordThis
 Punctuation
-Function
+VariableName
+Punctuation
+VariableName
+Punctuation
+VariableName
+Punctuation
 Punctuation
 VariableName
 Punctuation
