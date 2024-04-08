@@ -219,7 +219,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
+Punctuation
+Punctuation
+VariableName
+Punctuation
 NewLine
 Whitespace
 Punctuation

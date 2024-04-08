@@ -90,6 +90,14 @@ Whitespace
 Text
 NewLine
 Whitespace
+Punctuation
+VariableName
+Whitespace
+VariableName
+Whitespace
+VariableName
+Punctuation
+Punctuation
 Text
 NewLine
 Whitespace

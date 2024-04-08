@@ -36,6 +36,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
+Punctuation
 Text
 NewLine
 Whitespace
