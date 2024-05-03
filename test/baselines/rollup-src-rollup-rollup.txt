@@ -4,7 +4,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -2418,7 +2418,7 @@ Whitespace
 Numeric
 Punctuation
 Whitespace
-Function
+KeywordControl
 Whitespace
 Punctuation
 NewLine
@@ -2470,7 +2470,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 VariableName

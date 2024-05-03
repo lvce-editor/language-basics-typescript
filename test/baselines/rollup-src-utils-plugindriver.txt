@@ -1697,7 +1697,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
@@ -1992,7 +1992,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -2210,7 +2210,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -2428,7 +2428,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
@@ -3400,7 +3400,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Class
 Punctuation
@@ -3817,7 +3817,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Class
 Punctuation

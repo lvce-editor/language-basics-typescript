@@ -6739,7 +6739,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 KeywordControl
 Punctuation

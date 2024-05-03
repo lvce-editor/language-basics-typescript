@@ -919,7 +919,7 @@ Punctuation
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
@@ -3641,11 +3641,11 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

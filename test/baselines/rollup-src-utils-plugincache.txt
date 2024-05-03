@@ -485,7 +485,7 @@ KeywordReturn
 Whitespace
 LanguageConstant
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

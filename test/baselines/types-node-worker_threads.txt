@@ -4477,7 +4477,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4485,7 +4485,7 @@ NewLine
 Whitespace
 Class
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4493,7 +4493,7 @@ NewLine
 Whitespace
 Class
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

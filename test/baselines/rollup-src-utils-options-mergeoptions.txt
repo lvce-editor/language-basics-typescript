@@ -790,7 +790,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -807,7 +807,7 @@ KeywordReturn
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -1167,7 +1167,7 @@ VariableName
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 LanguageConstant
 Whitespace
@@ -1977,7 +1977,7 @@ KeywordReturn
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 LanguageConstant
 Punctuation

@@ -541,7 +541,7 @@ Punctuation
 Numeric
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -2087,7 +2087,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

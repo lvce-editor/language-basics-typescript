@@ -6,7 +6,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -30,7 +30,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

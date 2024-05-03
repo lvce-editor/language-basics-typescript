@@ -170,7 +170,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 LanguageConstant
 Whitespace
@@ -240,7 +240,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace

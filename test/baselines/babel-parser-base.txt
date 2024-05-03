@@ -449,7 +449,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-Function
+KeywordControl
 Whitespace
 Punctuation
 VariableName
@@ -570,7 +570,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 LanguageConstant
 Whitespace

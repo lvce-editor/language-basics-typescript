@@ -7,7 +7,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Punctuation
 NewLine
