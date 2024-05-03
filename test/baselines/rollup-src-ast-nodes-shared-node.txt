@@ -301,7 +301,7 @@ Keyword
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -405,7 +405,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 Punctuation

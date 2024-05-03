@@ -389,7 +389,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -562,7 +562,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

@@ -57,7 +57,7 @@ Punctuation
 String
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 NewLine
@@ -349,7 +349,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

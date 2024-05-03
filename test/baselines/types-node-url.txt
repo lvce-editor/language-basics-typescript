@@ -35,7 +35,7 @@ Punctuation
 Whitespace
 Class
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -2924,14 +2924,14 @@ Punctuation
 Whitespace
 Class
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
 Whitespace
 Class
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace

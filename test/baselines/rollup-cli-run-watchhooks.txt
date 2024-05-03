@@ -395,7 +395,7 @@ Punctuation
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Class
 Punctuation

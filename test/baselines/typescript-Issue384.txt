@@ -34,7 +34,7 @@ KeywordVoid
 NewLine
 KeywordImport
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace

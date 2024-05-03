@@ -456,7 +456,7 @@ KeywordThis
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -1043,7 +1043,7 @@ KeywordThis
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

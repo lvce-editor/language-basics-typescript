@@ -1370,11 +1370,11 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 NewLine

@@ -149,7 +149,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -348,7 +348,7 @@ KeywordThis
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

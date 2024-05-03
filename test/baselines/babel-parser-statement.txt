@@ -4,7 +4,7 @@ Keyword
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -106,7 +106,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -328,7 +328,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 Punctuation
@@ -349,7 +349,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 Punctuation
@@ -1996,7 +1996,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3611,7 +3611,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3639,7 +3639,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3667,7 +3667,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3795,7 +3795,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3867,7 +3867,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3907,7 +3907,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3935,7 +3935,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3963,7 +3963,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -3991,7 +3991,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4019,7 +4019,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4164,7 +4164,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4356,7 +4356,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4626,7 +4626,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4664,7 +4664,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4692,7 +4692,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4738,7 +4738,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -4936,7 +4936,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -5030,7 +5030,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -5299,7 +5299,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -5442,7 +5442,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -5490,7 +5490,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -7849,7 +7849,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -8284,7 +8284,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -8340,7 +8340,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -8669,7 +8669,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -8759,7 +8759,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -14129,7 +14129,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -14156,7 +14156,7 @@ KeywordReturn
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -15534,7 +15534,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -15661,7 +15661,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -15878,11 +15878,11 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -15988,7 +15988,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -16004,7 +16004,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -16020,7 +16020,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -16036,7 +16036,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -16052,7 +16052,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -18323,7 +18323,7 @@ VariableName
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -19900,7 +19900,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20108,7 +20108,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20146,7 +20146,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20192,7 +20192,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20347,7 +20347,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20415,7 +20415,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -20718,7 +20718,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -21339,7 +21339,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -21415,7 +21415,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -21478,7 +21478,7 @@ Function
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -21866,7 +21866,7 @@ Function
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -22745,11 +22745,11 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25392,7 +25392,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25430,7 +25430,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25483,7 +25483,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25538,7 +25538,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25578,7 +25578,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25696,7 +25696,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25866,7 +25866,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -25920,7 +25920,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -26555,7 +26555,7 @@ Function
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -28901,7 +28901,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -28929,7 +28929,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

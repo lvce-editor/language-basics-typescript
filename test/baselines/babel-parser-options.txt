@@ -654,7 +654,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-Function
+KeywordControl
 Whitespace
 Punctuation
 VariableName

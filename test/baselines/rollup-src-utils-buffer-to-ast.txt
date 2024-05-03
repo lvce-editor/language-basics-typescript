@@ -11,7 +11,7 @@ Keyword
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -802,7 +802,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -1180,7 +1180,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -7214,7 +7214,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -7770,7 +7770,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -8672,7 +8672,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -10745,7 +10745,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -10915,7 +10915,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -11045,7 +11045,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -13640,7 +13640,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation

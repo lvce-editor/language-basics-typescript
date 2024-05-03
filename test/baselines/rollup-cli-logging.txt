@@ -148,7 +148,7 @@ VariableName
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Class
 Punctuation

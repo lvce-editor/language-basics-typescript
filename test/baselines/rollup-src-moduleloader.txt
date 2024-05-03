@@ -5096,7 +5096,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 Punctuation
@@ -5241,7 +5241,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 Keyword
 NewLine
@@ -6183,7 +6183,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -6411,7 +6411,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
