@@ -84,6 +84,14 @@ Whitespace
 VariableName
 Punctuation
 NewLine
+Whitespace
+VariableName
+Punctuation
+NewLine
+Whitespace
+VariableName
+Punctuation
+NewLine
 Punctuation
 Whitespace
 KeywordImport
@@ -2050,6 +2058,10 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
+VariableName
+Whitespace
+VariableName
+Whitespace
 Punctuation
 NewLine
 Whitespace
@@ -2253,6 +2265,10 @@ Whitespace
 VariableName
 Punctuation
 Punctuation
+Whitespace
+VariableName
+Whitespace
+VariableName
 Whitespace
 VariableName
 Whitespace

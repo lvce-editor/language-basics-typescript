@@ -1309,11 +1309,13 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
-NewLine
+Punctuation
+VariableName
+Whitespace
+KeywordControl
 Whitespace
 VariableName
+Punctuation
 Punctuation
 VariableName
 Whitespace
@@ -1321,10 +1323,6 @@ Punctuation
 Whitespace
 Keyword
 Punctuation
-NewLine
-Whitespace
-Comment
-Comment
 NewLine
 Whitespace
 VariableName
