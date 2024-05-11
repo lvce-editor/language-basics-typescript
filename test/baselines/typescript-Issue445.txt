@@ -37,4 +37,4 @@ NewLine
 Whitespace
 Comment
 NewLine
-Comment
+Punctuation

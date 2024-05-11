@@ -355,6 +355,7 @@ export const tokenizeLine = (line, lineState) => {
             token = TokenType.Comment
             state = State.InsideBlockComment
           } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+            stack.push(state)
             token = TokenType.Comment
             state = State.InsideLineComment
           } else if ((next = part.match(RE_REGEX))) {
@@ -1034,7 +1035,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideLineComment:
         if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Comment
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else {
           throw new Error('no')
         }
@@ -1439,6 +1440,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.VariableName
           state = State.TopLevelContent
         } else if ((next = part.match(RE_LINE_COMMENT))) {
+          stack.push(state)
           token = TokenType.Comment
           state = State.InsideLineComment
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
@@ -1670,6 +1672,8 @@ export const tokenizeLine = (line, lineState) => {
     stack.pop()
   } else if (state === State.AfterType) {
     state = State.AfterTypeAfterNewLine
+  } else if (state === State.InsideLineComment) {
+    state = stack.pop() || State.TopLevelContent
   }
   return {
     state,
