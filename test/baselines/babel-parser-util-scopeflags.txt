@@ -5,10 +5,6 @@ Comment
 Comment
 Comment
 NewLine
-Comment
-Comment
-Comment
-NewLine
 KeywordImport
 Whitespace
 Keyword
