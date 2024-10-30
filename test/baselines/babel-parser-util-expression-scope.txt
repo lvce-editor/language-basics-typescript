@@ -389,8 +389,7 @@ Whitespace
 Punctuation
 VariableName
 Punctuation
-Punctuation
-Punctuation
+VariableName
 Punctuation
 Punctuation
 Whitespace
@@ -451,8 +450,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Punctuation
-Punctuation
+VariableName
 Punctuation
 Punctuation
 NewLine
@@ -935,8 +933,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Punctuation
-Punctuation
+VariableName
 Punctuation
 Punctuation
 NewLine

@@ -9,12 +9,15 @@ import type { Undone } from "../parser/node.ts";
 import type { BindingFlag } from "../util/scopeflags.ts";
 
 const { defineProperty } = Object;
-const toUnenumerable = (object: any, key: string) =>
-  defineProperty(object, key, { enumerable: false, value: object[key] });
+const toUnenumerable = (object: any, key: string) => {
+  if (object) {
+    defineProperty(object, key, { enumerable: false, value: object[key] });
+  }
+};
 
 function toESTreeLocation(node: any) {
-  node.loc.start && toUnenumerable(node.loc.start, "index");
-  node.loc.end && toUnenumerable(node.loc.end, "index");
+  toUnenumerable(node.loc.start, "index");
+  toUnenumerable(node.loc.end, "index");
 
   return node;
 }
@@ -36,7 +39,7 @@ export default (superClass: typeof Parser) =>
       let regex: RegExp | null = null;
       try {
         regex = new RegExp(pattern, flags);
-      } catch (e) {
+      } catch (_) {
         // In environments that don't support these flags value will
         // be null as the regex can't be represented natively.
       }
@@ -49,7 +52,7 @@ export default (superClass: typeof Parser) =>
     // @ts-expect-error ESTree plugin changes node types
     parseBigIntLiteral(value: any): N.Node {
       // https://github.com/estree/estree/blob/master/es2020.md#bigintliteral
-      let bigInt: BigInt | null;
+      let bigInt: bigint | null;
       try {
         bigInt = BigInt(value);
       } catch {
@@ -431,16 +434,12 @@ export default (superClass: typeof Parser) =>
         (node as N.Node as N.EstreeImportExpression).type = "ImportExpression";
         (node as N.Node as N.EstreeImportExpression).source = node
           .arguments[0] as N.Expression;
-        if (
-          this.hasPlugin("importAttributes") ||
-          this.hasPlugin("importAssertions")
-        ) {
-          (node as N.Node as N.EstreeImportExpression).options =
-            (node.arguments[1] as N.Expression) ?? null;
-          // compatibility with previous ESTree AST
-          (node as N.Node as N.EstreeImportExpression).attributes =
-            (node.arguments[1] as N.Expression) ?? null;
-        }
+        (node as N.Node as N.EstreeImportExpression).options =
+          (node.arguments[1] as N.Expression) ?? null;
+        // compatibility with previous ESTree AST
+        // TODO(Babel 8): Remove this
+        (node as N.Node as N.EstreeImportExpression).attributes =
+          (node.arguments[1] as N.Expression) ?? null;
         // arguments isn't optional in the type definition
         delete node.arguments;
         // callee isn't optional in the type definition

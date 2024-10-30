@@ -3268,6 +3268,8 @@ Whitespace
 KeywordControl
 Whitespace
 Punctuation
+NewLine
+Whitespace
 KeywordThis
 Punctuation
 VariableName
@@ -3275,7 +3277,12 @@ Punctuation
 VariableName
 Whitespace
 Punctuation
+NewLine
 Whitespace
+KeywordThis
+Punctuation
+Function
+Punctuation
 KeywordThis
 Punctuation
 VariableName
@@ -3283,6 +3290,9 @@ Punctuation
 VariableName
 Punctuation
 VariableName
+Punctuation
+NewLine
+Whitespace
 Punctuation
 Whitespace
 Punctuation

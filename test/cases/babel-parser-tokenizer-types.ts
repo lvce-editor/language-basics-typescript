@@ -328,11 +328,15 @@ export const tt = {
   _opaque: createKeywordLike("opaque", { startsExpr }),
   // end: isFlowInterfaceOrTypeOrOpaque
   name: createToken("name", { startsExpr }),
+
+  // placeholder plugin
+  placeholder: createToken("%%", { startsExpr: true }),
   // end: isIdentifier
 
   string: createToken("string", { startsExpr }),
   num: createToken("num", { startsExpr }),
   bigint: createToken("bigint", { startsExpr }),
+  // TODO: Remove this in Babel 8
   decimal: createToken("decimal", { startsExpr }),
   // end: isLiteralPropertyName
   regexp: createToken("regexp", { startsExpr }),
@@ -344,13 +348,10 @@ export const tt = {
   jsxText: createToken("jsxText", { beforeExpr: true }),
   jsxTagStart: createToken("jsxTagStart", { startsExpr: true }),
   jsxTagEnd: createToken("jsxTagEnd"),
-
-  // placeholder plugin
-  placeholder: createToken("%%", { startsExpr: true }),
 } as const;
 
 export function tokenIsIdentifier(token: TokenType): boolean {
-  return token >= tt._as && token <= tt.name;
+  return token >= tt._as && token <= tt.placeholder;
 }
 
 export function tokenKeywordOrIdentifierIsKeyword(token: TokenType): boolean {
@@ -360,7 +361,7 @@ export function tokenKeywordOrIdentifierIsKeyword(token: TokenType): boolean {
 }
 
 export function tokenIsKeywordOrIdentifier(token: TokenType): boolean {
-  return token >= tt._in && token <= tt.name;
+  return token >= tt._in && token <= tt.placeholder;
 }
 
 export function tokenIsLiteralPropertyName(token: TokenType): boolean {
