@@ -303,18 +303,12 @@ export default (superClass: typeof Parser) =>
     // past the initial comment.
     flowPragma: void | null | "flow" | "noflow" = undefined;
 
-    getScopeHandler(): {
-      new (...args: any): FlowScopeHandler;
-    } {
+    getScopeHandler(): new (...args: any) => FlowScopeHandler {
       return FlowScopeHandler;
     }
 
     shouldParseTypes(): boolean {
       return this.getPluginOption("flow", "all") || this.flowPragma === "flow";
-    }
-
-    shouldParseEnums(): boolean {
-      return !!this.getPluginOption("flow", "enums");
     }
 
     finishToken(type: TokenType, val: any): void {
@@ -1956,7 +1950,7 @@ export default (superClass: typeof Parser) =>
           this.next();
           return this.flowParseInterface(node);
         }
-      } else if (this.shouldParseEnums() && this.isContextual(tt._enum)) {
+      } else if (this.isContextual(tt._enum)) {
         const node = this.startNode();
         this.next();
         return this.flowParseEnumDeclaration(node);
@@ -2007,10 +2001,7 @@ export default (superClass: typeof Parser) =>
     // export type
     shouldParseExportDeclaration(): boolean {
       const { type } = this.state;
-      if (
-        tokenIsFlowInterfaceOrTypeOrOpaque(type) ||
-        (this.shouldParseEnums() && type === tt._enum)
-      ) {
+      if (type === tt._enum || tokenIsFlowInterfaceOrTypeOrOpaque(type)) {
         return !this.state.containsEsc;
       }
       return super.shouldParseExportDeclaration();
@@ -2018,10 +2009,7 @@ export default (superClass: typeof Parser) =>
 
     isExportDefaultSpecifier(): boolean {
       const { type } = this.state;
-      if (
-        tokenIsFlowInterfaceOrTypeOrOpaque(type) ||
-        (this.shouldParseEnums() && type === tt._enum)
-      ) {
+      if (type === tt._enum || tokenIsFlowInterfaceOrTypeOrOpaque(type)) {
         return this.state.containsEsc;
       }
 
@@ -2029,7 +2017,7 @@ export default (superClass: typeof Parser) =>
     }
 
     parseExportDefaultExpression() {
-      if (this.shouldParseEnums() && this.isContextual(tt._enum)) {
+      if (this.isContextual(tt._enum)) {
         const node = this.startNode();
         this.next();
         return this.flowParseEnumDeclaration(node);
@@ -2192,7 +2180,11 @@ export default (superClass: typeof Parser) =>
       parse: () => T,
     ): T {
       let result: T;
-      if (this.state.noArrowParamsConversionAt.indexOf(node.start) !== -1) {
+      if (
+        this.state.noArrowParamsConversionAt.includes(
+          this.offsetToSourcePos(node.start),
+        )
+      ) {
         this.state.noArrowParamsConversionAt.push(this.state.start);
         result = parse();
         this.state.noArrowParamsConversionAt.pop();
@@ -2278,7 +2270,7 @@ export default (superClass: typeof Parser) =>
         this.next();
         // @ts-expect-error: refine typings
         return this.flowParseInterface(declarationNode);
-      } else if (this.shouldParseEnums() && this.isContextual(tt._enum)) {
+      } else if (this.isContextual(tt._enum)) {
         node.exportKind = "value";
         const declarationNode = this.startNode();
         this.next();
@@ -2671,7 +2663,7 @@ export default (superClass: typeof Parser) =>
       return result;
     }
 
-    parseAssignableListItemTypes(param: N.Pattern): N.Pattern {
+    parseFunctionParamType(param: N.Pattern): N.Pattern {
       if (this.eat(tt.question)) {
         if (param.type !== "Identifier") {
           this.raise(FlowErrors.PatternIsOptional, param);
@@ -3109,7 +3101,11 @@ export default (superClass: typeof Parser) =>
         | Array<N.Expression | N.SpreadElement>
         | Array<N.Expression | N.RestElement>,
     ): void {
-      if (this.state.noArrowParamsConversionAt.indexOf(node.start) !== -1) {
+      if (
+        this.state.noArrowParamsConversionAt.includes(
+          this.offsetToSourcePos(node.start),
+        )
+      ) {
         node.params = params as N.ArrowFunctionExpression["params"];
       } else {
         super.setArrowFunctionParameters(node, params);
@@ -3124,7 +3120,9 @@ export default (superClass: typeof Parser) =>
     ): void {
       if (
         isArrowFunction &&
-        this.state.noArrowParamsConversionAt.indexOf(node.start) !== -1
+        this.state.noArrowParamsConversionAt.includes(
+          this.offsetToSourcePos(node.start),
+        )
       ) {
         return;
       }
@@ -3146,7 +3144,10 @@ export default (superClass: typeof Parser) =>
 
     parseParenAndDistinguishExpression(canBeArrow: boolean): N.Expression {
       return super.parseParenAndDistinguishExpression(
-        canBeArrow && this.state.noArrowAt.indexOf(this.state.start) === -1,
+        canBeArrow &&
+          !this.state.noArrowAt.includes(
+            this.sourceToOffsetPos(this.state.start),
+          ),
       );
     }
 
@@ -3159,13 +3160,13 @@ export default (superClass: typeof Parser) =>
       if (
         base.type === "Identifier" &&
         base.name === "async" &&
-        this.state.noArrowAt.indexOf(startLoc.index) !== -1
+        this.state.noArrowAt.includes(startLoc.index)
       ) {
         this.next();
 
         const node = this.startNodeAt<N.CallExpression>(startLoc);
         node.callee = base;
-        node.arguments = super.parseCallExpressionArguments(tt.parenR, false);
+        node.arguments = super.parseCallExpressionArguments(tt.parenR);
         base = this.finishNode(node, "CallExpression");
       } else if (
         base.type === "Identifier" &&
@@ -3224,7 +3225,7 @@ export default (superClass: typeof Parser) =>
         node.callee = base;
         node.typeArguments = this.flowParseTypeParameterInstantiation();
         this.expect(tt.parenL);
-        node.arguments = this.parseCallExpressionArguments(tt.parenR, false);
+        node.arguments = this.parseCallExpressionArguments(tt.parenR);
         node.optional = true;
         return this.finishCallExpression(node, /* optional */ true);
       } else if (!noCalls && this.shouldParseTypes() && this.match(tt.lt)) {
@@ -3237,7 +3238,7 @@ export default (superClass: typeof Parser) =>
           node.typeArguments =
             this.flowParseTypeParameterInstantiationCallOrNew();
           this.expect(tt.parenL);
-          node.arguments = super.parseCallExpressionArguments(tt.parenR, false);
+          node.arguments = super.parseCallExpressionArguments(tt.parenR);
           if (subscriptState.optionalChainMember) {
             (node as Undone<N.OptionalCallExpression>).optional = false;
           }

@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 
 const REPO = 'https://github.com/babel/babel'
-const COMMIT = '1199e6aca1df0db81074cc99fa3f89a54f02810d'
+const COMMIT = 'ca0bd04c583beb7f6f6be4676ce16e0c7b5d76ea'
 
 const getTestName = (baseName) => {
   return (

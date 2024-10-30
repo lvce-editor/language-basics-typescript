@@ -67,10 +67,11 @@ const VALID_REGEX_FLAGS = new Set([
 
 export class Token {
   constructor(state: State) {
+    const startIndex = state.startIndex || 0;
     this.type = state.type;
     this.value = state.value;
-    this.start = state.start;
-    this.end = state.end;
+    this.start = startIndex + state.start;
+    this.end = startIndex + state.end;
     this.loc = new SourceLocation(state.startLoc, state.endLoc);
   }
 
@@ -303,8 +304,8 @@ export default abstract class Tokenizer extends CommentsParser {
     const comment: N.CommentBlock = {
       type: "CommentBlock",
       value: this.input.slice(start + 2, end),
-      start,
-      end: end + commentEnd.length,
+      start: this.sourceToOffsetPos(start),
+      end: this.sourceToOffsetPos(end + commentEnd.length),
       loc: new SourceLocation(startLoc, this.state.curPosition()),
     };
     if (this.options.tokens) this.pushToken(comment);
@@ -325,7 +326,6 @@ export default abstract class Tokenizer extends CommentsParser {
     // If we are doing a lookahead right now we need to advance the position (above code)
     // but we do not want to push the comment to the state.
     if (this.isLookahead) return;
-    /*:: invariant(startLoc) */
 
     const end = this.state.pos;
     const value = this.input.slice(start + startSkip, end);
@@ -333,8 +333,8 @@ export default abstract class Tokenizer extends CommentsParser {
     const comment: N.CommentLine = {
       type: "CommentLine",
       value,
-      start,
-      end,
+      start: this.sourceToOffsetPos(start),
+      end: this.sourceToOffsetPos(end),
       loc: new SourceLocation(startLoc, this.state.curPosition()),
     };
     if (this.options.tokens) this.pushToken(comment);
@@ -447,8 +447,8 @@ export default abstract class Tokenizer extends CommentsParser {
     if (comments.length > 0) {
       const end = this.state.pos;
       const commentWhitespace: CommentWhitespace = {
-        start: spaceStart,
-        end,
+        start: this.sourceToOffsetPos(spaceStart),
+        end: this.sourceToOffsetPos(end),
         comments,
         leadingNode: null,
         trailingNode: null,
@@ -1173,6 +1173,7 @@ export default abstract class Tokenizer extends CommentsParser {
   }
 
   readRadixNumber(radix: number): void {
+    const start = this.state.pos;
     const startLoc = this.state.curPosition();
     let isBigInt = false;
 
@@ -1202,9 +1203,7 @@ export default abstract class Tokenizer extends CommentsParser {
     }
 
     if (isBigInt) {
-      const str = this.input
-        .slice(startLoc.index, this.state.pos)
-        .replace(/[_n]/g, "");
+      const str = this.input.slice(start, this.state.pos).replace(/[_n]/g, "");
       this.finishToken(tt.bigint, str);
       return;
     }
@@ -1219,7 +1218,6 @@ export default abstract class Tokenizer extends CommentsParser {
     const startLoc = this.state.curPosition();
     let isFloat = false;
     let isBigInt = false;
-    let isDecimal = false;
     let hasExponent = false;
     let isOctal = false;
 
@@ -1281,13 +1279,14 @@ export default abstract class Tokenizer extends CommentsParser {
       isBigInt = true;
     }
 
-    if (next === charCodes.lowercaseM) {
+    if (!process.env.BABEL_8_BREAKING && next === charCodes.lowercaseM) {
       this.expectPlugin("decimal", this.state.curPosition());
       if (hasExponent || hasLeadingZero) {
         this.raise(Errors.InvalidDecimal, startLoc);
       }
       ++this.state.pos;
-      isDecimal = true;
+      // eslint-disable-next-line no-var
+      var isDecimal = true;
     }
 
     if (isIdentifierStart(this.codePointAtPos(this.state.pos))) {
@@ -1302,7 +1301,7 @@ export default abstract class Tokenizer extends CommentsParser {
       return;
     }
 
-    if (isDecimal) {
+    if (!process.env.BABEL_8_BREAKING && isDecimal) {
       this.finishToken(tt.decimal, str);
       return;
     }
@@ -1371,7 +1370,7 @@ export default abstract class Tokenizer extends CommentsParser {
       this.state.firstInvalidTemplateEscapePos = new Position(
         firstInvalidLoc.curLine,
         firstInvalidLoc.pos - firstInvalidLoc.lineStart,
-        firstInvalidLoc.pos,
+        this.sourceToOffsetPos(firstInvalidLoc.pos),
       );
     }
 
@@ -1488,7 +1487,7 @@ export default abstract class Tokenizer extends CommentsParser {
    * The return type is marked as `never` for simplicity, as error recovery
    * will create types in an invalid AST shape.
    */
-  raise<ErrorDetails = {}>(
+  raise<ErrorDetails = object>(
     toParseError: ParseErrorConstructor<ErrorDetails>,
     at: Position | Undone<Node>,
     details: ErrorDetails = {} as ErrorDetails,
@@ -1565,7 +1564,7 @@ export default abstract class Tokenizer extends CommentsParser {
     }
   }
 
-  errorBuilder(error: ParseErrorConstructor<{}>) {
+  errorBuilder(error: ParseErrorConstructor<object>) {
     return (pos: number, lineStart: number, curLine: number) => {
       this.raise(error, buildPosition(pos, lineStart, curLine));
     };
