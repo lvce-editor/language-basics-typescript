@@ -1,9 +1,9 @@
 import flru from 'flru';
+import GlobalScope from './ast/scopes/GlobalScope';
+import { PathTracker } from './ast/utils/PathTracker';
 import type ExternalModule from './ExternalModule';
 import Module from './Module';
 import { ModuleLoader, type UnresolvedModule } from './ModuleLoader';
-import GlobalScope from './ast/scopes/GlobalScope';
-import { PathTracker } from './ast/utils/PathTracker';
 import type {
 	ModuleInfo,
 	ModuleJSON,
@@ -14,8 +14,6 @@ import type {
 	SerializablePluginCache,
 	WatchChangeHook
 } from './rollup/types';
-import { PluginDriver } from './utils/PluginDriver';
-import Queue from './utils/Queue';
 import { BuildPhase } from './utils/buildPhase';
 import { analyseModuleExecution } from './utils/executionOrder';
 import { LOGLEVEL_WARN } from './utils/logging';
@@ -25,8 +23,10 @@ import {
 	logImplicitDependantIsNotIncluded,
 	logMissingExport
 } from './utils/logs';
+import { PluginDriver } from './utils/PluginDriver';
 import type { PureFunctions } from './utils/pureFunctions';
 import { getPureFunctions } from './utils/pureFunctions';
+import Queue from './utils/Queue';
 import { timeEnd, timeStart } from './utils/timers';
 import { markModuleAndImpureDependenciesAsExecuted } from './utils/traverseStaticDependencies';
 
@@ -151,6 +151,7 @@ export default class Graph {
 			throw new Error('You must supply options.input to rollup');
 		}
 		for (const module of this.modulesById.values()) {
+			module.cacheInfoGetters();
 			if (module instanceof Module) {
 				this.modules.push(module);
 			} else {
@@ -171,6 +172,7 @@ export default class Graph {
 				this.needsTreeshakingPass = false;
 				for (const module of this.modules) {
 					if (module.isExecuted) {
+						module.hasTreeShakingPassStarted = true;
 						if (module.info.moduleSideEffects === 'no-treeshake') {
 							module.includeAllInBundle();
 						} else {

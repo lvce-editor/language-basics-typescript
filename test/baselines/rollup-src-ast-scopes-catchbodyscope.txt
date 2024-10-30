@@ -77,6 +77,8 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
+Keyword
+Whitespace
 Punctuation
 Whitespace
 VariableName
@@ -235,9 +237,9 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
 Punctuation
-VariableName
+String
+Punctuation
 Punctuation
 Whitespace
 Punctuation
@@ -328,9 +330,9 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
 Punctuation
-VariableName
+String
+Punctuation
 Whitespace
 Punctuation
 Punctuation
@@ -483,9 +485,9 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
 Punctuation
-VariableName
+String
+Punctuation
 Punctuation
 Whitespace
 Punctuation

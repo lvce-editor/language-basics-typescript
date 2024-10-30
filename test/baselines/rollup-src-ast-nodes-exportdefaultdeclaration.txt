@@ -522,6 +522,14 @@ Punctuation
 NewLine
 Whitespace
 Keyword
+Punctuation
+Function
+Punctuation
+Punctuation
+Punctuation
+NewLine
+Whitespace
+Keyword
 Whitespace
 VariableName
 Whitespace

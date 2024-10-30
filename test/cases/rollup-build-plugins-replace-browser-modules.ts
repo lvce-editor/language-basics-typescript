@@ -1,4 +1,4 @@
-import { dirname, join } from 'node:path';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Plugin as RollupPlugin } from 'rollup';
 import type { Plugin } from 'vite';
@@ -37,11 +37,11 @@ export default function replaceBrowserModules(): Plugin & RollupPlugin {
 		name: 'replace-browser-modules',
 		resolveId(source: string, importer: string | undefined) {
 			if (importer && source[0] === '.') {
-				return resolutions.get(join(dirname(importer), source));
+				return resolutions.get(path.join(path.dirname(importer), source));
 			}
 		},
 		transformIndexHtml(html) {
-			// Unfortunately, picomatch sneaks as a dedendency into the dev bundle.
+			// Unfortunately, picomatch sneaks as a dependency into the dev bundle.
 			// This fixes an error.
 			return html.replace('</head>', '<script>window.process={}</script></head>');
 		}

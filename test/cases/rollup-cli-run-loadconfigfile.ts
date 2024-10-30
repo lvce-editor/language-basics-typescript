@@ -1,5 +1,5 @@
 import { unlink, writeFile } from 'node:fs/promises';
-import { dirname, isAbsolute, join } from 'node:path';
+import path from 'node:path';
 import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 import * as rollup from '../../src/node-entry';
@@ -97,8 +97,7 @@ async function loadTranspiledConfigFile(
 	const { bundleConfigAsCjs, configPlugin, silent } = commandOptions;
 	const warnings = batchWarnings(commandOptions);
 	const inputOptions = {
-		external: (id: string) =>
-			(id[0] !== '.' && !isAbsolute(id)) || id.slice(-5, id.length) === '.json',
+		external: (id: string) => (id[0] !== '.' && !path.isAbsolute(id)) || id.slice(-5) === '.json',
 		input: fileName,
 		onwarn: warnings.add,
 		plugins: [],
@@ -118,8 +117,14 @@ async function loadTranspiledConfigFile(
 					if (property === 'url') {
 						return `'${pathToFileURL(moduleId).href}'`;
 					}
+					if (property == 'filename') {
+						return `'${moduleId}'`;
+					}
+					if (property == 'dirname') {
+						return `'${path.dirname(moduleId)}'`;
+					}
 					if (property == null) {
-						return `{url:'${pathToFileURL(moduleId).href}'}`;
+						return `{url:'${pathToFileURL(moduleId).href}', filename: '${moduleId}', dirname: '${path.dirname(moduleId)}'}`;
 					}
 				}
 			}
@@ -130,7 +135,10 @@ async function loadTranspiledConfigFile(
 		warnings.flush();
 	}
 	return loadConfigFromWrittenFile(
-		join(dirname(fileName), `rollup.config-${Date.now()}.${bundleConfigAsCjs ? 'cjs' : 'mjs'}`),
+		path.join(
+			path.dirname(fileName),
+			`rollup.config-${Date.now()}.${bundleConfigAsCjs ? 'cjs' : 'mjs'}`
+		),
 		code
 	);
 }

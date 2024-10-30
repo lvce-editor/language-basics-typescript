@@ -263,10 +263,6 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Comment
-Comment
-NewLine
-Whitespace
 VariableName
 Punctuation
 Function

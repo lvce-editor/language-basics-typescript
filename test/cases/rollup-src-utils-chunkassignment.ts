@@ -49,13 +49,10 @@ interface ChunkPartition {
  *
  * One non-trivial optimization we can apply is that dynamic entries are
  * different from static entries in so far as when a dynamic import occurs,
- * some
- * modules are already in memory. If some of these modules are also
- * dependencies
- * of the dynamic entry, then it does not make sense to create a separate chunk
- * for them. Instead, the dynamic import target can load them from the
- * importing
- * chunk.
+ * some modules are already in memory. If some of these modules are also
+ * dependencies of the dynamic entry, then it does not make sense to create a
+ * separate chunk for them. Instead, the dynamic import target can load them
+ * from the importing chunk.
  *
  * With regard to chunking, if B is implicitly loaded after A, then this can be
  * handled the same way as if there was a dynamic import A => B.
@@ -64,8 +61,7 @@ interface ChunkPartition {
  * Assume A -> B (A imports B), A => C (A dynamically imports C) and C -> B.
  * Then the initial algorithm would assign A into the A chunk, C into the C
  * chunk and B into the AC chunk, i.e. the chunk with the dependent entry
- * points
- * A and C.
+ * points A and C.
  * However we know that C can only be loaded from A, so A and its dependency B
  * must already be in memory when C is loaded. So it is enough to create only
  * two chunks A containing [AB] and C containing [C].
@@ -80,15 +76,13 @@ interface ChunkPartition {
  * A => D,
  * D -> B, D -> C
  * So without dynamic import optimization, the dependent entry points are
- * A: XY, B: DXY, C: DX, D: D, X: X, Y: Y,
- * so we would for now create six chunks.
+ * A: XY, B: DXY, C: DX, D: D, X: X, Y: Y, so we would for now create six
+ * chunks.
  *
  * Now D is loaded only after A is loaded. But A is loaded if either X is
- * loaded
- * or Y is loaded. So the modules that are already in memory when D is loaded
- * are the intersection of all modules that X depends on with all modules that
- * Y
- * depends on, which in this case are the modules A and B.
+ * loaded or Y is loaded. So the modules that are already in memory when D is
+ * loaded are the intersection of all modules that X depends on with all
+ * modules that Y depends on, which in this case are the modules A and B.
  * We could also say they are all modules that have both X and Y as dependent
  * entry points.
  *
@@ -97,8 +91,7 @@ interface ChunkPartition {
  * same chunk.
  *
  * Now let us extend this to the most general case where we have several
- * dynamic
- * importers for one dynamic entry point.
+ * dynamic importers for one dynamic entry point.
  *
  * In the most general form, it works like this:
  * For each dynamic entry point, we have a number of dynamic importers, which
@@ -111,9 +104,8 @@ interface ChunkPartition {
  * each dynamic importer.
  *
  * Assuming that A => D and B => D and A has dependent entry points XY and B
- * has
- * dependent entry points YZ, then the modules guaranteed to be in memory are
- * all modules that have at least XYZ as dependent entry points.
+ * has dependent entry points YZ, then the modules guaranteed to be in memory
+ * are all modules that have at least XYZ as dependent entry points.
  * We call XYZ the *dynamically dependent entry points* of D.
  *
  * Now there is one last case to consider: If one of the dynamically dependent
@@ -140,7 +132,7 @@ interface ChunkPartition {
  *
  * For efficient operations, we assign each entry a numerical index and
  * represent Sets of Chunks as BigInt values where each chunk corresponds to a
- * bit index. Then thw last two maps can be represented as arrays of BigInt
+ * bit index. Then the last two maps can be represented as arrays of BigInt
  * values.
  *
  * Then we iterate through each dynamic entry. We set the already loaded modules
@@ -158,7 +150,7 @@ interface ChunkPartition {
  * another round of chunks.
  */
 export function getChunkAssignments(
-	entries: ReadonlyArray<Module>,
+	entries: readonly Module[],
 	manualChunkAliasByEntry: ReadonlyMap<Module, string>,
 	minChunkSize: number,
 	log: LogHandler
@@ -209,7 +201,6 @@ export function getChunkAssignments(
 function getChunkDefinitionsFromManualChunks(
 	manualChunkAliasByEntry: ReadonlyMap<Module, string>
 ): { chunkDefinitions: ChunkDefinitions; modulesInManualChunks: Set<Module> } {
-	const chunkDefinitions: ChunkDefinitions = [];
 	const modulesInManualChunks = new Set(manualChunkAliasByEntry.keys());
 	const manualChunkModulesByAlias: Record<string, Module[]> = Object.create(null);
 	for (const [entry, alias] of manualChunkAliasByEntry) {
@@ -219,8 +210,11 @@ function getChunkDefinitionsFromManualChunks(
 			modulesInManualChunks
 		);
 	}
-	for (const [alias, modules] of Object.entries(manualChunkModulesByAlias)) {
-		chunkDefinitions.push({ alias, modules });
+	const manualChunks = Object.entries(manualChunkModulesByAlias);
+	const chunkDefinitions: ChunkDefinitions = new Array(manualChunks.length);
+	let index = 0;
+	for (const [alias, modules] of manualChunks) {
+		chunkDefinitions[index++] = { alias, modules };
 	}
 	return { chunkDefinitions, modulesInManualChunks };
 }
@@ -243,19 +237,19 @@ function addStaticDependenciesToManualChunk(
 }
 
 function analyzeModuleGraph(entries: Iterable<Module>): {
-	allEntries: ReadonlyArray<Module>;
+	allEntries: readonly Module[];
 	dependentEntriesByModule: Map<Module, Set<number>>;
-	dynamicImportsByEntry: ReadonlyArray<ReadonlySet<number>>;
+	dynamicImportsByEntry: readonly ReadonlySet<number>[];
 	dynamicallyDependentEntriesByDynamicEntry: Map<number, Set<number>>;
 } {
 	const dynamicEntryModules = new Set<Module>();
-	const dependentEntriesByModule: Map<Module, Set<number>> = new Map();
-	const dynamicImportModulesByEntry: Set<Module>[] = [];
+	const dependentEntriesByModule = new Map<Module, Set<number>>();
 	const allEntriesSet = new Set(entries);
+	const dynamicImportModulesByEntry: Set<Module>[] = new Array(allEntriesSet.size);
 	let entryIndex = 0;
 	for (const currentEntry of allEntriesSet) {
 		const dynamicImportsForCurrentEntry = new Set<Module>();
-		dynamicImportModulesByEntry.push(dynamicImportsForCurrentEntry);
+		dynamicImportModulesByEntry[entryIndex] = dynamicImportsForCurrentEntry;
 		const modulesToHandle = new Set([currentEntry]);
 		for (const module of modulesToHandle) {
 			getOrCreate(dependentEntriesByModule, module, getNewSet<number>).add(entryIndex);
@@ -315,13 +309,14 @@ function getDynamicEntries(
 			dynamicEntries.add(entryIndex);
 		}
 	}
-	const dynamicImportsByEntry: Set<number>[] = [];
+	const dynamicImportsByEntry: Set<number>[] = new Array(dynamicImportModulesByEntry.length);
+	let index = 0;
 	for (const dynamicImportModules of dynamicImportModulesByEntry) {
 		const dynamicImports = new Set<number>();
 		for (const dynamicEntry of dynamicImportModules) {
 			dynamicImports.add(entryIndexByModule.get(dynamicEntry)!);
 		}
-		dynamicImportsByEntry.push(dynamicImports);
+		dynamicImportsByEntry[index++] = dynamicImports;
 	}
 	return { dynamicEntries, dynamicImportsByEntry };
 }
@@ -329,9 +324,9 @@ function getDynamicEntries(
 function getDynamicallyDependentEntriesByDynamicEntry(
 	dependentEntriesByModule: ReadonlyMap<Module, ReadonlySet<number>>,
 	dynamicEntries: ReadonlySet<number>,
-	allEntries: ReadonlyArray<Module>
+	allEntries: readonly Module[]
 ): Map<number, Set<number>> {
-	const dynamicallyDependentEntriesByDynamicEntry: Map<number, Set<number>> = new Map();
+	const dynamicallyDependentEntriesByDynamicEntry = new Map<number, Set<number>>();
 	for (const dynamicEntryIndex of dynamicEntries) {
 		const dynamicallyDependentEntries = getOrCreate(
 			dynamicallyDependentEntriesByDynamicEntry,
@@ -354,9 +349,7 @@ function getDynamicallyDependentEntriesByDynamicEntry(
 function getChunksWithSameDependentEntries(
 	modulesWithDependentEntries: Iterable<ModulesWithDependentEntries>
 ): ModulesWithDependentEntries[] {
-	const chunkModules: {
-		[signature: string]: ModulesWithDependentEntries;
-	} = Object.create(null);
+	const chunkModules: Record<string, ModulesWithDependentEntries> = Object.create(null);
 	for (const { dependentEntries, modules } of modulesWithDependentEntries) {
 		let chunkSignature = 0n;
 		for (const entryIndex of dependentEntries) {
@@ -382,7 +375,7 @@ function* getModulesWithDependentEntries(
 }
 
 function getStaticDependencyAtomsByEntry(
-	allEntries: ReadonlyArray<Module>,
+	allEntries: readonly Module[],
 	chunkAtoms: ModulesWithDependentEntries[]
 ) {
 	// The indices correspond to the indices in allEntries. The atoms correspond
@@ -404,8 +397,8 @@ function getStaticDependencyAtomsByEntry(
 function getAlreadyLoadedAtomsByEntry(
 	staticDependencyAtomsByEntry: bigint[],
 	dynamicallyDependentEntriesByDynamicEntry: Map<number, Set<number>>,
-	dynamicImportsByEntry: ReadonlyArray<ReadonlySet<number>>,
-	allEntries: ReadonlyArray<Module>
+	dynamicImportsByEntry: readonly ReadonlySet<number>[],
+	allEntries: readonly Module[]
 ) {
 	// Dynamic entries have all atoms as already loaded initially because we then
 	// intersect with the static dependency atoms of all dynamic importers.
@@ -472,13 +465,12 @@ function getChunksWithSameDependentEntriesAndCorrelatedAtoms(
 	alreadyLoadedAtomsByEntry: bigint[],
 	minChunkSize: number
 ) {
-	const chunksBySignature: {
-		[signature: string]: ChunkDescription;
-	} = Object.create(null);
+	const chunksBySignature: Record<string, ChunkDescription> = Object.create(null);
 	const chunkByModule = new Map<Module, ChunkDescription>();
-	const sizeByAtom: number[] = [];
+	const sizeByAtom: number[] = new Array(chunkAtoms.length);
 	let sideEffectAtoms = 0n;
 	let atomMask = 1n;
+	let index = 0;
 	for (const { dependentEntries, modules } of chunkAtoms) {
 		let chunkSignature = 0n;
 		let correlatedAtoms = -1n;
@@ -517,7 +509,7 @@ function getChunksWithSameDependentEntriesAndCorrelatedAtoms(
 		if (!pure) {
 			sideEffectAtoms |= atomMask;
 		}
-		sizeByAtom.push(atomSize);
+		sizeByAtom[index++] = atomSize;
 
 		chunk.containedAtoms |= atomMask;
 		chunk.modules.push(...modules);
@@ -658,10 +650,11 @@ function getOptimizedChunks(
 		timeEnd('optimize chunks', 3);
 		return chunks; // the actual modules
 	}
-	minChunkSize > 1 &&
+	if (minChunkSize > 1) {
 		log('info', logOptimizeChunkStatus(chunks.length, chunkPartition.small.size, 'Initially'));
+	}
 	mergeChunks(chunkPartition, minChunkSize, sideEffectAtoms, sizeByAtom);
-	minChunkSize > 1 &&
+	if (minChunkSize > 1) {
 		log(
 			'info',
 			logOptimizeChunkStatus(
@@ -670,6 +663,7 @@ function getOptimizedChunks(
 				'After merging chunks'
 			)
 		);
+	}
 	timeEnd('optimize chunks', 3);
 	return [...chunkPartition.small, ...chunkPartition.big];
 }

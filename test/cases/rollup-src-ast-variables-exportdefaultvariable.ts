@@ -3,7 +3,8 @@ import ClassDeclaration from '../nodes/ClassDeclaration';
 import type ExportDefaultDeclaration from '../nodes/ExportDefaultDeclaration';
 import FunctionDeclaration from '../nodes/FunctionDeclaration';
 import Identifier, { type IdentifierWithVariable } from '../nodes/Identifier';
-import { VariableKind } from '../nodes/shared/VariableKinds';
+import type IdentifierBase from '../nodes/shared/IdentifierBase';
+import type { NodeBase } from '../nodes/shared/Node';
 import LocalVariable from './LocalVariable';
 import UndefinedVariable from './UndefinedVariable';
 import type Variable from './Variable';
@@ -19,13 +20,7 @@ export default class ExportDefaultVariable extends LocalVariable {
 		exportDefaultDeclaration: ExportDefaultDeclaration,
 		context: AstContext
 	) {
-		super(
-			name,
-			exportDefaultDeclaration,
-			exportDefaultDeclaration.declaration,
-			context,
-			VariableKind.other
-		);
+		super(name, exportDefaultDeclaration, exportDefaultDeclaration.declaration, context, 'other');
 		const declaration = exportDefaultDeclaration.declaration;
 		if (
 			(declaration instanceof FunctionDeclaration || declaration instanceof ClassDeclaration) &&
@@ -38,9 +33,18 @@ export default class ExportDefaultVariable extends LocalVariable {
 		}
 	}
 
-	addReference(identifier: Identifier): void {
+	addReference(identifier: IdentifierBase): void {
 		if (!this.hasId) {
 			this.name = identifier.name;
+		}
+	}
+
+	addUsedPlace(usedPlace: NodeBase): void {
+		const original = this.getOriginalVariable();
+		if (original === this) {
+			super.addUsedPlace(usedPlace);
+		} else {
+			original.addUsedPlace(usedPlace);
 		}
 	}
 

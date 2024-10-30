@@ -553,6 +553,14 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
+Keyword
+Punctuation
+Function
+Punctuation
+Punctuation
+Punctuation
+NewLine
+Whitespace
 KeywordThis
 Punctuation
 VariableName

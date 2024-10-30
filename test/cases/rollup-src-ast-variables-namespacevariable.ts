@@ -6,9 +6,9 @@ import { getSystemExportStatement } from '../../utils/systemJsRendering';
 import type { HasEffectsContext } from '../ExecutionContext';
 import type { NodeInteraction } from '../NodeInteractions';
 import { INTERACTION_ASSIGNED, INTERACTION_CALLED } from '../NodeInteractions';
-import type Identifier from '../nodes/Identifier';
 import type { LiteralValueOrUnknown } from '../nodes/shared/Expression';
 import { deoptimizeInteraction, UnknownValue } from '../nodes/shared/Expression';
+import type IdentifierBase from '../nodes/shared/IdentifierBase';
 import type ChildScope from '../scopes/ChildScope';
 import type { ObjectPath, PathTracker } from '../utils/PathTracker';
 import { SymbolToStringTag } from '../utils/PathTracker';
@@ -19,10 +19,10 @@ export default class NamespaceVariable extends Variable {
 	declare isNamespace: true;
 	readonly module: Module;
 
-	private memberVariables: { [name: string]: Variable } | null = null;
+	private memberVariables: Record<string, Variable> | null = null;
 	private mergedNamespaces: readonly Variable[] = [];
 	private referencedEarly = false;
-	private references: Identifier[] = [];
+	private references: IdentifierBase[] = [];
 
 	constructor(context: AstContext) {
 		super(context.getModuleName());
@@ -30,7 +30,7 @@ export default class NamespaceVariable extends Variable {
 		this.module = context.module;
 	}
 
-	addReference(identifier: Identifier): void {
+	addReference(identifier: IdentifierBase): void {
 		this.references.push(identifier);
 		this.name = identifier.name;
 	}
@@ -70,12 +70,12 @@ export default class NamespaceVariable extends Variable {
 		return UnknownValue;
 	}
 
-	getMemberVariables(): { [name: string]: Variable } {
+	getMemberVariables(): Record<string, Variable> {
 		if (this.memberVariables) {
 			return this.memberVariables;
 		}
 
-		const memberVariables: { [name: string]: Variable } = Object.create(null);
+		const memberVariables: Record<string, Variable> = Object.create(null);
 		const sortedExports = [...this.context.getExports(), ...this.context.getReexports()].sort();
 
 		for (const name of sortedExports) {

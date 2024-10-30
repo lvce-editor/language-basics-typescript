@@ -81,8 +81,6 @@ NewLine
 Comment
 Comment
 NewLine
-KeywordImport
-Whitespace
 Keyword
 Whitespace
 VariableName
@@ -165,16 +163,6 @@ KeywordReturn
 Whitespace
 Punctuation
 VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Whitespace
 Punctuation
 Whitespace
 VariableName

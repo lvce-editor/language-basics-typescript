@@ -69,7 +69,9 @@ export async function normalizeOutputOptions(
 		freeze: config.freeze ?? true,
 		generatedCode,
 		globals: config.globals || {},
+		hashCharacters: config.hashCharacters ?? 'base64',
 		hoistTransitiveImports: config.hoistTransitiveImports ?? true,
+		importAttributesKey: config.importAttributesKey ?? 'assert',
 		indent: getIndent(config, compact),
 		inlineDynamicImports,
 		interop: getInterop(config),
@@ -83,6 +85,7 @@ export async function normalizeOutputOptions(
 		plugins: await normalizePluginOption(config.plugins),
 		preserveModules,
 		preserveModulesRoot: getPreserveModulesRoot(config),
+		reexportProtoFromExternal: config.reexportProtoFromExternal ?? true,
 		sanitizeFileName:
 			typeof config.sanitizeFileName === 'function'
 				? config.sanitizeFileName
@@ -105,7 +108,8 @@ export async function normalizeOutputOptions(
 			| undefined,
 		strict: config.strict ?? true,
 		systemNullSetters: config.systemNullSetters ?? true,
-		validate: config.validate || false
+		validate: config.validate || false,
+		virtualDirname: config.virtualDirname || '_virtual'
 	};
 
 	warnUnknownOptions(config, Object.keys(outputOptions), 'output options', inputOptions.onLog);
@@ -292,7 +296,6 @@ const getAddon = <T extends 'banner' | 'footer' | 'intro' | 'outro'>(
 	return () => configAddon || '';
 };
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 const getDir = (
 	config: OutputOptions,
 	file: string | undefined
@@ -371,7 +374,7 @@ const getIndent = (config: OutputOptions, compact: boolean): NormalizedOutputOpt
 		return '';
 	}
 	const configIndent = config.indent;
-	return configIndent === false ? '' : configIndent ?? true;
+	return configIndent === false ? '' : (configIndent ?? true);
 };
 
 const ALLOWED_INTEROP_TYPES: ReadonlySet<string | boolean> = new Set([
@@ -385,7 +388,7 @@ const ALLOWED_INTEROP_TYPES: ReadonlySet<string | boolean> = new Set([
 const getInterop = (config: OutputOptions): NormalizedOutputOptions['interop'] => {
 	const configInterop = config.interop;
 	if (typeof configInterop === 'function') {
-		const interopPerId: { [id: string]: InteropType } = Object.create(null);
+		const interopPerId: Record<string, InteropType> = Object.create(null);
 		let defaultInterop: InteropType | null = null;
 		return id =>
 			id === null
@@ -403,7 +406,7 @@ const validateInterop = (interop: InteropType): InteropType => {
 			logInvalidOption(
 				'output.interop',
 				URL_OUTPUT_INTEROP,
-				// eslint-disable-next-line unicorn/prefer-spread
+
 				`use one of ${Array.from(ALLOWED_INTEROP_TYPES, value => JSON.stringify(value)).join(
 					', '
 				)}`,

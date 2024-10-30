@@ -293,9 +293,6 @@ Whitespace
 StorageModifier
 Whitespace
 VariableName
-Punctuation
-Whitespace
-TypePrimitive
 Whitespace
 Punctuation
 Whitespace

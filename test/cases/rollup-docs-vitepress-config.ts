@@ -1,4 +1,5 @@
 import alias from '@rollup/plugin-alias';
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import type { Plugin } from 'vite';
 import { defineConfig } from 'vitepress';
 import { moduleAliases } from '../../build-plugins/aliases';
@@ -6,6 +7,7 @@ import replaceBrowserModules from '../../build-plugins/replace-browser-modules';
 import '../declarations.d';
 import { examplesPlugin } from './create-examples';
 import { renderMermaidGraphsPlugin } from './mermaid';
+import { replacePathPicomatch } from './replace-path-picomatch';
 import { transposeTables } from './transpose-tables';
 import { buildEnd, callback, transformPageData } from './verify-anchors';
 
@@ -35,6 +37,28 @@ export default defineConfig({
 			callback,
 			level: 2
 		},
+		codeTransformers: [
+			transformerTwoslash({
+				langs: [
+					// defaults
+					'ts',
+					'tsx',
+					'js',
+					'jsx',
+					'json',
+					'vue',
+					// custom
+					'javascript',
+					'typescript'
+				],
+				twoslashOptions: {
+					compilerOptions: {
+						moduleResolution: 100, // bundler
+						types: ['node']
+					}
+				}
+			})
+		],
 		config(md) {
 			transposeTables(md);
 		},
@@ -134,7 +158,10 @@ export default defineConfig({
 	title: 'Rollup',
 	transformPageData,
 	vite: {
+		optimizeDeps: { exclude: ['@rollup/pluginutils'] },
 		plugins: [
+			replacePathPicomatch(),
+			replaceBrowserModules(),
 			renderMermaidGraphsPlugin(),
 			replaceBrowserModules(),
 			{

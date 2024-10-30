@@ -26,11 +26,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Punctuation
-Whitespace
 VariableName
-Whitespace
-Punctuation
 Whitespace
 KeywordImport
 Whitespace
@@ -1571,6 +1567,8 @@ Punctuation
 Whitespace
 KeywordReturn
 Whitespace
+VariableName
+Punctuation
 Function
 Punctuation
 VariableName
