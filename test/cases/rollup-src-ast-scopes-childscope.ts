@@ -47,7 +47,9 @@ export default class ChildScope extends Scope {
 	}
 
 	addReturnExpression(expression: ExpressionEntity): void {
-		this.parent instanceof ChildScope && this.parent.addReturnExpression(expression);
+		if (this.parent instanceof ChildScope) {
+			this.parent.addReturnExpression(expression);
+		}
 	}
 
 	addUsedOutsideNames(
@@ -102,6 +104,12 @@ export default class ChildScope extends Scope {
 
 	findLexicalBoundary(): ChildScope {
 		return (this.parent as ChildScope).findLexicalBoundary();
+	}
+
+	findGlobal(name: string): Variable {
+		const variable = this.parent.findVariable(name);
+		this.accessedOutsideVariables.set(name, variable);
+		return variable;
 	}
 
 	findVariable(name: string): Variable {

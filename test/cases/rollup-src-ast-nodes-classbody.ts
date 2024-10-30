@@ -5,11 +5,12 @@ import ClassBodyScope from '../scopes/ClassBodyScope';
 import type MethodDefinition from './MethodDefinition';
 import type * as NodeType from './NodeType';
 import type PropertyDefinition from './PropertyDefinition';
+import type StaticBlock from './StaticBlock';
 import type ClassNode from './shared/ClassNode';
 import { type GenericEsTreeNode, type IncludeChildren, NodeBase } from './shared/Node';
 
 export default class ClassBody extends NodeBase {
-	declare body: (MethodDefinition | PropertyDefinition)[];
+	declare body: (MethodDefinition | PropertyDefinition | StaticBlock)[];
 	declare scope: ClassBodyScope;
 	declare type: NodeType.tClassBody;
 
@@ -25,18 +26,16 @@ export default class ClassBody extends NodeBase {
 		}
 	}
 
-	parseNode(esTreeNode: GenericEsTreeNode): void {
-		const body: NodeBase[] = (this.body = []);
+	parseNode(esTreeNode: GenericEsTreeNode): this {
+		const body: NodeBase[] = (this.body = new Array(esTreeNode.body.length));
+		let index = 0;
 		for (const definition of esTreeNode.body) {
-			body.push(
-				new (this.scope.context.getNodeConstructor(definition.type))(
-					definition,
-					this,
-					definition.static ? this.scope : this.scope.instanceScope
-				)
-			);
+			body[index++] = new (this.scope.context.getNodeConstructor(definition.type))(
+				this,
+				definition.static ? this.scope : this.scope.instanceScope
+			).parseNode(definition);
 		}
-		super.parseNode(esTreeNode);
+		return super.parseNode(esTreeNode);
 	}
 
 	protected applyDeoptimizations() {}

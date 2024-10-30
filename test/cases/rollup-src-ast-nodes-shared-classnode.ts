@@ -11,21 +11,24 @@ import {
 	UNKNOWN_PATH,
 	UnknownKey
 } from '../../utils/PathTracker';
+import { checkEffectForNodes } from '../../utils/checkEffectForNodes';
 import type ClassBody from '../ClassBody';
+import type Decorator from '../Decorator';
 import Identifier from '../Identifier';
 import type Literal from '../Literal';
 import MethodDefinition from '../MethodDefinition';
+import { isStaticBlock } from '../StaticBlock';
 import { type ExpressionEntity, type LiteralValueOrUnknown } from './Expression';
 import { type ExpressionNode, type IncludeChildren, NodeBase } from './Node';
 import { ObjectEntity, type ObjectProperty } from './ObjectEntity';
 import { ObjectMember } from './ObjectMember';
 import { OBJECT_PROTOTYPE } from './ObjectPrototype';
-import { VariableKind } from './VariableKinds';
 
 export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 	declare body: ClassBody;
 	declare id: Identifier | null;
 	declare superClass: ExpressionNode | null;
+	declare decorators: Decorator[];
 	private declare classConstructor: MethodDefinition | null;
 	private objectEntity: ObjectEntity | null = null;
 
@@ -79,7 +82,7 @@ export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 		if (!this.deoptimized) this.applyDeoptimizations();
 		const initEffect = this.superClass?.hasEffects(context) || this.body.hasEffects(context);
 		this.id?.markDeclarationReached();
-		return initEffect || super.hasEffects(context);
+		return initEffect || super.hasEffects(context) || checkEffectForNodes(this.decorators, context);
 	}
 
 	hasEffectsOnInteractionAtPath(
@@ -101,6 +104,7 @@ export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 		this.included = true;
 		this.superClass?.include(context, includeChildrenRecursively);
 		this.body.include(context, includeChildrenRecursively);
+		for (const decorator of this.decorators) decorator.include(context, includeChildrenRecursively);
 		if (this.id) {
 			this.id.markDeclarationReached();
 			this.id.include();
@@ -108,7 +112,8 @@ export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 	}
 
 	initialise(): void {
-		this.id?.declare(VariableKind.class, this);
+		super.initialise();
+		this.id?.declare('class', this);
 		for (const method of this.body.body) {
 			if (method instanceof MethodDefinition && method.kind === 'constructor') {
 				this.classConstructor = method;
@@ -122,6 +127,7 @@ export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 		this.deoptimized = true;
 		for (const definition of this.body.body) {
 			if (
+				!isStaticBlock(definition) &&
 				!(
 					definition.static ||
 					(definition instanceof MethodDefinition && definition.kind === 'constructor')
@@ -141,6 +147,7 @@ export default class ClassNode extends NodeBase implements DeoptimizableEntity {
 		const staticProperties: ObjectProperty[] = [];
 		const dynamicMethods: ObjectProperty[] = [];
 		for (const definition of this.body.body) {
+			if (isStaticBlock(definition)) continue;
 			const properties = definition.static ? staticProperties : dynamicMethods;
 			const definitionKind = (definition as MethodDefinition | { kind: undefined }).kind;
 			// Note that class fields do not end up on the prototype
