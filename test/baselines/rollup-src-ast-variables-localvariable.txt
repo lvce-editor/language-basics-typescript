@@ -806,11 +806,9 @@ NewLine
 Whitespace
 KeywordThis
 Punctuation
-VariableName
-Whitespace
+Function
 Punctuation
-Whitespace
-LanguageConstant
+Punctuation
 Punctuation
 NewLine
 Whitespace
@@ -1882,11 +1880,9 @@ NewLine
 Whitespace
 KeywordThis
 Punctuation
-VariableName
-Whitespace
+Function
 Punctuation
-Whitespace
-LanguageConstant
+Punctuation
 Punctuation
 NewLine
 Whitespace

@@ -243,7 +243,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-KeywordVoid
+KeywordThis
 Whitespace
 Punctuation
 NewLine
@@ -259,6 +259,8 @@ Punctuation
 VariableName
 Punctuation
 NewLine
+Whitespace
+KeywordReturn
 Whitespace
 Keyword
 Punctuation
