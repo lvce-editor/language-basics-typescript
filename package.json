@@ -13,9 +13,9 @@
   "license": "MIT",
   "devDependencies": {
     "@lvce-editor/package-extension": "^1.2.0",
-    "@lvce-editor/server": "^0.37.10",
+    "@lvce-editor/server": "^0.37.12",
     "@lvce-editor/test-syntax-highlighting": "^1.2.0",
-    "got": "^14.4.3",
+    "got": "^14.4.4",
     "prettier": "^2.8.8",
     "tar-fs": "^3.0.6",
     "typescript": "^5.6.3"
