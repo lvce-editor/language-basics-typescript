@@ -7,6 +7,7 @@ import type { Position } from "../util/location.ts";
 import { Errors } from "../parse-error.ts";
 import type { Undone } from "../parser/node.ts";
 import type { BindingFlag } from "../util/scopeflags.ts";
+import { OptionFlags } from "../options.ts";
 
 const { defineProperty } = Object;
 const toUnenumerable = (object: any, key: string) => {
@@ -27,7 +28,7 @@ export default (superClass: typeof Parser) =>
     parse(): File {
       const file = toESTreeLocation(super.parse());
 
-      if (this.options.tokens) {
+      if (this.optionFlags & OptionFlags.Tokens) {
         file.tokens = file.tokens.map(toESTreeLocation);
       }
 
@@ -174,31 +175,6 @@ export default (superClass: typeof Parser) =>
       delete node.directives;
     }
 
-    pushClassMethod(
-      classBody: N.ClassBody,
-      method: N.ClassMethod,
-      isGenerator: boolean,
-      isAsync: boolean,
-      isConstructor: boolean,
-      allowsDirectSuper: boolean,
-    ): void {
-      this.parseMethod(
-        method,
-        isGenerator,
-        isAsync,
-        isConstructor,
-        allowsDirectSuper,
-        "ClassMethod",
-        true,
-      );
-      if (method.typeParameters) {
-        // @ts-expect-error mutate AST types
-        method.value.typeParameters = method.typeParameters;
-        delete method.typeParameters;
-      }
-      classBody.body.push(method);
-    }
-
     parsePrivateName(): any {
       const node = super.parsePrivateName();
       if (!process.env.BABEL_8_BREAKING) {
@@ -272,7 +248,7 @@ export default (superClass: typeof Parser) =>
       allowDirectSuper: boolean,
       type: T["type"],
       inClassScope: boolean = false,
-    ): N.EstreeMethodDefinition {
+    ): N.EstreeMethodDefinition | N.EstreeTSAbstractMethodDefinition {
       let funcNode = this.startNode<N.MethodLike>();
       funcNode.kind = node.kind; // provide kind, so super method correctly sets state
       funcNode = super.parseMethod(
@@ -290,8 +266,28 @@ export default (superClass: typeof Parser) =>
       delete funcNode.kind;
       // @ts-expect-error mutate AST types
       node.value = funcNode;
+      const { typeParameters } = node;
+      if (typeParameters) {
+        delete node.typeParameters;
+        funcNode.typeParameters = typeParameters;
+        this.resetStartLocationFromNode(funcNode, typeParameters);
+      }
       if (type === "ClassPrivateMethod") {
         node.computed = false;
+      }
+      if (process.env.BABEL_8_BREAKING && this.hasPlugin("typescript")) {
+        if (!funcNode.body) {
+          (funcNode as unknown as N.EstreeTSEmptyBodyFunctionExpression).type =
+            "TSEmptyBodyFunctionExpression";
+        }
+        // @ts-expect-error todo(flow->ts) property not defined for all types in union
+        if (node.abstract) {
+          return this.finishNode(
+            // @ts-expect-error cast methods to estree types
+            node as Undone<N.EstreeTSAbstractMethodDefinition>,
+            "TSAbstractMethodDefinition",
+          );
+        }
       }
       return this.finishNode(
         // @ts-expect-error cast methods to estree types
@@ -306,26 +302,46 @@ export default (superClass: typeof Parser) =>
     }
 
     parseClassProperty(...args: [N.ClassProperty]): any {
-      const propertyNode = super.parseClassProperty(...args) as any;
+      const propertyNode = super.parseClassProperty(...args);
       if (!process.env.BABEL_8_BREAKING) {
         if (!this.getPluginOption("estree", "classFeatures")) {
-          return propertyNode as N.EstreePropertyDefinition;
+          return propertyNode as unknown as N.EstreePropertyDefinition;
         }
       }
-      propertyNode.type = "PropertyDefinition";
-      return propertyNode as N.EstreePropertyDefinition;
+      if (
+        process.env.BABEL_8_BREAKING &&
+        propertyNode.abstract &&
+        this.hasPlugin("typescript")
+      ) {
+        (propertyNode as unknown as N.EstreeTSAbstractPropertyDefinition).type =
+          "TSAbstractPropertyDefinition";
+      } else {
+        (propertyNode as unknown as N.EstreePropertyDefinition).type =
+          "PropertyDefinition";
+      }
+      return propertyNode;
     }
 
     parseClassPrivateProperty(...args: [N.ClassPrivateProperty]): any {
-      const propertyNode = super.parseClassPrivateProperty(...args) as any;
+      const propertyNode = super.parseClassPrivateProperty(...args);
       if (!process.env.BABEL_8_BREAKING) {
         if (!this.getPluginOption("estree", "classFeatures")) {
-          return propertyNode as N.EstreePropertyDefinition;
+          return propertyNode as unknown as N.EstreePropertyDefinition;
         }
       }
-      propertyNode.type = "PropertyDefinition";
+      if (
+        process.env.BABEL_8_BREAKING &&
+        propertyNode.abstract &&
+        this.hasPlugin("typescript")
+      ) {
+        (propertyNode as unknown as N.EstreeTSAbstractPropertyDefinition).type =
+          "TSAbstractPropertyDefinition";
+      } else {
+        (propertyNode as unknown as N.EstreePropertyDefinition).type =
+          "PropertyDefinition";
+      }
       propertyNode.computed = false;
-      return propertyNode as N.EstreePropertyDefinition;
+      return propertyNode;
     }
 
     parseObjectMethod(

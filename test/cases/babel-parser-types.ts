@@ -171,6 +171,7 @@ export type Declaration =
   | VariableDeclaration
   | ClassDeclaration
   | FunctionDeclaration
+  | TsImportEqualsDeclaration
   | TsInterfaceDeclaration
   | TsTypeAliasDeclaration
   | TsEnumDeclaration
@@ -716,6 +717,9 @@ export interface CallOrNewBase extends NodeBase {
   callee: Expression | Super | Import;
   arguments: Array<Expression | SpreadElement>; // TODO: $ReadOnlyArray,
   typeArguments: TypeParameterInstantiationBase | undefined | null;
+  /**
+   * @deprecated
+   */
   typeParameters?: TypeParameterInstantiationBase | null; // TODO: Not in spec
 }
 
@@ -799,6 +803,10 @@ export interface TaggedTemplateExpression extends NodeBase {
   type: "TaggedTemplateExpression";
   tag: Expression;
   quasi: TemplateLiteral;
+  typeArguments?: TypeParameterInstantiationBase | null; // TODO: Not in spec
+  /**
+   * @deprecated
+   */
   typeParameters?: TypeParameterInstantiationBase | null; // TODO: Not in spec
 }
 
@@ -865,7 +873,8 @@ export interface ClassBase extends HasDecorators {
   decorators?: Decorator[];
   // TODO: All not in spec
   typeParameters?: TypeParameterDeclarationBase | null;
-  superTypeParameters?: TypeParameterInstantiationBase | null;
+  superTypeParameters?: TypeParameterInstantiationBase | null; // babel 7
+  superTypeArguments?: TypeParameterInstantiationBase | null; // babel 8
   abstract?: boolean;
   implements?: TSClassImplements[] | undefined | null | FlowClassImplements[];
 }
@@ -960,6 +969,9 @@ export interface ClassPrivateProperty extends NodeBase {
   definite?: true;
   readonly?: true;
   override?: true;
+  // For error recovery
+  abstract?: null;
+  accessibility?: null;
   // Flow only
   variance?: FlowVariance | null;
 }
@@ -1123,6 +1135,10 @@ export type JSXSpreadAttribute = NodeAny<"JSXSpreadAttribute">;
 export interface JSXOpeningElement extends NodeBase {
   type: "JSXOpeningElement";
   name: JSXNamespacedName | JSXMemberExpression;
+  typeArguments?: TypeParameterInstantiationBase | null; // TODO: Not in spec,
+  /**
+   * @deprecated
+   */
   typeParameters?: TypeParameterInstantiationBase | null; // TODO: Not in spec,
   attributes: (JSXAttribute | JSXSpreadAttribute)[];
   selfClosing: boolean;
@@ -1377,14 +1393,17 @@ export interface EstreeProperty extends NodeBase {
   variance?: FlowVariance | null;
 }
 
-export interface EstreeMethodDefinition extends NodeBase {
-  type: "MethodDefinition";
+interface EstreeMethodDefinitionBase extends NodeBase {
   static: boolean;
   key: Expression;
   computed: boolean;
-  value: FunctionExpression;
   decorators: Decorator[];
   kind?: "get" | "set" | "method";
+}
+
+export interface EstreeMethodDefinition extends EstreeMethodDefinitionBase {
+  type: "MethodDefinition";
+  value: FunctionExpression;
   variance?: FlowVariance | null;
 }
 
@@ -1403,11 +1422,14 @@ export interface EstreePrivateIdentifier extends NodeBase {
   name: string;
 }
 
-export interface EstreePropertyDefinition extends NodeBase {
-  type: "PropertyDefinition";
+interface EstreePropertyDefinitionBase extends NodeBase {
   static: boolean;
   key: Expression | EstreePrivateIdentifier;
   computed: boolean;
+}
+
+export interface EstreePropertyDefinition extends EstreePropertyDefinitionBase {
+  type: "PropertyDefinition";
   value: Expression;
 }
 
@@ -1465,7 +1487,7 @@ export interface TsQualifiedName extends NodeBase {
   right: Identifier;
 }
 
-export type TsEntityName = Identifier | TsQualifiedName;
+export type TsEntityName = Identifier | ThisExpression | TsQualifiedName;
 
 export type TsSignatureDeclaration =
   | TsCallSignatureDeclaration
@@ -1538,6 +1560,22 @@ export interface TsIndexSignature
   // Note: parameters.length must be 1.
 }
 
+export interface EstreeTSEmptyBodyFunctionExpression extends NodeBase {
+  type: "TSEmptyBodyFunctionExpression";
+}
+
+export interface EstreeTSAbstractMethodDefinition
+  extends EstreeMethodDefinitionBase {
+  type: "TSAbstractMethodDefinition";
+  value: EstreeTSEmptyBodyFunctionExpression;
+}
+
+export interface EstreeTSAbstractPropertyDefinition
+  extends EstreePropertyDefinitionBase {
+  type: "TSAbstractPropertyDefinition";
+  value: null;
+}
+
 // ================
 // TypeScript types
 // ================
@@ -1561,6 +1599,7 @@ export type TsType =
   | TsIndexedAccessType
   | TsMappedType
   | TsLiteralType // TODO: This probably shouldn't be included here.
+  | TsTemplateLiteralType
   | TsImportType
   | TsTypePredicate;
 
@@ -1606,6 +1645,10 @@ export interface TsConstructorType
 export interface TsTypeReference extends TsTypeBase {
   type: "TSTypeReference";
   typeName: TsEntityName;
+  typeArguments?: TsTypeParameterInstantiation;
+  /**
+   * @deprecated
+   */
   typeParameters?: TsTypeParameterInstantiation;
 }
 
@@ -1620,6 +1663,10 @@ export interface TsTypePredicate extends TsTypeBase {
 export interface TsTypeQuery extends TsTypeBase {
   type: "TSTypeQuery";
   exprName: TsEntityName | TsImportType;
+  typeArguments?: TsTypeParameterInstantiation;
+  /**
+   * @deprecated
+   */
   typeParameters?: TsTypeParameterInstantiation;
 }
 
@@ -1709,6 +1756,12 @@ export interface TsMappedType extends TsTypeBase {
   nameType: TsType | undefined | null;
 }
 
+export interface TsTemplateLiteralType extends TsTypeBase {
+  type: "TSTemplateLiteralType";
+  quasis: TemplateElement[];
+  types: TsType[];
+}
+
 export interface TsLiteralType extends TsTypeBase {
   type: "TSLiteralType";
   literal: NumericLiteral | StringLiteral | BooleanLiteral | TemplateLiteral;
@@ -1716,8 +1769,12 @@ export interface TsLiteralType extends TsTypeBase {
 
 export interface TsImportType extends TsTypeBase {
   type: "TSImportType";
-  argument: StringLiteral;
+  argument: TsLiteralType;
   qualifier?: TsEntityName;
+  typeArguments?: TsTypeParameterInstantiation;
+  /**
+   * @deprecated
+   */
   typeParameters?: TsTypeParameterInstantiation;
   options?: Expression | null;
 }
@@ -1741,7 +1798,7 @@ export interface TSInterfaceBody extends NodeBase {
 
 export interface TSHeritageBase extends NodeBase {
   expression: TsEntityName;
-  typeParameters?: TsTypeParameterInstantiation;
+  typeArguments?: TsTypeParameterInstantiation;
 }
 
 export interface TSClassImplements extends TSHeritageBase {
@@ -1763,6 +1820,15 @@ export interface TsEnumDeclaration extends DeclarationBase {
   type: "TSEnumDeclaration";
   const?: true;
   id: Identifier;
+  body: TsEnumBody;
+  /**
+   * @deprecated
+   */
+  members?: TsEnumMember[];
+}
+
+export interface TsEnumBody extends NodeBase {
+  type: "TSEnumBody";
   members: TsEnumMember[];
 }
 
@@ -1793,14 +1859,15 @@ export interface TsNamespaceDeclaration extends TsModuleDeclaration {
   body: TsNamespaceBody;
 }
 
-export type TsModuleName = Identifier | StringLiteral;
+export type TsModuleName = TsEntityName | StringLiteral;
 
 export interface TsImportEqualsDeclaration extends NodeBase {
   type: "TSImportEqualsDeclaration";
-  isExport: boolean;
   id: Identifier;
   importKind: "type" | "value";
   moduleReference: TsModuleReference;
+  /** @deprecated */
+  isExport: boolean;
 }
 
 export type TsModuleReference = TsEntityName | TsExternalModuleReference;
@@ -1852,7 +1919,11 @@ export interface TsNonNullExpression extends NodeBase {
 export interface TsInstantiationExpression extends NodeBase {
   type: "TSInstantiationExpression";
   expression: Expression;
-  typeParameters: TsTypeParameterInstantiation;
+  typeArguments?: TsTypeParameterInstantiation;
+  /**
+   * @deprecated
+   */
+  typeParameters?: TsTypeParameterInstantiation;
 }
 
 // ================
@@ -1923,6 +1994,9 @@ export type Node =
   | EstreePrivateIdentifier
   | EstreeProperty
   | EstreePropertyDefinition
+  | EstreeTSAbstractMethodDefinition
+  | EstreeTSAbstractPropertyDefinition
+  | EstreeTSEmptyBodyFunctionExpression
   | ExportAllDeclaration
   | ExportDefaultDeclaration
   | ExportDefaultSpecifier
@@ -2056,6 +2130,7 @@ export type Node =
   | TsConstructSignatureDeclaration
   | TsConstructorType
   | TsEnumDeclaration
+  | TsEnumBody
   | TsEnumMember
   | TsExportAssignment
   | TSClassImplements
@@ -2085,6 +2160,7 @@ export type Node =
   | TsQualifiedName
   | TsRestType
   | TsSatisfiesExpression
+  | TsTemplateLiteralType
   | TsThisType
   | TsTupleType
   | TsTypeAliasDeclaration
