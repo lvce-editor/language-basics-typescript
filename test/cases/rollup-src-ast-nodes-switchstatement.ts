@@ -8,9 +8,9 @@ import {
 import BlockScope from '../scopes/BlockScope';
 import type ChildScope from '../scopes/ChildScope';
 import type * as NodeType from './NodeType';
-import type SwitchCase from './SwitchCase';
 import type { ExpressionNode, GenericEsTreeNode, IncludeChildren } from './shared/Node';
-import { StatementBase } from './shared/Node';
+import { doNotDeoptimize, onlyIncludeSelfNoDeoptimize, StatementBase } from './shared/Node';
+import type SwitchCase from './SwitchCase';
 
 export default class SwitchStatement extends StatementBase {
 	declare cases: readonly SwitchCase[];
@@ -18,7 +18,7 @@ export default class SwitchStatement extends StatementBase {
 	declare type: NodeType.tSwitchStatement;
 
 	declare parentScope: ChildScope;
-	private declare defaultCase: number | null;
+	declare private defaultCase: number | null;
 
 	createScope(parentScope: ChildScope): void {
 		this.parentScope = parentScope;
@@ -106,3 +106,6 @@ export default class SwitchStatement extends StatementBase {
 		}
 	}
 }
+
+SwitchStatement.prototype.includeNode = onlyIncludeSelfNoDeoptimize;
+SwitchStatement.prototype.applyDeoptimizations = doNotDeoptimize;

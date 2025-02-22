@@ -170,9 +170,9 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-StorageModifier
-Whitespace
 VariableName
+Whitespace
+StorageModifier
 Whitespace
 VariableName
 Punctuation

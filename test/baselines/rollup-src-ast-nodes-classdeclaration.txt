@@ -617,14 +617,9 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-KeywordModifier
-Whitespace
 Function
 Punctuation
 Punctuation
-Punctuation
-Whitespace
-KeywordVoid
 Whitespace
 Punctuation
 NewLine

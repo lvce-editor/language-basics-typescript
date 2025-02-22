@@ -68,6 +68,9 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
+VariableName
+Punctuation
+Whitespace
 Keyword
 Whitespace
 Type
@@ -120,6 +123,9 @@ Punctuation
 Punctuation
 Whitespace
 LanguageConstant
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Whitespace
 VariableName

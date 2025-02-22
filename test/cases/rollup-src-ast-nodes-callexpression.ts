@@ -8,20 +8,20 @@ import { type NodeRenderOptions, type RenderOptions } from '../../utils/renderHe
 import type { DeoptimizableEntity } from '../DeoptimizableEntity';
 import type { HasEffectsContext, InclusionContext } from '../ExecutionContext';
 import { INTERACTION_CALLED } from '../NodeInteractions';
-import type { ObjectPath, PathTracker } from '../utils/PathTracker';
-import { EMPTY_PATH, SHARED_RECURSION_TRACKER } from '../utils/PathTracker';
+import type { EntityPathTracker, ObjectPath } from '../utils/PathTracker';
+import { EMPTY_PATH, SHARED_RECURSION_TRACKER, UNKNOWN_PATH } from '../utils/PathTracker';
 import Identifier from './Identifier';
 import MemberExpression from './MemberExpression';
 import type * as NodeType from './NodeType';
-import type SpreadElement from './SpreadElement';
-import type Super from './Super';
 import { Flag, isFlagSet, setFlag } from './shared/BitFlags';
 import CallExpressionBase from './shared/CallExpressionBase';
+import { getChainElementLiteralValueAtPath } from './shared/chainElements';
 import type { ExpressionEntity, LiteralValueOrUnknown } from './shared/Expression';
 import { UNKNOWN_RETURN_EXPRESSION } from './shared/Expression';
 import type { ChainElement, ExpressionNode, IncludeChildren, SkippedChain } from './shared/Node';
 import { INCLUDE_PARAMETERS, IS_SKIPPED_CHAIN } from './shared/Node';
-import { getChainElementLiteralValueAtPath } from './shared/chainElements';
+import type SpreadElement from './SpreadElement';
+import type Super from './Super';
 
 export default class CallExpression
 	extends CallExpressionBase
@@ -67,7 +67,7 @@ export default class CallExpression
 
 	getLiteralValueAtPathAsChainElement(
 		path: ObjectPath,
-		recursionTracker: PathTracker,
+		recursionTracker: EntityPathTracker,
 		origin: DeoptimizableEntity
 	): LiteralValueOrUnknown | SkippedChain {
 		return getChainElementLiteralValueAtPath(this, this.callee, path, recursionTracker, origin);
@@ -112,9 +112,9 @@ export default class CallExpression
 	}
 
 	include(context: InclusionContext, includeChildrenRecursively: IncludeChildren): void {
-		if (!this.deoptimized) this.applyDeoptimizations();
+		if (!this.included) this.includeNode(context);
 		if (includeChildrenRecursively) {
-			super.include(context, includeChildrenRecursively);
+			super.include(context, true);
 			if (
 				includeChildrenRecursively === INCLUDE_PARAMETERS &&
 				this.callee instanceof Identifier &&
@@ -123,10 +123,15 @@ export default class CallExpression
 				this.callee.variable.markCalledFromTryStatement();
 			}
 		} else {
-			this.included = true;
 			this.callee.include(context, false);
+			this.callee.includeCallArguments(this.interaction, context);
 		}
-		this.callee.includeCallArguments(context, this.arguments);
+	}
+
+	includeNode(context: InclusionContext) {
+		this.included = true;
+		if (!this.deoptimized) this.applyDeoptimizations();
+		this.callee.includePath(UNKNOWN_PATH, context);
 	}
 
 	initialise() {
@@ -151,7 +156,7 @@ export default class CallExpression
 		renderCallArguments(code, options, this);
 	}
 
-	protected applyDeoptimizations(): void {
+	applyDeoptimizations() {
 		this.deoptimized = true;
 		this.callee.deoptimizeArgumentsOnInteractionAtPath(
 			this.interaction,
@@ -162,7 +167,7 @@ export default class CallExpression
 	}
 
 	protected getReturnExpression(
-		recursionTracker: PathTracker = SHARED_RECURSION_TRACKER
+		recursionTracker: EntityPathTracker = SHARED_RECURSION_TRACKER
 	): [expression: ExpressionEntity, isPure: boolean] {
 		if (this.returnExpression === null) {
 			this.returnExpression = UNKNOWN_RETURN_EXPRESSION;

@@ -48,6 +48,9 @@ Whitespace
 Punctuation
 Whitespace
 VariableName
+Punctuation
+Whitespace
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -929,6 +932,16 @@ NewLine
 Whitespace
 Function
 Punctuation
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Punctuation
 Whitespace
@@ -954,6 +967,10 @@ Punctuation
 Punctuation
 Function
 Punctuation
+VariableName
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Punctuation
 NewLine

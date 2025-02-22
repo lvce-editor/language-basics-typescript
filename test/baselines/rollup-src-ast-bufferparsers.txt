@@ -1184,6 +1184,21 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
+Punctuation
+Whitespace
+VariableName
+Whitespace
+Punctuation
+Whitespace
+KeywordImport
+Whitespace
+Punctuation
+String
+Punctuation
+Punctuation
+NewLine
+KeywordImport
+Whitespace
 Keyword
 Whitespace
 VariableName
@@ -2717,6 +2732,7 @@ VariableName
 Whitespace
 Punctuation
 Punctuation
+NewLine
 Whitespace
 VariableName
 Punctuation
@@ -2725,6 +2741,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Whitespace
 VariableName
@@ -3583,6 +3602,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Whitespace
 VariableName
@@ -6118,6 +6140,7 @@ VariableName
 Whitespace
 Punctuation
 Punctuation
+NewLine
 Whitespace
 VariableName
 Punctuation
@@ -6126,6 +6149,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Whitespace
 VariableName
@@ -6456,6 +6482,7 @@ VariableName
 Whitespace
 Punctuation
 Punctuation
+NewLine
 Whitespace
 VariableName
 Punctuation
@@ -6464,6 +6491,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+Punctuation
+Whitespace
+VariableName
 Punctuation
 Whitespace
 VariableName

@@ -22,7 +22,10 @@ export const enum Flag {
 	tail = 1 << 20,
 	prefix = 1 << 21,
 	generator = 1 << 22,
-	expression = 1 << 23
+	expression = 1 << 23,
+	destructuringDeoptimized = 1 << 24,
+	hasDeoptimizedCache = 1 << 25,
+	hasEffects = 1 << 26
 }
 
 export function isFlagSet(flags: number, flag: Flag): boolean {

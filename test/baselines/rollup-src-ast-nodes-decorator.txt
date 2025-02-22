@@ -169,3 +169,15 @@ Punctuation
 NewLine
 Punctuation
 NewLine
+NewLine
+VariableName
+Punctuation
+VariableName
+Punctuation
+VariableName
+Whitespace
+Punctuation
+Whitespace
+VariableName
+Punctuation
+NewLine

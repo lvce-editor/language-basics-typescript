@@ -1,13 +1,6 @@
 KeywordImport
 Whitespace
-Punctuation
-Whitespace
 VariableName
-Punctuation
-Whitespace
-VariableName
-Whitespace
-Punctuation
 Whitespace
 KeywordImport
 Whitespace
@@ -741,6 +734,8 @@ Function
 Punctuation
 Function
 Punctuation
+VariableName
+Punctuation
 Function
 Punctuation
 VariableName
@@ -788,6 +783,8 @@ Whitespace
 Function
 Punctuation
 Function
+Punctuation
+VariableName
 Punctuation
 Function
 Punctuation
@@ -2239,12 +2236,9 @@ NewLine
 Whitespace
 Function
 Punctuation
-Function
-Punctuation
 VariableName
 Punctuation
 VariableName
-Punctuation
 Punctuation
 Punctuation
 NewLine

@@ -462,7 +462,9 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Keyword
+KeywordAwait
+Whitespace
+VariableName
 Whitespace
 VariableName
 Whitespace
@@ -684,16 +686,6 @@ Punctuation
 VariableName
 Punctuation
 VariableName
-Punctuation
-Punctuation
-Punctuation
-NewLine
-Whitespace
-KeywordAwait
-Whitespace
-VariableName
-Punctuation
-Function
 Punctuation
 Punctuation
 Punctuation
