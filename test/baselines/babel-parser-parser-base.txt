@@ -5,6 +5,9 @@ Whitespace
 Punctuation
 Whitespace
 VariableName
+Punctuation
+Whitespace
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -154,6 +157,15 @@ Punctuation
 NewLine
 Whitespace
 Text
+NewLine
+Whitespace
+KeywordDeclare
+Whitespace
+Type
+Punctuation
+Whitespace
+Type
+Punctuation
 NewLine
 Whitespace
 KeywordDeclare

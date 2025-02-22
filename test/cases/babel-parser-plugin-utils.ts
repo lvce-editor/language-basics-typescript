@@ -3,8 +3,6 @@ import type { PluginConfig } from "./typings.ts";
 
 export type Plugin = PluginConfig;
 
-export type PluginList = PluginConfig[];
-
 export type MixinPlugin = (
   superClass: new (...args: any) => Parser,
 ) => new (...args: any) => Parser;
@@ -93,7 +91,11 @@ export function validatePlugins(pluginsMap: Map<string, any>) {
           `Plugin conflict between \`["pipelineOperator", { proposal: "hack", topicToken: "#" }]\` and \`${JSON.stringify(["recordAndTuple", pluginsMap.get("recordAndTuple")])}\`.`,
         );
       }
-    } else if (proposal === "smart" && tupleSyntaxIsHash) {
+    } else if (
+      !process.env.BABEL_8_BREAKING &&
+      proposal === "smart" &&
+      tupleSyntaxIsHash
+    ) {
       throw new Error(
         `Plugin conflict between \`["pipelineOperator", { proposal: "smart" }]\` and \`${JSON.stringify(["recordAndTuple", pluginsMap.get("recordAndTuple")])}\`.`,
       );
