@@ -51,6 +51,9 @@ Whitespace
 Punctuation
 Whitespace
 VariableName
+Punctuation
+Whitespace
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -132,6 +135,13 @@ Punctuation
 Whitespace
 Class
 Text
+NewLine
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
 NewLine
 Whitespace
 VariableName

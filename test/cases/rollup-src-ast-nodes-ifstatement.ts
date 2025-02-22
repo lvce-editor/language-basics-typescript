@@ -4,14 +4,17 @@ import type { DeoptimizableEntity } from '../DeoptimizableEntity';
 import { type HasEffectsContext, type InclusionContext } from '../ExecutionContext';
 import TrackingScope from '../scopes/TrackingScope';
 import { EMPTY_PATH, SHARED_RECURSION_TRACKER } from '../utils/PathTracker';
+import { tryCastLiteralValueToBoolean } from '../utils/tryCastLiteralValueToBoolean';
 import BlockStatement from './BlockStatement';
 import type Identifier from './Identifier';
 import * as NodeType from './NodeType';
 import { type LiteralValueOrUnknown, UnknownValue } from './shared/Expression';
 import {
+	doNotDeoptimize,
 	type ExpressionNode,
 	type GenericEsTreeNode,
 	type IncludeChildren,
+	onlyIncludeSelfNoDeoptimize,
 	StatementBase,
 	type StatementNode
 } from './shared/Node';
@@ -120,14 +123,10 @@ export default class IfStatement extends StatementBase implements DeoptimizableE
 		this.renderHoistedDeclarations(hoistedDeclarations, code, getPropertyAccess);
 	}
 
-	protected applyDeoptimizations() {}
-
 	private getTestValue(): LiteralValueOrUnknown {
 		if (this.testValue === unset) {
-			return (this.testValue = this.test.getLiteralValueAtPath(
-				EMPTY_PATH,
-				SHARED_RECURSION_TRACKER,
-				this
+			return (this.testValue = tryCastLiteralValueToBoolean(
+				this.test.getLiteralValueAtPath(EMPTY_PATH, SHARED_RECURSION_TRACKER, this)
 			));
 		}
 		return this.testValue;
@@ -208,3 +207,6 @@ export default class IfStatement extends StatementBase implements DeoptimizableE
 		return false;
 	}
 }
+
+IfStatement.prototype.includeNode = onlyIncludeSelfNoDeoptimize;
+IfStatement.prototype.applyDeoptimizations = doNotDeoptimize;

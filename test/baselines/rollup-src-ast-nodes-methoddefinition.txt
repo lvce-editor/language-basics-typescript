@@ -211,6 +211,7 @@ Punctuation
 Punctuation
 Punctuation
 NewLine
+NewLine
 Whitespace
 Function
 Punctuation
@@ -250,16 +251,6 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Punctuation
-NewLine
-Whitespace
-KeywordModifier
-Whitespace
-Function
-Punctuation
-Punctuation
-Whitespace
-Punctuation
 Punctuation
 NewLine
 Punctuation

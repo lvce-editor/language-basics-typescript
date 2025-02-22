@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
 
 const REPO = 'https://github.com/rollup/rollup'
-const COMMIT = '69353a84d70294ecfcd5e1ab8e372e21e94c9f8e'
+const COMMIT = 'b4cb7cccf1e770de72d49ffc47680172d34f963e'
 
 const getTestName = (baseName) => {
   return (
