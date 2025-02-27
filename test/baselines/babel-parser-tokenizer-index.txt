@@ -668,7 +668,8 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
 VariableName

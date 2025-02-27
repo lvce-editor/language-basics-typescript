@@ -1507,7 +1507,8 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 NewLine
 Whitespace

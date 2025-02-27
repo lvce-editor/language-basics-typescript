@@ -309,10 +309,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
-KeywordModifier
+VariableName
 Whitespace
 Function
 Punctuation

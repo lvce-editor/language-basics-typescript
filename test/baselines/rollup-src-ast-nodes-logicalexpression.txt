@@ -395,10 +395,11 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
-KeywordModifier
+StorageModifier
 Whitespace
 VariableName
 Whitespace

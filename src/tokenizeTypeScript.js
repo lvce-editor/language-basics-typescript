@@ -1139,6 +1139,10 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideClass
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else if ((next = part.match(RE_KEYWORD_CLASS_PROPERTY_MODIFIER))) {
           token = TokenType.StorageModifier
           state = State.InsideClass
