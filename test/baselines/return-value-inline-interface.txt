@@ -28,7 +28,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Punctuation
 Whitespace

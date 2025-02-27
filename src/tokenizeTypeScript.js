@@ -1530,7 +1530,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_KEYWORD_TYPE))) {
-          token = TokenType.Keyword
+          token = TokenType.KeywordControl
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
