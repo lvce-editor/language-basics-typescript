@@ -28,7 +28,7 @@ KeywordControl
 Whitespace
 Punctuation
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 KeywordControl
 Whitespace

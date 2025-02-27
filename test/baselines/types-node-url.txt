@@ -33,7 +33,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 KeywordControl
 Whitespace
@@ -2922,14 +2922,14 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 KeywordControl
 Whitespace
 VariableName
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 KeywordControl
 Whitespace

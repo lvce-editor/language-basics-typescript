@@ -44,6 +44,7 @@ const State = {
   AfterKeywordNew: 41,
   AfterKeywordTypeOf: 42,
   InsideObject: 43,
+  InsideImportStructure: 44,
 }
 
 /**
@@ -196,6 +197,8 @@ const RE_KEYWORD_CONSTRUCTOR = /^constructor\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_ASYNC = /^async\b/
+const RE_KEYWORD_AS = /^as\b/
+const RE_KEYWORD_FROM = /^from\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
@@ -1525,6 +1528,43 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.InsideImportStructure:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_KEYWORD_AS))) {
+          token = TokenType.KeywordControl
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.KeywordControl
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_STAR))) {
+          token = TokenType.Punctuation
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else {
+          throw new Error('no')
+        }
+        break
       case State.AfterKeywordImport:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -1534,7 +1574,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_KEYWORD_FROM))) {
+          token = TokenType.KeywordImport
+          state = State.AfterKeywordImport
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
