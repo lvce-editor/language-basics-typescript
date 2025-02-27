@@ -322,7 +322,7 @@ Text
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
@@ -347,7 +347,7 @@ Text
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Punctuation
 Whitespace
