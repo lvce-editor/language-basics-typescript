@@ -225,7 +225,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 Whitespace

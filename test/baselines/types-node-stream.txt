@@ -70,7 +70,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 KeywordControl
 Whitespace
