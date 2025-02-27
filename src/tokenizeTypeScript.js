@@ -195,6 +195,7 @@ const RE_KEYWORD_FUNCTION = /^function\b/
 const RE_KEYWORD_CONSTRUCTOR = /^constructor\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
+const RE_KEYWORD_ASYNC = /^async\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
@@ -1625,6 +1626,9 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideObject:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
+          state = State.InsideObject
+        } else if ((next = part.match(RE_KEYWORD_ASYNC))) {
+          token = TokenType.KeywordModifier
           state = State.InsideObject
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
