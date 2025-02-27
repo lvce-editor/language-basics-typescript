@@ -241,7 +241,8 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Text
+Comment
+Comment
 NewLine
 Whitespace
 Comment
@@ -251,14 +252,14 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 NewLine
