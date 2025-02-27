@@ -1,0 +1,17 @@
+Keyword
+Whitespace
+Type
+Whitespace
+Punctuation
+NewLine
+Whitespace
+Function
+Punctuation
+Punctuation
+Punctuation
+Whitespace
+Class
+Text
+NewLine
+Punctuation
+NewLine
