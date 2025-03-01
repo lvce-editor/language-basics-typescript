@@ -1580,7 +1580,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
-          state = State.TopLevelContent
+          state = State.AfterKeywordImport
         } else if ((next = part.match(RE_STAR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -1596,7 +1596,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.AfterPropertyDot
+        } else if ((next = part.match(RE_EQUAL))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordImport
         } else {
+          console.log({ part })
           throw new Error('no')
         }
         break
