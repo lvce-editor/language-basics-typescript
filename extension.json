@@ -6,12 +6,14 @@
     {
       "id": "typescript",
       "extensions": [".ts", ".mts", ".cts"],
-      "tokenize": "src/tokenizeTypeScript.js"
+      "tokenize": "src/tokenizeTypeScript.js",
+      "configuration":"languageConfiguration.json"
     },
     {
       "id": "typescriptreact",
       "extensions": [".tsx"],
-      "tokenize": "src/tokenizeTypeScript.js"
+      "tokenize": "src/tokenizeTypeScript.js",
+      "configuration":"languageConfiguration.json"
     }
   ]
 }
