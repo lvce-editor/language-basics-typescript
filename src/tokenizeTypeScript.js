@@ -1743,6 +1743,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_TYPE))) {
           token = TokenType.KeywordControl
           state = State.BeforeType
+        } else if ((next = part.match(RE_STAR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
