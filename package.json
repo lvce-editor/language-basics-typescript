@@ -58,7 +58,7 @@
       "typescript-constTypeParameter",
       "typescript-importTypeOnly",
       "typescript-importTypes",
-      "typescript-issue-949",
+      "typescript-issue949",
       "types-node-process"
     ]
   }
