@@ -54,7 +54,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace

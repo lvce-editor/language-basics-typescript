@@ -154,7 +154,7 @@ NewLine
 Whitespace
 KeywordImport
 Whitespace
-KeywordDeclare
+VariableName
 Whitespace
 Keyword
 Whitespace
@@ -182,7 +182,7 @@ NewLine
 Whitespace
 KeywordImport
 Whitespace
-KeywordDeclare
+VariableName
 Whitespace
 Keyword
 Whitespace

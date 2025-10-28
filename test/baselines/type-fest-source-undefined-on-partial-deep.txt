@@ -106,10 +106,14 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
-Text
+Punctuation
+Type
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 Comment

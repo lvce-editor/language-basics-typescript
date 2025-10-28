@@ -42,7 +42,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace
@@ -50,7 +50,7 @@ Punctuation
 Whitespace
 KeywordModifier
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 Punctuation
 Punctuation

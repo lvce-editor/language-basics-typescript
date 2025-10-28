@@ -361,7 +361,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 KeywordModifier
 Whitespace

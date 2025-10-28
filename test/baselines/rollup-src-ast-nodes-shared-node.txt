@@ -423,13 +423,13 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Whitespace
 Punctuation
 Whitespace

@@ -3,7 +3,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Punctuation
 VariableName
