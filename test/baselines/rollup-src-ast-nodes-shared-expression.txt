@@ -260,9 +260,9 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine
@@ -280,9 +280,8 @@ NewLine
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
