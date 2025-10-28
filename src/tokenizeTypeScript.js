@@ -1735,7 +1735,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD_CONST_LET))) {
           token = TokenType.Keyword
-          state = State.AfterKeywordDeclare
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_KEYWORD_TYPE))) {
           token = TokenType.KeywordControl
           state = State.BeforeType
