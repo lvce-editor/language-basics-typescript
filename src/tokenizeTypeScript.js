@@ -45,6 +45,7 @@ const State = {
   AfterKeywordTypeOf: 42,
   InsideObject: 43,
   InsideImportStructure: 44,
+  AfterKeywordExport: 45,
 }
 
 /**
@@ -140,9 +141,11 @@ const RE_TYPE_PRIMITIVE =
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
+const RE_KEYWORD_CONST_LET = /^(?:const|let)/
 const RE_KEYWORD_LET = /^(?:let)/
 const RE_KEYWORD_ENUM = /^(?:enum)/
 const RE_KEYWORD_CLASS = /^(?:class)/
+const RE_KEYWORD_INTERFACE = /^(?:interface)/
 const RE_LINE_COMMENT_START = /^\/\//
 const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
 const RE_NEWLINE_WHITESPACE = /^\n\s*/
@@ -1719,6 +1722,42 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideObject
         } else {
           throw new Error('no')
+        }
+        break
+      case State.AfterKeywordExport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordExport
+        } else if ((next = part.match(RE_KEYWORD_CONST_LET))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordVariableDeclaration
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_KEYWORD_INTERFACE))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordInterface
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.KeywordControl
+          state = State.BeforeType
+        } else if ((next = part.match(RE_STAR))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_KEYWORD_FUNCTION))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordFunction
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+          stack.push(State.AfterKeywordExport)
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else {
+          throw new Error(`no`)
         }
         break
       default:
