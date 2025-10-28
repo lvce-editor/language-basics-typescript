@@ -186,7 +186,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 StorageModifier
 Whitespace

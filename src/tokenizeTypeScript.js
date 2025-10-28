@@ -207,6 +207,7 @@ const RE_BUILTIN_CLASS =
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
+const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_ENDS_WITH_EQUAL = /\=\s+$/
 
@@ -1155,6 +1156,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
           state = State.AfterVariableName
+        } else if ((next = part.match(RE_DECLARE))) {
+          token = TokenType.KeywordModifier
+          state = State.InsideClass
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideClass

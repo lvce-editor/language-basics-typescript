@@ -333,7 +333,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation

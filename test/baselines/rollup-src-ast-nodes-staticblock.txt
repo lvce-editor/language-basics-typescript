@@ -148,7 +148,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -161,7 +161,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation

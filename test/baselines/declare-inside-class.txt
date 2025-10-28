@@ -1,3 +1,8 @@
+NewLine
+KeywordImport
+Whitespace
+KeywordControl
+Whitespace
 Keyword
 Whitespace
 Class
@@ -5,12 +10,17 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
+Comment
+Comment
+NewLine
+Whitespace
 KeywordModifier
 Whitespace
 VariableName
 Punctuation
 Whitespace
-TypePrimitive
+Type
 Punctuation
 NewLine
 Punctuation
+NewLine

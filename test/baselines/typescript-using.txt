@@ -535,7 +535,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -801,7 +801,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Punctuation
 VariableName

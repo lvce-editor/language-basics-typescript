@@ -422,7 +422,7 @@ NewLine
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
@@ -460,7 +460,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 VariableName
 Punctuation
