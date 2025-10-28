@@ -22,9 +22,9 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-Class
+Function
 Punctuation
 Punctuation
 Punctuation

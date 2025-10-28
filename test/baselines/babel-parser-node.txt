@@ -577,7 +577,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -756,7 +756,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation

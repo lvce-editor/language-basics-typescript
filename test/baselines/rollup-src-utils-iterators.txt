@@ -12,7 +12,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Punctuation
 Whitespace
 VariableName

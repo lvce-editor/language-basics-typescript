@@ -4,7 +4,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -29,7 +29,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -50,7 +50,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -105,7 +105,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -134,7 +134,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -166,7 +166,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -200,7 +200,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -234,7 +234,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -271,7 +271,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -317,7 +317,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -377,7 +377,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -400,7 +400,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation
@@ -424,7 +424,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
 Function
 Punctuation

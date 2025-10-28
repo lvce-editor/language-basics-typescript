@@ -2804,9 +2804,9 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Whitespace
