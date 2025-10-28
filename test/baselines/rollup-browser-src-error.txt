@@ -21,7 +21,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Function
+Type
 Whitespace
 Punctuation
 Whitespace

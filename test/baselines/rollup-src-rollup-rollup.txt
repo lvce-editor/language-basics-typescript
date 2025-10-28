@@ -398,7 +398,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Keyword
 Whitespace
@@ -435,7 +435,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-KeywordModifier
+VariableName
 Whitespace
 Keyword
 Whitespace
@@ -2804,9 +2804,9 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Function
+VariableName
 Punctuation
 VariableName
 Whitespace

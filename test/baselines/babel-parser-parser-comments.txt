@@ -80,7 +80,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace
@@ -101,7 +101,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 NewLine
 Whitespace
@@ -117,7 +117,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 NewLine
 Whitespace
@@ -135,7 +135,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-Type
+VariableName
 Punctuation
 Punctuation
 NewLine
@@ -152,11 +152,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -172,11 +172,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -192,11 +192,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Punctuation
 NewLine
 Punctuation
@@ -397,7 +397,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
 Function
 Punctuation
@@ -658,7 +658,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Keyword
 Whitespace

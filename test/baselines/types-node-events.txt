@@ -1261,9 +1261,9 @@ NewLine
 Whitespace
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -1279,12 +1279,13 @@ NewLine
 Whitespace
 VariableName
 Punctuation
+Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Punctuation
 NewLine
 Whitespace

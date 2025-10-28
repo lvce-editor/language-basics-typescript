@@ -7,9 +7,9 @@ NewLine
 Whitespace
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Punctuation

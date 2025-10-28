@@ -45,6 +45,7 @@ const State = {
   AfterKeywordTypeOf: 42,
   InsideObject: 43,
   InsideImportStructure: 44,
+  AfterKeywordExport: 45,
 }
 
 /**
@@ -140,6 +141,7 @@ const RE_TYPE_PRIMITIVE =
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
+const RE_KEYWORD_CONST_LET = /^(?:const|let)/
 const RE_KEYWORD_LET = /^(?:let)/
 const RE_KEYWORD_ENUM = /^(?:enum)/
 const RE_KEYWORD_CLASS = /^(?:class)/
@@ -246,9 +248,12 @@ export const tokenizeLine = (line, lineState) => {
               state = State.AfterKeywordImport
               break
             case 'export':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordExport
+              break
             case 'from':
               token = TokenType.KeywordImport
-              state = State.TopLevelContent
+              state = State.AfterKeywordImport
               break
             case 'as':
             case 'break':
@@ -1719,6 +1724,26 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideObject
         } else {
           throw new Error('no')
+        }
+        break
+      case State.AfterKeywordExport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordExport
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_KEYWORD_CONST_LET))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordDeclare
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.KeywordControl
+          state = State.BeforeType
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
+        } else {
+          throw new Error(`no`)
         }
         break
       default:

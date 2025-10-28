@@ -1,8 +1,8 @@
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Function
+VariableName
 Punctuation
 VariableName
 Whitespace
