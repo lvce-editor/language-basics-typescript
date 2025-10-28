@@ -256,7 +256,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Punctuation
 VariableName
