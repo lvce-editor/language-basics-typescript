@@ -1914,7 +1914,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -1952,7 +1952,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace

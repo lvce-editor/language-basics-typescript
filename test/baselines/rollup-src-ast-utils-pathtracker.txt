@@ -87,7 +87,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -103,7 +103,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -119,7 +119,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -135,7 +135,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -210,7 +210,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type
@@ -225,7 +225,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type
@@ -256,7 +256,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type
@@ -272,7 +272,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type
@@ -732,7 +732,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace

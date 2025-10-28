@@ -19,7 +19,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+Function
 Whitespace
 Punctuation
 Whitespace

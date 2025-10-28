@@ -1017,7 +1017,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type

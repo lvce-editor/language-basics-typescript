@@ -233,7 +233,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -244,7 +244,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -255,7 +255,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -266,8 +266,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Keyword
-Type
+VariableName
 Punctuation
 Whitespace
 Punctuation
@@ -425,7 +424,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Punctuation
