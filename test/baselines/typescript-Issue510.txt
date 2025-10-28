@@ -6,7 +6,7 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace
@@ -96,7 +96,7 @@ NewLine
 Whitespace
 Keyword
 Whitespace
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace

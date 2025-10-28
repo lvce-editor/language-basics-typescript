@@ -9,7 +9,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-Numeric
+Function
 Punctuation
 Punctuation
 Whitespace

@@ -36,12 +36,22 @@ NewLine
 Whitespace
 VariableName
 Punctuation
+<<<<<<< HEAD
 Whitespace
 TypePrimitive
 Whitespace
 Punctuation
 Whitespace
 TypePrimitive
+=======
+Punctuation
+Whitespace
+VariableName
+Whitespace
+Punctuation
+Whitespace
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Punctuation

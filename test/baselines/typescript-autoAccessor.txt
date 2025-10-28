@@ -5,7 +5,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+StorageModifier
 Whitespace
 VariableName
 Punctuation
@@ -14,7 +14,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-VariableName
+StorageModifier
 Whitespace
 VariableName
 Whitespace
@@ -26,7 +26,7 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -35,9 +35,9 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Whitespace

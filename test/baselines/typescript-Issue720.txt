@@ -44,7 +44,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace

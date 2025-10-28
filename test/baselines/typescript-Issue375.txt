@@ -8,7 +8,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 KeywordModifier
 Whitespace
@@ -107,7 +107,7 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
@@ -117,13 +117,13 @@ NewLine
 Whitespace
 KeywordNew
 Whitespace
-Class
+Function
 Punctuation
 Punctuation
 String
 Punctuation
 Punctuation
-Text
+Punctuation
 NewLine
 Whitespace
 Punctuation

@@ -12,7 +12,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -43,7 +43,13 @@ KeywordReturn
 Whitespace
 Punctuation
 VariableName
-Regex
+Punctuation
+Numeric
+Punctuation
+Punctuation
+Function
+Punctuation
+Punctuation
 Punctuation
 Function
 Punctuation

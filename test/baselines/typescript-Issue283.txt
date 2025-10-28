@@ -5,7 +5,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -25,7 +25,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation
@@ -42,7 +42,7 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace
@@ -374,11 +374,11 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace

@@ -42,9 +42,9 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

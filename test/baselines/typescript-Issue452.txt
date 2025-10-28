@@ -12,7 +12,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Punctuation
@@ -31,6 +31,16 @@ NewLine
 Text
 NewLine
 Whitespace
+<<<<<<< HEAD
+=======
+LanguageConstant
+NewLine
+Punctuation
+Whitespace
+Punctuation
+NewLine
+Whitespace
+>>>>>>> origin/main
 Comment
 Comment
 NewLine

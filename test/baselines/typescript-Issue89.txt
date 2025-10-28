@@ -4,7 +4,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Comment
 Comment
@@ -37,7 +37,7 @@ Comment
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Comment
 Comment
@@ -57,7 +57,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Comment
 Comment
@@ -86,7 +86,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Whitespace

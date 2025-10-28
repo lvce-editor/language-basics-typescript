@@ -81,7 +81,7 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace
@@ -100,7 +100,15 @@ NewLine
 Whitespace
 Comment
 NewLine
-Comment
+Whitespace
+Keyword
+Whitespace
+VariableName
+Whitespace
+Punctuation
+Whitespace
+Numeric
+Punctuation
 NewLine
 Whitespace
 Keyword

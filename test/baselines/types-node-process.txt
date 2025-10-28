@@ -13,7 +13,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -252,7 +252,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -263,7 +267,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -274,7 +282,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -1503,7 +1515,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -1527,7 +1543,11 @@ Class
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -1548,7 +1568,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -1824,7 +1844,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1858,7 +1880,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1906,7 +1930,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
@@ -1920,12 +1946,12 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace
@@ -2823,7 +2849,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -3499,7 +3525,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -3539,7 +3565,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -3839,7 +3865,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -4100,7 +4126,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -4134,7 +4160,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -4143,7 +4169,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -4202,7 +4228,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -4395,7 +4421,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -4556,7 +4582,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -4574,7 +4600,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -4610,7 +4636,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -4686,7 +4712,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -4745,7 +4771,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -4896,7 +4922,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -4963,31 +4989,9 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
-Punctuation
-Whitespace
-VariableName
-Punctuation
-NewLine
-Whitespace
-Comment
-Comment
-NewLine
-Comment
-NewLine
-Comment
-NewLine
-Comment
-NewLine
-Comment
-NewLine
-Comment
-Comment
-NewLine
-Whitespace
-VariableName
 Punctuation
 Whitespace
 VariableName
@@ -4996,10 +5000,32 @@ NewLine
 Whitespace
 Comment
 Comment
+NewLine
+Comment
+NewLine
+Comment
+NewLine
+Comment
+NewLine
+Comment
+NewLine
+Comment
 Comment
 NewLine
 Whitespace
 VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+NewLine
+Whitespace
+Comment
+Comment
+Comment
+NewLine
+Whitespace
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5020,7 +5046,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5041,7 +5067,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5062,7 +5088,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5083,7 +5109,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5104,7 +5130,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5125,7 +5151,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5146,7 +5172,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5167,7 +5193,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5188,7 +5214,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5207,28 +5233,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
-Punctuation
-VariableName
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Punctuation
-Whitespace
-KeywordThis
-Punctuation
-NewLine
-Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5249,7 +5254,28 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
+Function
+Punctuation
 VariableName
+Punctuation
+Whitespace
+Punctuation
+String
+Punctuation
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Punctuation
+Whitespace
+KeywordThis
+Punctuation
+NewLine
+Whitespace
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5270,7 +5296,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5285,7 +5311,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5306,7 +5332,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5330,7 +5356,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5351,7 +5377,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5372,7 +5398,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5402,7 +5428,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5423,7 +5449,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5450,7 +5476,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5470,7 +5496,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5487,7 +5513,7 @@ Type
 Text
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5508,7 +5534,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5529,7 +5555,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5550,7 +5576,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5571,7 +5597,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5592,7 +5618,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5613,7 +5639,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5634,7 +5660,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5655,7 +5681,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5676,7 +5702,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5697,7 +5723,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5716,7 +5742,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5737,7 +5763,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5758,7 +5784,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5796,7 +5822,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5817,7 +5843,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5838,7 +5864,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5859,7 +5885,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5880,7 +5906,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5901,7 +5927,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5922,7 +5948,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5943,7 +5969,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5964,7 +5990,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -5985,7 +6011,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6004,7 +6030,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6025,7 +6051,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6046,7 +6072,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6084,7 +6110,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6105,7 +6131,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6126,7 +6152,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6147,7 +6173,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6168,7 +6194,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6189,7 +6215,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6210,7 +6236,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6231,7 +6257,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6252,7 +6278,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6273,7 +6299,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6292,28 +6318,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
-Punctuation
-VariableName
-Punctuation
-Whitespace
-Punctuation
-String
-Punctuation
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Punctuation
-Whitespace
-KeywordThis
-Punctuation
-NewLine
-Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6334,7 +6339,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6355,7 +6360,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6376,7 +6381,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6397,7 +6402,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6418,7 +6423,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6439,7 +6444,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6460,7 +6465,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6481,7 +6486,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6502,7 +6507,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6523,26 +6528,7 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
-VariableName
-Punctuation
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Whitespace
-VariableName
-Punctuation
-Punctuation
-Whitespace
-KeywordThis
-Punctuation
-NewLine
-Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6563,7 +6549,26 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
+Function
+Punctuation
 VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Punctuation
+Whitespace
+KeywordThis
+Punctuation
+NewLine
+Whitespace
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6584,7 +6589,28 @@ KeywordThis
 Punctuation
 NewLine
 Whitespace
+Function
+Punctuation
 VariableName
+Punctuation
+Whitespace
+Punctuation
+String
+Punctuation
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Punctuation
+Whitespace
+KeywordThis
+Punctuation
+NewLine
+Whitespace
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6601,7 +6627,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6618,7 +6644,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6635,7 +6661,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6652,7 +6678,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6669,7 +6695,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6686,7 +6712,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6703,7 +6729,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6720,7 +6746,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6737,7 +6763,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6752,7 +6778,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6769,7 +6795,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -6821,7 +6847,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String

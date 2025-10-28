@@ -17,7 +17,7 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -148,10 +148,10 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 Whitespace
 Punctuation
@@ -422,7 +422,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace
@@ -444,7 +444,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 NewLine
 Whitespace

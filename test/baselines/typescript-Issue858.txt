@@ -53,14 +53,14 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 Punctuation
 Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 LanguageConstant
 Whitespace
@@ -72,7 +72,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+LanguageConstant
 Punctuation
 Punctuation
 NewLine
@@ -82,7 +82,7 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Whitespace
@@ -97,9 +97,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordOperator
 Whitespace
-Type
+VariableName
 Whitespace
 Text
 NewLine
@@ -135,7 +135,7 @@ NewLine
 Whitespace
 VariableName
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation

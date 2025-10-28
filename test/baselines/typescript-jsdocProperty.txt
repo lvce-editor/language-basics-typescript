@@ -86,7 +86,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 VariableName
 Punctuation

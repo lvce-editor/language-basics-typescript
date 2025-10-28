@@ -17,7 +17,7 @@ Whitespace
 TypePrimitive
 NewLine
 Whitespace
-Function
+Keyword
 Punctuation
 KeywordModifier
 Whitespace

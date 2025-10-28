@@ -15,7 +15,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -50,7 +50,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -248,7 +248,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -268,7 +272,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -288,7 +296,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -308,7 +320,11 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -716,7 +732,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -812,7 +828,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -847,7 +863,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String
@@ -882,7 +898,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String

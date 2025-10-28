@@ -100,12 +100,16 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
+<<<<<<< HEAD
 TypePrimitive
 Punctuation
 Whitespace
 Punctuation
 Whitespace
 TypePrimitive
+=======
+LanguageConstant
+>>>>>>> origin/main
 Punctuation
 NewLine
 Whitespace
@@ -414,9 +418,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordOperator
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 Whitespace
@@ -434,9 +438,9 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordOperator
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 Whitespace

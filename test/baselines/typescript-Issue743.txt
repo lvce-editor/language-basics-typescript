@@ -17,7 +17,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace
@@ -42,7 +42,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordModifier
 Whitespace
 Punctuation
 Whitespace

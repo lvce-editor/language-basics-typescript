@@ -32,9 +32,9 @@ NewLine
 Comment
 Comment
 NewLine
-VariableName
+KeywordDeclare
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 String
@@ -43,7 +43,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 VariableName
 Whitespace
@@ -51,7 +51,11 @@ Punctuation
 Whitespace
 Function
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Comment
@@ -73,7 +77,7 @@ Keyword
 Whitespace
 Class
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
 Class
 Whitespace
@@ -132,7 +136,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -170,7 +174,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 Punctuation
@@ -313,7 +317,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation
@@ -345,7 +349,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation

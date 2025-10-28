@@ -8,7 +8,7 @@ Whitespace
 Text
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 VariableName
 Punctuation

@@ -19,7 +19,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
@@ -42,7 +42,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -62,7 +62,7 @@ Punctuation
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
@@ -82,13 +82,10 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+KeywordOperator
 Whitespace
-Type
-Punctuation
 VariableName
-Whitespace
-Punctuation
+Text
 NewLine
 Whitespace
 KeywordOperator
@@ -145,7 +142,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Punctuation
 String

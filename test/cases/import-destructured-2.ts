@@ -1,0 +1,1 @@
+import gensync, { type Handler } from "gensync";

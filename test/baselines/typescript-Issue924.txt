@@ -1,7 +1,7 @@
 Comment
 Comment
 NewLine
-VariableName
+Function
 Punctuation
 Punctuation
 VariableName
