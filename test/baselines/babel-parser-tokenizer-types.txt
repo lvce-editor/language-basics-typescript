@@ -347,6 +347,14 @@ VariableName
 Punctuation
 Whitespace
 Class
+Punctuation
+Type
+Punctuation
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+TypePrimitive
 Text
 NewLine
 Whitespace
@@ -379,7 +387,9 @@ Punctuation
 Whitespace
 Punctuation
 Punctuation
-Text
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 KeywordThis

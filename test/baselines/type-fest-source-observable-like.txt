@@ -80,9 +80,9 @@ Comment
 NewLine
 Comment
 NewLine
-Keyword
+VariableName
 Whitespace
-Type
+VariableName
 Text
 NewLine
 Comment

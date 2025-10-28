@@ -11,13 +11,5 @@ Whitespace
 Class
 Punctuation
 Whitespace
-VariableName
-Punctuation
-Whitespace
-Type
-Punctuation
-Whitespace
-Punctuation
-Whitespace
-TypePrimitive
+Text
 NewLine

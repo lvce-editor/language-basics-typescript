@@ -691,11 +691,11 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 VariableName
 Punctuation
