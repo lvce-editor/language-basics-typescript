@@ -349,7 +349,7 @@ Comment
 Comment
 NewLine
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Punctuation
@@ -359,9 +359,9 @@ Punctuation
 NewLine
 Punctuation
 NewLine
-KeywordDeclare
+VariableName
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 String
@@ -370,11 +370,11 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordImport
+VariableName
 Whitespace
 Punctuation
 Whitespace
-KeywordImport
+VariableName
 Whitespace
 Punctuation
 String

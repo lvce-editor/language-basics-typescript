@@ -11,7 +11,10 @@ Punctuation
 Punctuation
 Whitespace
 Class
-Text
+Punctuation
+TypePrimitive
+Punctuation
+Punctuation
 NewLine
 Punctuation
 NewLine

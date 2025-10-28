@@ -19,15 +19,13 @@ NewLine
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
 Punctuation
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
