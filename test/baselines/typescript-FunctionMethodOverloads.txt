@@ -564,11 +564,11 @@ NewLine
 Punctuation
 NewLine
 NewLine
-KeywordModifier
+VariableName
 Whitespace
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -580,10 +580,6 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-KeywordModifier
-Whitespace
-Function
-Punctuation
 Punctuation
 NewLine
 Punctuation

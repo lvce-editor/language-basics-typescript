@@ -43,14 +43,10 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Keyword
+VariableName
 Whitespace
-Type
-Punctuation
-Type
-Punctuation
-Whitespace
-Punctuation
+VariableName
+Text
 NewLine
 Whitespace
 Function
@@ -58,7 +54,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
 Punctuation
 Whitespace
@@ -78,7 +74,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-TypePrimitive
+VariableName
 Punctuation
 NewLine
 Punctuation

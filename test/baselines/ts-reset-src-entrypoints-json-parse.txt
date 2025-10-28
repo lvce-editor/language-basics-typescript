@@ -62,7 +62,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

@@ -532,7 +532,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
-          state = stack.pop() || State.AfterType
+          state = State.AfterType
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
           stack.push(state)
           token = TokenType.KeywordOperator
@@ -1291,6 +1291,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_METHOD_NAME))) {
           token = TokenType.Function
           state = State.AfterMethodName
+          stack.push(State.InsideTypeObject)
         } else if ((next = part.match(RE_KEYWORD_READONLY))) {
           token = TokenType.KeywordModifier
           state = State.InsideTypeObject
@@ -1607,7 +1608,6 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.AfterKeywordImport
         } else {
-          console.log({ part })
           throw new Error('no')
         }
         break
