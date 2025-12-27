@@ -249,9 +249,12 @@ export const tokenizeLine = (line, lineState) => {
               state = State.AfterKeywordImport
               break
             case 'export':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordExport
+              break
             case 'from':
               token = TokenType.KeywordImport
-              state = State.TopLevelContent
+              state = State.AfterKeywordImport
               break
             case 'as':
             case 'break':

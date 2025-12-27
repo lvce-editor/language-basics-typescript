@@ -4,13 +4,13 @@ Comment
 NewLine
 KeywordImport
 Whitespace
+VariableName
+Whitespace
+VariableName
+Whitespace
 Keyword
 Whitespace
-Class
-Whitespace
-KeywordModifier
-Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -21,7 +21,7 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+KeywordModifier
 Whitespace
 Function
 Whitespace

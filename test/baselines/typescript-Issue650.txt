@@ -4,9 +4,9 @@ Comment
 Comment
 Comment
 Whitespace
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Punctuation
 NewLine
 Punctuation

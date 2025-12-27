@@ -128,13 +128,13 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
-Text
+Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace

@@ -231,15 +231,15 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace
 Punctuation
 Whitespace
-Type
+VariableName
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 NewLine
@@ -309,7 +309,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Punctuation
 VariableName

@@ -60,7 +60,7 @@ Comment
 NewLine
 KeywordImport
 Whitespace
-Keyword
+KeywordControl
 Whitespace
 Type
 Whitespace
@@ -70,11 +70,7 @@ Punctuation
 Punctuation
 VariableName
 Punctuation
-Punctuation
-Whitespace
-Type
 Text
-Punctuation
 NewLine
 NewLine
 Comment
