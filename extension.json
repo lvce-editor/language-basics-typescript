@@ -5,15 +5,22 @@
   "languages": [
     {
       "id": "typescript",
-      "extensions": [".ts", ".mts", ".cts"],
+      "extensions": [
+        ".ts",
+        ".mts",
+        ".cts"
+      ],
       "tokenize": "src/tokenizeTypeScript.js",
-      "configuration":"languageConfiguration.json"
+      "configuration": "languageConfiguration.json"
     },
     {
       "id": "typescriptreact",
-      "extensions": [".tsx"],
+      "extensions": [
+        ".tsx"
+      ],
       "tokenize": "src/tokenizeTypeScript.js",
-      "configuration":"languageConfiguration.json"
+      "configuration": "languageConfiguration.json"
     }
-  ]
+  ],
+  "repository": "https://github.com/lvce-editor/language-basics-typescript"
 }
