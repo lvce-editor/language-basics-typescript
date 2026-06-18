@@ -135,9 +135,9 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine

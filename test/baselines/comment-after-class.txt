@@ -1,8 +1,8 @@
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine
@@ -16,7 +16,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-TypePrimitive
+VariableName
 Punctuation
 Whitespace
 Punctuation

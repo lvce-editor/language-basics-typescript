@@ -41,7 +41,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
 Function
 Whitespace
@@ -70,7 +70,7 @@ NewLine
 NewLine
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
 VariableName
 Punctuation

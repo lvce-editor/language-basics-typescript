@@ -1,13 +1,13 @@
 KeywordImport
 Whitespace
-Keyword
+VariableName
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 NewLine
 Whitespace
-StorageModifier
+KeywordModifier
 Whitespace
 Function
 Punctuation

@@ -77,7 +77,7 @@ NewLine
 Whitespace
 KeywordImport
 Whitespace
-KeywordModifier
+VariableName
 Whitespace
 Keyword
 Whitespace
