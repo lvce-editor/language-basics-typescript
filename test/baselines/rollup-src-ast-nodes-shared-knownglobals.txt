@@ -255,9 +255,9 @@ NewLine
 Punctuation
 NewLine
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

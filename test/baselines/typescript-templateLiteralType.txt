@@ -1066,11 +1066,12 @@ Punctuation
 Punctuation
 Whitespace
 Comment
+Comment
 NewLine
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Text
 NewLine
 Keyword
