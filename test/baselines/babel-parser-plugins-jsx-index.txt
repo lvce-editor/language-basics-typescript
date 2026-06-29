@@ -717,11 +717,11 @@ NewLine
 Punctuation
 NewLine
 NewLine
-VariableName
+KeywordImport
 Whitespace
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Text
 NewLine
 Whitespace

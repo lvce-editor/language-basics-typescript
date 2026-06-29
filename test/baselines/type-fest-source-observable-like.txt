@@ -6,7 +6,6 @@ Punctuation
 NewLine
 Whitespace
 Comment
-Comment
 NewLine
 Whitespace
 Keyword
@@ -80,9 +79,9 @@ Comment
 NewLine
 Comment
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Text
 NewLine
 Comment

@@ -46,6 +46,9 @@ const State = {
   InsideObject: 43,
   InsideImportStructure: 44,
   AfterKeywordExport: 45,
+  AfterDeclareGlobal: 46,
+  InsideDeclareGlobal: 47,
+  AfterAmbientFunctionKeyword: 48,
 }
 
 /**
@@ -142,6 +145,7 @@ const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
 const RE_KEYWORD_CONST_LET = /^(?:const|let)/
+const RE_KEYWORD_VARIABLE_DECLARATION = /^(?:const|let|var)\b/
 const RE_KEYWORD_LET = /^(?:let)/
 const RE_KEYWORD_ENUM = /^(?:enum)/
 const RE_KEYWORD_CLASS = /^(?:class)/
@@ -202,6 +206,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
 const RE_KEYWORD_FROM = /^from\b/
+const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
@@ -388,7 +393,7 @@ export const tokenizeLine = (line, lineState) => {
           }
           if (
             next[0] === '{' &&
-            line.slice(0, index).match(RE_ENDS_WITH_EQUAL)
+            RE_ENDS_WITH_EQUAL.test(line.slice(0, index))
           ) {
             state = State.InsideObject
           }
@@ -970,11 +975,96 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_FUNCTION))) {
           token = TokenType.Keyword
           state = State.AfterKeywordFunction
+        } else if ((next = part.match(RE_KEYWORD_GLOBAL))) {
+          token = TokenType.Type
+          state = State.AfterDeclareGlobal
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterVariableName
         } else {
           part
+          throw new Error('no')
+        }
+        break
+
+      case State.AfterDeclareGlobal:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterDeclareGlobal
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideDeclareGlobal
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+
+      case State.InsideDeclareGlobal:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideDeclareGlobal
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.InsideDeclareGlobal
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_KEYWORD_INTERFACE))) {
+          stack.push(State.InsideDeclareGlobal)
+          token = TokenType.Keyword
+          state = State.AfterKeywordInterface
+        } else if ((next = part.match(RE_KEYWORD_FUNCTION))) {
+          token = TokenType.Keyword
+          state = State.AfterAmbientFunctionKeyword
+        } else if ((next = part.match(RE_KEYWORD_VARIABLE_DECLARATION))) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordVariableDeclaration
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          stack.push(State.InsideDeclareGlobal)
+          token = TokenType.Keyword
+          state = State.AfterKeywordTypeDeclaration
+        } else if ((next = part.match(RE_KEYWORD_ENUM))) {
+          stack.push(State.InsideDeclareGlobal)
+          token = TokenType.Keyword
+          state = State.AfterKeywordEnum
+        } else if ((next = part.match(RE_KEYWORD_CLASS))) {
+          stack.push(State.InsideDeclareGlobal)
+          token = TokenType.Keyword
+          state = State.AfterKeywordClass
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          token = TokenType.Punctuation
+          state = State.InsideDeclareGlobal
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideDeclareGlobal
+        } else {
+          part
+          throw new Error('no')
+        }
+        break
+
+      case State.AfterAmbientFunctionKeyword:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterAmbientFunctionKeyword
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          stack.push(State.InsideDeclareGlobal)
+          token = TokenType.FunctionName
+          state = State.AfterMethodName
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else {
           throw new Error('no')
         }
         break
@@ -1429,7 +1519,6 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
-          stack.push(State.InsideTypeObject)
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterMethodParameters
