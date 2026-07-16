@@ -686,6 +686,8 @@ Type
 Punctuation
 Whitespace
 Text
+Type
+Text
 NewLine
 Whitespace
 Keyword
