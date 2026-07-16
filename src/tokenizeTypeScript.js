@@ -142,8 +142,9 @@ const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
 const RE_COLON_OPTIONAL = /^\??\:/
-const RE_TYPE_PRIMITIVE =
-  /^(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false|unknown)\b/
+const TYPE_PRIMITIVE_PATTERN =
+  '(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false|unknown)'
+const RE_TYPE_PRIMITIVE = new RegExp(`^${TYPE_PRIMITIVE_PATTERN}\\b`)
 
 const RE_EQUAL = /^=/
 const RE_SEMICOLON = /^;/
@@ -295,6 +296,44 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
   return highlightedTokens
 }
 
+const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
+const SIMPLE_TYPE_PATTERN = `${IDENTIFIER_PATTERN}(?:\\[\\])*`
+const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
+const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
+  `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
+  'g'
+)
+const RE_PARAMETER_PRIMITIVE_TYPE = new RegExp(
+  `:\\s*(${TYPE_PRIMITIVE_PATTERN})\\b`,
+  'g'
+)
+
+const getArrowFunctionPrimitiveTypeOffsets = (line) => {
+  const offsets = new Set()
+  if (!line.includes(':') || !line.includes('=>')) {
+    return offsets
+  }
+  for (const match of line.matchAll(RE_SIMPLE_ARROW_FUNCTION)) {
+    const parameters = match[1]
+    const parametersOffset = match.index + match[0].indexOf(parameters)
+    for (const parameterMatch of parameters.matchAll(
+      RE_PARAMETER_PRIMITIVE_TYPE
+    )) {
+      const type = parameterMatch[1]
+      offsets.add(
+        parametersOffset +
+          parameterMatch.index +
+          parameterMatch[0].lastIndexOf(type)
+      )
+    }
+    const returnType = match[2]
+    if (returnType && RE_TYPE_PRIMITIVE.test(returnType)) {
+      offsets.add(match.index + match[0].lastIndexOf(returnType))
+    }
+  }
+  return offsets
+}
+
 export const hasArrayReturn = true
 /**
  *
@@ -309,12 +348,20 @@ export const tokenizeLine = (line, lineState) => {
   let token = TokenType.None
   let state = lineState.state
   let stack = lineState.stack
+  const arrowFunctionPrimitiveTypeOffsets =
+    getArrowFunctionPrimitiveTypeOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
+          state = State.TopLevelContent
+        } else if (
+          arrowFunctionPrimitiveTypeOffsets.has(index) &&
+          (next = part.match(RE_TYPE_PRIMITIVE))
+        ) {
+          token = TokenType.TypePrimitive
           state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
