@@ -81,7 +81,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 VariableName
 Punctuation
@@ -301,7 +301,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 VariableName
 Punctuation
@@ -619,7 +619,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+Function
 Punctuation
 Punctuation
 Whitespace

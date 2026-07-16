@@ -342,9 +342,10 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Keyword
+VariableName
 Whitespace
-Text
+Punctuation
+Punctuation
 NewLine
 Punctuation
 Punctuation

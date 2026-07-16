@@ -908,7 +908,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-KeywordOperator
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -984,7 +984,7 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-KeywordControl
+Keyword
 Whitespace
 Punctuation
 Punctuation
@@ -1011,7 +1011,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-KeywordReturn
+Keyword
 Whitespace
 VariableName
 Punctuation
