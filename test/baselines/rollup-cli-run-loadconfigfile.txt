@@ -624,7 +624,7 @@ Class
 Punctuation
 Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Whitespace
 Punctuation
 Punctuation
