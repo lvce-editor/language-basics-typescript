@@ -12,4 +12,6 @@ Class
 Punctuation
 Whitespace
 Text
+Type
+Text
 NewLine

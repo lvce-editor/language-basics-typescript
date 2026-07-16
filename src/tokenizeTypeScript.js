@@ -222,6 +222,78 @@ const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_ENDS_WITH_EQUAL = /\=\s+$/
+const RE_NAMED_ARROW_FUNCTION_TYPE = /:\s*([A-Z_\$][\w\$]*)/g
+const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
+  /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
+const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
+  /^\s*export\s+const\s+\w+\s*=\s*\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*=>/
+const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
+  /^\s*return\s+\(\w+\s*:\s*[A-Z_\$][\w\$]*\s*,\s*\{[^}]+\}\s*:\s*\{.*=>.*\}\)\s*:/
+
+const highlightNamedArrowFunctionTypes = (line, tokens) => {
+  if (
+    !RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS.test(line) &&
+    !RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER.test(line) &&
+    !RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN.test(line)
+  ) {
+    return tokens
+  }
+  const typeRanges = []
+  for (const match of line.matchAll(RE_NAMED_ARROW_FUNCTION_TYPE)) {
+    const typeName = match[1]
+    const start = match.index + match[0].lastIndexOf(typeName)
+    typeRanges.push({
+      end: start + typeName.length,
+      start,
+    })
+  }
+  if (typeRanges.length === 0) {
+    return tokens
+  }
+  const highlightedTokens = []
+  let offset = 0
+  let rangeIndex = 0
+  for (let index = 0; index < tokens.length; index += 2) {
+    const token = tokens[index]
+    const length = tokens[index + 1]
+    const end = offset + length
+    let tokenOffset = offset
+    while (
+      rangeIndex < typeRanges.length &&
+      typeRanges[rangeIndex].end <= tokenOffset
+    ) {
+      rangeIndex++
+    }
+    while (
+      rangeIndex < typeRanges.length &&
+      typeRanges[rangeIndex].start < end
+    ) {
+      const range = typeRanges[rangeIndex]
+      if (range.start > tokenOffset) {
+        highlightedTokens.push(token, range.start - tokenOffset)
+      }
+      const highlightedStart = Math.max(range.start, tokenOffset)
+      const highlightedEnd = Math.min(range.end, end)
+      highlightedTokens.push(
+        token === TokenType.Text || token === TokenType.VariableName
+          ? TokenType.Type
+          : token,
+        highlightedEnd - highlightedStart
+      )
+      tokenOffset = highlightedEnd
+      if (range.end <= end) {
+        rangeIndex++
+      } else {
+        break
+      }
+    }
+    if (tokenOffset < end) {
+      highlightedTokens.push(token, end - tokenOffset)
+    }
+    offset = end
+  }
+  return highlightedTokens
+}
 
 export const hasArrayReturn = true
 /**
@@ -2047,6 +2119,7 @@ export const tokenizeLine = (line, lineState) => {
   } else if (state === State.InsideLineComment) {
     state = stack.pop() || State.TopLevelContent
   }
+  tokens = highlightNamedArrowFunctionTypes(line, tokens)
   return {
     state,
     stack,
