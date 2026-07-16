@@ -49,6 +49,10 @@ const State = {
   AfterDeclareGlobal: 46,
   InsideDeclareGlobal: 47,
   AfterAmbientFunctionKeyword: 48,
+  AfterKeywordReturn: 49,
+  InsideReturnArray: 50,
+  InsideReturnObject: 51,
+  InsideReturnObjectValue: 52,
 }
 
 /**
@@ -286,7 +290,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'return':
               token = TokenType.KeywordReturn
-              state = State.TopLevelContent
+              state = State.AfterKeywordReturn
               break
             case 'new':
               token = TokenType.KeywordNew
@@ -1564,7 +1568,7 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideBacktickString:
         if ((next = part.match(RE_QUOTE_BACKTICK))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_STRING_BACKTICK_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideBacktickString
@@ -1809,6 +1813,184 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.InsideObject
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterKeywordReturn:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordReturn
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          stack.push(State.TopLevelContent)
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_SQUARE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnArray
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
+        } else {
+          state = State.TopLevelContent
+          continue
+        }
+        break
+      case State.InsideReturnArray:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideReturnArray
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          stack.push(State.InsideReturnArray)
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_SQUARE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnArray
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
+        } else {
+          state = State.TopLevelContent
+          continue
+        }
+        break
+      case State.InsideReturnObject:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_KEYWORD_ASYNC))) {
+          token = TokenType.KeywordModifier
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.FunctionName
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_COLON))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          stack.push(state)
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
+          token = TokenType.Text
+          state = State.InsideReturnObject
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideReturnObjectValue:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_QUOTE_BACKTICK))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideBacktickString
+        } else if ((next = part.match(RE_KEYWORD))) {
+          switch (next[0]) {
+            case 'true':
+            case 'false':
+            case 'null':
+            case 'undefined':
+              token = TokenType.LanguageConstant
+              state = State.InsideReturnObjectValue
+              break
+            case 'new':
+              token = TokenType.KeywordNew
+              state = State.AfterKeywordNew
+              break
+            case 'this':
+              token = TokenType.KeywordThis
+              state = State.InsideReturnObjectValue
+              break
+            default:
+              token = TokenType.Keyword
+              state = State.InsideReturnObjectValue
+              break
+          }
+        } else if ((next = part.match(RE_BUILTIN_CLASS))) {
+          token = TokenType.Class
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.Function
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_NUMERIC_2))) {
+          token = TokenType.Numeric
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_DOT))) {
+          stack.push(State.InsideReturnObjectValue)
+          token = TokenType.Punctuation
+          state = State.AfterPropertyDot
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_ANGLE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          stack.push(State.InsideReturnObjectValue)
+          state = State.InsideReturnObject
+        } else if ((next = part.match(RE_CURLY_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_OPERATOR))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
         } else {
           throw new Error('no')
         }

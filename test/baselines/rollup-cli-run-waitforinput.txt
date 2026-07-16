@@ -136,7 +136,7 @@ TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-TypePrimitive
+LanguageConstant
 Whitespace
 Punctuation
 Whitespace
