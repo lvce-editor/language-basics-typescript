@@ -53,6 +53,7 @@ const State = {
   InsideReturnArray: 50,
   InsideReturnObject: 51,
   InsideReturnObjectValue: 52,
+  BeforeArrowFunctionParameters: 53,
 }
 
 /**
@@ -192,6 +193,10 @@ const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
+const RE_ARROW_FUNCTION_PARAMETERS_START =
+  /(?:^|\s)(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*(?:async\s+)?\($/
+const RE_ARROW_FUNCTION_PARAMETER_NAME =
+  /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?=\??\s*:)/
 
 const RE_NUMERIC_2 =
   /^(?:(?:[0-9][0-9_]*(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)(n)?\B)|(?:(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(n)?\b(?!\.))|(?:0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b)|(?:0(?:b|B)[01][01_]*(n)?\b)|(?:0(?:o|O)?[0-7][0-7_]*(n)?\b))/ // 1.1E+3
@@ -230,6 +235,8 @@ const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
   /^\s*export\s+const\s+\w+\s*=\s*\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*=>/
 const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
   /^\s*return\s+\(\w+\s*:\s*[A-Z_\$][\w\$]*\s*,\s*\{[^}]+\}\s*:\s*\{.*=>.*\}\)\s*:/
+const RE_SIMPLE_TYPE_QUERY =
+  /^\s*type\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*$/
 
 const highlightNamedArrowFunctionTypes = (line, tokens) => {
   if (
@@ -511,6 +518,16 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+          if (
+            next[0] === '(' &&
+            RE_ARROW_FUNCTION_PARAMETERS_START.test(
+              line.slice(0, index + next[0].length)
+            ) &&
+            /^\s*$/.test(line.slice(index + next[0].length))
+          ) {
+            stack.push(State.TopLevelContent)
+            state = State.BeforeArrowFunctionParameters
+          }
           if (next[0] === '.') {
             state = State.AfterPropertyDot
           }
@@ -1530,6 +1547,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+          stack.push(State.InsideTypeObject)
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
@@ -1620,6 +1638,21 @@ export const tokenizeLine = (line, lineState) => {
         } else {
           part
           throw new Error('no')
+        }
+        break
+      case State.BeforeArrowFunctionParameters:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.BeforeArrowFunctionParameters
+        } else if ((next = part.match(RE_ARROW_FUNCTION_PARAMETER_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideMethodParametersAfterVariableName
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterMethodParameters
+        } else {
+          state = stack.pop() || State.TopLevelContent
+          continue
         }
         break
       case State.InsideMethodParametersAfterVariableName:
@@ -2158,10 +2191,19 @@ export const tokenizeLine = (line, lineState) => {
     index += tokenLength
     tokens.push(token, tokenLength)
   }
-  if (state === State.AfterType && stack[0] === State.InsideClass) {
-    state = State.InsideClass
-    stack.pop()
+  if (
+    state === State.AfterType &&
+    (stack.includes(State.InsideClass) ||
+      stack.includes(State.InsideTypeObject))
+  ) {
+    const insideClassIndex = stack.lastIndexOf(State.InsideClass)
+    const insideTypeObjectIndex = stack.lastIndexOf(State.InsideTypeObject)
+    const containerIndex = Math.max(insideClassIndex, insideTypeObjectIndex)
+    state = stack[containerIndex]
+    stack.length = containerIndex
   } else if (state === State.AfterType) {
+    state = State.AfterTypeAfterNewLine
+  } else if (state === State.BeforeType && RE_SIMPLE_TYPE_QUERY.test(line)) {
     state = State.AfterTypeAfterNewLine
   } else if (state === State.InsideLineComment) {
     state = stack.pop() || State.TopLevelContent

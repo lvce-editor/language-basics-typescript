@@ -1451,9 +1451,8 @@ Punctuation
 VariableName
 Punctuation
 Punctuation
-Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

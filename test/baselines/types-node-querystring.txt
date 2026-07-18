@@ -90,14 +90,13 @@ NewLine
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
 Punctuation
 Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
@@ -108,7 +107,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
