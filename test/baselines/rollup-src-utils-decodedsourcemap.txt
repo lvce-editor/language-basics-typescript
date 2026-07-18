@@ -119,7 +119,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 String
@@ -128,7 +128,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

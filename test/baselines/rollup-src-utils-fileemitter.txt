@@ -864,14 +864,14 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
@@ -935,7 +935,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
@@ -1019,7 +1019,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Punctuation
 Whitespace
 Type
