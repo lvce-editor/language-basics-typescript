@@ -5,19 +5,13 @@
   "languages": [
     {
       "id": "typescript",
-      "extensions": [
-        ".ts",
-        ".mts",
-        ".cts"
-      ],
+      "extensions": [".ts", ".mts", ".cts"],
       "tokenize": "src/tokenizeTypeScript.js",
       "configuration": "languageConfiguration.json"
     },
     {
       "id": "typescriptreact",
-      "extensions": [
-        ".tsx"
-      ],
+      "extensions": [".tsx"],
       "tokenize": "src/tokenizeTypeScript.js",
       "configuration": "languageConfiguration.json"
     }
