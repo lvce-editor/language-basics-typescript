@@ -54,6 +54,8 @@ const State = {
   InsideReturnObject: 51,
   InsideReturnObjectValue: 52,
   BeforeArrowFunctionParameters: 53,
+  AfterKeywordPropertyTypeOf: 54,
+  AfterPropertyTypeQuery: 55,
 }
 
 /**
@@ -237,6 +239,8 @@ const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
   /^\s*return\s+\(\w+\s*:\s*[A-Z_\$][\w\$]*\s*,\s*\{[^}]+\}\s*:\s*\{.*=>.*\}\)\s*:/
 const RE_SIMPLE_TYPE_QUERY =
   /^\s*type\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*$/
+const RE_PROPERTY_TYPE_QUERY =
+  /^\s*(?:readonly\s+)?[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\??\s*:\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?:\.[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)+\s*;?\s*$/
 
 const highlightNamedArrowFunctionTypes = (line, tokens) => {
   if (
@@ -684,7 +688,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
           stack.push(state)
           token = TokenType.KeywordOperator
-          state = State.AfterKeywordTypeOf
+          state = RE_PROPERTY_TYPE_QUERY.test(line)
+            ? State.AfterKeywordPropertyTypeOf
+            : State.AfterKeywordTypeOf
         } else if ((next = part.match(RE_KEYWORD_READONLY))) {
           token = TokenType.KeywordModifier
           state = State.BeforeType
@@ -1929,6 +1935,32 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.AfterKeywordPropertyTypeOf:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterKeywordPropertyTypeOf
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterPropertyTypeQuery
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterPropertyTypeQuery:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterPropertyTypeQuery
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.AfterKeywordPropertyTypeOf
+        } else if ((next = part.match(RE_SEMICOLON))) {
+          stack.pop()
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
       case State.InsideObject:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -2203,6 +2235,9 @@ export const tokenizeLine = (line, lineState) => {
     stack.length = containerIndex
   } else if (state === State.AfterType) {
     state = State.AfterTypeAfterNewLine
+  } else if (state === State.AfterPropertyTypeQuery) {
+    stack.pop()
+    state = stack.pop() || State.AfterTypeAfterNewLine
   } else if (state === State.BeforeType && RE_SIMPLE_TYPE_QUERY.test(line)) {
     state = State.AfterTypeAfterNewLine
   } else if (state === State.InsideLineComment) {
