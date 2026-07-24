@@ -122,11 +122,11 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation
