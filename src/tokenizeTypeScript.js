@@ -228,26 +228,26 @@ const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_ENDS_WITH_EQUAL = /\=\s+$/
-const RE_NAMED_ARROW_FUNCTION_TYPE = /:\s*([A-Z_\$][\w\$]*)/g
+const RE_NAMED_ARROW_FUNCTION_TYPE = /(?:\:|\<)\s*([A-Z_\$][\w\$]*)/g
 const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
-  /^\s*export\s+const\s+\w+\s*=\s*\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*=>/
+  /^\s*export\s+const\s+\w+\s*=\s*(?:async\s+)?\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*(?::\s*[A-Z_\$][\w\$]*(?:<[^>]+>)?)?\s*=>/
 const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
   /^\s*return\s+\(\w+\s*:\s*[A-Z_\$][\w\$]*\s*,\s*\{[^}]+\}\s*:\s*\{.*=>.*\}\)\s*:/
 const RE_SIMPLE_TYPE_QUERY =
   /^\s*type\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*$/
 
 const highlightNamedArrowFunctionTypes = (line, tokens) => {
-  if (
-    !RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS.test(line) &&
-    !RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER.test(line) &&
-    !RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN.test(line)
-  ) {
+  const signature =
+    line.match(RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS)?.[0] ||
+    line.match(RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER)?.[0] ||
+    line.match(RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN)?.[0]
+  if (!signature) {
     return tokens
   }
   const typeRanges = []
-  for (const match of line.matchAll(RE_NAMED_ARROW_FUNCTION_TYPE)) {
+  for (const match of signature.matchAll(RE_NAMED_ARROW_FUNCTION_TYPE)) {
     const typeName = match[1]
     const start = match.index + match[0].lastIndexOf(typeName)
     typeRanges.push({
