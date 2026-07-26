@@ -140,6 +140,8 @@ const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-\*]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
+const RE_OBJECT_PROPERTY_QUOTE_SINGLE = /^'(?=(?:\\.|[^'\\])*'\s*:)/
+const RE_OBJECT_PROPERTY_QUOTE_DOUBLE = /^"(?=(?:\\.|[^"\\])*"\s*:)/
 const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
@@ -1965,6 +1967,14 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideObject
+        } else if ((next = part.match(RE_OBJECT_PROPERTY_QUOTE_SINGLE))) {
+          token = TokenType.Punctuation
+          stack.push(state)
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_OBJECT_PROPERTY_QUOTE_DOUBLE))) {
+          token = TokenType.Punctuation
+          stack.push(state)
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_KEYWORD_ASYNC))) {
           token = TokenType.KeywordModifier
           state = State.InsideObject
