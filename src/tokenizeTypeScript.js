@@ -965,7 +965,13 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
           state = State.AfterType
-          stack.push(State.AfterType)
+          if (
+            !isArrowFunctionParameters ||
+            (stack.at(-1) !== State.InsideMethodParameters &&
+              stack.at(-1) !== State.AfterArrowFunctionReturnType)
+          ) {
+            stack.push(State.AfterType)
+          }
         } else if ((next = part.match(RE_SQUARE_CLOSE))) {
           token = TokenType.Punctuation
           state = State.AfterType
