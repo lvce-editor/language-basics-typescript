@@ -759,11 +759,11 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Punctuation
 Whitespace
-Type
-Text
+VariableName
+Punctuation
 NewLine
 Whitespace
 VariableName
