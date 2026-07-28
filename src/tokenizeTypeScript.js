@@ -129,6 +129,7 @@ export const TokenMap = {
 export const initialLineState = {
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
+  objectDepth: 0,
   state: State.TopLevelContent,
   /**
    * @type {any[]}
@@ -142,6 +143,7 @@ const RE_KEYWORD =
 
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
+const RE_OBJECT_PROPERTY_TYPE = /^type(?=\s*:)/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-\*]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
@@ -368,6 +370,7 @@ export const tokenizeLine = (line, lineState) => {
   let token = TokenType.None
   let state = lineState.state
   let stack = lineState.stack
+  let objectDepth = lineState.objectDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
@@ -385,6 +388,12 @@ export const tokenizeLine = (line, lineState) => {
           (next = part.match(RE_TYPE_PRIMITIVE))
         ) {
           token = TokenType.TypePrimitive
+          state = State.TopLevelContent
+        } else if (
+          objectDepth > 0 &&
+          (next = part.match(RE_OBJECT_PROPERTY_TYPE))
+        ) {
+          token = TokenType.VariableName
           state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
@@ -2383,6 +2392,19 @@ export const tokenizeLine = (line, lineState) => {
         state
         throw new Error('no')
     }
+    if (
+      token === TokenType.Punctuation &&
+      next[0] === '{' &&
+      (objectDepth > 0 || state === State.InsideObject)
+    ) {
+      objectDepth++
+    } else if (
+      token === TokenType.Punctuation &&
+      next[0] === '}' &&
+      objectDepth > 0
+    ) {
+      objectDepth--
+    }
     const tokenLength = next[0].length
     index += tokenLength
     tokens.push(token, tokenLength)
@@ -2411,6 +2433,7 @@ export const tokenizeLine = (line, lineState) => {
   return {
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
+    objectDepth,
     state,
     stack,
     tokens,
