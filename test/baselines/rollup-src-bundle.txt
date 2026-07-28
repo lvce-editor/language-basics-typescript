@@ -409,7 +409,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation

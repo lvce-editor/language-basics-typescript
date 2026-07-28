@@ -8,8 +8,8 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-Class
+Type
 Punctuation
 Punctuation
 Punctuation
-Punctuation
+NewLine

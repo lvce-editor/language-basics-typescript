@@ -56,6 +56,7 @@ const State = {
   BeforeArrowFunctionParameters: 53,
   AfterKeywordPropertyTypeOf: 54,
   AfterPropertyTypeQuery: 55,
+  AfterGenericSetCallee: 56,
 }
 
 /**
@@ -225,6 +226,7 @@ const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
   /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|Headers|Response|Request|Buffer|MessagePort|FileHandle|X509Certificate|Blob|HTMLElement|MutationRecord|HTMLVideoElement)\b/
+const RE_SET = /^Set\b/
 
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
@@ -788,6 +790,42 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.InsideTypeExpression
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.InsideGeneric:
+        if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_ANGLE_CLOSE))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_BUILTIN_CLASS))) {
+          token = TokenType.Class
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
+          token = TokenType.TypePrimitive
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.Type
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_VERTICAL_LINE))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else {
           throw new Error('no')
         }
@@ -1906,6 +1944,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_NEW))) {
           token = TokenType.KeywordNew
           state = State.AfterKeywordNew
+        } else if ((next = part.match(RE_SET))) {
+          token = TokenType.Class
+          state = State.AfterGenericSetCallee
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Class
           state = State.TopLevelContent
@@ -1922,6 +1963,28 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.AfterGenericSetCallee:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.AfterGenericSetCallee
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(State.TopLevelContent)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_DOT))) {
+          token = TokenType.Punctuation
+          state = State.AfterPropertyDot
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else {
           throw new Error('no')
         }

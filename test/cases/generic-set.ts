@@ -1,1 +1,1 @@
-const instances = new Set<Object>();
+const instances = new Set<ActiveTodoViewInstance>()
