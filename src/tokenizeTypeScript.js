@@ -57,6 +57,8 @@ const State = {
   AfterKeywordPropertyTypeOf: 54,
   AfterPropertyTypeQuery: 55,
   AfterGenericSetCallee: 56,
+  InsideMethodParameterDefaultValue: 57,
+  AfterArrowFunctionReturnType: 58,
 }
 
 /**
@@ -125,6 +127,8 @@ export const TokenMap = {
 }
 
 export const initialLineState = {
+  hasArrowFunctionParameterDefaultValue: false,
+  isArrowFunctionParameters: false,
   state: State.TopLevelContent,
   /**
    * @type {any[]}
@@ -153,6 +157,7 @@ const TYPE_PRIMITIVE_PATTERN =
 const RE_TYPE_PRIMITIVE = new RegExp(`^${TYPE_PRIMITIVE_PATTERN}\\b`)
 
 const RE_EQUAL = /^=/
+const RE_PARAMETER_DEFAULT_EQUAL = /^=(?!>)/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
 const RE_KEYWORD_CONST_LET = /^(?:const|let)/
@@ -363,6 +368,9 @@ export const tokenizeLine = (line, lineState) => {
   let token = TokenType.None
   let state = lineState.state
   let stack = lineState.stack
+  let hasArrowFunctionParameterDefaultValue =
+    lineState.hasArrowFunctionParameterDefaultValue || false
+  let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
   const arrowFunctionPrimitiveTypeOffsets =
     getArrowFunctionPrimitiveTypeOffsets(line)
   while (index < line.length) {
@@ -534,6 +542,8 @@ export const tokenizeLine = (line, lineState) => {
             /^\s*$/.test(line.slice(index + next[0].length))
           ) {
             stack.push(State.TopLevelContent)
+            hasArrowFunctionParameterDefaultValue = false
+            isArrowFunctionParameters = true
             state = State.BeforeArrowFunctionParameters
           }
           if (next[0] === '.') {
@@ -685,7 +695,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
-          state = stack.pop() || State.AfterType
+          state =
+            stack.at(-1) === State.AfterArrowFunctionReturnType
+              ? State.AfterType
+              : stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
           state = State.AfterType
@@ -919,6 +932,18 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterType
+        } else if (
+          stack.includes(State.AfterArrowFunctionReturnType) &&
+          (next = part.match(RE_ARROW))
+        ) {
+          token = TokenType.Punctuation
+          const returnTypeIndex = stack.lastIndexOf(
+            State.AfterArrowFunctionReturnType
+          )
+          stack.length = returnTypeIndex
+          state = stack.pop() || State.TopLevelContent
+          hasArrowFunctionParameterDefaultValue = false
+          isArrowFunctionParameters = false
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1675,6 +1700,13 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if (
+          isArrowFunctionParameters &&
+          (next = part.match(RE_PARAMETER_DEFAULT_EQUAL))
+        ) {
+          token = TokenType.Punctuation
+          hasArrowFunctionParameterDefaultValue = true
+          state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.InsideMethodParameters
@@ -1697,8 +1729,52 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.AfterMethodParameters
         } else {
+          hasArrowFunctionParameterDefaultValue = false
+          isArrowFunctionParameters = false
           state = stack.pop() || State.TopLevelContent
           continue
+        }
+        break
+      case State.InsideMethodParameterDefaultValue:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideMethodParameterDefaultValue
+        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+          token = TokenType.Function
+          state = State.InsideMethodParameterDefaultValue
+        } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.InsideMethodParameterDefaultValue
+        } else if ((next = part.match(RE_NUMERIC_2))) {
+          token = TokenType.Numeric
+          state = State.InsideMethodParameterDefaultValue
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameters
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterMethodParameters
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
+        } else if ((next = part.match(RE_PUNCTUATION))) {
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameterDefaultValue
+        } else {
+          throw new Error('no')
         }
         break
       case State.InsideMethodParametersAfterVariableName:
@@ -1720,15 +1796,24 @@ export const tokenizeLine = (line, lineState) => {
       case State.AfterMethodParameters:
         if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
+          if (hasArrowFunctionParameterDefaultValue && part.includes('=>')) {
+            stack.push(State.AfterArrowFunctionReturnType)
+          }
           state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterMethodParameters
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
-          // TODO depending on whether this is a type function
-          // this can be either a type or a value
-          state = State.BeforeType
+          if (hasArrowFunctionParameterDefaultValue) {
+            hasArrowFunctionParameterDefaultValue = false
+            isArrowFunctionParameters = false
+            state = stack.pop() || State.TopLevelContent
+          } else {
+            // TODO depending on whether this is a type function
+            // this can be either a type or a value
+            state = State.BeforeType
+          }
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -2318,6 +2403,8 @@ export const tokenizeLine = (line, lineState) => {
   }
   tokens = highlightNamedArrowFunctionTypes(line, tokens)
   return {
+    hasArrowFunctionParameterDefaultValue,
+    isArrowFunctionParameters,
     state,
     stack,
     tokens,
