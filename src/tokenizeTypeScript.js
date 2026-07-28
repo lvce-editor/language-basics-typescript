@@ -319,38 +319,56 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
 }
 
 const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
-const SIMPLE_TYPE_PATTERN = `${IDENTIFIER_PATTERN}(?:\\[\\])*`
+const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:\\[\\])*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
-const RE_PARAMETER_PRIMITIVE_TYPE = new RegExp(
-  `:\\s*(${TYPE_PRIMITIVE_PATTERN})\\b`,
+const RE_PARAMETER_TYPE = new RegExp(
+  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b`,
   'g'
 )
+const RE_SIMPLE_TYPE_NAME = new RegExp(
+  `^(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b`
+)
 
-const getArrowFunctionPrimitiveTypeOffsets = (line) => {
-  const offsets = new Set()
+const getTypeToken = (typeName) => {
+  if (RE_TYPE_PRIMITIVE.test(typeName)) {
+    return TokenType.TypePrimitive
+  }
+  if (RE_BUILTIN_CLASS.test(typeName)) {
+    return TokenType.Class
+  }
+  return TokenType.Type
+}
+
+const getArrowFunctionTypeOffsets = (line) => {
+  const offsets = new Map()
   if (!line.includes(':') || !line.includes('=>')) {
     return offsets
   }
   for (const match of line.matchAll(RE_SIMPLE_ARROW_FUNCTION)) {
     const parameters = match[1]
     const parametersOffset = match.index + match[0].indexOf(parameters)
-    for (const parameterMatch of parameters.matchAll(
-      RE_PARAMETER_PRIMITIVE_TYPE
-    )) {
-      const type = parameterMatch[1]
-      offsets.add(
+    for (const parameterMatch of parameters.matchAll(RE_PARAMETER_TYPE)) {
+      const typeName = parameterMatch[1]
+      offsets.set(
         parametersOffset +
           parameterMatch.index +
-          parameterMatch[0].lastIndexOf(type)
+          parameterMatch[0].lastIndexOf(typeName),
+        getTypeToken(typeName)
       )
     }
     const returnType = match[2]
-    if (returnType && RE_TYPE_PRIMITIVE.test(returnType)) {
-      offsets.add(match.index + match[0].lastIndexOf(returnType))
+    const returnTypeName = returnType?.match(RE_SIMPLE_TYPE_NAME)?.[1]
+    if (returnTypeName) {
+      offsets.set(
+        match.index +
+          match[0].lastIndexOf(returnType) +
+          returnType.lastIndexOf(returnTypeName),
+        getTypeToken(returnTypeName)
+      )
     }
   }
   return offsets
@@ -374,8 +392,7 @@ export const tokenizeLine = (line, lineState) => {
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
-  const arrowFunctionPrimitiveTypeOffsets =
-    getArrowFunctionPrimitiveTypeOffsets(line)
+  const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
@@ -384,10 +401,10 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.TopLevelContent
         } else if (
-          arrowFunctionPrimitiveTypeOffsets.has(index) &&
-          (next = part.match(RE_TYPE_PRIMITIVE))
+          arrowFunctionTypeOffsets.has(index) &&
+          (next = part.match(RE_VARIABLE_NAME))
         ) {
-          token = TokenType.TypePrimitive
+          token = arrowFunctionTypeOffsets.get(index)
           state = State.TopLevelContent
         } else if (
           objectDepth > 0 &&

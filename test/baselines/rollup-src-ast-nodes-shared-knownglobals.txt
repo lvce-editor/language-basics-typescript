@@ -306,7 +306,7 @@ Punctuation
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation
