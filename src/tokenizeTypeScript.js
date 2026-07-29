@@ -251,7 +251,7 @@ const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
 const RE_SIMPLE_TYPE_QUERY =
   /^\s*type\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*$/
 const RE_PROPERTY_TYPE_QUERY =
-  /^\s*(?:readonly\s+)?[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\??\s*:\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?:\.[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)+\s*;?\s*$/
+  /^\s*(?:(?:readonly\s+)?[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\??|(?:export\s+)?declare\s+(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)\s*:\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?:\.[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)+\s*;?\s*$/
 
 const highlightNamedArrowFunctionTypes = (line, tokens) => {
   const signature =
