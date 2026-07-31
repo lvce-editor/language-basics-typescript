@@ -2246,6 +2246,10 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideReturnObject
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
         } else if ((next = part.match(RE_KEYWORD_ASYNC))) {
           token = TokenType.KeywordModifier
           state = State.InsideReturnObject
