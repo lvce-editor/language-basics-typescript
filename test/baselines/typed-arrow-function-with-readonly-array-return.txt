@@ -81,7 +81,15 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Whitespace
+Punctuation
+String
+Punctuation
+Punctuation
 NewLine
 Whitespace
 VariableName
