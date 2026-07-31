@@ -319,16 +319,18 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
 }
 
 const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
-const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:\\[\\])*`
+const GENERIC_ARGUMENTS_PATTERN = `<\\s*${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*\\s*>`
+const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${GENERIC_ARGUMENTS_PATTERN})?(?:\\[\\])*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
 const RE_PARAMETER_TYPE = new RegExp(
-  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b`,
+  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*)\\s*>)?`,
   'g'
 )
+const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 const RE_SIMPLE_TYPE_NAME = new RegExp(
   `^(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b`
 )
@@ -353,12 +355,24 @@ const getArrowFunctionTypeOffsets = (line) => {
     const parametersOffset = match.index + match[0].indexOf(parameters)
     for (const parameterMatch of parameters.matchAll(RE_PARAMETER_TYPE)) {
       const typeName = parameterMatch[1]
+      const parameterOffset = parametersOffset + parameterMatch.index
       offsets.set(
-        parametersOffset +
-          parameterMatch.index +
-          parameterMatch[0].lastIndexOf(typeName),
+        parameterOffset + parameterMatch[0].indexOf(typeName),
         getTypeToken(typeName)
       )
+      const genericTypeNames = parameterMatch[2]
+      if (genericTypeNames) {
+        const genericTypesOffset =
+          parameterOffset + parameterMatch[0].indexOf(genericTypeNames)
+        for (const genericTypeMatch of genericTypeNames.matchAll(
+          RE_TYPE_NAME
+        )) {
+          offsets.set(
+            genericTypesOffset + genericTypeMatch.index,
+            getTypeToken(genericTypeMatch[0])
+          )
+        }
+      }
     }
     const returnType = match[2]
     const returnTypeName = returnType?.match(RE_SIMPLE_TYPE_NAME)?.[1]
