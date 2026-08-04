@@ -175,7 +175,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation

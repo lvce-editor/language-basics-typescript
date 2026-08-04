@@ -331,9 +331,6 @@ const RE_PARAMETER_TYPE = new RegExp(
   'g'
 )
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
-const RE_SIMPLE_TYPE_NAME = new RegExp(
-  `^(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b`
-)
 
 const getTypeToken = (typeName) => {
   if (RE_TYPE_PRIMITIVE.test(typeName)) {
@@ -375,14 +372,17 @@ const getArrowFunctionTypeOffsets = (line) => {
       }
     }
     const returnType = match[2]
-    const returnTypeName = returnType?.match(RE_SIMPLE_TYPE_NAME)?.[1]
-    if (returnTypeName) {
-      offsets.set(
-        match.index +
-          match[0].lastIndexOf(returnType) +
-          returnType.lastIndexOf(returnTypeName),
-        getTypeToken(returnTypeName)
-      )
+    if (returnType) {
+      const returnTypeOffset = match.index + match[0].lastIndexOf(returnType)
+      for (const returnTypeMatch of returnType.matchAll(RE_TYPE_NAME)) {
+        if (returnTypeMatch[0] === 'readonly') {
+          continue
+        }
+        offsets.set(
+          returnTypeOffset + returnTypeMatch.index,
+          getTypeToken(returnTypeMatch[0])
+        )
+      }
     }
   }
   return offsets
