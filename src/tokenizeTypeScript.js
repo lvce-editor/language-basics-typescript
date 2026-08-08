@@ -93,6 +93,8 @@ export const TokenType = {
   Text: 23,
   KeywordThis: 24,
   KeywordAwait: 25,
+  PunctuationTag: 228,
+  TagName: 118,
 }
 
 export const TokenMap = {
@@ -124,6 +126,8 @@ export const TokenMap = {
   [TokenType.Text]: 'Text',
   [TokenType.KeywordThis]: 'KeywordThis',
   [TokenType.KeywordAwait]: 'KeywordAwait',
+  [TokenType.PunctuationTag]: 'PunctuationTag',
+  [TokenType.TagName]: 'TagName',
 }
 
 export const initialLineState = {
