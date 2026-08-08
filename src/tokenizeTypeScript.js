@@ -195,6 +195,7 @@ const RE_COMMA = /^\,/
 const RE_DOT = /^\./
 const RE_SQUARE_OPEN = /^\[/
 const RE_SQUARE_CLOSE = /^\]/
+const RE_BINDING_PATTERN_END = /[\]\}]\s*$/
 const RE_QUESTION_MARK = /^\?/
 const RE_EXCLAMATION_MARK = /^\!/
 const RE_STAR = /^\*/
@@ -2445,6 +2446,11 @@ export const tokenizeLine = (line, lineState) => {
     tokens.push(token, tokenLength)
   }
   if (
+    state === State.AfterKeywordVariableDeclaration &&
+    RE_BINDING_PATTERN_END.test(line)
+  ) {
+    state = State.TopLevelContent
+  } else if (
     state === State.AfterType &&
     (stack.includes(State.InsideClass) ||
       stack.includes(State.InsideTypeObject))
