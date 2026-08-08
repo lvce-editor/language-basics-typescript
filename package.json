@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node ./node_modules/@lvce-editor/server/bin/server.js ./test/cases --only-extension=.",
     "lint": "eslint . && prettier --check .",
-    "test": "test-syntax-highlighting"
+    "test": "test-syntax-highlighting && node --test test/*.test.js"
   },
   "author": "Lvce Editor",
   "license": "MIT",

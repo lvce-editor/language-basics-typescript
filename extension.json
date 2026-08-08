@@ -12,7 +12,7 @@
     {
       "id": "typescriptreact",
       "extensions": [".tsx"],
-      "tokenize": "src/tokenizeTypeScript.js",
+      "tokenize": "src/tokenizeTypeScriptReact.js",
       "configuration": "languageConfiguration.json"
     }
   ],
