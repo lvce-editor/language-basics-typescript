@@ -130,7 +130,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+Class
 NewLine
 Whitespace
 KeywordModifier
