@@ -992,6 +992,10 @@ export const tokenizeLine = (line, lineState) => {
           isArrowFunctionParameters = false
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
+          // Array type suffixes push an AfterType state for each [] pair.
+          while (stack.at(-1) === State.AfterType) {
+            stack.pop()
+          }
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_QUESTION_MARK_COLON))) {
           token = TokenType.Punctuation
