@@ -59,6 +59,7 @@ const State = {
   AfterGenericSetCallee: 56,
   InsideMethodParameterDefaultValue: 57,
   AfterArrowFunctionReturnType: 58,
+  InsideEmbeddedBacktickString: 59,
 }
 
 /**
@@ -93,6 +94,7 @@ export const TokenType = {
   Text: 23,
   KeywordThis: 24,
   KeywordAwait: 25,
+  Embedded: 999,
   PunctuationTag: 228,
   TagName: 118,
 }
@@ -126,6 +128,7 @@ export const TokenMap = {
   [TokenType.Text]: 'Text',
   [TokenType.KeywordThis]: 'KeywordThis',
   [TokenType.KeywordAwait]: 'KeywordAwait',
+  [TokenType.Embedded]: 'Embedded',
   [TokenType.PunctuationTag]: 'PunctuationTag',
   [TokenType.TagName]: 'TagName',
 }
@@ -139,6 +142,7 @@ export const initialLineState = {
    * @type {any[]}
    */
   stack: [],
+  embeddedLanguageState: '',
 }
 
 const RE_LINE_COMMENT = /^\/\/[^\n]*/
@@ -176,6 +180,7 @@ const RE_LINE_COMMENT_START = /^\/\//
 const RE_LINE_COMMENT_CONTENT = /^[^\n]+/
 const RE_NEWLINE_WHITESPACE = /^\n\s*/
 const RE_BLOCK_COMMENT_START = /^\/\*/
+const RE_EMBEDDED_LANGUAGE_COMMENT = /^\/\*\s*([^\s*/]+)\s*\*\/(?=\s*`)/
 const RE_BLOCK_COMMENT_CONTENT = /^.+?(?=\*\/)/
 const RE_BLOCK_COMMENT_END = /^\*\//
 const RE_SLASH = /^\//
@@ -409,6 +414,11 @@ export const tokenizeLine = (line, lineState) => {
   let token = TokenType.None
   let state = lineState.state
   let stack = lineState.stack
+  let embeddedLanguage = lineState.embeddedLanguageState || ''
+  let embeddedLanguageState = embeddedLanguage
+  let embeddedLanguageStart = 0
+  let embeddedLanguageEnd = embeddedLanguage ? line.length : 0
+  let embeddedLanguageTag = ''
   let objectDepth = lineState.objectDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
@@ -561,6 +571,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_EMBEDDED_LANGUAGE_COMMENT))) {
+          token = TokenType.Comment
+          embeddedLanguageTag = next[1]
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_SLASH))) {
           if ((next = part.match(RE_BLOCK_COMMENT_START))) {
             token = TokenType.Comment
@@ -618,7 +632,15 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_QUOTE_BACKTICK))) {
           token = TokenType.Punctuation
-          state = State.InsideBacktickString
+          if (embeddedLanguageTag) {
+            state = State.InsideEmbeddedBacktickString
+            embeddedLanguage = embeddedLanguageTag
+            embeddedLanguageState = embeddedLanguageTag
+            embeddedLanguageStart = index + next[0].length
+            embeddedLanguageEnd = line.length
+          } else {
+            state = State.InsideBacktickString
+          }
         } else if ((next = part.match(RE_OPERATOR))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -1929,6 +1951,24 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.InsideEmbeddedBacktickString:
+        if ((next = part.match(RE_QUOTE_BACKTICK))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+          embeddedLanguageEnd = index
+          embeddedLanguageState = ''
+        } else if ((next = part.match(RE_STRING_BACKTICK_QUOTE_CONTENT))) {
+          token = TokenType.Embedded
+          state = State.InsideEmbeddedBacktickString
+          embeddedLanguageEnd = index + next[0].length
+        } else if ((next = part.match(RE_STRING_ESCAPE))) {
+          token = TokenType.Embedded
+          state = State.InsideEmbeddedBacktickString
+          embeddedLanguageEnd = index + next[0].length
+        } else {
+          throw new Error('no')
+        }
+        break
       case State.AfterInterfaceName:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -2237,6 +2277,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_SQUARE_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideReturnArray
+        } else if ((next = part.match(RE_EMBEDDED_LANGUAGE_COMMENT))) {
+          token = TokenType.Comment
+          embeddedLanguageTag = next[1]
+          state = State.AfterKeywordReturn
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
@@ -2331,6 +2375,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_EMBEDDED_LANGUAGE_COMMENT))) {
+          token = TokenType.Comment
+          embeddedLanguageTag = next[1]
+          state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
@@ -2346,7 +2394,15 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUOTE_BACKTICK))) {
           stack.push(state)
           token = TokenType.Punctuation
-          state = State.InsideBacktickString
+          if (embeddedLanguageTag) {
+            state = State.InsideEmbeddedBacktickString
+            embeddedLanguage = embeddedLanguageTag
+            embeddedLanguageState = embeddedLanguageTag
+            embeddedLanguageStart = index + next[0].length
+            embeddedLanguageEnd = line.length
+          } else {
+            state = State.InsideBacktickString
+          }
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':
@@ -2495,6 +2551,10 @@ export const tokenizeLine = (line, lineState) => {
   }
   tokens = highlightNamedArrowFunctionTypes(line, tokens)
   return {
+    embeddedLanguage,
+    embeddedLanguageEnd,
+    embeddedLanguageStart,
+    embeddedLanguageState,
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
     objectDepth,
