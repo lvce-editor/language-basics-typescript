@@ -324,7 +324,8 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
 }
 
 const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
-const GENERIC_ARGUMENTS_PATTERN = `<\\s*${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*\\s*>`
+const SIMPLE_GENERIC_ARGUMENT_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:\\[\\])*`
+const GENERIC_ARGUMENTS_PATTERN = `<\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*\\s*>`
 const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${GENERIC_ARGUMENTS_PATTERN})?(?:\\[\\])*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
@@ -332,7 +333,7 @@ const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   'g'
 )
 const RE_PARAMETER_TYPE = new RegExp(
-  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*)\\s*>)?`,
+  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*)\\s*>)?`,
   'g'
 )
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
