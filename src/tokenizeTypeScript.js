@@ -232,6 +232,7 @@ const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
+const RE_READONLY_TYPE_ASSERTION = /^as\s+readonly\b/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -324,7 +325,8 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
 }
 
 const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
-const GENERIC_ARGUMENTS_PATTERN = `<\\s*${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*\\s*>`
+const SIMPLE_GENERIC_ARGUMENT_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:\\[\\])*`
+const GENERIC_ARGUMENTS_PATTERN = `<\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*\\s*>`
 const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${GENERIC_ARGUMENTS_PATTERN})?(?:\\[\\])*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
@@ -332,7 +334,7 @@ const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   'g'
 )
 const RE_PARAMETER_TYPE = new RegExp(
-  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${IDENTIFIER_PATTERN}(?:\\s*,\\s*${IDENTIFIER_PATTERN})*)\\s*>)?`,
+  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*)\\s*>)?`,
   'g'
 )
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
@@ -450,6 +452,11 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'as':
+              token = TokenType.KeywordControl
+              state = RE_READONLY_TYPE_ASSERTION.test(part)
+                ? State.BeforeType
+                : State.TopLevelContent
+              break
             case 'break':
             case 'case':
             case 'catch':
@@ -1082,6 +1089,11 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'as':
+              token = TokenType.KeywordControl
+              state = RE_READONLY_TYPE_ASSERTION.test(part)
+                ? State.BeforeType
+                : State.TopLevelContent
+              break
             case 'break':
             case 'case':
             case 'catch':
@@ -2298,6 +2310,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_AMPERSAND))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObject
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.InsideReturnObject
