@@ -232,6 +232,7 @@ const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
+const RE_READONLY_TYPE_ASSERTION = /^as\s+readonly\b/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -451,6 +452,11 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'as':
+              token = TokenType.KeywordControl
+              state = RE_READONLY_TYPE_ASSERTION.test(part)
+                ? State.BeforeType
+                : State.TopLevelContent
+              break
             case 'break':
             case 'case':
             case 'catch':
@@ -1083,6 +1089,11 @@ export const tokenizeLine = (line, lineState) => {
               state = State.TopLevelContent
               break
             case 'as':
+              token = TokenType.KeywordControl
+              state = RE_READONLY_TYPE_ASSERTION.test(part)
+                ? State.BeforeType
+                : State.TopLevelContent
+              break
             case 'break':
             case 'case':
             case 'catch':
