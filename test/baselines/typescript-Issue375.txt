@@ -107,7 +107,7 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Type
+VariableName
 Punctuation
 Punctuation
 Punctuation
@@ -117,7 +117,7 @@ NewLine
 Whitespace
 KeywordNew
 Whitespace
-Function
+Class
 Punctuation
 Punctuation
 String

@@ -1348,7 +1348,7 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Type
+VariableName
 Punctuation
 Punctuation
 NewLine

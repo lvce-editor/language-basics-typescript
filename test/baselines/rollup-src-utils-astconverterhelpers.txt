@@ -186,10 +186,12 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+KeywordNew
 Whitespace
-Type
-Text
+Class
+Punctuation
+VariableName
+Punctuation
 Punctuation
 NewLine
 Whitespace
