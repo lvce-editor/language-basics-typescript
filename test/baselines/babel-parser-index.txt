@@ -290,7 +290,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Whitespace
 Punctuation
@@ -405,7 +405,7 @@ KeywordControl
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -490,7 +490,7 @@ KeywordControl
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -548,7 +548,7 @@ KeywordControl
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -609,7 +609,7 @@ KeywordControl
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
@@ -661,7 +661,7 @@ KeywordControl
 Whitespace
 VariableName
 Punctuation
-VariableName
+Class
 Punctuation
 Punctuation
 NewLine
