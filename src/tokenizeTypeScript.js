@@ -137,6 +137,7 @@ export const initialLineState = {
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
   objectDepth: 0,
+  parenthesisDepth: 0,
   state: State.TopLevelContent,
   /**
    * @type {any[]}
@@ -253,6 +254,7 @@ const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_ENDS_WITH_EQUAL = /\=\s+$/
+const RE_OBJECT_ARGUMENT_START = /(?:,|\()\s*$/
 const RE_NAMED_ARROW_FUNCTION_TYPE = /(?:\:|\<)\s*([A-Z_\$][\w\$]*)/g
 const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
@@ -413,6 +415,7 @@ export const tokenizeLine = (line, lineState) => {
   let embeddedLanguageEnd = embeddedLanguage ? line.length : 0
   let embeddedLanguageTag = ''
   let objectDepth = lineState.objectDepth || 0
+  let parenthesisDepth = lineState.parenthesisDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
@@ -2522,7 +2525,10 @@ export const tokenizeLine = (line, lineState) => {
     if (
       token === TokenType.Punctuation &&
       next[0] === '{' &&
-      (objectDepth > 0 || state === State.InsideObject)
+      (objectDepth > 0 ||
+        state === State.InsideObject ||
+        (parenthesisDepth > 0 &&
+          RE_OBJECT_ARGUMENT_START.test(line.slice(0, index))))
     ) {
       objectDepth++
     } else if (
@@ -2531,6 +2537,11 @@ export const tokenizeLine = (line, lineState) => {
       objectDepth > 0
     ) {
       objectDepth--
+    }
+    if (token === TokenType.Punctuation && next[0] === '(') {
+      parenthesisDepth++
+    } else if (token === TokenType.Punctuation && next[0] === ')') {
+      parenthesisDepth = Math.max(0, parenthesisDepth - 1)
     }
     const tokenLength = next[0].length
     index += tokenLength
@@ -2570,6 +2581,7 @@ export const tokenizeLine = (line, lineState) => {
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
     objectDepth,
+    parenthesisDepth,
     state,
     stack,
     tokens,
