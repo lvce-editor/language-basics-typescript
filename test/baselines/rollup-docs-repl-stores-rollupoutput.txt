@@ -1393,7 +1393,12 @@ Punctuation
 KeywordOperator
 Whitespace
 VariableName
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+TypePrimitive
+Punctuation
 NewLine
 Whitespace
 Keyword
