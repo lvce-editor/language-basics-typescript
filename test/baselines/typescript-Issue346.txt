@@ -230,9 +230,15 @@ Punctuation
 Punctuation
 Punctuation
 Punctuation
-Keyword
+VariableName
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation
+Punctuation
+Punctuation
 NewLine
 NewLine
 VariableName
