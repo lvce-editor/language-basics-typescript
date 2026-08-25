@@ -3124,7 +3124,7 @@ Type
 Whitespace
 Type
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace

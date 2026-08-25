@@ -1084,6 +1084,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.AfterType)
+        } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
+          token = TokenType.TypePrimitive
+          state = State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType

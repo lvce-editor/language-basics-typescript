@@ -812,7 +812,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -1051,7 +1051,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -1145,7 +1145,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -1469,7 +1469,7 @@ String
 Punctuation
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -1723,7 +1723,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

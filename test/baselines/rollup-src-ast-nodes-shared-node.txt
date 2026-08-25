@@ -567,7 +567,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

@@ -82,7 +82,7 @@ TypePrimitive
 Punctuation
 Punctuation
 Punctuation
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -95,7 +95,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Punctuation
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -107,7 +107,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Punctuation
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -119,7 +119,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Punctuation
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
