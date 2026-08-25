@@ -1018,6 +1018,15 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
           hasArrowFunctionParameterDefaultValue = false
           isArrowFunctionParameters = false
+        } else if (
+          isArrowFunctionParameters &&
+          stack.at(-1) === State.InsideMethodParameters &&
+          (next = part.match(RE_PARAMETER_DEFAULT_EQUAL))
+        ) {
+          token = TokenType.Punctuation
+          stack.pop()
+          hasArrowFunctionParameterDefaultValue = true
+          state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           // Array type suffixes push an AfterType state for each [] pair.
@@ -1065,7 +1074,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterType
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.AfterType
+          state =
+            stack.at(-1) === State.AfterArrowFunctionReturnType
+              ? State.AfterType
+              : stack.pop() || State.AfterType
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
