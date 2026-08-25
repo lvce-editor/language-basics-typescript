@@ -109,7 +109,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation

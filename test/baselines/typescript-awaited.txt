@@ -5,7 +5,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Keyword

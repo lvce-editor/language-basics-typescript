@@ -73,7 +73,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

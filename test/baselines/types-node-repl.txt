@@ -2980,7 +2980,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -3002,7 +3002,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

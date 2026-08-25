@@ -7623,7 +7623,7 @@ String
 Punctuation
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

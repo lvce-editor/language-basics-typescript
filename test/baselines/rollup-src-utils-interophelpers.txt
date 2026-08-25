@@ -140,7 +140,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -281,7 +281,7 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Type
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
