@@ -24,9 +24,15 @@ Whitespace
 Class
 Punctuation
 Whitespace
-Text
+VariableName
+Punctuation
+Whitespace
 Type
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+TypePrimitive
 NewLine
 NewLine
 Keyword

@@ -258,6 +258,8 @@ const RE_OBJECT_ARGUMENT_START = /(?:,|\()\s*$/
 const RE_NAMED_ARROW_FUNCTION_TYPE = /(?:\:|\<)\s*([A-Z_\$][\w\$]*)/g
 const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
+const RE_FUNCTION_TYPE_ALIAS =
+  /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
   /^\s*export\s+const\s+\w+\s*=\s*(?:async\s+)?\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*(?::\s*[A-Z_\$][\w\$]*(?:<[^>]+>)?)?\s*=>/
 const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
@@ -419,6 +421,7 @@ export const tokenizeLine = (line, lineState) => {
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
+  const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
@@ -1048,7 +1051,15 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.TopLevelContent
+          if (
+            isFunctionTypeAlias &&
+            stack.at(-1) === State.AfterTypeExpression
+          ) {
+            // Keep the closing-parenthesis state while parsing the next parameter.
+            state = State.InsideTypeExpression
+          } else {
+            state = stack.pop() || State.TopLevelContent
+          }
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.BeforePropertyAccess

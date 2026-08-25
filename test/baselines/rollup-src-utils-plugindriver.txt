@@ -390,7 +390,16 @@ Whitespace
 Type
 Punctuation
 Whitespace
-Text
+VariableName
+Punctuation
+Whitespace
+Type
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Type
+Punctuation
 NewLine
 NewLine
 KeywordImport
