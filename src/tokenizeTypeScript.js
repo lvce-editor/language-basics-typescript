@@ -169,6 +169,7 @@ const RE_TYPE_PRIMITIVE = new RegExp(`^${TYPE_PRIMITIVE_PATTERN}\\b`)
 
 const RE_EQUAL = /^=/
 const RE_PARAMETER_DEFAULT_EQUAL = /^=(?!>)/
+const RE_PARAMETER_DEFAULT_WHITESPACE = /^\s+(?==(?!>))/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^(?:const)/
 const RE_KEYWORD_CONST_LET = /^(?:const|let)/
@@ -1901,6 +1902,19 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.InsideMethodParameters)
+        } else if (
+          isArrowFunctionParameters &&
+          (next = part.match(RE_PARAMETER_DEFAULT_WHITESPACE))
+        ) {
+          token = TokenType.Whitespace
+          state = State.InsideMethodParametersAfterVariableName
+        } else if (
+          isArrowFunctionParameters &&
+          (next = part.match(RE_PARAMETER_DEFAULT_EQUAL))
+        ) {
+          token = TokenType.Punctuation
+          hasArrowFunctionParameterDefaultValue = true
+          state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.InsideMethodParametersAfterVariableName
