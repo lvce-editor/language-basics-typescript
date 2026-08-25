@@ -26,7 +26,8 @@ Punctuation
 KeywordOperator
 Whitespace
 VariableName
-Text
+Punctuation
+Punctuation
 NewLine
 VariableName
 Whitespace

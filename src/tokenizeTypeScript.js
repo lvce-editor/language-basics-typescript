@@ -251,6 +251,7 @@ const RE_SET = /^Set\b/
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
+const RE_INLINE_GENERIC_TYPE_QUERY = /<\s*typeof\b/
 const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
 const RE_ENDS_WITH_EQUAL = /\=\s+$/
@@ -776,7 +777,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Class
           state = State.AfterType
         } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
-          stack.push(state)
+          stack.push(
+            RE_INLINE_GENERIC_TYPE_QUERY.test(line) ? State.AfterType : state
+          )
           token = TokenType.KeywordOperator
           state = RE_PROPERTY_TYPE_QUERY.test(line)
             ? State.AfterKeywordPropertyTypeOf
