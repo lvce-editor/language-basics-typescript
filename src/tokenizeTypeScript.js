@@ -190,6 +190,7 @@ const RE_REGEX =
 const RE_ANYTHING_UNTIL_END = /^.+/s
 const RE_CURLY_OPEN = /^\{/
 const RE_CURLY_CLOSE = /^\}/
+const RE_OBJECT_TYPE_PARAMETER_END = /^\}(?=\s*\)\s*=>)/
 const RE_KEYWORD_CLASS_PROPERTY_MODIFIER =
   /^(?:override|public|protected|private|readonly|accessor)\b/
 
@@ -332,16 +333,14 @@ const highlightNamedArrowFunctionTypes = (line, tokens) => {
 const IDENTIFIER_PATTERN = '[\\#\\$a-zA-Z\\_][\\$a-zA-Z\\_\\d]*'
 const SIMPLE_GENERIC_ARGUMENT_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:\\[\\])*`
 const GENERIC_ARGUMENTS_PATTERN = `<\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*\\s*>`
-const SIMPLE_TYPE_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${GENERIC_ARGUMENTS_PATTERN})?(?:\\[\\])*`
+const SIMPLE_TYPE_MEMBER_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${GENERIC_ARGUMENTS_PATTERN})?(?:\\[\\])*`
+const SIMPLE_TYPE_PATTERN = `${SIMPLE_TYPE_MEMBER_PATTERN}(?:\\s*[|&]\\s*${SIMPLE_TYPE_MEMBER_PATTERN})*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
-const RE_PARAMETER_TYPE = new RegExp(
-  `:\\s*(?:readonly\\s+)?(${IDENTIFIER_PATTERN})\\b(?:\\s*<\\s*(${SIMPLE_GENERIC_ARGUMENT_PATTERN}(?:\\s*,\\s*${SIMPLE_GENERIC_ARGUMENT_PATTERN})*)\\s*>)?`,
-  'g'
-)
+const RE_PARAMETER_TYPE = new RegExp(`:\\s*(${SIMPLE_TYPE_PATTERN})`, 'g')
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 
 const getTypeToken = (typeName) => {
@@ -363,24 +362,18 @@ const getArrowFunctionTypeOffsets = (line) => {
     const parameters = match[1]
     const parametersOffset = match.index + match[0].indexOf(parameters)
     for (const parameterMatch of parameters.matchAll(RE_PARAMETER_TYPE)) {
-      const typeName = parameterMatch[1]
+      const parameterType = parameterMatch[1]
       const parameterOffset = parametersOffset + parameterMatch.index
-      offsets.set(
-        parameterOffset + parameterMatch[0].indexOf(typeName),
-        getTypeToken(typeName)
-      )
-      const genericTypeNames = parameterMatch[2]
-      if (genericTypeNames) {
-        const genericTypesOffset =
-          parameterOffset + parameterMatch[0].indexOf(genericTypeNames)
-        for (const genericTypeMatch of genericTypeNames.matchAll(
-          RE_TYPE_NAME
-        )) {
-          offsets.set(
-            genericTypesOffset + genericTypeMatch.index,
-            getTypeToken(genericTypeMatch[0])
-          )
+      const parameterTypeOffset =
+        parameterOffset + parameterMatch[0].indexOf(parameterType)
+      for (const typeMatch of parameterType.matchAll(RE_TYPE_NAME)) {
+        if (typeMatch[0] === 'readonly') {
+          continue
         }
+        offsets.set(
+          parameterTypeOffset + typeMatch.index,
+          getTypeToken(typeMatch[0])
+        )
       }
     }
     const returnType = match[2]
@@ -1005,6 +998,13 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
+          state = State.AfterType
+        } else if (
+          stack.at(-1) === State.InsideTypeObject &&
+          (next = part.match(RE_OBJECT_TYPE_PARAMETER_END))
+        ) {
+          token = TokenType.Punctuation
+          stack.pop()
           state = State.AfterType
         } else if (
           stack.includes(State.AfterArrowFunctionReturnType) &&

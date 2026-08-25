@@ -307,11 +307,11 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation
