@@ -246,7 +246,7 @@ const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
-  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|Headers|Response|Request|Cache|Buffer|MessagePort|FileHandle|X509Certificate|Blob|File|HTMLElement|MutationRecord|HTMLVideoElement)\b/
+  /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|DOMMatrixReadOnly(?!\s*:)|Headers|Response|Request|Cache|Buffer|MessagePort|FileHandle|X509Certificate|Blob|File|HTMLElement|MutationRecord|HTMLVideoElement)\b/
 const RE_SET = /^Set\b/
 
 const RE_KEYWORD_NEW = /^new\b/
