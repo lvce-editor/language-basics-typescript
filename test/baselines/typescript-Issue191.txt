@@ -25,9 +25,9 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -132,9 +132,9 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

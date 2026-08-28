@@ -2525,13 +2525,13 @@ Comment
 Comment
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
-KeywordThis
+Type
 Punctuation
 Punctuation
 VariableName

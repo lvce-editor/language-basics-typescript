@@ -2970,9 +2970,9 @@ NewLine
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+Function
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 VariableName

@@ -1,0 +1,1 @@
+ViewletRegistry.create<AboutState>()

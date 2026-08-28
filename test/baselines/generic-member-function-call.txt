@@ -1,9 +1,9 @@
+VariableName
+Punctuation
 Function
 Punctuation
 Type
-Whitespace
-Type
 Punctuation
 Punctuation
 Punctuation
-Punctuation
+NewLine

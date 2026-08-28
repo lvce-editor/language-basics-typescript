@@ -150,11 +150,11 @@ Punctuation
 Whitespace
 KeywordThis
 Punctuation
-VariableName
+Function
 Punctuation
-VariableName
+Type
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
