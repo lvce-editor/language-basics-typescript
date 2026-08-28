@@ -59,13 +59,13 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 Punctuation
 LanguageConstant

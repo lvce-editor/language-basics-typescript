@@ -8,11 +8,11 @@ Whitespace
 Numeric
 Punctuation
 Punctuation
-VariableName
+Function
 Punctuation
-KeywordModifier
+Type
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

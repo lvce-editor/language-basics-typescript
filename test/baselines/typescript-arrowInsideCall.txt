@@ -12,9 +12,9 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 VariableName

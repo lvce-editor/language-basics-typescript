@@ -1,6 +1,6 @@
-VariableName
+Function
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

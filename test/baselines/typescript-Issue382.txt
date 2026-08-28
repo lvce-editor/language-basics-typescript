@@ -117,11 +117,11 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+Function
 Punctuation
-VariableName
+Type
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

@@ -60,6 +60,7 @@ const State = {
   InsideMethodParameterDefaultValue: 57,
   AfterArrowFunctionReturnType: 58,
   InsideEmbeddedBacktickString: 59,
+  BeforeGenericCallTypeArguments: 60,
 }
 
 /**
@@ -217,6 +218,7 @@ const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
+const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
 const RE_ARROW_FUNCTION_PARAMETERS_START =
   /(?:^|\s)(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*(?:async\s+)?\($/
@@ -566,6 +568,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_GENERIC_FUNCTION_CALL_NAME))) {
+          token = TokenType.Function
+          state = State.BeforeGenericCallTypeArguments
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.Function
           state = State.TopLevelContent
@@ -889,6 +894,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if ((next = part.match(RE_ARROW))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -916,6 +924,21 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_QUESTION_MARK))) {
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_NUMERIC_2))) {
+          token = TokenType.Numeric
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
         } else {
           throw new Error('no')
         }
@@ -1960,6 +1983,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterPropertyDot
+        } else if ((next = part.match(RE_GENERIC_FUNCTION_CALL_NAME))) {
+          token = TokenType.FunctionName
+          state = State.BeforeGenericCallTypeArguments
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
           state = State.TopLevelContent
@@ -1979,6 +2005,15 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
+        } else {
+          throw new Error('no')
+        }
+        break
+      case State.BeforeGenericCallTypeArguments:
+        if ((next = part.match(RE_ANGLE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
+          stack.push(State.TopLevelContent)
         } else {
           throw new Error('no')
         }
