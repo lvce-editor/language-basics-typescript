@@ -1483,7 +1483,7 @@ LanguageConstant
 Whitespace
 KeywordControl
 Whitespace
-Keyword
+KeywordModifier
 NewLine
 Punctuation
 Punctuation

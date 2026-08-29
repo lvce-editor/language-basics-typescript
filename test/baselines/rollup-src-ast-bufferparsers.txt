@@ -1870,7 +1870,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-Keyword
+KeywordModifier
 Punctuation
 NewLine
 NewLine

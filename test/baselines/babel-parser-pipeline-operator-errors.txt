@@ -69,7 +69,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-Keyword
+KeywordModifier
 Punctuation
 Punctuation
 NewLine
