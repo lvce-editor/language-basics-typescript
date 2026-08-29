@@ -196,7 +196,7 @@ KeywordImport
 Whitespace
 Keyword
 Whitespace
-VariableName
+Function
 Whitespace
 Punctuation
 Whitespace
