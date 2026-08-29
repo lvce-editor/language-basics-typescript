@@ -349,7 +349,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-Keyword
+KeywordModifier
 Punctuation
 NewLine
 Whitespace
@@ -370,7 +370,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-Keyword
+KeywordModifier
 Punctuation
 NewLine
 NewLine

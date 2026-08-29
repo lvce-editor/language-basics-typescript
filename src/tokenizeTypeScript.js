@@ -172,7 +172,7 @@ const RE_EQUAL = /^=/
 const RE_PARAMETER_DEFAULT_EQUAL = /^=(?!>)/
 const RE_PARAMETER_DEFAULT_WHITESPACE = /^\s+(?==(?!>))/
 const RE_SEMICOLON = /^;/
-const RE_KEYWORD_CONST = /^(?:const)/
+const RE_KEYWORD_CONST = /^const\b/
 const RE_KEYWORD_CONST_LET = /^(?:const|let)/
 const RE_KEYWORD_VARIABLE_DECLARATION = /^(?:const|let|var)\b/
 const RE_KEYWORD_LET = /^(?:let)/
@@ -243,7 +243,7 @@ const RE_KEYWORD_EXTENDS = /^extends\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
-const RE_READONLY_TYPE_ASSERTION = /^as\s+readonly\b/
+const RE_MODIFIER_TYPE_ASSERTION = /^as\s+(?:const|readonly)\b/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -474,7 +474,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_READONLY_TYPE_ASSERTION.test(part)
+              state = RE_MODIFIER_TYPE_ASSERTION.test(part)
                 ? State.BeforeType
                 : State.TopLevelContent
               break
@@ -781,6 +781,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.BeforeType
+        } else if ((next = part.match(RE_KEYWORD_CONST))) {
+          token = TokenType.KeywordModifier
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
           state =
@@ -1180,7 +1183,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_READONLY_TYPE_ASSERTION.test(part)
+              state = RE_MODIFIER_TYPE_ASSERTION.test(part)
                 ? State.BeforeType
                 : State.TopLevelContent
               break
