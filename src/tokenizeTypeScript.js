@@ -219,7 +219,8 @@ const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
-const RE_FUNCTION_CALL_NAME = /^[\w]+(?=\s*(\(|\=\s*function|\=\s*\())/
+const RE_FUNCTION_CALL_NAME =
+  /^[\w]+(?=\s*(\(|\=\s*function|\=\s*async\s*\(|\=\s*\())/
 const RE_ARROW_FUNCTION_PARAMETERS_START =
   /(?:^|\s)(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*(?:async\s+)?\($/
 const RE_ARROW_FUNCTION_PARAMETER_NAME =
