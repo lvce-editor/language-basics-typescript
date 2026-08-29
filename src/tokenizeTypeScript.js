@@ -349,6 +349,10 @@ const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
   `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
+const RE_DESTRUCTURED_ARROW_FUNCTION_TYPES = new RegExp(
+  `[}\\]]\\s*:\\s*(${SIMPLE_TYPE_PATTERN})\\s*\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
+  'g'
+)
 const RE_PARAMETER_TYPE = new RegExp(`:\\s*(${SIMPLE_TYPE_PATTERN})`, 'g')
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 
@@ -360,6 +364,15 @@ const getTypeToken = (typeName) => {
     return TokenType.Class
   }
   return TokenType.Type
+}
+
+const addTypeOffsets = (offsets, type, typeOffset) => {
+  for (const typeMatch of type.matchAll(RE_TYPE_NAME)) {
+    if (typeMatch[0] === 'readonly') {
+      continue
+    }
+    offsets.set(typeOffset + typeMatch.index, getTypeToken(typeMatch[0]))
+  }
 }
 
 const getArrowFunctionTypeOffsets = (line) => {
@@ -375,28 +388,22 @@ const getArrowFunctionTypeOffsets = (line) => {
       const parameterOffset = parametersOffset + parameterMatch.index
       const parameterTypeOffset =
         parameterOffset + parameterMatch[0].indexOf(parameterType)
-      for (const typeMatch of parameterType.matchAll(RE_TYPE_NAME)) {
-        if (typeMatch[0] === 'readonly') {
-          continue
-        }
-        offsets.set(
-          parameterTypeOffset + typeMatch.index,
-          getTypeToken(typeMatch[0])
-        )
-      }
+      addTypeOffsets(offsets, parameterType, parameterTypeOffset)
     }
     const returnType = match[2]
     if (returnType) {
       const returnTypeOffset = match.index + match[0].lastIndexOf(returnType)
-      for (const returnTypeMatch of returnType.matchAll(RE_TYPE_NAME)) {
-        if (returnTypeMatch[0] === 'readonly') {
-          continue
-        }
-        offsets.set(
-          returnTypeOffset + returnTypeMatch.index,
-          getTypeToken(returnTypeMatch[0])
-        )
-      }
+      addTypeOffsets(offsets, returnType, returnTypeOffset)
+    }
+  }
+  for (const match of line.matchAll(RE_DESTRUCTURED_ARROW_FUNCTION_TYPES)) {
+    const parameterType = match[1]
+    const parameterTypeOffset = match.index + match[0].indexOf(parameterType)
+    addTypeOffsets(offsets, parameterType, parameterTypeOffset)
+    const returnType = match[2]
+    if (returnType) {
+      const returnTypeOffset = match.index + match[0].lastIndexOf(returnType)
+      addTypeOffsets(offsets, returnType, returnTypeOffset)
     }
   }
   return offsets

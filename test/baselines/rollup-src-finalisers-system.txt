@@ -1428,13 +1428,13 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
