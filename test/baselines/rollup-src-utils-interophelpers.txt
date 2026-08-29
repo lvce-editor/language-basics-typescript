@@ -1763,7 +1763,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation
@@ -1793,7 +1793,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation
@@ -1820,7 +1820,7 @@ Whitespace
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation
