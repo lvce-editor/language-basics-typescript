@@ -3,4 +3,16 @@ Whitespace
 Keyword
 Whitespace
 Type
+Punctuation
+Type
+Punctuation
+Whitespace
+Type
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+KeywordOperator
+Whitespace
+VariableName
 Text

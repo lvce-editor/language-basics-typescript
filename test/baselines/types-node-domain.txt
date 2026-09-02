@@ -421,7 +421,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Class
 Punctuation
@@ -508,7 +508,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Class
 Punctuation

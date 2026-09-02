@@ -52,5 +52,16 @@ Whitespace
 Keyword
 Whitespace
 Type
+Punctuation
+Type
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Numeric
+Whitespace
+Type
+Whitespace
 Text
+Punctuation
 NewLine

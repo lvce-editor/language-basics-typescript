@@ -182,7 +182,13 @@ Whitespace
 Keyword
 Whitespace
 Type
-Text
+Punctuation
+Type
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 Punctuation
@@ -194,7 +200,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-KeywordControl
+VariableName
 Whitespace
 Punctuation
 Punctuation

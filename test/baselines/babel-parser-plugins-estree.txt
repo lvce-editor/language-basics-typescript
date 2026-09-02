@@ -760,7 +760,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Type
 Punctuation
@@ -1967,7 +1967,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Type
 Punctuation
@@ -3915,7 +3915,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Type
 Punctuation
@@ -5244,7 +5244,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Type
 Punctuation

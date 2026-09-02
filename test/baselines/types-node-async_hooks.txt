@@ -1453,7 +1453,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 TypePrimitive
 Punctuation
@@ -1565,7 +1565,7 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 TypePrimitive
 Punctuation
