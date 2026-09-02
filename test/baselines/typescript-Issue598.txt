@@ -1,6 +1,6 @@
 Function
 Punctuation
-Type
+KeywordOperator
 Whitespace
 Type
 Punctuation

@@ -240,7 +240,9 @@ const RE_KEYWORD_OF = /^of\b/
 const RE_KEYWORD_FUNCTION = /^function\b/
 const RE_KEYWORD_CONSTRUCTOR = /^constructor\b/
 const RE_KEYWORD_EXTENDS = /^extends\b/
+const RE_KEYWORD_KEYOF = /^keyof\b/
 const RE_KEYWORD_READONLY = /^readonly\b/
+const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
 const RE_MODIFIER_TYPE_ASSERTION = /^as\s+(?:const|readonly)\b/
@@ -760,6 +762,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterKeywordTypeDeclaration
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(State.AfterKeywordTypeDeclaration)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -878,6 +884,10 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = State.AfterTypeExpression
+        } else if ((next = part.match(RE_ANGLE_OPEN))) {
+          stack.push(State.InsideTypeExpression)
+          token = TokenType.Punctuation
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterVariableName
@@ -895,6 +905,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideTypeExpression
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
+          state = State.InsideTypeExpression
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
           state = State.InsideTypeExpression
         } else {
           throw new Error('no')
@@ -916,6 +929,15 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideGeneric
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD_KEYOF))) {
+          token = TokenType.KeywordOperator
+          state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD_TYPE_PARAMETER_MODIFIER))) {
+          token = TokenType.KeywordModifier
           state = State.InsideGeneric
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
@@ -950,6 +972,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+          state = State.InsideGeneric
         } else {
           throw new Error('no')
         }
@@ -1098,6 +1123,9 @@ export const tokenizeLine = (line, lineState) => {
           } else {
             state = stack.pop() || State.TopLevelContent
           }
+        } else if ((next = part.match(RE_SPREAD))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_DOT))) {
           token = TokenType.Punctuation
           state = State.BeforePropertyAccess
@@ -1754,6 +1782,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(State.InsideTypeObject)
         } else if ((next = part.match(RE_KEYWORD_READONLY))) {
           token = TokenType.KeywordModifier
+          state = State.InsideTypeObject
+        } else if ((next = part.match(RE_KEYWORD_IN))) {
+          token = TokenType.KeywordOperator
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName

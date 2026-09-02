@@ -2021,7 +2021,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 Punctuation
 String

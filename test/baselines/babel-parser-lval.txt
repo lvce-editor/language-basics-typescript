@@ -550,7 +550,7 @@ Function
 Punctuation
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
 Type
 Whitespace

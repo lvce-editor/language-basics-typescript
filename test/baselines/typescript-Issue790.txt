@@ -10,7 +10,7 @@ Punctuation
 Punctuation
 Function
 Punctuation
-Type
+KeywordModifier
 Whitespace
 TypePrimitive
 Punctuation

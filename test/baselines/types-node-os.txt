@@ -874,7 +874,7 @@ Whitespace
 Punctuation
 VariableName
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
