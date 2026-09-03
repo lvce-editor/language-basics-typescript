@@ -1552,11 +1552,11 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

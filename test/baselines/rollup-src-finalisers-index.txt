@@ -326,9 +326,9 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+Type
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type
