@@ -2729,6 +2729,7 @@ export const tokenizeLine = (line, lineState) => {
       next[0] === '{' &&
       (objectDepth > 0 ||
         state === State.InsideObject ||
+        state === State.InsideReturnObject ||
         (parenthesisDepth > 0 &&
           RE_OBJECT_ARGUMENT_START.test(line.slice(0, index))))
     ) {
