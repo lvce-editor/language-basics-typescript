@@ -218,7 +218,7 @@ const RE_AS = /^as/
 const RE_ESCAPE = /^\\.?/
 const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
-const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@]/
+const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@~]/
 const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME =
