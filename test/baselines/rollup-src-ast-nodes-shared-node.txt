@@ -970,12 +970,12 @@ Whitespace
 Type
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation

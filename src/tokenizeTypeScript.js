@@ -2223,7 +2223,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = State.AfterInterfaceName
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
