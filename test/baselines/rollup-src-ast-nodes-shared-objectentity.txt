@@ -1195,9 +1195,14 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Keyword
+VariableName
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+VariableName
+Punctuation
 NewLine
 NewLine
 Whitespace
