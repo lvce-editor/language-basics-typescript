@@ -232,6 +232,8 @@ const RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_END =
   /^<(?:[^<>\n]|<[^<>\n]*>)+>\s*\(\s*$/
 const RE_UNAMBIGUOUS_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS =
   /^<[^>\n]*(?:extends\b|,|=)/
+const RE_SINGLE_LINE_GENERIC_ARROW_FUNCTION =
+  /^<(?:[^<>\n]|<[^<>\n]*>)+>\s*\((?:[^()\n]|\([^()\n]*\))*\)\s*(?::[^=\n]+)?=>/
 const RE_ARROW_FUNCTION_PARAMETER_NAME =
   /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?=\??\s*:)/
 
@@ -709,8 +711,11 @@ export const tokenizeLine = (line, lineState) => {
             RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_START.test(
               line.slice(0, index + next[0].length)
             ) &&
-            RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_END.test(part) &&
-            RE_UNAMBIGUOUS_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS.test(part)
+            ((RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_END.test(part) &&
+              RE_UNAMBIGUOUS_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS.test(
+                part
+              )) ||
+              RE_SINGLE_LINE_GENERIC_ARROW_FUNCTION.test(part))
           ) {
             stack.push(State.TopLevelContent)
             stack.push(State.BeforeArrowFunctionParameters)
