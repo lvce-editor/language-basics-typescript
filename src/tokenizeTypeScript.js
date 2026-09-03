@@ -61,6 +61,7 @@ const State = {
   AfterArrowFunctionReturnType: 58,
   InsideEmbeddedBacktickString: 59,
   BeforeGenericCallTypeArguments: 60,
+  InsideObjectDestructuringAfterComma: 61,
 }
 
 /**
@@ -1737,6 +1738,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideObjectDestructuringAfterValue
+        } else if ((next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = State.InsideObjectDestructuringAfterComma
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -1748,6 +1752,18 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideSingleQuoteString
         } else {
           throw new Error('no')
+        }
+        break
+      case State.InsideObjectDestructuringAfterComma:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+          state = State.InsideObjectDestructuringAfterComma
+        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
+          token = TokenType.VariableName
+          state = State.InsideObjectDestructuringAfterValue
+        } else {
+          state = State.TopLevelContent
+          continue
         }
         break
       case State.AfterKeywordInterface:
