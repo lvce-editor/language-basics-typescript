@@ -105,7 +105,7 @@ Keyword
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
@@ -142,7 +142,7 @@ Keyword
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName

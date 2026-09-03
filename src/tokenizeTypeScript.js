@@ -357,6 +357,11 @@ const RE_DESTRUCTURED_ARROW_FUNCTION_TYPES = new RegExp(
 )
 const RE_PARAMETER_TYPE = new RegExp(`:\\s*(${SIMPLE_TYPE_PATTERN})`, 'g')
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
+const TYPE_IDENTIFIER_PATTERN = '[A-Z_\\$][\\w\\$]*'
+const RE_GENERIC_TYPE_ARGUMENTS = new RegExp(
+  `${TYPE_IDENTIFIER_PATTERN}<\\s*${TYPE_PRIMITIVE_PATTERN}\\s*,\\s*(${SIMPLE_TYPE_PATTERN}(?:\\s*,\\s*${SIMPLE_TYPE_PATTERN})*)\\s*>`,
+  'g'
+)
 
 const getTypeToken = (typeName) => {
   if (RE_TYPE_PRIMITIVE.test(typeName)) {
@@ -411,6 +416,16 @@ const getArrowFunctionTypeOffsets = (line) => {
   return offsets
 }
 
+const getGenericTypeArgumentOffsets = (line) => {
+  const offsets = new Map()
+  for (const match of line.matchAll(RE_GENERIC_TYPE_ARGUMENTS)) {
+    const typeArguments = match[1]
+    const typeArgumentsOffset = match.index + match[0].indexOf(typeArguments)
+    addTypeOffsets(offsets, typeArguments, typeArgumentsOffset)
+  }
+  return offsets
+}
+
 export const hasArrayReturn = true
 /**
  *
@@ -437,6 +452,7 @@ export const tokenizeLine = (line, lineState) => {
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
   const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
+  const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
@@ -449,6 +465,12 @@ export const tokenizeLine = (line, lineState) => {
           (next = part.match(RE_VARIABLE_NAME))
         ) {
           token = arrowFunctionTypeOffsets.get(index)
+          state = State.TopLevelContent
+        } else if (
+          genericTypeArgumentOffsets.has(index) &&
+          (next = part.match(RE_VARIABLE_NAME))
+        ) {
+          token = genericTypeArgumentOffsets.get(index)
           state = State.TopLevelContent
         } else if (
           objectDepth > 0 &&

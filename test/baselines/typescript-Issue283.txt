@@ -34,7 +34,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
