@@ -359,7 +359,7 @@ const SIMPLE_TYPE_MEMBER_PATTERN = `(?:readonly\\s+)?${IDENTIFIER_PATTERN}(?:${G
 const SIMPLE_TYPE_PATTERN = `${SIMPLE_TYPE_MEMBER_PATTERN}(?:\\s*[|&]\\s*${SIMPLE_TYPE_MEMBER_PATTERN})*`
 const SIMPLE_PARAMETER_PATTERN = `(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}(?:\\??\\s*:\\s*${SIMPLE_TYPE_PATTERN})?`
 const RE_SIMPLE_ARROW_FUNCTION = new RegExp(
-  `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
+  `(?:export\\s+)?(?:const|let|var)\\s+${IDENTIFIER_PATTERN}\\s*=\\s*(?:async\\s+)?\\((\\s*(?:${SIMPLE_PARAMETER_PATTERN}(?:\\s*,\\s*${SIMPLE_PARAMETER_PATTERN})*\\s*,?)?\\s*)\\)\\s*(?::\\s*(?:(${SIMPLE_TYPE_PATTERN})(?=\\s*=>)|(?:asserts\\s+)?${IDENTIFIER_PATTERN}\\s+is\\s+(?:keyof\\s+)?${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
 const RE_DESTRUCTURED_ARROW_FUNCTION_TYPES = new RegExp(
