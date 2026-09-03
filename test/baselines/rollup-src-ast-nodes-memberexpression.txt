@@ -813,7 +813,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Function
+KeywordControl
 Whitespace
 Punctuation
 VariableName

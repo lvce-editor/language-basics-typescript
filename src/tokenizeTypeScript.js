@@ -2136,7 +2136,11 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
-          state = State.TopLevelContent
+          state =
+            parenthesisDepth === 0 &&
+            stack.at(-1) === State.InsideReturnObjectValue
+              ? stack.pop()
+              : State.TopLevelContent
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           stack.push(state)
           token = TokenType.Comment

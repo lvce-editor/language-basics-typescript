@@ -89,7 +89,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+KeywordReturn
 Whitespace
 Punctuation
 Punctuation
