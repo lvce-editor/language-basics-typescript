@@ -2667,6 +2667,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_NUMERIC_2))) {
           token = TokenType.Numeric
           state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_SLASH))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
           state = State.InsideReturnObject
