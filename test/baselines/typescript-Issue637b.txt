@@ -8,11 +8,11 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-VariableName
+Type
 Whitespace
-Keyword
+KeywordOperator
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
@@ -20,11 +20,10 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Punctuation
 Whitespace
-Punctuation
 Punctuation
 Whitespace
 Punctuation
