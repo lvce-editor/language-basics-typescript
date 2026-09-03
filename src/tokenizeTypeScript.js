@@ -363,6 +363,10 @@ const RE_DESTRUCTURED_ARROW_FUNCTION_TYPES = new RegExp(
   `[}\\]]\\s*:\\s*(${SIMPLE_TYPE_PATTERN})\\s*\\)\\s*(?::\\s*(${SIMPLE_TYPE_PATTERN}))?\\s*=>`,
   'g'
 )
+const RE_ARROW_FUNCTION_RETURN_TYPE = new RegExp(
+  `^\\s*}\\)\\s*:\\s*(${SIMPLE_TYPE_PATTERN})\\s*=>`,
+  'g'
+)
 const RE_PARAMETER_TYPE = new RegExp(`:\\s*(${SIMPLE_TYPE_PATTERN})`, 'g')
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 const TYPE_IDENTIFIER_PATTERN = '[A-Z_\\$][\\w\\$]*'
@@ -394,6 +398,11 @@ const getArrowFunctionTypeOffsets = (line) => {
   const offsets = new Map()
   if (!line.includes(':') || !line.includes('=>')) {
     return offsets
+  }
+  for (const match of line.matchAll(RE_ARROW_FUNCTION_RETURN_TYPE)) {
+    const returnType = match[1]
+    const returnTypeOffset = match.index + match[0].indexOf(returnType)
+    addTypeOffsets(offsets, returnType, returnTypeOffset)
   }
   for (const match of line.matchAll(RE_SIMPLE_ARROW_FUNCTION)) {
     const parameters = match[1]
