@@ -5533,7 +5533,7 @@ Whitespace
 Type
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation
@@ -5569,7 +5569,7 @@ Whitespace
 Type
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation
@@ -5605,7 +5605,7 @@ Whitespace
 Type
 Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation
