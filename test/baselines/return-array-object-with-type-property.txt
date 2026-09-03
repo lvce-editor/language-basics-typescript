@@ -32,6 +32,15 @@ VariableName
 Punctuation
 NewLine
 Whitespace
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+VariableName
+Punctuation
+NewLine
+Whitespace
 Punctuation
 Punctuation
 NewLine
