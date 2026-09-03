@@ -2240,7 +2240,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
+          state = State.AfterInterfaceName
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
@@ -2670,6 +2670,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_NUMERIC_2))) {
           token = TokenType.Numeric
+          state = State.InsideReturnObjectValue
+        } else if ((next = part.match(RE_SLASH))) {
+          token = TokenType.Punctuation
           state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation

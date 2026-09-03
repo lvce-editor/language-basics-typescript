@@ -1469,13 +1469,13 @@ Type
 Punctuation
 NewLine
 Whitespace
-Class
+Type
 Whitespace
-Keyword
+KeywordModifier
 Whitespace
-KeywordOperator
+Type
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
