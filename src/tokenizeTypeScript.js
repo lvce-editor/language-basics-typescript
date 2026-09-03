@@ -223,6 +223,7 @@ const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
 const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME =
   /^[\w]+(?=\s*(\(|\=\s*function|\=\s*async\s*\(|\=\s*\())/
+const RE_PARENTHESIZED_AWAIT_VARIABLE_NAME = /^[\w]+(?=\s*=\s*\(\s*await\b)/
 const RE_ARROW_FUNCTION_PARAMETERS_START =
   /(?:^|\s)(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*(?:async\s+)?\($/
 const RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_START =
@@ -253,7 +254,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
-const RE_MODIFIER_TYPE_ASSERTION = /^as\s+(?:const|readonly)\b/
+const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<)/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -517,7 +518,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_MODIFIER_TYPE_ASSERTION.test(part)
+              state = RE_TYPE_ASSERTION.test(part)
                 ? State.BeforeType
                 : State.TopLevelContent
               break
@@ -769,6 +770,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_OF))) {
           token = TokenType.KeywordOperator
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_PARENTHESIZED_AWAIT_VARIABLE_NAME))) {
+          token = TokenType.VariableName
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
           state = State.AfterKeywordVariableDeclaration
@@ -1279,7 +1283,7 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_MODIFIER_TYPE_ASSERTION.test(part)
+              state = RE_TYPE_ASSERTION.test(part)
                 ? State.BeforeType
                 : State.TopLevelContent
               break

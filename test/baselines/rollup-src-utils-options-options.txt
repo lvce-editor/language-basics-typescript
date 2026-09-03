@@ -1654,9 +1654,9 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+Type
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive
