@@ -854,7 +854,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
@@ -970,7 +970,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

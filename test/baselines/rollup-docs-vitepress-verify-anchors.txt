@@ -70,12 +70,12 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -124,7 +124,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
@@ -148,7 +148,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

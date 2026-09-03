@@ -797,7 +797,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation

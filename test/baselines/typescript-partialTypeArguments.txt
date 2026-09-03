@@ -90,7 +90,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Numeric
@@ -152,7 +152,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
