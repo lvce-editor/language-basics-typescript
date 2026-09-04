@@ -139,6 +139,7 @@ export const initialLineState = {
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
   isGenericArrowFunctionParameters: false,
+  isTypeAssertion: false,
   objectDepth: 0,
   parenthesisDepth: 0,
   state: State.TopLevelContent,
@@ -472,6 +473,7 @@ export const tokenizeLine = (line, lineState) => {
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
   let isGenericArrowFunctionParameters =
     lineState.isGenericArrowFunctionParameters || false
+  let isTypeAssertion = lineState.isTypeAssertion || false
   const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
@@ -520,9 +522,8 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_TYPE_ASSERTION.test(part)
-                ? State.BeforeType
-                : State.TopLevelContent
+              isTypeAssertion = RE_TYPE_ASSERTION.test(part)
+              state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
               break
             case 'break':
             case 'case':
@@ -1288,9 +1289,8 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              state = RE_TYPE_ASSERTION.test(part)
-                ? State.BeforeType
-                : State.TopLevelContent
+              isTypeAssertion = RE_TYPE_ASSERTION.test(part)
+              state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
               break
             case 'break':
             case 'case':
@@ -2791,6 +2791,12 @@ export const tokenizeLine = (line, lineState) => {
     state = stack[containerIndex]
     stack.length = containerIndex
   } else if (state === State.AfterType) {
+    if (isTypeAssertion) {
+      while (stack.at(-1) === State.AfterType) {
+        stack.pop()
+      }
+      isTypeAssertion = false
+    }
     state = State.AfterTypeAfterNewLine
   } else if (state === State.AfterPropertyTypeQuery) {
     stack.pop()
@@ -2809,6 +2815,7 @@ export const tokenizeLine = (line, lineState) => {
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
     isGenericArrowFunctionParameters,
+    isTypeAssertion,
     objectDepth,
     parenthesisDepth,
     state,
