@@ -13172,7 +13172,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
@@ -13277,7 +13277,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName

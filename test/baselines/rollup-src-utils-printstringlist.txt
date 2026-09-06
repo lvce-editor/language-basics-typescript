@@ -11,7 +11,7 @@ Punctuation
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

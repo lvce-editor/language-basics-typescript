@@ -333,7 +333,7 @@ Punctuation
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -344,7 +344,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

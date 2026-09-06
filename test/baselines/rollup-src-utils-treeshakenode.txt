@@ -50,13 +50,13 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace

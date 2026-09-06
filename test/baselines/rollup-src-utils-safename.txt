@@ -36,7 +36,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -45,7 +45,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -55,12 +55,12 @@ Punctuation
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 NewLine
 Punctuation
 Punctuation

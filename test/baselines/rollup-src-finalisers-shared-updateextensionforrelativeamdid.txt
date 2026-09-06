@@ -43,14 +43,14 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 NewLine
 Punctuation
 Punctuation

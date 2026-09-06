@@ -66,11 +66,11 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 NewLine
 Punctuation
 Punctuation

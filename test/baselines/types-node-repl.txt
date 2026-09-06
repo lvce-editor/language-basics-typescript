@@ -3043,7 +3043,7 @@ VariableName
 Punctuation
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace

@@ -3555,11 +3555,11 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
