@@ -1,0 +1,16 @@
+Keyword
+Whitespace
+Type
+Whitespace
+Punctuation
+Whitespace
+KeywordOperator
+Whitespace
+KeywordImport
+Punctuation
+Punctuation
+String
+Punctuation
+Punctuation
+Punctuation
+NewLine
