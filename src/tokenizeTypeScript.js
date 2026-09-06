@@ -195,7 +195,6 @@ const RE_REGEX =
 const RE_ANYTHING_UNTIL_END = /^.+/s
 const RE_CURLY_OPEN = /^\{/
 const RE_CURLY_CLOSE = /^\}/
-const RE_OBJECT_TYPE_PARAMETER_END = /^\}(?=\s*\)\s*=>)/
 const RE_KEYWORD_CLASS_PROPERTY_MODIFIER =
   /^(?:override|public|protected|private|readonly|accessor)\b/
 
@@ -1140,7 +1139,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterType
         } else if (
           stack.at(-1) === State.InsideTypeObject &&
-          (next = part.match(RE_OBJECT_TYPE_PARAMETER_END))
+          (next = part.match(RE_CURLY_CLOSE))
         ) {
           token = TokenType.Punctuation
           stack.pop()
