@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import { test } from 'node:test'
 import {
   initialLineState,
@@ -81,6 +82,19 @@ test('highlights multiline TSX tag punctuation', () => {
   assert.deepEqual(getTagTokens(source), [
     ['PunctuationTag', '<'],
     ['TagName', 'Button'],
+    ['PunctuationTag', '/>'],
+  ])
+})
+
+test('preserves TSX highlighting after import type queries', async () => {
+  const source = await readFile(
+    new URL('./cases/typeof-import-code-editor.tsx', import.meta.url),
+    'utf8'
+  )
+
+  assert.deepEqual(getTagTokens(source), [
+    ['PunctuationTag', '<'],
+    ['TagName', 'Pane'],
     ['PunctuationTag', '/>'],
   ])
 })
