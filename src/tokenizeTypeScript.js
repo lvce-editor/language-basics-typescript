@@ -62,6 +62,8 @@ const State = {
   InsideEmbeddedBacktickString: 59,
   BeforeGenericCallTypeArguments: 60,
   InsideObjectDestructuringAfterComma: 61,
+  InsideTypeImport: 62,
+  AfterTypeImport: 63,
 }
 
 /**
@@ -268,6 +270,7 @@ const RE_SET = /^Set\b/
 
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
+const RE_KEYWORD_IMPORT = /^import\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_INLINE_GENERIC_TYPE_QUERY = /<\s*typeof\b/
 const RE_DECLARE = /^declare\b/
@@ -1229,6 +1232,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(State.AfterType)
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
+          state = State.AfterType
+        } else if ((next = part.match(RE_NUMERIC))) {
+          token = TokenType.Numeric
           state = State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
@@ -2424,11 +2430,63 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordTypeOf
+        } else if ((next = part.match(RE_KEYWORD_IMPORT))) {
+          const returnState = stack.pop()
+          stack.push(
+            returnState === State.BeforeType ? State.AfterType : returnState
+          )
+          token = TokenType.KeywordImport
+          state = State.InsideTypeImport
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = stack.pop() || State.TopLevelContent
         } else {
           throw new Error('no')
+        }
+        break
+      case State.InsideTypeImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterTypeImport
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.AfterType
+          continue
+        }
+        break
+      case State.AfterTypeImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if ((next = part.match(RE_DOT))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.BeforePropertyAccess
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.AfterType
+          continue
         }
         break
       case State.AfterKeywordPropertyTypeOf:
