@@ -1055,9 +1055,8 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Punctuation

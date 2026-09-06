@@ -213,9 +213,8 @@ KeywordModifier
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 NewLine
