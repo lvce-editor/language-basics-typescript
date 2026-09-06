@@ -11,7 +11,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 VariableName
 Whitespace

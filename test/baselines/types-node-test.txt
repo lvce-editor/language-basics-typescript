@@ -6768,7 +6768,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-KeywordControl
+VariableName
 Punctuation
 Whitespace
 VariableName
