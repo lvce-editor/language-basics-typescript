@@ -202,11 +202,11 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine

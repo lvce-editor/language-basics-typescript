@@ -362,7 +362,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
@@ -1297,7 +1297,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Whitespace
 Punctuation
 NewLine
@@ -4339,7 +4339,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace

@@ -1226,7 +1226,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 NewLine
 Whitespace
