@@ -258,7 +258,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
-const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<)/
+const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<|\{)/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -1137,6 +1137,19 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if (
+          isTypeAssertion &&
+          stack.at(-1) === State.InsideTypeObject &&
+          RE_CURLY_CLOSE.test(part)
+        ) {
+          state = stack.pop()
+          continue
+        } else if (isTypeAssertion && (next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.BeforeType
+        } else if (isTypeAssertion && (next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterType
@@ -1254,6 +1267,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if (isTypeAssertion && (next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterType
@@ -1891,6 +1908,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideTypeObject
+        } else if (isTypeAssertion && (next = part.match(RE_ARROW))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           token = TokenType.Comment
           state = State.InsideBlockComment
