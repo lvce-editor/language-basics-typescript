@@ -62,6 +62,7 @@ const State = {
   InsideEmbeddedBacktickString: 59,
   BeforeGenericCallTypeArguments: 60,
   InsideObjectDestructuringAfterComma: 61,
+  AfterTypeObject: 62,
 }
 
 /**
@@ -157,6 +158,8 @@ const RE_KEYWORD =
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
 const RE_OBJECT_PROPERTY_TYPE = /^type(?=\s*:)/
+const RE_MAPPED_TYPE_EXTENDS = /^extends(?=\s)(?!\s*\??:)/
+const RE_MAPPED_TYPE_AS = /^as(?=\s)(?!\s*\??:)/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-\*]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
@@ -166,6 +169,7 @@ const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
+const RE_COLON_BEFORE_OBJECT_TYPE = /^:(?=\s*\{)/
 const RE_COLON_OPTIONAL = /^\??\:/
 const TYPE_PRIMITIVE_PATTERN =
   '(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false|unknown)'
@@ -1146,6 +1150,13 @@ export const tokenizeLine = (line, lineState) => {
           stack.pop()
           state = State.AfterType
         } else if (
+          stack.at(-1) === State.InsideTypeObject &&
+          (next = part.match(RE_CURLY_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          stack.pop()
+          state = State.AfterTypeObject
+        } else if (
           stack.includes(State.AfterArrowFunctionReturnType) &&
           (next = part.match(RE_ARROW))
         ) {
@@ -1399,6 +1410,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterTypeAfterNewLine
+        } else if ((next = part.match(RE_COLON_BEFORE_OBJECT_TYPE))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -1874,6 +1888,26 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.AfterTypeObject:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if (
+          (next = part.match(RE_VERTICAL_LINE)) ||
+          (next = part.match(RE_AMPERSAND))
+        ) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          token = TokenType.Comment
+          stack.push(state)
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.TopLevelContent
+          continue
+        }
+        break
       case State.InsideTypeObject:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -1892,12 +1926,18 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_IN))) {
           token = TokenType.KeywordOperator
           state = State.InsideTypeObject
+        } else if ((next = part.match(RE_MAPPED_TYPE_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.InsideTypeObject
+        } else if ((next = part.match(RE_MAPPED_TYPE_AS))) {
+          token = TokenType.KeywordControl
+          state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.TopLevelContent
+          state = State.AfterTypeObject
         } else if ((next = part.match(RE_COLON_OPTIONAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType

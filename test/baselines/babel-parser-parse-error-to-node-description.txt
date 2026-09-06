@@ -271,7 +271,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Punctuation
 Whitespace
 Type

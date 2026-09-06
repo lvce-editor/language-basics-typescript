@@ -117,10 +117,10 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
-VariableName
+Type
 Punctuation
 NewLine
 VariableName

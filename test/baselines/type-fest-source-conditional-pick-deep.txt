@@ -401,7 +401,7 @@ Whitespace
 Type
 Punctuation
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 NewLine

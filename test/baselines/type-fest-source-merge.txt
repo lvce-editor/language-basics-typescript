@@ -71,11 +71,11 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Whitespace
@@ -101,7 +101,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 NewLine

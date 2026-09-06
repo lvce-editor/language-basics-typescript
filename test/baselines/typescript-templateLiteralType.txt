@@ -1197,14 +1197,14 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Whitespace

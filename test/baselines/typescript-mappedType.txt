@@ -93,14 +93,15 @@ Punctuation
 Whitespace
 Class
 Whitespace
-Text
+Punctuation
 Punctuation
 Whitespace
 Comment
+Comment
 NewLine
-VariableName
+Keyword
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 Whitespace
@@ -302,7 +303,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 Keyword
 Whitespace
@@ -343,7 +343,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 Keyword
 Whitespace
@@ -381,7 +380,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 Keyword

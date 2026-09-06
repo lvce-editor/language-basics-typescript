@@ -28,7 +28,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 KeywordImport
 Whitespace

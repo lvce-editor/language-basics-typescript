@@ -1032,7 +1032,15 @@ Type
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Type
+Whitespace
+Punctuation
+Whitespace
+Type
 Punctuation
 NewLine
 Whitespace
@@ -1048,7 +1056,7 @@ Whitespace
 Punctuation
 NewLine
 Whitespace
-VariableName
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
