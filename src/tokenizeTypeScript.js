@@ -65,6 +65,7 @@ const State = {
   InsideTypeImport: 62,
   AfterTypeImport: 63,
   AfterParenthesizedType: 64,
+  AfterTypeObject: 65,
 }
 
 /**
@@ -160,6 +161,8 @@ const RE_KEYWORD =
 const RE_WHITESPACE = /^\s+/
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
 const RE_OBJECT_PROPERTY_TYPE = /^type(?=\s*:)/
+const RE_MAPPED_TYPE_EXTENDS = /^extends(?=\s)(?!\s*\??:)/
+const RE_MAPPED_TYPE_AS = /^as(?=\s)(?!\s*\??:)/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-\*]/
 const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
@@ -1926,6 +1929,26 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
+      case State.AfterTypeObject:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if (
+          (next = part.match(RE_VERTICAL_LINE)) ||
+          (next = part.match(RE_AMPERSAND))
+        ) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          token = TokenType.Comment
+          stack.push(state)
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.TopLevelContent
+          continue
+        }
+        break
       case State.InsideTypeObject:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
@@ -1947,12 +1970,18 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_IN))) {
           token = TokenType.KeywordOperator
           state = State.InsideTypeObject
+        } else if ((next = part.match(RE_MAPPED_TYPE_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.InsideTypeObject
+        } else if ((next = part.match(RE_MAPPED_TYPE_AS))) {
+          token = TokenType.KeywordControl
+          state = State.InsideTypeObject
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideTypeObject
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.TopLevelContent
+          state = State.AfterTypeObject
         } else if ((next = part.match(RE_COLON_OPTIONAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType

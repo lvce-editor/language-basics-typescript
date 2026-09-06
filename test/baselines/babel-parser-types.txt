@@ -432,7 +432,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 KeywordImport
@@ -1076,7 +1076,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 KeywordImport
@@ -1191,7 +1190,6 @@ NewLine
 Punctuation
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -1225,7 +1223,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -1588,7 +1585,6 @@ NewLine
 Punctuation
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -1711,7 +1707,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -1879,7 +1874,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -1958,7 +1952,6 @@ NewLine
 Punctuation
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -2203,7 +2196,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -2348,7 +2340,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -2473,7 +2464,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -2769,7 +2759,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -2946,7 +2935,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -3123,7 +3111,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -3818,7 +3805,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -4978,7 +4964,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -5006,7 +4991,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
 KeywordImport
@@ -5219,7 +5203,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 NewLine
@@ -5431,10 +5414,8 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 KeywordImport

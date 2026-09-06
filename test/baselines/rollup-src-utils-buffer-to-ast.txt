@@ -12467,7 +12467,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 NewLine
 KeywordImport

@@ -3113,7 +3113,6 @@ Punctuation
 NewLine
 Whitespace
 Comment
-Comment
 NewLine
 Whitespace
 Keyword

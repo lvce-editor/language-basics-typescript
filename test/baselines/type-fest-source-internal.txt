@@ -2483,7 +2483,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -2597,7 +2597,7 @@ Punctuation
 Whitespace
 TypePrimitive
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -2612,7 +2612,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 NewLine
@@ -3974,7 +3974,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordControl
 Whitespace
 VariableName
 Text

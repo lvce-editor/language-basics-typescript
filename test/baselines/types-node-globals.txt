@@ -89,7 +89,7 @@ VariableName
 Whitespace
 VariableName
 Whitespace
-VariableName
+KeywordOperator
 Whitespace
 VariableName
 Punctuation
@@ -710,7 +710,6 @@ Whitespace
 Punctuation
 Punctuation
 NewLine
-Comment
 Comment
 NewLine
 NewLine

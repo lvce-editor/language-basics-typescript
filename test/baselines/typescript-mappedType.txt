@@ -303,7 +303,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 Keyword
 Whitespace
@@ -344,7 +343,6 @@ Punctuation
 NewLine
 NewLine
 Comment
-Comment
 NewLine
 Keyword
 Whitespace
@@ -382,7 +380,6 @@ NewLine
 Punctuation
 NewLine
 NewLine
-Comment
 Comment
 NewLine
 Keyword
