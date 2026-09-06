@@ -1032,11 +1032,13 @@ Type
 Whitespace
 Type
 Whitespace
+Punctuation
+Whitespace
 Text
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine
