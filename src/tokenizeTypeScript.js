@@ -162,6 +162,7 @@ const RE_KEYWORD =
   /^(?:yield|with|while|void|var|undefined|typeof|type|true|try|throw|this|static|switch|super|readonly|return|public|protected|private|package|null|new|let|interface|instanceof|in|import|implements|if|function|for|finally|from|false|extends|export|enum|else|do|delete|default|debugger|declare|continue|const|constructor|class|catch|case|break|await|async|accessor|abstract|as)\b/
 
 const RE_WHITESPACE = /^\s+/
+const RE_NON_ASCII_TEXT = /^[^\x00-\x7f]+/u
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
 const RE_OBJECT_PROPERTY_TYPE = /^type(?=\s*:)/
 const RE_MAPPED_TYPE_EXTENDS = /^extends(?=\s)(?!\s*\??:)/
@@ -771,6 +772,9 @@ export const tokenizeLine = (line, lineState) => {
           } else {
             state = State.TopLevelContent
           }
+        } else if ((next = part.match(RE_NON_ASCII_TEXT))) {
+          token = TokenType.Text
+          state = State.TopLevelContent
         } else {
           part //?
           throw new Error('no')
