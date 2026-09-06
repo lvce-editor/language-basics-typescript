@@ -240,7 +240,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive
@@ -2309,7 +2309,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -2342,7 +2342,7 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -2784,7 +2784,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive

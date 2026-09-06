@@ -234,7 +234,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type
@@ -249,7 +249,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace

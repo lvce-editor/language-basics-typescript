@@ -66,6 +66,7 @@ const State = {
   AfterTypeImport: 63,
   AfterParenthesizedType: 64,
   AfterTypeObject: 65,
+  AfterFunctionName: 66,
 }
 
 /**
@@ -140,6 +141,8 @@ export const TokenMap = {
 }
 
 export const initialLineState = {
+  functionParameterDepth: 0,
+  functionParameterBraceDepth: 0,
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
   isGenericArrowFunctionParameters: false,
@@ -381,6 +384,10 @@ const RE_ARROW_FUNCTION_RETURN_TYPE = new RegExp(
   'g'
 )
 const RE_PARAMETER_TYPE = new RegExp(`:\\s*(${SIMPLE_TYPE_PATTERN})`, 'g')
+const RE_FUNCTION_PARAMETER_TYPE = new RegExp(
+  `(?:^|[(,])\\s*(?:\\.\\.\\.)?${IDENTIFIER_PATTERN}\\??\\s*:\\s*(${SIMPLE_TYPE_PATTERN})`,
+  'g'
+)
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 const TYPE_IDENTIFIER_PATTERN = '[A-Z_\\$][\\w\\$]*'
 const RE_GENERIC_TYPE_ARGUMENTS = new RegExp(
@@ -405,6 +412,20 @@ const addTypeOffsets = (offsets, type, typeOffset) => {
     }
     offsets.set(typeOffset + typeMatch.index, getTypeToken(typeMatch[0]))
   }
+}
+
+const getFunctionParameterTypeOffsets = (line) => {
+  const offsets = new Map()
+  for (const match of line.matchAll(RE_FUNCTION_PARAMETER_TYPE)) {
+    const type = match[1]
+    const typeOffset = match.index + match[0].lastIndexOf(type)
+    for (const typeMatch of type.matchAll(RE_TYPE_NAME)) {
+      if (RE_TYPE_PRIMITIVE.test(typeMatch[0])) {
+        offsets.set(typeOffset + typeMatch.index, TokenType.TypePrimitive)
+      }
+    }
+  }
+  return offsets
 }
 
 const getArrowFunctionTypeOffsets = (line) => {
@@ -477,6 +498,8 @@ export const tokenizeLine = (line, lineState) => {
   let embeddedLanguageTag = ''
   let objectDepth = lineState.objectDepth || 0
   let parenthesisDepth = lineState.parenthesisDepth || 0
+  let functionParameterDepth = lineState.functionParameterDepth || 0
+  let functionParameterBraceDepth = lineState.functionParameterBraceDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
@@ -486,12 +509,21 @@ export const tokenizeLine = (line, lineState) => {
   const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
+  const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
+          state = State.TopLevelContent
+        } else if (
+          functionParameterDepth > 0 &&
+          functionParameterBraceDepth === 0 &&
+          functionParameterTypeOffsets.has(index) &&
+          (next = part.match(RE_VARIABLE_NAME))
+        ) {
+          token = functionParameterTypeOffsets.get(index)
           state = State.TopLevelContent
         } else if (
           arrowFunctionTypeOffsets.has(index) &&
@@ -2448,7 +2480,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordFunction
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.FunctionName
-          state = State.TopLevelContent
+          state = State.AfterFunctionName
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -2458,6 +2490,23 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideBlockComment
         } else {
           throw new Error('no')
+        }
+        break
+      case State.AfterFunctionName:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+          functionParameterDepth = parenthesisDepth + 1
+          functionParameterBraceDepth = 0
+          state = State.TopLevelContent
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else {
+          state = State.TopLevelContent
+          continue
         }
         break
       case State.AfterKeywordInstanceOf:
@@ -2911,10 +2960,24 @@ export const tokenizeLine = (line, lineState) => {
     ) {
       objectDepth--
     }
+    if (functionParameterDepth > 0 && token === TokenType.Punctuation) {
+      if (next[0] === '{') {
+        functionParameterBraceDepth++
+      } else if (next[0] === '}') {
+        functionParameterBraceDepth = Math.max(
+          0,
+          functionParameterBraceDepth - 1
+        )
+      }
+    }
     if (token === TokenType.Punctuation && next[0] === '(') {
       parenthesisDepth++
     } else if (token === TokenType.Punctuation && next[0] === ')') {
       parenthesisDepth = Math.max(0, parenthesisDepth - 1)
+      if (parenthesisDepth < functionParameterDepth) {
+        functionParameterDepth = 0
+        functionParameterBraceDepth = 0
+      }
     }
     const tokenLength = next[0].length
     index += tokenLength
@@ -2957,6 +3020,8 @@ export const tokenizeLine = (line, lineState) => {
     embeddedLanguageEnd,
     embeddedLanguageStart,
     embeddedLanguageState,
+    functionParameterDepth,
+    functionParameterBraceDepth,
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
     isGenericArrowFunctionParameters,

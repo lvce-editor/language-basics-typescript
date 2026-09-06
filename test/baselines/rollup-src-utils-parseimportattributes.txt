@@ -858,7 +858,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -871,7 +871,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

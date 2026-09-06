@@ -457,7 +457,7 @@ VariableName
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 NewLine
 Punctuation
 Punctuation
@@ -1152,7 +1152,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 NewLine
 Punctuation
 Punctuation
@@ -1295,7 +1295,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 NewLine
 Punctuation
 Punctuation
@@ -1647,7 +1647,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Whitespace
@@ -1723,7 +1723,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -1739,7 +1739,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -2072,7 +2072,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation
@@ -2243,7 +2243,7 @@ Punctuation
 Whitespace
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine

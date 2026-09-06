@@ -801,7 +801,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
@@ -810,7 +810,7 @@ Punctuation
 Whitespace
 KeywordModifier
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -819,7 +819,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
