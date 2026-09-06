@@ -178,7 +178,6 @@ const RE_PARAMETER_DEFAULT_EQUAL = /^=(?!>)/
 const RE_PARAMETER_DEFAULT_WHITESPACE = /^\s+(?==(?!>))/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^const\b/
-const RE_KEYWORD_CONST_LET = /^(?:const|let)/
 const RE_KEYWORD_VARIABLE_DECLARATION = /^(?:const|let|var)\b/
 const RE_KEYWORD_LET = /^(?:let)/
 const RE_KEYWORD_ENUM = /^(?:enum)/
@@ -249,6 +248,7 @@ const RE_QUOTE_BACKTICK = /^`/
 const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
 const RE_STRING_ESCAPE = /^\\./
 const RE_KEYWORD_TYPE = /^type\b/
+const RE_EXPORT_TYPE_LIST = /^type\b(?=\s*(?:\{|\*))/
 const RE_KEYWORD_IN = /^in\b/
 const RE_KEYWORD_OF = /^of\b/
 const RE_KEYWORD_FUNCTION = /^function\b/
@@ -519,6 +519,9 @@ export const tokenizeLine = (line, lineState) => {
               state = State.AfterKeywordImport
               break
             case 'export':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordExport
+              break
             case 'from':
               token = TokenType.KeywordImport
               state = State.TopLevelContent
@@ -1289,6 +1292,9 @@ export const tokenizeLine = (line, lineState) => {
               state = State.AfterKeywordImport
               break
             case 'export':
+              token = TokenType.KeywordImport
+              state = State.AfterKeywordExport
+              break
             case 'from':
               token = TokenType.KeywordImport
               state = State.TopLevelContent
@@ -2273,12 +2279,12 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideImportStructure
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = State.AfterKeywordImport
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
           state = State.InsideImportStructure
         } else if ((next = part.match(RE_KEYWORD_TYPE))) {
-          token = TokenType.KeywordControl
+          token = TokenType.KeywordImport
           state = State.InsideImportStructure
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
@@ -2297,6 +2303,14 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else {
           throw new Error('no')
         }
@@ -2306,7 +2320,7 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Whitespace
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_KEYWORD_TYPE))) {
-          token = TokenType.KeywordControl
+          token = TokenType.KeywordImport
           state = State.AfterKeywordImport
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
@@ -2338,6 +2352,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.AfterKeywordImport
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else {
           throw new Error('no')
         }
@@ -2771,36 +2793,23 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordExport
-        } else if ((next = part.match(RE_KEYWORD_CONST_LET))) {
-          token = TokenType.Keyword
-          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
-          state = State.TopLevelContent
-        } else if ((next = part.match(RE_KEYWORD_INTERFACE))) {
-          token = TokenType.Keyword
-          state = State.AfterKeywordInterface
-        } else if ((next = part.match(RE_KEYWORD_TYPE))) {
-          token = TokenType.KeywordControl
-          state = State.BeforeType
-        } else if ((next = part.match(RE_STAR))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
-        } else if ((next = part.match(RE_KEYWORD_FUNCTION))) {
-          token = TokenType.Keyword
-          state = State.AfterKeywordFunction
-        } else if ((next = part.match(RE_VARIABLE_NAME))) {
-          token = TokenType.VariableName
-          state = State.TopLevelContent
+          state = State.InsideImportStructure
+        } else if ((next = part.match(RE_EXPORT_TYPE_LIST))) {
+          token = TokenType.KeywordImport
+          state = State.AfterKeywordImport
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
-          stack.push(State.AfterKeywordExport)
-        } else if ((next = part.match(RE_PUNCTUATION))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else {
-          throw new Error(`no`)
+          state = State.TopLevelContent
+          continue
         }
         break
       default:
