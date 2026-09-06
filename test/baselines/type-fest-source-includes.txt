@@ -71,7 +71,15 @@ Whitespace
 Punctuation
 Type
 Punctuation
-Text
+Numeric
+Punctuation
+Punctuation
+Whitespace
+Punctuation
+Type
+Whitespace
+Type
+Punctuation
 NewLine
 Whitespace
 Punctuation

@@ -96,7 +96,7 @@ Type
 Whitespace
 Type
 Whitespace
-Text
+Numeric
 NewLine
 Whitespace
 Punctuation
@@ -281,7 +281,7 @@ Type
 Whitespace
 Type
 Whitespace
-Text
+Numeric
 NewLine
 Whitespace
 Punctuation
@@ -481,7 +481,7 @@ Type
 Whitespace
 Type
 Whitespace
-Text
+Numeric
 NewLine
 Whitespace
 Punctuation

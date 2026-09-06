@@ -282,7 +282,8 @@ Type
 Punctuation
 Punctuation
 Punctuation
-Text
+Numeric
+Punctuation
 Punctuation
 NewLine
 NewLine
@@ -298,7 +299,12 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Text
+Numeric
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
