@@ -502,7 +502,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-Class
+VariableName
 Whitespace
 Punctuation
 Punctuation
@@ -1032,11 +1032,13 @@ Type
 Whitespace
 Type
 Whitespace
+Punctuation
+Whitespace
 Text
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 Whitespace
 Punctuation
 NewLine

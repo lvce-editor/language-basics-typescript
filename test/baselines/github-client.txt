@@ -1,6 +1,6 @@
 KeywordImport
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -213,9 +213,8 @@ KeywordModifier
 Whitespace
 VariableName
 Punctuation
-Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 NewLine

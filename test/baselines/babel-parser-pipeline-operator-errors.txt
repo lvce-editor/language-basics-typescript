@@ -1,6 +1,6 @@
 KeywordImport
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -92,9 +92,9 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Type
+KeywordOperator
 Whitespace
-Type
+Class
 Punctuation
 Type
 Whitespace

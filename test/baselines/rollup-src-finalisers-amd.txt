@@ -1,6 +1,6 @@
 KeywordImport
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -21,7 +21,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 Punctuation
 Whitespace
@@ -38,7 +38,7 @@ Punctuation
 NewLine
 KeywordImport
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 Punctuation
 Whitespace

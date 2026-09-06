@@ -1,7 +1,7 @@
 KeywordImport
 Whitespace
 Punctuation
-KeywordControl
+KeywordImport
 Whitespace
 VariableName
 Punctuation

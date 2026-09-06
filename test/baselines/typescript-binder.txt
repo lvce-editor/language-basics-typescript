@@ -52,11 +52,11 @@ Punctuation
 Whitespace
 Type
 Whitespace
-Text
+Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -69,7 +69,7 @@ Punctuation
 NewLine
 NewLine
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Punctuation
@@ -83,7 +83,7 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 VariableName
 Whitespace
