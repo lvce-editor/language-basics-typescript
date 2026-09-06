@@ -43,7 +43,7 @@ Class
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Class
 Punctuation
 Punctuation
 Whitespace

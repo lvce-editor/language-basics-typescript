@@ -16860,7 +16860,7 @@ Type
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Punctuation
 NewLine
 Whitespace

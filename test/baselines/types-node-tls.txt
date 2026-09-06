@@ -2812,13 +2812,13 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Punctuation
 Punctuation
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 Whitespace
 Punctuation
 Whitespace
