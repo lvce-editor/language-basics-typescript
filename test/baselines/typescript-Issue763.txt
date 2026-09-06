@@ -38,9 +38,12 @@ Punctuation
 Punctuation
 Whitespace
 Punctuation
+Whitespace
+TypePrimitive
+Punctuation
 Punctuation
 Whitespace
-VariableName
-Text
+TypePrimitive
+Punctuation
 NewLine
-Text
+Punctuation

@@ -243,13 +243,7 @@ Whitespace
 Type
 Punctuation
 Whitespace
-Punctuation
-Whitespace
-VariableName
-Whitespace
-Punctuation
-Whitespace
-VariableName
+Text
 Punctuation
 NewLine
 NewLine

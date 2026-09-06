@@ -62,6 +62,12 @@ Numeric
 Whitespace
 Type
 Whitespace
+Numeric
+Whitespace
+Punctuation
+Whitespace
+Type
+Whitespace
 Text
 Punctuation
 NewLine

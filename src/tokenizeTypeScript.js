@@ -62,7 +62,10 @@ const State = {
   InsideEmbeddedBacktickString: 59,
   BeforeGenericCallTypeArguments: 60,
   InsideObjectDestructuringAfterComma: 61,
-  AfterTypeObject: 62,
+  InsideTypeImport: 62,
+  AfterTypeImport: 63,
+  AfterParenthesizedType: 64,
+  AfterTypeObject: 65,
 }
 
 /**
@@ -169,7 +172,6 @@ const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
 const RE_COLON = /^\:/
-const RE_COLON_BEFORE_OBJECT_TYPE = /^:(?=\s*\{)/
 const RE_COLON_OPTIONAL = /^\??\:/
 const TYPE_PRIMITIVE_PATTERN =
   '(?:string|boolean|number|bigint|symbol|void|any|null|undefined|object|true|false|unknown)'
@@ -199,7 +201,6 @@ const RE_REGEX =
 const RE_ANYTHING_UNTIL_END = /^.+/s
 const RE_CURLY_OPEN = /^\{/
 const RE_CURLY_CLOSE = /^\}/
-const RE_OBJECT_TYPE_PARAMETER_END = /^\}(?=\s*\)\s*=>)/
 const RE_KEYWORD_CLASS_PROPERTY_MODIFIER =
   /^(?:override|public|protected|private|readonly|accessor)\b/
 
@@ -261,7 +262,7 @@ const RE_KEYWORD_READONLY = /^readonly\b/
 const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
-const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<)/
+const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<|\{)/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -272,6 +273,7 @@ const RE_SET = /^Set\b/
 
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
+const RE_KEYWORD_IMPORT = /^import\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
 const RE_INLINE_GENERIC_TYPE_QUERY = /<\s*typeof\b/
 const RE_DECLARE = /^declare\b/
@@ -281,6 +283,9 @@ const RE_OBJECT_ARGUMENT_START = /(?:,|\()\s*$/
 const RE_NAMED_ARROW_FUNCTION_TYPE = /(?:\:|\<)\s*([A-Z_\$][\w\$]*)/g
 const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
+const RE_PARENTHESIZED_UNION_ARRAY =
+  /^\(\s*(?:[\w$]+|"[^"]*"|'[^']*')(?:\s*\|\s*(?:[\w$]+|"[^"]*"|'[^']*'))+\s*\)\s*\[/
+const RE_FUNCTION_PARAMETER_END = /^\)\s*=>/
 const RE_FUNCTION_TYPE_ALIAS =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
@@ -867,7 +872,8 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
           state =
-            stack.at(-1) === State.AfterArrowFunctionReturnType
+            stack.at(-1) === State.AfterArrowFunctionReturnType ||
+            stack.at(-1) === State.AfterParenthesizedType
               ? State.AfterType
               : stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
@@ -896,8 +902,14 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-          stack.push(State.AfterTypeExpression)
+          if (RE_PARENTHESIZED_UNION_ARRAY.test(part)) {
+            // Keep the union's enclosing state until its closing parenthesis.
+            state = State.BeforeType
+            stack.push(State.AfterParenthesizedType)
+          } else {
+            state = State.InsideTypeExpression
+            stack.push(State.AfterTypeExpression)
+          }
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -1069,6 +1081,13 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.AfterTypeExpression
+          if (
+            state === State.InsideMethodParameters &&
+            RE_FUNCTION_PARAMETER_END.test(part)
+          ) {
+            // The outer parameter list has already consumed its closing parenthesis.
+            state = State.AfterMethodParameters
+          }
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1139,15 +1158,21 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if (
+          isTypeAssertion &&
+          stack.at(-1) === State.InsideTypeObject &&
+          RE_CURLY_CLOSE.test(part)
+        ) {
+          state = stack.pop()
+          continue
+        } else if (isTypeAssertion && (next = part.match(RE_KEYWORD_EXTENDS))) {
+          token = TokenType.KeywordOperator
+          state = State.BeforeType
+        } else if (isTypeAssertion && (next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterType
-        } else if (
-          stack.at(-1) === State.InsideTypeObject &&
-          (next = part.match(RE_OBJECT_TYPE_PARAMETER_END))
-        ) {
-          token = TokenType.Punctuation
-          stack.pop()
           state = State.AfterType
         } else if (
           stack.at(-1) === State.InsideTypeObject &&
@@ -1155,7 +1180,7 @@ export const tokenizeLine = (line, lineState) => {
         ) {
           token = TokenType.Punctuation
           stack.pop()
-          state = State.AfterTypeObject
+          state = State.AfterType
         } else if (
           stack.includes(State.AfterArrowFunctionReturnType) &&
           (next = part.match(RE_ARROW))
@@ -1193,9 +1218,13 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          if (
-            isGenericArrowFunctionParameters &&
-            stack.at(-1) === State.InsideMethodParameters
+          if (stack.at(-1) === State.AfterParenthesizedType) {
+            stack.pop()
+            state = State.AfterType
+          } else if (
+            stack.at(-1) === State.InsideMethodParameters &&
+            (isGenericArrowFunctionParameters ||
+              RE_FUNCTION_PARAMETER_END.test(part))
           ) {
             stack.pop()
             state = State.AfterMethodParameters
@@ -1244,6 +1273,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
           state = State.AfterType
+        } else if ((next = part.match(RE_NUMERIC))) {
+          token = TokenType.Numeric
+          state = State.AfterType
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Type
           state = State.AfterType
@@ -1260,6 +1292,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
+        } else if (isTypeAssertion && (next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterType
@@ -1283,7 +1319,15 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterTypeAfterNewLine:
-        if ((next = part.match(RE_KEYWORD))) {
+        if (
+          // A type query can continue with conditional branches on later lines.
+          stack.at(-1) === State.BeforeType &&
+          ((next = part.match(RE_QUESTION_MARK)) ||
+            (next = part.match(RE_COLON)))
+        ) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':
             case 'false':
@@ -1410,9 +1454,6 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterTypeAfterNewLine
-        } else if ((next = part.match(RE_COLON_BEFORE_OBJECT_TYPE))) {
-          token = TokenType.Punctuation
-          state = State.BeforeType
         } else if ((next = part.match(RE_EQUAL))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -1912,6 +1953,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideTypeObject
+        } else if (isTypeAssertion && (next = part.match(RE_ARROW))) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           token = TokenType.Comment
           state = State.InsideBlockComment
@@ -2486,11 +2530,63 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordTypeOf
+        } else if ((next = part.match(RE_KEYWORD_IMPORT))) {
+          const returnState = stack.pop()
+          stack.push(
+            returnState === State.BeforeType ? State.AfterType : returnState
+          )
+          token = TokenType.KeywordImport
+          state = State.InsideTypeImport
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = stack.pop() || State.TopLevelContent
         } else {
           throw new Error('no')
+        }
+        break
+      case State.InsideTypeImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if ((next = part.match(RE_ROUND_OPEN))) {
+          token = TokenType.Punctuation
+        } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.InsideDoubleQuoteString
+        } else if ((next = part.match(RE_ROUND_CLOSE))) {
+          token = TokenType.Punctuation
+          state = State.AfterTypeImport
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.AfterType
+          continue
+        }
+        break
+      case State.AfterTypeImport:
+        if ((next = part.match(RE_WHITESPACE))) {
+          token = TokenType.Whitespace
+        } else if ((next = part.match(RE_DOT))) {
+          stack.push(state)
+          token = TokenType.Punctuation
+          state = State.BeforePropertyAccess
+        } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
+        } else {
+          state = stack.pop() || State.AfterType
+          continue
         }
         break
       case State.AfterKeywordPropertyTypeOf:

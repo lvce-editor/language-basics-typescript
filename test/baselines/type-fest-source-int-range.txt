@@ -230,6 +230,8 @@ Type
 Whitespace
 Type
 Whitespace
+Numeric
+Whitespace
 Text
 NewLine
 Whitespace
