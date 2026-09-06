@@ -35,7 +35,7 @@ KeywordImport
 Whitespace
 Punctuation
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 VariableName
 Punctuation
@@ -90,12 +90,12 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 VariableName
 Punctuation
 Whitespace
-KeywordControl
+KeywordImport
 Whitespace
 VariableName
 Whitespace
