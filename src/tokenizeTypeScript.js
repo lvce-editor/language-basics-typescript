@@ -1271,7 +1271,15 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterTypeAfterNewLine:
-        if ((next = part.match(RE_KEYWORD))) {
+        if (
+          // A type query can continue with conditional branches on later lines.
+          stack.at(-1) === State.BeforeType &&
+          ((next = part.match(RE_QUESTION_MARK)) ||
+            (next = part.match(RE_COLON)))
+        ) {
+          token = TokenType.Punctuation
+          state = State.BeforeType
+        } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':
             case 'false':

@@ -147,7 +147,14 @@ Punctuation
 Punctuation
 Whitespace
 Type
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Type
+Punctuation
+Type
+Punctuation
 Punctuation
 NewLine
 Punctuation
