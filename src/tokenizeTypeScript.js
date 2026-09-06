@@ -62,6 +62,7 @@ const State = {
   InsideEmbeddedBacktickString: 59,
   BeforeGenericCallTypeArguments: 60,
   InsideObjectDestructuringAfterComma: 61,
+  AfterParenthesizedType: 62,
 }
 
 /**
@@ -277,6 +278,9 @@ const RE_OBJECT_ARGUMENT_START = /(?:,|\()\s*$/
 const RE_NAMED_ARROW_FUNCTION_TYPE = /(?:\:|\<)\s*([A-Z_\$][\w\$]*)/g
 const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
+const RE_PARENTHESIZED_UNION_ARRAY =
+  /^\(\s*(?:[\w$]+|"[^"]*"|'[^']*')(?:\s*\|\s*(?:[\w$]+|"[^"]*"|'[^']*'))+\s*\)\s*\[/
+const RE_FUNCTION_PARAMETER_END = /^\)\s*=>/
 const RE_FUNCTION_TYPE_ALIAS =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
@@ -860,7 +864,8 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
           state =
-            stack.at(-1) === State.AfterArrowFunctionReturnType
+            stack.at(-1) === State.AfterArrowFunctionReturnType ||
+            stack.at(-1) === State.AfterParenthesizedType
               ? State.AfterType
               : stack.pop() || State.AfterType
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
@@ -889,8 +894,14 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
-          state = State.InsideTypeExpression
-          stack.push(State.AfterTypeExpression)
+          if (RE_PARENTHESIZED_UNION_ARRAY.test(part)) {
+            // Keep the union's enclosing state until its closing parenthesis.
+            state = State.BeforeType
+            stack.push(State.AfterParenthesizedType)
+          } else {
+            state = State.InsideTypeExpression
+            stack.push(State.AfterTypeExpression)
+          }
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.BeforeType
@@ -1062,6 +1073,13 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.AfterTypeExpression
+          if (
+            state === State.InsideMethodParameters &&
+            RE_FUNCTION_PARAMETER_END.test(part)
+          ) {
+            // The outer parameter list has already consumed its closing parenthesis.
+            state = State.AfterMethodParameters
+          }
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1179,9 +1197,13 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          if (
-            isGenericArrowFunctionParameters &&
-            stack.at(-1) === State.InsideMethodParameters
+          if (stack.at(-1) === State.AfterParenthesizedType) {
+            stack.pop()
+            state = State.AfterType
+          } else if (
+            stack.at(-1) === State.InsideMethodParameters &&
+            (isGenericArrowFunctionParameters ||
+              RE_FUNCTION_PARAMETER_END.test(part))
           ) {
             stack.pop()
             state = State.AfterMethodParameters
