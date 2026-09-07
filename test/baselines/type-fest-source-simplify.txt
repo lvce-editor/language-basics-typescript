@@ -126,6 +126,11 @@ Type
 Punctuation
 Type
 Punctuation
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Punctuation
+Punctuation
 Punctuation
 NewLine

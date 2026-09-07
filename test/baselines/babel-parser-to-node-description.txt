@@ -231,7 +231,7 @@ Punctuation
 String
 Punctuation
 NewLine
-Text
+Punctuation
 Punctuation
 NewLine
 NewLine

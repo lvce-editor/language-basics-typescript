@@ -1477,7 +1477,11 @@ String
 Punctuation
 Punctuation
 NewLine
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 VariableName
