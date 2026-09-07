@@ -692,6 +692,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_SLASH))) {
           if ((next = part.match(RE_BLOCK_COMMENT_START))) {
+            if (stack.includes(State.InsideReturnObjectValue)) {
+              stack.push(state)
+            }
             token = TokenType.Comment
             state = State.InsideBlockComment
           } else if ((next = part.match(RE_LINE_COMMENT_START))) {
@@ -731,22 +734,34 @@ export const tokenizeLine = (line, lineState) => {
           if (next[0] === '.') {
             state = State.AfterPropertyDot
           }
-          if (
-            next[0] === '{' &&
-            RE_ENDS_WITH_EQUAL.test(line.slice(0, index))
-          ) {
-            state = State.InsideObject
+          if (next[0] === '{') {
+            // Keep callback blocks above the enclosing returned object value.
+            if (stack.includes(State.InsideReturnObjectValue)) {
+              stack.push(State.TopLevelContent)
+            }
+            if (RE_ENDS_WITH_EQUAL.test(line.slice(0, index))) {
+              state = State.InsideObject
+            }
           }
           if (next[0] === '}') {
             state = stack.pop() || State.TopLevelContent
           }
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
+          if (stack.includes(State.InsideReturnObjectValue)) {
+            stack.push(state)
+          }
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
         } else if ((next = part.match(RE_QUOTE_DOUBLE))) {
+          if (stack.includes(State.InsideReturnObjectValue)) {
+            stack.push(state)
+          }
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_QUOTE_BACKTICK))) {
+          if (stack.includes(State.InsideReturnObjectValue)) {
+            stack.push(state)
+          }
           token = TokenType.Punctuation
           if (embeddedLanguageTag) {
             state = State.InsideEmbeddedBacktickString
