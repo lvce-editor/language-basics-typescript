@@ -1177,10 +1177,10 @@ VariableName
 Punctuation
 NewLine
 Whitespace
-Keyword
+VariableName
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 NewLine
 Punctuation
