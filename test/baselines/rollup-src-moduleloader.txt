@@ -595,7 +595,7 @@ Whitespace
 TypePrimitive
 Punctuation
 NewLine
-Text
+Punctuation
 Punctuation
 NewLine
 Keyword

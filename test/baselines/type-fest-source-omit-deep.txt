@@ -321,10 +321,10 @@ Type
 Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
 Punctuation
 NewLine
 NewLine

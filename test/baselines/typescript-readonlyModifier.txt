@@ -113,5 +113,5 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Text
+Punctuation
 Punctuation

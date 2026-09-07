@@ -45,7 +45,16 @@ String
 Punctuation
 Punctuation
 NewLine
-Text
+Punctuation
+Whitespace
+Punctuation
+Whitespace
+VariableName
+Whitespace
+Punctuation
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 Keyword

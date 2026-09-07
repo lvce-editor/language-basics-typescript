@@ -130,6 +130,6 @@ Type
 Punctuation
 NewLine
 Whitespace
-Text
+Punctuation
 Punctuation
 NewLine

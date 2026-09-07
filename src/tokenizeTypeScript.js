@@ -1200,6 +1200,16 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterType:
+        if (
+          RE_CURLY_CLOSE.test(part) &&
+          stack.findLast((entry) => entry !== State.AfterType) ===
+            State.InsideTypeObject
+        ) {
+          // Finish array and indexed-access suffixes before closing the type object.
+          while (stack.at(-1) === State.AfterType) {
+            stack.pop()
+          }
+        }
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
@@ -1364,7 +1374,10 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterTypeAfterNewLine:
-        if (
+        if (RE_ANGLE_CLOSE.test(part)) {
+          state = State.AfterType
+          continue
+        } else if (
           // A type query can continue with conditional branches on later lines.
           stack.at(-1) === State.BeforeType &&
           ((next = part.match(RE_QUESTION_MARK)) ||

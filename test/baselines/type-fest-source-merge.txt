@@ -216,6 +216,6 @@ Type
 Punctuation
 Punctuation
 NewLine
-Text
+Punctuation
 Punctuation
 NewLine
