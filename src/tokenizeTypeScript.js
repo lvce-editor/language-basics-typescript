@@ -164,7 +164,7 @@ const RE_KEYWORD =
 const RE_WHITESPACE = /^\s+/
 const RE_NON_ASCII_TEXT = /^[^\x00-\x7f]+/u
 const RE_VARIABLE_NAME = /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*/
-const RE_OBJECT_PROPERTY_TYPE = /^type(?=\s*:)/
+const RE_TYPE_IDENTIFIER = /^type\b(?=\s*[,)=:;\].}?])/
 const RE_MAPPED_TYPE_EXTENDS = /^extends(?=\s)(?!\s*\??:)/
 const RE_MAPPED_TYPE_AS = /^as(?=\s)(?!\s*\??:)/
 const RE_PUNCTUATION = /^[:,;\{\}\[\]\.=\(\)>\+\-\*]/
@@ -538,10 +538,7 @@ export const tokenizeLine = (line, lineState) => {
         ) {
           token = genericTypeArgumentOffsets.get(index)
           state = State.TopLevelContent
-        } else if (
-          objectDepth > 0 &&
-          (next = part.match(RE_OBJECT_PROPERTY_TYPE))
-        ) {
+        } else if ((next = part.match(RE_TYPE_IDENTIFIER))) {
           token = TokenType.VariableName
           state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD))) {
