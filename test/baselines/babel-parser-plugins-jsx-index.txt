@@ -5965,8 +5965,9 @@ Punctuation
 Whitespace
 Function
 Punctuation
-Keyword
-Text
+VariableName
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Punctuation

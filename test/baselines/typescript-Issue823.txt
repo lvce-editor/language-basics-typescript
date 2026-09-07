@@ -2,8 +2,13 @@ Keyword
 Whitespace
 Function
 Punctuation
-Keyword
-Text
+VariableName
+Punctuation
+Whitespace
+VariableName
+Punctuation
+Whitespace
+Punctuation
 NewLine
 Whitespace
 KeywordReturn
