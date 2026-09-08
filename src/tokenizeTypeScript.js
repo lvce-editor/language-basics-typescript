@@ -230,7 +230,9 @@ const RE_ESCAPE = /^\\.?/
 const RE_ANGLE_OPEN = /^</
 const RE_ANGLE_CLOSE = /^>/
 const RE_OPERATOR = /^[!\*\?\.\:\|\%\&\^@~]/
-const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\??\:\s*function|\??\:\s*\())/
+const RE_METHOD_NAME = /^[\w\d]+(?=\s*(\(|\:\s*function|\:\s*\())/
+// Leave parenthesized function types to the type-expression parser.
+const RE_OPTIONAL_CALLBACK_NAME = /^[\w\d]+(?=\s*\?\:\s*\((?!\s*\())/
 const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME =
   /^[\w]+(?=\s*(\(|\=\s*function|\=\s*async\b|\=\s*\())/
@@ -2036,7 +2038,10 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Comment
           state = State.InsideBlockComment
           stack.push(State.InsideTypeObject)
-        } else if ((next = part.match(RE_METHOD_NAME))) {
+        } else if (
+          (next = part.match(RE_METHOD_NAME)) ||
+          (next = part.match(RE_OPTIONAL_CALLBACK_NAME))
+        ) {
           token = TokenType.Function
           state = State.AfterMethodName
           stack.push(State.InsideTypeObject)
