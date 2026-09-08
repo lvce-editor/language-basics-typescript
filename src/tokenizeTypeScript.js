@@ -247,6 +247,8 @@ const RE_SINGLE_LINE_GENERIC_ARROW_FUNCTION =
   /^<(?:[^<>\n]|<[^<>\n]*>)+>\s*\((?:[^()\n]|\([^()\n]*\))*\)\s*(?::[^=\n]+)?=>/
 const RE_ARROW_FUNCTION_PARAMETER_NAME =
   /^[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?=\??\s*:)/
+const RE_DESTRUCTURED_PARAMETER_END = /^\s*[}\]]\s*$/
+const RE_DESTRUCTURED_PARAMETER_ANNOTATION = /^:\s*[\w$]+\s*\)\s*:/
 
 const RE_NUMERIC_2 =
   /^(?:(?:[0-9][0-9_]*(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:(\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(\.)(n)?\B)|(?:(\.)[0-9][0-9_]*(n)?\b)|(?:[0-9][0-9_]*(n)?\b(?!\.))|(?:0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b)|(?:0(?:b|B)[01][01_]*(n)?\b)|(?:0(?:o|O)?[0-7][0-7_]*(n)?\b))/ // 1.1E+3
@@ -520,6 +522,19 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.TopLevelContent
+        } else if (
+          (next = part.match(RE_COLON)) &&
+          RE_DESTRUCTURED_PARAMETER_END.test(line.slice(0, index)) &&
+          RE_DESTRUCTURED_PARAMETER_ANNOTATION.test(part) &&
+          part.includes('=>')
+        ) {
+          token = TokenType.Punctuation
+          // Resume type parsing after a multiline destructured parameter.
+          stack.push(State.TopLevelContent)
+          stack.push(State.AfterArrowFunctionReturnType)
+          stack.push(State.InsideMethodParameters)
+          isArrowFunctionParameters = true
+          state = State.BeforeType
         } else if (
           functionParameterDepth > 0 &&
           functionParameterBraceDepth === 0 &&
@@ -1131,6 +1146,13 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
+          if (
+            stack.at(-1) === State.AfterTypeExpression &&
+            stack.at(-2) === State.InsideTypeObject
+          ) {
+            // The property function's parameter list is complete before its return type.
+            stack.pop()
+          }
           state = State.BeforeType
         } else if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
