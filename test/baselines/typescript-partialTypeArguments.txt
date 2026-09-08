@@ -8,10 +8,10 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Numeric
@@ -87,7 +87,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type

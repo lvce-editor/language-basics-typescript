@@ -32,9 +32,9 @@ VariableName
 Punctuation
 Function
 Punctuation
-Type
+KeywordOperator
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Type

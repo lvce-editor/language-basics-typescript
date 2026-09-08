@@ -27,7 +27,7 @@ Whitespace
 KeywordOperator
 Whitespace
 Punctuation
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -57,13 +57,13 @@ KeywordOperator
 Whitespace
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive

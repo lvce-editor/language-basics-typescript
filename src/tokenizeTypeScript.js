@@ -56,7 +56,7 @@ const State = {
   BeforeArrowFunctionParameters: 53,
   AfterKeywordPropertyTypeOf: 54,
   AfterPropertyTypeQuery: 55,
-  AfterGenericSetCallee: 56,
+  AfterConstructorCallee: 56,
   InsideMethodParameterDefaultValue: 57,
   AfterArrowFunctionReturnType: 58,
   InsideEmbeddedBacktickString: 59,
@@ -275,12 +275,13 @@ const RE_SHEBANG = /^\#\!\/.*/
 const RE_SPREAD = /^\.\.\./
 const RE_BUILTIN_CLASS =
   /^(?:Array|Object|Promise|ArrayBuffer|URL|URLSearchParams|WebSocket|FileSystemHandle|FileSystemFileHandle|Function|StorageEvent|MessageEvent|MessageChannel|Int32Array|Uint8Array|Boolean|String|Error|Set|RegExp|Map|WeakMap|RangeError|Date|DOMMatrixReadOnly(?!\s*:)|Headers|Response|Request|Cache|Buffer|MessagePort|FileHandle|X509Certificate|Blob|File|HTMLElement|MutationRecord|HTMLVideoElement)\b/
-const RE_SET = /^Set\b/
 
 const RE_KEYWORD_NEW = /^new\b/
 const RE_KEYWORD_IMPLEMENTS = /^implements\b/
 const RE_KEYWORD_IMPORT = /^import\b/
 const RE_KEYWORD_TYPE_OF = /^typeof\b/
+const RE_GENERIC_MEMBER_NAME = /^[\w$]+(?=\??\s*:)/
+const RE_GENERIC_MEMBER_PREFIX = /[({\[,;]\s*(?:\.\.\.)?$/
 const RE_INLINE_GENERIC_TYPE_QUERY = /<\s*typeof\b/
 const RE_DECLARE = /^declare\b/
 const RE_ANYTHING_BUT_SEMICOLON_UNTIL_END = /^[^;]+/s
@@ -1070,6 +1071,17 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if ((next = part.match(RE_KEYWORD_NEW))) {
+          token = TokenType.KeywordNew
+        } else if ((next = part.match(RE_KEYWORD_TYPE_OF))) {
+          stack.push(state)
+          token = TokenType.KeywordOperator
+          state = State.AfterKeywordTypeOf
+        } else if (
+          RE_GENERIC_MEMBER_PREFIX.test(line.slice(0, index)) &&
+          (next = part.match(RE_GENERIC_MEMBER_NAME))
+        ) {
+          token = TokenType.VariableName
         } else if ((next = part.match(RE_BUILTIN_CLASS))) {
           token = TokenType.Class
           state = State.InsideGeneric
@@ -2574,12 +2586,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_NEW))) {
           token = TokenType.KeywordNew
           state = State.AfterKeywordNew
-        } else if ((next = part.match(RE_SET))) {
-          token = TokenType.Class
-          state = State.AfterGenericSetCallee
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Class
-          state = State.TopLevelContent
+          state = State.AfterConstructorCallee
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -2597,10 +2606,10 @@ export const tokenizeLine = (line, lineState) => {
           throw new Error('no')
         }
         break
-      case State.AfterGenericSetCallee:
+      case State.AfterConstructorCallee:
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
-          state = State.AfterGenericSetCallee
+          state = State.AfterConstructorCallee
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           stack.push(State.TopLevelContent)
           token = TokenType.Punctuation
@@ -2612,11 +2621,9 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
-        } else if ((next = part.match(RE_PUNCTUATION))) {
-          token = TokenType.Punctuation
-          state = State.TopLevelContent
         } else {
-          throw new Error('no')
+          state = State.TopLevelContent
+          continue
         }
         break
       case State.AfterKeywordTypeOf:

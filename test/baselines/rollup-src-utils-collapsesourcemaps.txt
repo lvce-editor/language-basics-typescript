@@ -482,7 +482,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive
@@ -534,7 +534,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive

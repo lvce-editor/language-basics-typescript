@@ -87,13 +87,13 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
 Punctuation
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive

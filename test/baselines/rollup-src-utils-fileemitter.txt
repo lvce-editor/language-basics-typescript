@@ -2620,7 +2620,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -2706,7 +2706,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type

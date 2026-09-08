@@ -153,10 +153,10 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -224,7 +224,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type
@@ -256,7 +256,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive

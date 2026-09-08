@@ -1171,7 +1171,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 KeywordNew
@@ -1183,13 +1183,12 @@ Punctuation
 VariableName
 Punctuation
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
