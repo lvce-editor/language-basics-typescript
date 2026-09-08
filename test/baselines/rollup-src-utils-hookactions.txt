@@ -236,7 +236,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Whitespace
 Punctuation
@@ -247,9 +247,8 @@ Class
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
-KeywordVoid
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation
@@ -311,7 +310,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation

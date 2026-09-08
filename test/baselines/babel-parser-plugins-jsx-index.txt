@@ -729,13 +729,13 @@ Type
 Whitespace
 KeywordOperator
 Whitespace
-Type
+KeywordNew
 Whitespace
 Punctuation
 Punctuation
 Punctuation
 Punctuation
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive

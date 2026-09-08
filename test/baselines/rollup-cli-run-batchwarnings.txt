@@ -300,14 +300,14 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+KeywordOperator
 Whitespace
 KeywordOperator
 Whitespace
 VariableName
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 Punctuation
@@ -2007,7 +2007,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive
@@ -2464,7 +2464,7 @@ KeywordNew
 Whitespace
 Class
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Type
