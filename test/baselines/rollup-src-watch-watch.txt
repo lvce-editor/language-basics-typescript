@@ -1945,9 +1945,7 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Punctuation
-Punctuation
-VariableName
+KeywordThis
 Punctuation
 VariableName
 Punctuation

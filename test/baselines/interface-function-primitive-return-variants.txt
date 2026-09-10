@@ -17,7 +17,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -28,7 +28,7 @@ Whitespace
 TypePrimitive
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -40,7 +40,7 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -55,7 +55,7 @@ Whitespace
 TypePrimitive
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -68,7 +68,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
@@ -103,7 +103,7 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Function
 Punctuation
 Whitespace
 Punctuation
