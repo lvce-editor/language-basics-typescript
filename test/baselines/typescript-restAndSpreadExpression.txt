@@ -174,8 +174,6 @@ VariableName
 Punctuation
 Whitespace
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Whitespace
 Punctuation

@@ -2746,6 +2746,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideObject
+        } else if ((next = part.match(RE_SPREAD))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_OBJECT_PROPERTY_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
           stack.push(state)

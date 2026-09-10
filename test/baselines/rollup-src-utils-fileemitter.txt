@@ -4554,8 +4554,6 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
@@ -5168,8 +5166,6 @@ Punctuation
 Whitespace
 Punctuation
 Whitespace
-Punctuation
-Punctuation
 Punctuation
 VariableName
 Punctuation
