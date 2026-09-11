@@ -8,6 +8,7 @@ export * from './tokenizeTypeScript.js'
 
 export const initialLineState = {
   ...initialTypeScriptLineState,
+  jsx: true,
   insideJsxTag: false,
   jsxElementDepth: 0,
 }

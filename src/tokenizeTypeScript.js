@@ -493,6 +493,8 @@ export const hasArrayReturn = true
  * @returns
  */
 export const tokenizeLine = (line, lineState) => {
+  const jsx = lineState.jsx || false
+  const jsxStack = (lineState.jsxStack || []).map((frame) => ({ ...frame }))
   let next = null
   let index = 0
   let tokens = []
@@ -520,6 +522,73 @@ export const tokenizeLine = (line, lineState) => {
   const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
+    let jsxFrame = jsxStack.at(-1)
+    // JSX children and attributes are not TypeScript source. Only braces resume
+    // the regular tokenizer, with the enclosing JSX context saved separately.
+    if (jsx && jsxFrame && jsxFrame.kind === 'element') {
+      let value
+      let type = TokenType.Punctuation
+      if (jsxFrame.quote) {
+        if (part[0] === jsxFrame.quote) {
+          value = part[0]
+          jsxFrame.quote = ''
+        } else {
+          value = part.split(jsxFrame.quote)[0]
+          type = TokenType.String
+        }
+      } else if (part[0] === '{') {
+        jsxStack.push({ kind: 'expression', depth: 0, state, stack })
+        state = State.TopLevelContent
+        stack = []
+        value = '{'
+      } else if (jsxFrame.mode === 'text') {
+        if (part.startsWith('</')) {
+          jsxFrame.mode = 'closing'
+          value = '</'
+        } else if (part[0] === '<') {
+          jsxStack.push({ kind: 'element', mode: 'tag' })
+          value = '<'
+        } else {
+          value = part.match(/^[^<{]+/)[0]
+          type = TokenType.Text
+        }
+      } else if (part.startsWith('/>') || part[0] === '>') {
+        value = part.startsWith('/>') ? '/>' : '>'
+        if (value === '/>' || jsxFrame.mode === 'closing') {
+          jsxStack.pop()
+        } else {
+          jsxFrame.mode = 'text'
+        }
+      } else if (part[0] === '"' || part[0] === "'") {
+        value = part[0]
+        jsxFrame.quote = value
+      } else if ((next = part.match(RE_WHITESPACE))) {
+        value = next[0]
+        type = TokenType.Whitespace
+      } else if ((next = part.match(/^[\w$:-]+/))) {
+        value = next[0]
+        type = TokenType.VariableName
+      } else {
+        value = part[0]
+      }
+      tokens.push(type, value.length)
+      index += value.length
+      continue
+    }
+    if (
+      jsx &&
+      (state === State.TopLevelContent || state === State.BeforeValue) &&
+      !/[$\w\])]/.test(line[index - 1] || '') &&
+      /^<(?:[A-Za-z_$][\w$.:\-]*(?=[\s/>]|$)|>)/.test(part) &&
+      !RE_SINGLE_LINE_GENERIC_ARROW_FUNCTION.test(part) &&
+      !/^<[A-Za-z_$][\w$]*\s*(?:,|=|extends\b)/.test(part)
+    ) {
+      jsxStack.push({ kind: 'element', mode: 'tag' })
+      state = State.TopLevelContent
+      tokens.push(TokenType.Punctuation, 1)
+      index++
+      continue
+    }
     switch (state) {
       case State.TopLevelContent:
         if ((next = part.match(RE_WHITESPACE))) {
@@ -3060,6 +3129,20 @@ export const tokenizeLine = (line, lineState) => {
         functionParameterBraceDepth = 0
       }
     }
+    jsxFrame = jsxStack.at(-1)
+    if (jsxFrame?.kind === 'expression' && token === TokenType.Punctuation) {
+      if (next[0] === '{') {
+        jsxFrame.depth++
+      } else if (next[0] === '}') {
+        if (jsxFrame.depth === 0) {
+          state = jsxFrame.state
+          stack = jsxFrame.stack
+          jsxStack.pop()
+        } else {
+          jsxFrame.depth--
+        }
+      }
+    }
     const tokenLength = next[0].length
     index += tokenLength
     tokens.push(token, tokenLength)
@@ -3097,6 +3180,8 @@ export const tokenizeLine = (line, lineState) => {
   }
   tokens = highlightNamedArrowFunctionTypes(line, tokens)
   return {
+    jsx,
+    jsxStack,
     embeddedLanguage,
     embeddedLanguageEnd,
     embeddedLanguageStart,
