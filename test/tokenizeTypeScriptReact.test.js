@@ -222,3 +222,41 @@ const returnValue = todos`)
     )
   )
 })
+
+test('highlights TSX attributes like HTML while preserving expression variables', () => {
+  const tokens = getTokens(`const className = 'heading'
+const view = <header className="flex items-center">
+  <Layout.Header
+    className={className}
+    disabled
+    data-label="className"
+    aria-hidden={true}
+    {...props}
+    title={format({ className })}
+  />
+  <h1 className='heading'>this is the heading</h1>
+</header>`)
+  assert.deepEqual(
+    tokens
+      .filter(([type]) => type === 'AttributeName')
+      .map(([, value]) => value),
+    [
+      'className',
+      'className',
+      'disabled',
+      'data-label',
+      'aria-hidden',
+      'title',
+      'className',
+    ]
+  )
+  assert.equal(
+    tokens.filter(
+      ([type, value]) => type === 'VariableName' && value === 'className'
+    ).length,
+    3
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'String' && value === 'className')
+  )
+})
