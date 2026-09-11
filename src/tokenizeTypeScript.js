@@ -104,6 +104,7 @@ export const TokenType = {
   Embedded: 999,
   PunctuationTag: 228,
   TagName: 118,
+  AttributeName: 119,
 }
 
 export const TokenMap = {
@@ -138,6 +139,7 @@ export const TokenMap = {
   [TokenType.Embedded]: 'Embedded',
   [TokenType.PunctuationTag]: 'PunctuationTag',
   [TokenType.TagName]: 'TagName',
+  [TokenType.AttributeName]: 'AttributeName',
 }
 
 export const initialLineState = {
@@ -567,7 +569,13 @@ export const tokenizeLine = (line, lineState) => {
         type = TokenType.Whitespace
       } else if ((next = part.match(/^[\w$:-]+/))) {
         value = next[0]
-        type = TokenType.VariableName
+        type =
+          jsxFrame.mode === 'attributes'
+            ? TokenType.AttributeName
+            : TokenType.VariableName
+        if (jsxFrame.mode === 'tag') {
+          jsxFrame.mode = 'attributes'
+        }
       } else {
         value = part[0]
       }
