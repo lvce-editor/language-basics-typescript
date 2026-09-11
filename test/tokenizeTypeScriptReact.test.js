@@ -98,3 +98,74 @@ test('preserves TSX highlighting after import type queries', async () => {
     ['PunctuationTag', '/>'],
   ])
 })
+
+const getTokens = (source) => {
+  const tokens = []
+  let lineState = structuredClone(initialLineState)
+  for (const line of source.split('\n')) {
+    lineState = tokenizeLine(line, lineState)
+    let offset = 0
+    for (let index = 0; index < lineState.tokens.length; index += 2) {
+      const length = lineState.tokens[index + 1]
+      tokens.push([
+        TokenMap[lineState.tokens[index]],
+        line.slice(offset, offset + length),
+      ])
+      offset += length
+    }
+    assert.equal(offset, line.length)
+  }
+  return tokens
+}
+
+test('highlights JSX child text instead of TypeScript keywords and strings', () => {
+  const text = `this return true 123 "hello" don't // comment &amp; 😀 `
+  const tokens = getTokens(`<h1>${text}</h1>`)
+  assert.ok(tokens.some(([type, value]) => type === 'Text' && value === text))
+  assert.deepEqual(getTagTokens(`<h1>${text}</h1>`), [
+    ['PunctuationTag', '<'],
+    ['TagName', 'h1'],
+    ['PunctuationTag', '>'],
+    ['PunctuationTag', '</'],
+    ['TagName', 'h1'],
+    ['PunctuationTag', '>'],
+  ])
+})
+
+test('preserves expressions, nested elements, fragments, and multiline child text', async () => {
+  const source = await readFile(
+    new URL('./cases/tsx-child-text.tsx', import.meta.url),
+    'utf8'
+  )
+  const tokens = getTokens(source)
+  const text = tokens
+    .filter(([type]) => type === 'Text')
+    .map(([, value]) => value)
+  assert.ok(text.includes('this is the heading'))
+  assert.ok(text.includes('  const this true 123'))
+  assert.ok(text.includes(' text'))
+  assert.ok(text.includes('  after expression'))
+  assert.ok(text.includes('Done'))
+  assert.ok(
+    tokens.some(([type, value]) => type === 'VariableName' && value === 'name')
+  )
+  assert.ok(
+    tokens.some(
+      ([type, value]) => type === 'LanguageConstant' && value === 'true'
+    )
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'String' && value === 'a > b')
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'VariableName' && value === 'after')
+  )
+})
+
+test('does not enter JSX children for generic calls or comparisons', () => {
+  const tokens = getTokens('const result = foo<Bar>()\nconst less = a<b && c>d')
+  assert.equal(
+    tokens.some(([type]) => type === 'Text'),
+    false
+  )
+})
