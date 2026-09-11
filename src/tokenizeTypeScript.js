@@ -920,6 +920,11 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.AfterKeywordVariableDeclaration:
+        // A return statement starts new code even if a declaration is unfinished.
+        if (/^return\b/.test(part)) {
+          state = State.TopLevelContent
+          continue
+        }
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordVariableDeclaration

@@ -169,3 +169,56 @@ test('does not enter JSX children for generic calls or comparisons', () => {
     false
   )
 })
+
+test('recovers JSX highlighting after unfinished array declarations', () => {
+  for (const declaration of [
+    'const [todos, setTodos',
+    'const [',
+    'const [todos,',
+  ]) {
+    const source = `function TodoApp(){
+${declaration}
+  return <ul>
+    <li>todo 1</li>
+  </ul>
+}
+function App() {
+  const [count, setCount] = useState(0)
+  return <section id="center" />
+}`
+    const tokens = getTokens(source)
+    assert.equal(
+      tokens.filter(
+        ([type, value]) => type === 'KeywordReturn' && value === 'return'
+      ).length,
+      2
+    )
+    assert.ok(
+      tokens.some(([type, value]) => type === 'Text' && value === 'todo 1')
+    )
+    assert.deepEqual(
+      getTagTokens(source)
+        .filter(([type]) => type === 'TagName')
+        .map(([, value]) => value),
+      ['ul', 'li', 'li', 'ul', 'section']
+    )
+  }
+})
+
+test('preserves valid multiline array declarations', () => {
+  const tokens = getTokens(`const [
+  todos,
+  setTodos
+] = useState([])
+const returnValue = todos`)
+  assert.ok(
+    tokens.some(
+      ([type, value]) => type === 'VariableName' && value === 'setTodos'
+    )
+  )
+  assert.ok(
+    tokens.some(
+      ([type, value]) => type === 'VariableName' && value === 'returnValue'
+    )
+  )
+})
