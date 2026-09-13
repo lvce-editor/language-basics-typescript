@@ -260,3 +260,17 @@ const view = <header className="flex items-center">
     tokens.some(([type, value]) => type === 'String' && value === 'className')
   )
 })
+
+test('highlights new after spread in returned arrays', () => {
+  const tokens = getTokens(`const getUniqueDepths = () => {
+  return [...new Set([])]
+  return [
+    ...new Set([]),
+  ]
+  return [object.new]
+}`)
+  assert.deepEqual(
+    tokens.filter(([, value]) => value === 'new').map(([type]) => type),
+    ['KeywordNew', 'KeywordNew', 'VariableName']
+  )
+})

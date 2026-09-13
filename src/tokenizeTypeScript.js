@@ -2907,6 +2907,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.InsideReturnArray
+        } else if ((next = part.match(RE_SPREAD))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           stack.push(State.InsideReturnArray)
