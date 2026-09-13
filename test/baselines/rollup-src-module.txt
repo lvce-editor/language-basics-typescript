@@ -3460,8 +3460,6 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Function
@@ -5241,9 +5239,7 @@ KeywordReturn
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
-VariableName
+KeywordThis
 Punctuation
 VariableName
 Punctuation

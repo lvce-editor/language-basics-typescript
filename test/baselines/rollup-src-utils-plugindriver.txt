@@ -4192,8 +4192,6 @@ KeywordReturn
 Whitespace
 Punctuation
 Punctuation
-Punctuation
-Punctuation
 VariableName
 Punctuation
 Whitespace
