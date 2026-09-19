@@ -150,6 +150,9 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
+Punctuation
+VariableName
+Punctuation
 String
 Punctuation
 NewLine

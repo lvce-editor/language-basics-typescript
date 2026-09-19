@@ -196,6 +196,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Whitespace
 Punctuation
@@ -400,7 +403,13 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
+Punctuation
+VariableName
+Punctuation
 String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 NewLine
@@ -427,6 +436,9 @@ NewLine
 Whitespace
 KeywordReturn
 Whitespace
+Punctuation
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation

@@ -300,8 +300,14 @@ Punctuation
 String
 Punctuation
 VariableName
-Whitespace
-VariableName
+Punctuation
+String
+Punctuation
+Function
+Punctuation
+Punctuation
+String
+String
 Punctuation
 VariableName
 Punctuation

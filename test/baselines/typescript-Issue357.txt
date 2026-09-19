@@ -131,7 +131,9 @@ NewLine
 Whitespace
 Punctuation
 Punctuation
-String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Punctuation
@@ -146,7 +148,9 @@ Punctuation
 Punctuation
 Punctuation
 Punctuation
-String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 NewLine

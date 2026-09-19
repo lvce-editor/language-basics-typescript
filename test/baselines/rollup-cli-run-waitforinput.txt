@@ -215,6 +215,13 @@ Punctuation
 Punctuation
 String
 Punctuation
+Function
+Punctuation
+VariableName
+Punctuation
+Punctuation
+String
+Punctuation
 Punctuation
 Punctuation
 NewLine

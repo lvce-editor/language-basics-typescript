@@ -230,6 +230,9 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 NewLine
 NewLine

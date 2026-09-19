@@ -247,7 +247,15 @@ Whitespace
 Keyword
 Whitespace
 Punctuation
-String
+Punctuation
+VariableName
+Whitespace
+VariableName
+Whitespace
+Keyword
+Whitespace
+VariableName
+Punctuation
 Punctuation
 NewLine
 Whitespace

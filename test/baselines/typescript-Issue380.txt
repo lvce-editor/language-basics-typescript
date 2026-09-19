@@ -8,6 +8,10 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
+Punctuation
+Punctuation
+String
+Punctuation
 String
 Punctuation
 Punctuation

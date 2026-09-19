@@ -126,6 +126,10 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
 Punctuation
 Punctuation
 NewLine
@@ -158,6 +162,10 @@ VariableName
 Punctuation
 Function
 Punctuation
+Punctuation
+String
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation

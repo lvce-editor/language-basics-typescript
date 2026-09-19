@@ -1699,7 +1699,16 @@ Whitespace
 Punctuation
 Whitespace
 Punctuation
-String
+Punctuation
+VariableName
+Punctuation
+Punctuation
+VariableName
+Whitespace
+Punctuation
+Whitespace
+Numeric
+Punctuation
 Punctuation
 Punctuation
 NewLine

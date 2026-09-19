@@ -49,7 +49,9 @@ Whitespace
 Punctuation
 String
 String
-String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 NewLine

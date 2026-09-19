@@ -107,6 +107,14 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Function
+Punctuation
+VariableName
+Punctuation
+Punctuation
+Punctuation
 Punctuation
 NewLine
 Punctuation
@@ -119,6 +127,12 @@ Punctuation
 Whitespace
 Function
 Punctuation
+Punctuation
+String
+Punctuation
+VariableName
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation

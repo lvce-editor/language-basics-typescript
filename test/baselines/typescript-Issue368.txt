@@ -28,6 +28,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Punctuation
 NewLine
@@ -37,6 +40,9 @@ Function
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Punctuation
