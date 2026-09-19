@@ -2400,7 +2400,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterMethodParameters
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
-          if (
+          if (/^\s*\{/.test(part.slice(next[0].length))) {
+            // A block-bodied arrow function has no return type to parse.
+            state = stack.pop() || State.TopLevelContent
+          } else if (
             hasArrowFunctionParameterDefaultValue ||
             isGenericArrowFunctionParameters
           ) {
