@@ -1,3 +1,6 @@
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation

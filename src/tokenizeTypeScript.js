@@ -262,8 +262,10 @@ const RE_NUMERIC_HEX = /0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\b/
 const RE_NUMERIC_BINARY = /0(?:b|B)[01][01_]*(n)?\b/
 const RE_NUMERIC_OCTAL = /0(?:o|O)?[0-7][0-7_]*(n)?\b/
 const RE_QUOTE_BACKTICK = /^`/
-const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\]+/
+const RE_STRING_BACKTICK_QUOTE_CONTENT = /^[^`\\$]+/
 const RE_STRING_ESCAPE = /^\\./
+const RE_DOLLAR_CURLY_OPEN = /^\$\{/
+const RE_DOLLAR = /^\$/
 const RE_KEYWORD_TYPE = /^type\b/
 const RE_EXPORT_TYPE_LIST = /^type\b(?=\s*(?:\{|\*))/
 const RE_KEYWORD_IN = /^in\b/
@@ -2499,7 +2501,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_STRING_BACKTICK_QUOTE_CONTENT))) {
           token = TokenType.String
           state = State.InsideBacktickString
+        } else if ((next = part.match(RE_DOLLAR_CURLY_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.TopLevelContent
+          stack.push(State.InsideBacktickString)
         } else if ((next = part.match(RE_STRING_ESCAPE))) {
+          token = TokenType.String
+          state = State.InsideBacktickString
+        } else if ((next = part.match(RE_DOLLAR))) {
           token = TokenType.String
           state = State.InsideBacktickString
         } else {
