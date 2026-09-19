@@ -191,6 +191,8 @@ const RE_PARAMETER_DEFAULT_WHITESPACE = /^\s+(?==(?!>))/
 const RE_SEMICOLON = /^;/
 const RE_KEYWORD_CONST = /^const\b/
 const RE_KEYWORD_VARIABLE_DECLARATION = /^(?:const|let|var)\b/
+const RE_USING_DECLARATION =
+  /^using\b(?=\s+(?:[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*|[\{\[]))/
 const RE_KEYWORD_LET = /^(?:let)/
 const RE_KEYWORD_ENUM = /^(?:enum)/
 const RE_KEYWORD_CLASS = /^(?:class)/
@@ -309,6 +311,18 @@ const RE_SIMPLE_TYPE_QUERY =
   /^\s*type\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*$/
 const RE_PROPERTY_TYPE_QUERY =
   /^\s*(?:(?:readonly\s+)?[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\??|(?:export\s+)?declare\s+(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)\s*:\s*typeof\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*(?:\.[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*)+\s*;?\s*$/
+
+const isUsingDeclaration = (line, index) => {
+  if (!RE_USING_DECLARATION.test(line.slice(index))) {
+    return false
+  }
+  const prefix = line.slice(0, index)
+  return (
+    prefix.trim() === '' ||
+    /[;{}]\s*$/.test(prefix) ||
+    /^\s*(?:for\s*\(\s*(?:await\s+)?|await\s*)$/.test(prefix)
+  )
+}
 
 const highlightNamedArrowFunctionTypes = (line, tokens) => {
   const signature =
@@ -648,6 +662,12 @@ export const tokenizeLine = (line, lineState) => {
         ) {
           token = TokenType.VariableName
           state = State.TopLevelContent
+        } else if (
+          isUsingDeclaration(line, index) &&
+          (next = part.match(RE_USING_DECLARATION))
+        ) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':
@@ -1518,6 +1538,12 @@ export const tokenizeLine = (line, lineState) => {
         ) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if (
+          isUsingDeclaration(line, index) &&
+          (next = part.match(RE_USING_DECLARATION))
+        ) {
+          token = TokenType.Keyword
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':

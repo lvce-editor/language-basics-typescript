@@ -464,7 +464,7 @@ NewLine
 Whitespace
 KeywordAwait
 Whitespace
-VariableName
+Keyword
 Whitespace
 VariableName
 Whitespace
