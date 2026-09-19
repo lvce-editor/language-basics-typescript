@@ -1118,6 +1118,15 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Whitespace
+Punctuation
+Whitespace
+Punctuation
+String
+Punctuation
+String
+Punctuation
 Punctuation
 Punctuation
 NewLine
@@ -1603,6 +1612,10 @@ Whitespace
 VariableName
 Punctuation
 Whitespace
+Punctuation
+String
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation
@@ -2264,6 +2277,9 @@ Punctuation
 Whitespace
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Punctuation

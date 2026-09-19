@@ -282,6 +282,10 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
 Punctuation
 Whitespace
 VariableName
@@ -314,6 +318,10 @@ KeywordNew
 Whitespace
 Class
 Punctuation
+Punctuation
+String
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation
@@ -381,6 +389,13 @@ Class
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
+String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Whitespace

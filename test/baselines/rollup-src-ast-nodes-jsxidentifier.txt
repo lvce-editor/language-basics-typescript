@@ -930,6 +930,13 @@ Punctuation
 Punctuation
 String
 Punctuation
+KeywordThis
+Punctuation
+VariableName
+Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Punctuation
 NewLine

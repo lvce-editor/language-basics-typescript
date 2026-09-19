@@ -14,6 +14,14 @@ VariableName
 Punctuation
 Whitespace
 Punctuation
+Punctuation
+Numeric
+Punctuation
+String
+Punctuation
+Punctuation
+String
+Punctuation
 String
 Punctuation
 Punctuation

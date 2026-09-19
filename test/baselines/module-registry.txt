@@ -234,6 +234,10 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
 Punctuation
 Punctuation
 NewLine

@@ -8969,6 +8969,13 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 NewLine
 Whitespace
@@ -12347,6 +12354,9 @@ Class
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Punctuation

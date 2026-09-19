@@ -81,6 +81,10 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
 Punctuation
 NewLine
 NewLine
@@ -130,6 +134,10 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
+Punctuation
+String
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation

@@ -1852,6 +1852,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Whitespace
 Numeric
@@ -2092,6 +2095,11 @@ Function
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
+Punctuation
+Punctuation
 Punctuation
 Punctuation
 Whitespace

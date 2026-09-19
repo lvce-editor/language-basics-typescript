@@ -759,6 +759,15 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
+Punctuation
+VariableName
+Punctuation
+Punctuation
+VariableName
+Punctuation
+Punctuation
+VariableName
+Punctuation
 String
 Punctuation
 NewLine

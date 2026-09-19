@@ -2486,6 +2486,9 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 NewLine
 Whitespace
@@ -2503,6 +2506,13 @@ Whitespace
 Punctuation
 String
 Punctuation
+Function
+Punctuation
+VariableName
+Punctuation
+Punctuation
+String
+Punctuation
 Punctuation
 NewLine
 Whitespace
@@ -2513,6 +2523,11 @@ Punctuation
 Whitespace
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 NewLine

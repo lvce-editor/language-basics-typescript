@@ -88,6 +88,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Whitespace
 KeywordImport
@@ -202,6 +205,9 @@ Punctuation
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+Punctuation
 Punctuation
 Punctuation
 NewLine
@@ -214,6 +220,10 @@ Punctuation
 Whitespace
 Function
 Punctuation
+Punctuation
+String
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation
@@ -236,6 +246,9 @@ Punctuation
 NewLine
 Whitespace
 Punctuation
+Punctuation
+Punctuation
+VariableName
 Punctuation
 String
 Punctuation

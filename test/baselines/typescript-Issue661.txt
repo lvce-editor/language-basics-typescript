@@ -54,6 +54,9 @@ Whitespace
 Punctuation
 String
 Punctuation
+Numeric
+Punctuation
+Punctuation
 Punctuation
 NewLine
 Whitespace

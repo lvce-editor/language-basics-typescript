@@ -25434,6 +25434,10 @@ Whitespace
 Punctuation
 String
 Punctuation
+VariableName
+Punctuation
+String
+Punctuation
 Punctuation
 NewLine
 Whitespace

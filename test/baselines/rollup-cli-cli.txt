@@ -164,6 +164,14 @@ Function
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
+Function
+Punctuation
+Punctuation
+String
+Punctuation
 String
 String
 Punctuation
@@ -191,6 +199,9 @@ Function
 Punctuation
 Punctuation
 String
+Punctuation
+VariableName
+Punctuation
 Punctuation
 Punctuation
 Punctuation
