@@ -534,6 +534,7 @@ export const tokenizeLine = (line, lineState) => {
   let isGenericArrowFunctionParameters =
     lineState.isGenericArrowFunctionParameters || false
   let isTypeAssertion = lineState.isTypeAssertion || false
+  let isMultilineArrowFunctionParameter = false
   const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
@@ -1107,6 +1108,15 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
+        } else if (
+          isTypeAssertion &&
+          stack.at(-1) === State.InsideTypeObject &&
+          (next = part.match(RE_CURLY_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          stack.pop()
+          state = stack.pop() || State.TopLevelContent
+          isTypeAssertion = false
         } else if ((next = part.match(RE_QUOTE_SINGLE))) {
           stack.push(State.AfterType)
           token = TokenType.Punctuation
@@ -1444,6 +1454,13 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
           if (
+            isArrowFunctionParameters &&
+            stack.at(-1) === State.AfterTypeExpression &&
+            stack.at(-2) === State.InsideMethodParameters
+          ) {
+            stack.pop()
+            state = stack.pop() || State.TopLevelContent
+          } else if (
             isFunctionTypeAlias &&
             stack.at(-1) === State.AfterTypeExpression
           ) {
@@ -1491,10 +1508,18 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterType
         } else if ((next = part.match(RE_ANGLE_CLOSE))) {
           token = TokenType.Punctuation
-          state =
-            stack.at(-1) === State.AfterArrowFunctionReturnType
-              ? State.AfterType
-              : stack.pop() || State.AfterType
+          if (
+            isArrowFunctionParameters &&
+            stack.at(-1) === State.AfterTypeExpression &&
+            stack.at(-2) === State.InsideMethodParameters
+          ) {
+            state = State.AfterType
+          } else {
+            state =
+              stack.at(-1) === State.AfterArrowFunctionReturnType
+                ? State.AfterType
+                : stack.pop() || State.AfterType
+          }
         } else if ((next = part.match(RE_CURLY_OPEN))) {
           token = TokenType.Punctuation
           state = State.InsideTypeObject
@@ -2442,6 +2467,14 @@ export const tokenizeLine = (line, lineState) => {
           } else {
             // TODO depending on whether this is a type function
             // this can be either a type or a value
+            if (
+              isArrowFunctionParameters &&
+              lineState.state === State.InsideMethodParameters &&
+              stack.at(-1) === State.TopLevelContent &&
+              /,\s*$/.test(line)
+            ) {
+              isMultilineArrowFunctionParameter = true
+            }
             state = State.BeforeType
           }
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
@@ -3231,6 +3264,10 @@ export const tokenizeLine = (line, lineState) => {
     state = State.AfterTypeAfterNewLine
   } else if (state === State.InsideLineComment) {
     state = stack.pop() || State.TopLevelContent
+  }
+  if (isMultilineArrowFunctionParameter) {
+    stack.push(State.TopLevelContent)
+    state = State.InsideMethodParameters
   }
   tokens = highlightNamedArrowFunctionTypes(line, tokens)
   return {
