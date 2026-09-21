@@ -241,6 +241,27 @@ const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME =
   /^[\w]+(?=\s*(\(|\=\s*function|\=\s*async\b|\=\s*\())/
 const RE_PARENTHESIZED_AWAIT_VARIABLE_NAME = /^[\w]+(?=\s*=\s*\(\s*await\b)/
+
+const isParenthesizedFunctionDeclaration = (line, index) => {
+  const part = line.slice(index)
+  const match = part.match(/^[\w]+\s*=\s*(?:async\s+)?\(/)
+  if (!match) {
+    return true
+  }
+  let depth = 0
+  for (let i = match[0].length - 1; i < part.length; i++) {
+    if (part[i] === '(') {
+      depth++
+    } else if (part[i] === ')') {
+      depth--
+      if (depth === 0) {
+        return /^\s*(?::[^=\n]+)?\s*=>/.test(part.slice(i + 1))
+      }
+    }
+  }
+  return true
+}
+
 const RE_ARROW_FUNCTION_PARAMETERS_START =
   /(?:^|\s)(?:const|let|var)\s+[\#\$a-zA-Z\_][\$a-zA-Z\_\d]*\s*=\s*(?:async\s+)?\($/
 const RE_GENERIC_ARROW_FUNCTION_TYPE_PARAMETERS_START =
@@ -974,7 +995,10 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_PARENTHESIZED_AWAIT_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterKeywordVariableDeclaration
-        } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
+        } else if (
+          (next = part.match(RE_FUNCTION_CALL_NAME)) &&
+          isParenthesizedFunctionDeclaration(line, index)
+        ) {
           token = TokenType.FunctionName
           state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
