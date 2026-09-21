@@ -3044,6 +3044,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_AMPERSAND))) {
           token = TokenType.Punctuation
           state = State.InsideReturnObject
+        } else if ((next = part.match(RE_QUESTION_MARK))) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.InsideReturnObject
