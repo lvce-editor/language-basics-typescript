@@ -692,6 +692,12 @@ export const tokenizeLine = (line, lineState) => {
         ) {
           token = TokenType.Keyword
           state = State.AfterKeywordVariableDeclaration
+        } else if (
+          (next = part.match(RE_KEYWORD_TYPE)) &&
+          /\breturn\b.*(?:\[|\$\{|\?|\()\s*$/.test(line.slice(0, index))
+        ) {
+          token = TokenType.VariableName
+          state = State.TopLevelContent
         } else if ((next = part.match(RE_KEYWORD))) {
           switch (next[0]) {
             case 'true':

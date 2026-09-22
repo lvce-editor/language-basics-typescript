@@ -1141,8 +1141,13 @@ KeywordThis
 Punctuation
 Function
 Punctuation
-Keyword
-Text
+VariableName
+Punctuation
+VariableName
+Punctuation
+VariableName
+Punctuation
+Punctuation
 NewLine
 Whitespace
 Punctuation
