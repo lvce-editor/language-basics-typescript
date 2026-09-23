@@ -1764,7 +1764,7 @@ Punctuation
 Whitespace
 Class
 Punctuation
-Type
+Class
 Punctuation
 Punctuation
 NewLine
