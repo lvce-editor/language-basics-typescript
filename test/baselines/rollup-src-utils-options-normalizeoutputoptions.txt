@@ -1073,12 +1073,12 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-VariableName
+Type
 NewLine
 Whitespace
 Punctuation
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

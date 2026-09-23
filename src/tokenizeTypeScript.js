@@ -300,6 +300,7 @@ const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
 const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<|\{)/
+const RE_TYPE_ASSERTION_NEXT_LINE = /^as\s*$/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
 const RE_SHEBANG = /^\#\!\/.*/
@@ -721,7 +722,9 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              isTypeAssertion = RE_TYPE_ASSERTION.test(part)
+              isTypeAssertion =
+                RE_TYPE_ASSERTION.test(part) ||
+                RE_TYPE_ASSERTION_NEXT_LINE.test(part)
               state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
               break
             case 'break':
@@ -1624,7 +1627,9 @@ export const tokenizeLine = (line, lineState) => {
               break
             case 'as':
               token = TokenType.KeywordControl
-              isTypeAssertion = RE_TYPE_ASSERTION.test(part)
+              isTypeAssertion =
+                RE_TYPE_ASSERTION.test(part) ||
+                RE_TYPE_ASSERTION_NEXT_LINE.test(part)
               state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
               break
             case 'break':
@@ -2222,6 +2227,9 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
         } else {
+          if (isTypeAssertion) {
+            isTypeAssertion = false
+          }
           state = stack.pop() || State.TopLevelContent
           continue
         }
