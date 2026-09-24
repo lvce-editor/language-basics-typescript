@@ -29,7 +29,7 @@ NewLine
 Whitespace
 Punctuation
 Whitespace
-Type
+Class
 NewLine
 Whitespace
 Punctuation
