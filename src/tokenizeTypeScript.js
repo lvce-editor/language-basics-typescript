@@ -325,6 +325,9 @@ const RE_FUNCTION_TYPE_WITH_MULTIPLE_NAMED_PARAMETERS =
   /^\s*type\s+\w+\s*=\s*\([^)]*:\s*[A-Z_\$][\w\$]*\s*,[^)]*:\s*[A-Z_\$][\w\$]*\s*\)\s*=>/
 const RE_PARENTHESIZED_UNION_ARRAY =
   /^\(\s*(?:[\w$]+|"[^"]*"|'[^']*')(?:\s*\|\s*(?:[\w$]+|"[^"]*"|'[^']*'))+\s*\)\s*\[/
+const RE_PARENTHESIZED_UNION_ARRAY_WITH_COMPLEX_MEMBERS =
+  /^\((?=[^)]*\|)[^)]*\)\s*\[/
+const RE_READONLY_PARENTHESIZED_ARRAY_START = /:\s*readonly\s*$/
 const RE_FUNCTION_PARAMETER_END = /^\)\s*=>/
 const RE_FUNCTION_TYPE_ALIAS =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
@@ -1137,7 +1140,12 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_OPEN))) {
           token = TokenType.Punctuation
-          if (RE_PARENTHESIZED_UNION_ARRAY.test(part)) {
+          if (
+            RE_PARENTHESIZED_UNION_ARRAY.test(part) ||
+            (RE_READONLY_PARENTHESIZED_ARRAY_START.test(line.slice(0, index)) &&
+              (RE_PARENTHESIZED_UNION_ARRAY_WITH_COMPLEX_MEMBERS.test(part) ||
+                /^\(\s*$/.test(part)))
+          ) {
             // Keep the union's enclosing state until its closing parenthesis.
             state = State.BeforeType
             stack.push(State.AfterParenthesizedType)
@@ -1566,6 +1574,10 @@ export const tokenizeLine = (line, lineState) => {
             stack.at(-2) === State.InsideMethodParameters
           ) {
             state = State.AfterType
+          } else if (stack.at(-1) === State.AfterParenthesizedType) {
+            // Keep the enclosing parenthesized array marker while closing a
+            // generic type argument inside its union.
+            state = State.AfterType
           } else {
             state =
               stack.at(-1) === State.AfterArrowFunctionReturnType
@@ -1763,7 +1775,10 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          if (
+          if (stack.at(-1) === State.AfterParenthesizedType) {
+            stack.pop()
+            state = State.AfterType
+          } else if (
             isGenericArrowFunctionParameters &&
             stack.at(-1) === State.InsideMethodParameters
           ) {
@@ -3320,24 +3335,25 @@ export const tokenizeLine = (line, lineState) => {
     RE_BINDING_PATTERN_END.test(line)
   ) {
     state = State.TopLevelContent
-  } else if (
-    state === State.AfterType &&
-    (stack.includes(State.InsideClass) ||
-      stack.includes(State.InsideTypeObject))
-  ) {
+  } else if (state === State.AfterType) {
     const insideClassIndex = stack.lastIndexOf(State.InsideClass)
     const insideTypeObjectIndex = stack.lastIndexOf(State.InsideTypeObject)
     const containerIndex = Math.max(insideClassIndex, insideTypeObjectIndex)
-    state = stack[containerIndex]
-    stack.length = containerIndex
-  } else if (state === State.AfterType) {
-    if (isTypeAssertion) {
-      while (stack.at(-1) === State.AfterType) {
-        stack.pop()
+    const parenthesizedTypeIndex = stack.lastIndexOf(
+      State.AfterParenthesizedType
+    )
+    if (containerIndex > parenthesizedTypeIndex) {
+      state = stack[containerIndex]
+      stack.length = containerIndex
+    } else {
+      if (isTypeAssertion) {
+        while (stack.at(-1) === State.AfterType) {
+          stack.pop()
+        }
+        isTypeAssertion = false
       }
-      isTypeAssertion = false
+      state = State.AfterTypeAfterNewLine
     }
-    state = State.AfterTypeAfterNewLine
   } else if (state === State.AfterPropertyTypeQuery) {
     stack.pop()
     state = stack.pop() || State.AfterTypeAfterNewLine
