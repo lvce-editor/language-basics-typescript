@@ -67,6 +67,7 @@ const State = {
   AfterParenthesizedType: 64,
   AfterTypeObject: 65,
   AfterFunctionName: 66,
+  InsideReturnObjectValueArray: 67,
 }
 
 /**
@@ -863,6 +864,24 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_NUMERIC_2))) {
           token = TokenType.Numeric
           state = State.TopLevelContent
+        } else if (
+          stack.includes(State.InsideReturnObjectValueArray) &&
+          (next = part.match(RE_COMMA))
+        ) {
+          token = TokenType.Punctuation
+          state = State.InsideReturnObjectValue
+        } else if (
+          stack.includes(State.InsideReturnObjectValueArray) &&
+          (next = part.match(RE_SQUARE_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          const arrayIndex = stack.lastIndexOf(
+            State.InsideReturnObjectValueArray
+          )
+          if (arrayIndex !== -1) {
+            stack.splice(arrayIndex, 1)
+          }
+          state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
@@ -3166,7 +3185,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
-          state = State.InsideReturnObject
+          state = stack.includes(State.InsideReturnObjectValueArray)
+            ? State.InsideReturnObjectValue
+            : State.InsideReturnObject
         } else if ((next = part.match(RE_DOT))) {
           stack.push(State.InsideReturnObjectValue)
           token = TokenType.Punctuation
@@ -3184,6 +3205,25 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
           state = stack.pop() || State.TopLevelContent
+        } else if (
+          !/<\s*$/.test(line.slice(0, index)) &&
+          (next = part.match(RE_SQUARE_OPEN))
+        ) {
+          token = TokenType.Punctuation
+          stack.push(State.InsideReturnObjectValueArray)
+          state = State.InsideReturnObjectValue
+        } else if (
+          stack.includes(State.InsideReturnObjectValueArray) &&
+          (next = part.match(RE_SQUARE_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          const arrayIndex = stack.lastIndexOf(
+            State.InsideReturnObjectValueArray
+          )
+          if (arrayIndex !== -1) {
+            stack.splice(arrayIndex, 1)
+          }
+          state = State.InsideReturnObjectValue
         } else if ((next = part.match(RE_PUNCTUATION))) {
           token = TokenType.Punctuation
           state = State.InsideReturnObjectValue
