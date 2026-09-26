@@ -148,6 +148,9 @@ export const initialLineState = {
   functionParameterBraceDepth: 0,
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
+  isAsyncArrowFunctionParameters: false,
+  arrowFunctionParameterObjectDepth: 0,
+  isArrowFunctionParameterObjectType: false,
   isGenericArrowFunctionParameters: false,
   isTypeAssertion: false,
   objectDepth: 0,
@@ -329,6 +332,8 @@ const RE_PARENTHESIZED_UNION_ARRAY_WITH_COMPLEX_MEMBERS =
   /^\((?=[^)]*\|)[^)]*\)\s*\[/
 const RE_READONLY_PARENTHESIZED_ARRAY_START = /:\s*readonly\s*$/
 const RE_FUNCTION_PARAMETER_END = /^\)\s*=>/
+const RE_TYPED_OBJECT_ARROW_FUNCTION_PARAMETER =
+  /^\{\s*(?=[^}]*\w+\s*=\s*[^,}]+)[^}]+\}\s*:\s*[\w$]+/
 const RE_FUNCTION_TYPE_ALIAS =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
@@ -556,7 +561,13 @@ export const tokenizeLine = (line, lineState) => {
   let functionParameterBraceDepth = lineState.functionParameterBraceDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
+  let arrowFunctionParameterObjectDepth =
+    lineState.arrowFunctionParameterObjectDepth || 0
+  let isArrowFunctionParameterObjectType =
+    lineState.isArrowFunctionParameterObjectType || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
+  let isAsyncArrowFunctionParameters =
+    lineState.isAsyncArrowFunctionParameters || false
   let isGenericArrowFunctionParameters =
     lineState.isGenericArrowFunctionParameters || false
   let isTypeAssertion = lineState.isTypeAssertion || false
@@ -898,6 +909,9 @@ export const tokenizeLine = (line, lineState) => {
             stack.push(State.TopLevelContent)
             hasArrowFunctionParameterDefaultValue = false
             isArrowFunctionParameters = true
+            isAsyncArrowFunctionParameters = /\basync\s*$/.test(
+              line.slice(0, index)
+            )
             isGenericArrowFunctionParameters = false
             state = State.BeforeArrowFunctionParameters
           }
@@ -1473,6 +1487,7 @@ export const tokenizeLine = (line, lineState) => {
           state = stack.pop() || State.TopLevelContent
           hasArrowFunctionParameterDefaultValue = false
           isArrowFunctionParameters = false
+          isAsyncArrowFunctionParameters = false
           isGenericArrowFunctionParameters = false
         } else if (
           isArrowFunctionParameters &&
@@ -2375,12 +2390,38 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterMethodParameters
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          state = stack.pop() || State.TopLevelContent
+          if (
+            isAsyncArrowFunctionParameters &&
+            arrowFunctionParameterObjectDepth > 0
+          ) {
+            arrowFunctionParameterObjectDepth--
+            isArrowFunctionParameterObjectType =
+              arrowFunctionParameterObjectDepth === 0
+            state = State.InsideMethodParameters
+          } else {
+            state = stack.pop() || State.TopLevelContent
+          }
+        } else if (
+          isAsyncArrowFunctionParameters &&
+          RE_TYPED_OBJECT_ARROW_FUNCTION_PARAMETER.test(part) &&
+          (next = part.match(RE_CURLY_OPEN))
+        ) {
+          token = TokenType.Punctuation
+          arrowFunctionParameterObjectDepth++
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
+          if (
+            isAsyncArrowFunctionParameters &&
+            isArrowFunctionParameterObjectType
+          ) {
+            stack.push(State.InsideMethodParameters)
+            isArrowFunctionParameterObjectType = false
+          }
           state = State.BeforeType
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
+          isArrowFunctionParameterObjectType = false
           state = State.InsideMethodParameters
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           stack.push(state)
@@ -2445,6 +2486,13 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.Function
           state = State.InsideMethodParameterDefaultValue
+        } else if (
+          isAsyncArrowFunctionParameters &&
+          arrowFunctionParameterObjectDepth > 0 &&
+          (next = part.match(/^(?:true|false)\b/))
+        ) {
+          token = TokenType.LanguageConstant
+          state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.InsideMethodParameterDefaultValue
@@ -2453,6 +2501,16 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_COMMA))) {
           token = TokenType.Punctuation
+          state = State.InsideMethodParameters
+        } else if (
+          isAsyncArrowFunctionParameters &&
+          arrowFunctionParameterObjectDepth > 0 &&
+          (next = part.match(RE_CURLY_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          arrowFunctionParameterObjectDepth--
+          isArrowFunctionParameterObjectType =
+            arrowFunctionParameterObjectDepth === 0
           state = State.InsideMethodParameters
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
@@ -2481,7 +2539,24 @@ export const tokenizeLine = (line, lineState) => {
         }
         break
       case State.InsideMethodParametersAfterVariableName:
-        if ((next = part.match(RE_COLON))) {
+        if (
+          isAsyncArrowFunctionParameters &&
+          arrowFunctionParameterObjectDepth > 0 &&
+          (next = part.match(RE_COMMA))
+        ) {
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameters
+        } else if (
+          isAsyncArrowFunctionParameters &&
+          arrowFunctionParameterObjectDepth > 0 &&
+          (next = part.match(RE_CURLY_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          arrowFunctionParameterObjectDepth--
+          isArrowFunctionParameterObjectType =
+            arrowFunctionParameterObjectDepth === 0
+          state = State.InsideMethodParameters
+        } else if ((next = part.match(RE_COLON))) {
           token = TokenType.Punctuation
           state = State.BeforeType
           stack.push(State.InsideMethodParameters)
@@ -2534,6 +2609,7 @@ export const tokenizeLine = (line, lineState) => {
           ) {
             hasArrowFunctionParameterDefaultValue = false
             isArrowFunctionParameters = false
+            isAsyncArrowFunctionParameters = false
             isGenericArrowFunctionParameters = false
             state = stack.pop() || State.TopLevelContent
           } else {
@@ -3378,6 +3454,9 @@ export const tokenizeLine = (line, lineState) => {
     functionParameterBraceDepth,
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
+    isAsyncArrowFunctionParameters,
+    arrowFunctionParameterObjectDepth,
+    isArrowFunctionParameterObjectType,
     isGenericArrowFunctionParameters,
     isTypeAssertion,
     objectDepth,
