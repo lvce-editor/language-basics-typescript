@@ -50,3 +50,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-destructured-async-default-parameters
         shell: bash
+      - name: Test TypeScript generic function type aliases
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-generic-function-type-alias
+        shell: bash
