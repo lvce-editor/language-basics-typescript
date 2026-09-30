@@ -42,10 +42,10 @@ const nextValue = 123
   ).toHaveText('readonly')
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'boolean' })
-  ).toHaveText('boolean')
+  ).toHaveCount(3)
   await expect(
     Locator('.Token.Type', { hasText: 'VirtualDomNode' })
-  ).toHaveText('VirtualDomNode')
+  ).toHaveCount(2)
   await expect(Locator('.Token.KeywordReturn')).toHaveCount(1)
   await expect(Locator('.Token.String', { hasText: 'blurred' })).toHaveText(
     "' blurred'"
