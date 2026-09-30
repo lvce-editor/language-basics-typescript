@@ -53,4 +53,7 @@ jobs:
       - name: Test TypeScript multiline typeof parameters
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-multiline-typeof-parameters
+      - name: Test TypeScript generic function type aliases
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-generic-function-type-alias
         shell: bash
