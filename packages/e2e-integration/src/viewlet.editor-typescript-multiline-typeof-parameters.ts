@@ -47,8 +47,6 @@ const nextValue = 123
     Locator('.Token.Type', { hasText: 'VirtualDomNode' })
   ).toHaveCount(2)
   await expect(Locator('.Token.KeywordReturn')).toHaveCount(1)
-  await expect(Locator('.Token.String', { hasText: 'blurred' })).toHaveText(
-    ' blurred'
-  )
+  await expect(Locator('.Token.String')).toHaveCount(3)
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 }
