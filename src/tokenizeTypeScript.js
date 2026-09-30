@@ -451,6 +451,7 @@ const RE_GENERIC_TYPE_ARGUMENTS = new RegExp(
   `${TYPE_IDENTIFIER_PATTERN}<\\s*${TYPE_PRIMITIVE_PATTERN}\\s*,\\s*(${SIMPLE_TYPE_PATTERN}(?:\\s*,\\s*${SIMPLE_TYPE_PATTERN})*)\\s*>`,
   'g'
 )
+const RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT = /ReadonlyMap\s*<\s*string\s*,\s*\{/
 
 const getTypeToken = (typeName) => {
   if (RE_TYPE_PRIMITIVE.test(typeName)) {
@@ -1270,6 +1271,15 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if (
+          RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
+            line.slice(0, index) + part
+          ) &&
+          (next = part.match(RE_CURLY_OPEN))
+        ) {
+          stack.push(State.InsideGeneric)
+          token = TokenType.Punctuation
+          state = State.InsideTypeObject
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           state = State.InsideGeneric
@@ -1568,9 +1578,13 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           token = TokenType.Punctuation
-          state = isGenericArrowFunctionParameters
-            ? State.InsideGeneric
-            : State.BeforeType
+          state =
+            isGenericArrowFunctionParameters ||
+            RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
+              line.slice(0, index) + part
+            )
+              ? State.InsideGeneric
+              : State.BeforeType
           stack.push(State.AfterType)
         } else if ((next = part.match(RE_TYPE_PRIMITIVE))) {
           token = TokenType.TypePrimitive
