@@ -48,7 +48,7 @@ const nextValue = 123
   ).toHaveCount(2)
   await expect(Locator('.Token.KeywordReturn')).toHaveCount(1)
   await expect(Locator('.Token.String', { hasText: 'blurred' })).toHaveText(
-    "' blurred'"
+    ' blurred'
   )
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 }
