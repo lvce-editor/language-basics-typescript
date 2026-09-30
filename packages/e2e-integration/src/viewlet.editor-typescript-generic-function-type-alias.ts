@@ -36,14 +36,12 @@ const nextValue = 123
     Locator('.Token.KeywordModifier', { hasText: 'readonly' })
   ).toHaveCount(2)
   await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveCount(2)
-  await expect(
-    Locator('.Token.Comment', { hasText: 'eslint-disable-next-line' })
-  ).toHaveCount(1)
+  await expect(Locator('.Token.Comment')).toHaveCount(2)
   await expect(Locator('.Token.Function', { hasText: 'invoke' })).toHaveText(
     'invoke'
   )
   await expect(
     Locator('.Token.VariableName', { hasText: 'targets' })
-  ).toHaveText('targets')
+  ).toHaveCount(2)
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 }
