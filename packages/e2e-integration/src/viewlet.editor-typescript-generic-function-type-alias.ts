@@ -28,13 +28,13 @@ const nextValue = 123
   await expect(Locator('.Token.Type', { hasText: 'Invoke' })).toHaveCount(2)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
-  ).toHaveText('string')
+  ).toHaveCount(2)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'unknown' })
   ).toHaveText('unknown')
   await expect(
     Locator('.Token.KeywordModifier', { hasText: 'readonly' })
-  ).toHaveText('readonly')
+  ).toHaveCount(2)
   await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveText(
     'Promise'
   )
