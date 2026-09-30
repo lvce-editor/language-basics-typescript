@@ -1,0 +1,38 @@
+export const getWorkerRow = (
+  worker: DisplayedWorker,
+  showMemory: boolean,
+  strings: typeof WorkersViewStrings,
+  selected: boolean,
+  hasFocus: boolean,
+): readonly VirtualDomNode[] => {
+  let className = 'WorkersViewWorkerRow'
+  if (selected) {
+    className += ' WorkersViewWorkerRowSelected'
+    className += hasFocus ? ' WorkersViewWorkerRowFocused' : ' WorkersViewWorkerRowBlurred'
+  }
+  const cells: VirtualDomNode[] = [
+    { className: 'WorkersViewWorkerCell', role: AriaRoles.Cell, textContent: worker.name, type: VirtualDomElements.Td },
+  ]
+  if (showMemory) {
+    cells.push({
+      className: 'WorkersViewWorkerCell',
+      role: AriaRoles.Cell,
+      textContent: GetMemoryText.getMemoryText(worker.memory, strings),
+      type: VirtualDomElements.Td,
+    })
+  }
+  return [
+    {
+      'aria-selected': selected,
+      ariaLabel: worker.name,
+      childCount: cells.length,
+      className,
+      'data-workerId': worker.id,
+      onClick: DomEventListenerFunctions.SelectWorker,
+      onContextMenu: DomEventListenerFunctions.ShowWorkerContextMenu,
+      role: AriaRoles.Row,
+      type: VirtualDomElements.Tr,
+    },
+    ...cells,
+  ]
+}

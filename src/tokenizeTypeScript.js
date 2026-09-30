@@ -2980,8 +2980,18 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.KeywordImport
           state = State.InsideTypeImport
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
+          const returnState = stack.pop()
           token = TokenType.VariableName
-          state = stack.pop() || State.TopLevelContent
+          if (
+            isArrowFunctionParameters &&
+            returnState === State.BeforeType &&
+            stack.at(-1) === State.InsideMethodParameters
+          ) {
+            stack.pop()
+            state = State.InsideMethodParameters
+          } else {
+            state = returnState || State.TopLevelContent
+          }
         } else {
           throw new Error('no')
         }
