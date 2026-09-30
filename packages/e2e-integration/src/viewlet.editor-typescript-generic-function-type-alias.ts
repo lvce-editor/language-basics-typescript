@@ -25,9 +25,7 @@ const nextValue = 123
   await Main.openUri(filePath)
 
   await expect(Locator('.Token.Text')).toHaveCount(0)
-  await expect(Locator('.Token.Type', { hasText: 'Invoke' })).toHaveText(
-    'Invoke'
-  )
+  await expect(Locator('.Token.Type', { hasText: 'Invoke' })).toHaveCount(2)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
   ).toHaveText('string')
