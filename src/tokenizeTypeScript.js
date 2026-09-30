@@ -152,6 +152,7 @@ export const initialLineState = {
   arrowFunctionParameterObjectDepth: 0,
   isArrowFunctionParameterObjectType: false,
   isGenericArrowFunctionParameters: false,
+  isFunctionTypeAlias: false,
   isTypeAssertion: false,
   objectDepth: 0,
   parenthesisDepth: 0,
@@ -335,7 +336,9 @@ const RE_FUNCTION_PARAMETER_END = /^\)\s*=>/
 const RE_TYPED_OBJECT_ARROW_FUNCTION_PARAMETER =
   /^\{\s*(?=[^}]*\w+\s*=\s*[^,}]+)[^}]+\}\s*:\s*[\w$]+/
 const RE_FUNCTION_TYPE_ALIAS =
-  /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*\([^)]*\)\s*=>/
+  /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*(?:<[^>]+>\s*)?\([^)]*\)\s*=>/
+const RE_GENERIC_FUNCTION_TYPE_ALIAS_START =
+  /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*$/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
   /^\s*export\s+const\s+\w+\s*=\s*(?:async\s+)?\(\w+\s*:\s*[A-Z_\$][\w\$]*\)\s*(?::\s*[A-Z_\$][\w\$]*(?:<[^>]+>)?)?\s*=>/
 const RE_RETURNED_ARROW_FUNCTION_WITH_TYPED_BINDING_PATTERN =
@@ -573,7 +576,8 @@ export const tokenizeLine = (line, lineState) => {
     lineState.isGenericArrowFunctionParameters || false
   let isTypeAssertion = lineState.isTypeAssertion || false
   let isMultilineArrowFunctionParameter = false
-  const isFunctionTypeAlias = RE_FUNCTION_TYPE_ALIAS.test(line)
+  let isFunctionTypeAlias =
+    lineState.isFunctionTypeAlias || RE_FUNCTION_TYPE_ALIAS.test(line)
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
   const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
@@ -1203,6 +1207,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_VERTICAL_LINE))) {
           token = TokenType.Punctuation
           state = State.BeforeType
+        } else if (
+          RE_GENERIC_FUNCTION_TYPE_ALIAS_START.test(line.slice(0, index)) &&
+          (next = part.match(RE_ANGLE_OPEN))
+        ) {
+          token = TokenType.Punctuation
+          isFunctionTypeAlias = true
+          stack.push(state)
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
@@ -1358,6 +1370,7 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
+          isFunctionTypeAlias = false
           if (
             stack.at(-1) === State.AfterTypeExpression &&
             stack.at(-2) === State.InsideTypeObject
@@ -1403,6 +1416,12 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_LINE_COMMENT))) {
           token = TokenType.Comment
           state = State.AfterTypeExpression
+        } else if (
+          isFunctionTypeAlias &&
+          (next = part.match(RE_VARIABLE_NAME))
+        ) {
+          token = TokenType.VariableName
+          state = State.AfterVariableName
         } else if ((next = part.match(RE_ANYTHING_UNTIL_END))) {
           token = TokenType.Text
           state = State.TopLevelContent
@@ -3472,6 +3491,7 @@ export const tokenizeLine = (line, lineState) => {
     arrowFunctionParameterObjectDepth,
     isArrowFunctionParameterObjectType,
     isGenericArrowFunctionParameters,
+    isFunctionTypeAlias,
     isTypeAssertion,
     objectDepth,
     parenthesisDepth,
