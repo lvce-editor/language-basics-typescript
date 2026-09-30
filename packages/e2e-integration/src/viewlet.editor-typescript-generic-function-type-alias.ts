@@ -35,9 +35,7 @@ const nextValue = 123
   await expect(
     Locator('.Token.KeywordModifier', { hasText: 'readonly' })
   ).toHaveCount(2)
-  await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveText(
-    'Promise'
-  )
+  await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveCount(2)
   await expect(
     Locator('.Token.Comment', { hasText: 'eslint-disable-next-line' })
   ).toHaveCount(1)
