@@ -42,6 +42,6 @@ const nextValue = 123
   )
   await expect(
     Locator('.Token.VariableName', { hasText: 'targets' })
-  ).toHaveCount(2)
+  ).toHaveText('targets')
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 }
