@@ -43,7 +43,7 @@ export const createRpc = async (url = new URL('.tmp/cacheWorkerMain.js', import.
   ).toHaveText('readonly')
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'unknown' })
-  ).toHaveCount(3)
+  ).toHaveCount(4)
   await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveCount(3)
   await expect(Locator('.Token.KeywordControl', { hasText: 'if' })).toHaveText(
     'if'
