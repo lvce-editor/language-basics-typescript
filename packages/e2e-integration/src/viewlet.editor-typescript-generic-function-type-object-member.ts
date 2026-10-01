@@ -48,6 +48,7 @@ export const createRpc = async (url = new URL('.tmp/cacheWorkerMain.js', import.
   await expect(Locator('.Token.KeywordControl', { hasText: 'if' })).toHaveText(
     'if'
   )
+  await expect(Locator('.Token.Punctuation', { hasText: '[' })).toHaveCount(1)
 
   const genericLine = source.split('\n')[1]
   const genericDefaultColumn = genericLine.indexOf('unknown') + 'unknown'.length
@@ -55,7 +56,7 @@ export const createRpc = async (url = new URL('.tmp/cacheWorkerMain.js', import.
   await Editor.type('[]')
 
   await expect(Locator('.Token.Text')).toHaveCount(0)
-  await expect(Locator('.Token.Punctuation', { hasText: '[' })).toHaveText('[')
+  await expect(Locator('.Token.Punctuation', { hasText: '[' })).toHaveCount(2)
   await expect(Locator('.Token.KeywordControl', { hasText: 'if' })).toHaveText(
     'if'
   )
