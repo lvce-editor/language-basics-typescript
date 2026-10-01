@@ -1215,6 +1215,14 @@ export const tokenizeLine = (line, lineState) => {
           isFunctionTypeAlias = true
           stack.push(state)
           state = State.InsideGeneric
+        } else if (
+          stack.at(-1) === State.InsideTypeObject &&
+          (next = part.match(RE_ANGLE_OPEN))
+        ) {
+          // Generic function-valued object members continue like named methods.
+          token = TokenType.Punctuation
+          stack.push(State.AfterMethodName)
+          state = State.InsideGeneric
         } else if ((next = part.match(RE_BLOCK_COMMENT_START))) {
           stack.push(state)
           token = TokenType.Comment
