@@ -32,7 +32,7 @@ const nextValue = 123
   await Main.openUri(filePath)
 
   await expect(Locator('.Token.Text')).toHaveCount(0)
-  await expect(Locator('.Token.Comment')).toHaveCount(2)
+  await expect(Locator('.Token.Comment')).toHaveCount(3)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
   ).toHaveCount(3)
