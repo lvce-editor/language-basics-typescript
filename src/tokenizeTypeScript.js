@@ -2481,6 +2481,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT_START))) {
+          stack.push(state)
+          token = TokenType.Comment
+          state = State.InsideLineComment
         } else if (
           isArrowFunctionParameters &&
           (next = part.match(RE_PARAMETER_DEFAULT_EQUAL))

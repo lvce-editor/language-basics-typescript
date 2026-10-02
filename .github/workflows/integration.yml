@@ -61,3 +61,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-generic-function-type-object-member
         shell: bash
+      - name: Test TypeScript line comments in parameters
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-line-comment-in-parameters
+        shell: bash
