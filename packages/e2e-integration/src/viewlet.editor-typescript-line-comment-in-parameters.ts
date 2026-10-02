@@ -39,7 +39,7 @@ const nextValue = 123
   await expect(
     Locator('.Token.Type', { hasText: 'FileSystemWriteChunkType' })
   ).toHaveText('FileSystemWriteChunkType')
-  await expect(Locator('.Token.KeywordReturn')).toHaveCount(1)
+  await expect(Locator('.Token.KeywordReturn')).toHaveCount(2)
   await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveCount(2)
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 }
