@@ -65,3 +65,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-line-comment-in-parameters
         shell: bash
+      - name: Test TypeScript incomplete new highlighting
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-incomplete-new
+        shell: bash
