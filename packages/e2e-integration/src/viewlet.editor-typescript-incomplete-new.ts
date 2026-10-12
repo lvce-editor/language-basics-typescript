@@ -28,7 +28,7 @@ export const test = async ({
   await Editor.type(' new')
 
   await expect(Locator('.Token.KeywordNew')).toHaveCount(2)
-  await expect(Locator('.Token.Comment')).toHaveCount(2)
+  await expect(Locator('.Token.Comment')).toHaveCount(1)
   await expect(Locator('.Token.Keyword', { hasText: 'const' })).toHaveCount(3)
   await expect(Locator('.Token.VariableName', { hasText: 'later' })).toHaveText(
     'later'
