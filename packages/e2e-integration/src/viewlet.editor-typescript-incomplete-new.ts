@@ -30,9 +30,9 @@ export const test = async ({
   await expect(Locator('.Token.KeywordNew')).toHaveCount(2)
   await expect(Locator('.Token.Comment')).toHaveCount(1)
   await expect(Locator('.Token.Keyword', { hasText: 'const' })).toHaveCount(3)
-  await expect(Locator('.Token.VariableName', { hasText: 'later' })).toHaveText(
-    'later'
-  )
+  await expect(
+    Locator('.Token.VariableName', { hasText: 'later' })
+  ).toHaveCount(2)
   await expect(Locator('.Token.Class', { hasText: 'Float32Array' })).toHaveText(
     'Float32Array'
   )
