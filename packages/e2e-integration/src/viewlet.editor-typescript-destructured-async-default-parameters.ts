@@ -46,20 +46,20 @@ const nextValue = 123
 
   await expect(Locator('.Token.Text')).toHaveCount(0)
   await expect(Locator('.Token.Type', { hasText: 'EditorStatus' })).toHaveText(
-    'EditorStatus',
+    'EditorStatus'
   )
   await expect(Locator('.Token.Type', { hasText: 'StatusBarItem' })).toHaveText(
-    'StatusBarItem',
+    'StatusBarItem'
   )
   await expect(
-    Locator('.Token.Type', { hasText: 'GetBuiltinStatusBarItemsOptions' }),
+    Locator('.Token.Type', { hasText: 'GetBuiltinStatusBarItemsOptions' })
   ).toHaveCount(2)
   await expect(Locator('.Token.Class', { hasText: 'Promise' })).toHaveText(
-    'Promise',
+    'Promise'
   )
   await expect(Locator('.Token.KeywordReturn')).toHaveCount(1)
   await expect(
-    Locator('.Token.Function', { hasText: 'getEditorStatusBarItems' }),
+    Locator('.Token.Function', { hasText: 'getEditorStatusBarItems' })
   ).toHaveText('getEditorStatusBarItems')
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
 

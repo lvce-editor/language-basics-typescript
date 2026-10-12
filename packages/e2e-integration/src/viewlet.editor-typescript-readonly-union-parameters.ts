@@ -26,20 +26,20 @@ export const test = async ({
   return process.children
 }
 const nextValue = 123
-`,
+`
   )
   await Settings.update({ 'editor.combineWhitespaceTokens': false })
   await Workspace.setUri(tmpDir)
   await Main.openUri(filePath)
 
   await expect(
-    Locator('.Token.TypePrimitive', { hasText: 'number' }),
+    Locator('.Token.TypePrimitive', { hasText: 'number' })
   ).toHaveText('number')
   await expect(Locator('.Token.Type', { hasText: 'ProcessInfo' })).toHaveText(
-    'ProcessInfo',
+    'ProcessInfo'
   )
   await expect(
-    Locator('.Token.Type', { hasText: 'VisibleProcess' }),
+    Locator('.Token.Type', { hasText: 'VisibleProcess' })
   ).toHaveText('VisibleProcess')
   await expect(Locator('.Token.KeywordReturn')).toHaveCount(3)
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')

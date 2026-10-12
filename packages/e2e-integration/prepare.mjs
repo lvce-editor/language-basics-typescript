@@ -8,7 +8,7 @@ if (!process.argv[2])
   throw new Error('Pass the path to a disposable LVCE checkout')
 const application = resolve(process.argv[2])
 const manifest = JSON.parse(
-  await readFile(join(application, 'package.json'), 'utf8'),
+  await readFile(join(application, 'package.json'), 'utf8')
 )
 if (manifest.name !== 'lvce-editor')
   throw new Error('Expected an LVCE application checkout')
@@ -30,7 +30,7 @@ try {
 for (const path of config.scripts) {
   await cp(
     join(here, 'scripts', path.split('/').at(-1)),
-    join(application, path),
+    join(application, path)
   )
 }
 // Exercise this repository's build in the pinned application runtime.
