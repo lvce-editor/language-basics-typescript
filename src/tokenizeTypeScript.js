@@ -2959,6 +2959,12 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_KEYWORD_NEW))) {
           token = TokenType.KeywordNew
           state = State.AfterKeywordNew
+        } else if (
+          line.slice(0, index).trim() === '' &&
+          (next = part.match(RE_KEYWORD_VARIABLE_DECLARATION))
+        ) {
+          state = State.TopLevelContent
+          continue
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.Class
           state = State.AfterConstructorCallee

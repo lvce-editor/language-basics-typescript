@@ -25,7 +25,7 @@ const tokenize = (source) => {
 
 test('recovers after a standalone new and a following line comment', () => {
   const lines = tokenize(
-    `const instance = new  \n// constructor to be added\nconst later = new Float32Array(9)`
+    `const instance = new  \n// constructor to be added\n  const later = new Float32Array(9)`
   )
 
   assert.ok(
@@ -36,6 +36,16 @@ test('recovers after a standalone new and a following line comment', () => {
   )
   assert.ok(
     lines[2].some(([type, text]) => type === 'VariableName' && text === 'later')
+  )
+  assert.ok(
+    lines[2].some(
+      ([type, text]) => type === 'Keyword' && text.trim() === 'const'
+    )
+  )
+  assert.ok(
+    !lines[2].some(
+      ([type, text]) => type === 'Class' && text.trim() === 'const'
+    )
   )
   assert.ok(
     lines[2].some(([type, text]) => type === 'Class' && text === 'Float32Array')
