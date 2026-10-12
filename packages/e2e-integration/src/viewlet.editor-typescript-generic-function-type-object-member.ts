@@ -50,7 +50,7 @@ export const createRpc = async (url = new URL('.tmp/cacheWorkerMain.js', import.
   )
   await expect(Locator('.Token.Punctuation', { hasText: '[' })).toHaveCount(1)
 
-  const genericLine = source.split('\n')[1]
+  const genericLine = source.split('\n', 2)[1]
   const genericDefaultColumn = genericLine.indexOf('unknown') + 'unknown'.length
   await Editor.setCursor(1, genericDefaultColumn)
   await Editor.type('[]')

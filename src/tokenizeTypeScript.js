@@ -2975,6 +2975,8 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Comment
           state = State.InsideBlockComment
+        } else if ((next = part.match(RE_LINE_COMMENT))) {
+          token = TokenType.Comment
         } else {
           throw new Error('no')
         }
