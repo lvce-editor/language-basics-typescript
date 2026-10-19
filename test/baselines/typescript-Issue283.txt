@@ -31,7 +31,7 @@ Class
 Punctuation
 VariableName
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 TypePrimitive
