@@ -451,8 +451,8 @@ const RE_FUNCTION_PARAMETER_TYPE = new RegExp(
 const RE_TYPE_NAME = new RegExp(IDENTIFIER_PATTERN, 'g')
 const TYPE_IDENTIFIER_PATTERN = '[A-Z_\\$][\\w\\$]*'
 const RE_GENERIC_TYPE_ARGUMENTS = new RegExp(
-  `${TYPE_IDENTIFIER_PATTERN}<\\s*${TYPE_PRIMITIVE_PATTERN}\\s*,\\s*(${SIMPLE_TYPE_PATTERN}(?:\\s*,\\s*${SIMPLE_TYPE_PATTERN})*)\\s*>`,
-  'g'
+  `${TYPE_IDENTIFIER_PATTERN}<\\s*(${TYPE_PRIMITIVE_PATTERN})\\s*,\\s*(${SIMPLE_TYPE_PATTERN}(?:\\s*,\\s*${SIMPLE_TYPE_PATTERN})*)\\s*>`,
+  'dg'
 )
 const RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT = /ReadonlyMap\s*<\s*string\s*,\s*\{/
 
@@ -531,9 +531,11 @@ const getArrowFunctionTypeOffsets = (line) => {
 const getGenericTypeArgumentOffsets = (line) => {
   const offsets = new Map()
   for (const match of line.matchAll(RE_GENERIC_TYPE_ARGUMENTS)) {
-    const typeArguments = match[1]
-    const typeArgumentsOffset = match.index + match[0].indexOf(typeArguments)
-    addTypeOffsets(offsets, typeArguments, typeArgumentsOffset)
+    for (const argumentIndex of [1, 2]) {
+      const typeArguments = match[argumentIndex]
+      const typeArgumentsOffset = match.indices[argumentIndex][0]
+      addTypeOffsets(offsets, typeArguments, typeArgumentsOffset)
+    }
   }
   return offsets
 }

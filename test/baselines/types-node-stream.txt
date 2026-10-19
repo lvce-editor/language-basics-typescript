@@ -10701,7 +10701,7 @@ Punctuation
 TypePrimitive
 Punctuation
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 NewLine
