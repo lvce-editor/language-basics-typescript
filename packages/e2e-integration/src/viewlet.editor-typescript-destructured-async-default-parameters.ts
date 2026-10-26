@@ -65,7 +65,7 @@ const configureRenderer = (setAsRendererProcess = true) => setAsRendererProcess
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
   await expect(
     Locator('.Token.LanguageConstant', { hasText: 'true' })
-  ).toHaveText('true')
+  ).toHaveCount(3)
 
   const booleanLine = source
     .split('\n')
@@ -78,7 +78,7 @@ const configureRenderer = (setAsRendererProcess = true) => setAsRendererProcess
 
   await expect(
     Locator('.Token.LanguageConstant', { hasText: 'false' })
-  ).toHaveText('false')
+  ).toHaveCount(1)
   await expect(Locator('.Token.Text')).toHaveCount(0)
 
   const parameterLine = source
