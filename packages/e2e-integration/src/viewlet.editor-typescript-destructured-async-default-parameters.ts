@@ -73,7 +73,14 @@ const configureRenderer = (setAsRendererProcess = true) => setAsRendererProcess
   const booleanColumn =
     source.split('\n')[booleanLine].indexOf('setAsRendererProcess = ') +
     'setAsRendererProcess = '.length
-  await Editor.setCursor(booleanLine, booleanColumn)
+  await Editor.setSelections(
+    new Uint32Array([
+      booleanLine,
+      booleanColumn,
+      booleanLine,
+      booleanColumn + 4,
+    ])
+  )
   await Editor.type('false')
 
   await expect(
