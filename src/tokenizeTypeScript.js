@@ -2535,11 +2535,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.Function
           state = State.InsideMethodParameterDefaultValue
-        } else if (
-          isAsyncArrowFunctionParameters &&
-          arrowFunctionParameterObjectDepth > 0 &&
-          (next = part.match(/^(?:true|false)\b/))
-        ) {
+        } else if ((next = part.match(/^(?:true|false|null|undefined)\b/))) {
           token = TokenType.LanguageConstant
           state = State.InsideMethodParameterDefaultValue
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
