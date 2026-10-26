@@ -1611,7 +1611,9 @@ export const tokenizeLine = (line, lineState) => {
             isGenericArrowFunctionParameters ||
             RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
               line.slice(0, index) + part
-            )
+            ) ||
+            (line.slice(index + part.length).trim() === '' &&
+              /\bRecord\s*<$/.test(line.slice(0, index) + part))
               ? State.InsideGeneric
               : State.BeforeType
           stack.push(State.AfterType)

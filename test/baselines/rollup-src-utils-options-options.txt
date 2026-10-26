@@ -1016,7 +1016,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 NewLine
 Punctuation
 Whitespace
@@ -1250,7 +1250,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 NewLine
 Punctuation
 Whitespace
@@ -1470,7 +1470,7 @@ Punctuation
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 Punctuation
 Punctuation
 String

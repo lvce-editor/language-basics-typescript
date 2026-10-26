@@ -12,7 +12,12 @@ export const test = async ({
   const filePath = `${tmpDir}/record.ts`
   await FileSystem.writeFile(
     filePath,
-    `const contents = Object.create(null) as Record<string, string>
+    `type LinuxProcessStat = { pid: number }
+const contents = Object.create(null) as Record<string, string>
+export type ProcessStatsByParentPid = Record<
+  number,
+  LinuxProcessStat[] | undefined
+>
 const nextValue = 123
 `
   )
@@ -23,8 +28,19 @@ const nextValue = 123
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
   ).toHaveCount(2)
-  await expect(Locator('.Token.Punctuation', { hasText: '<' })).toHaveText('<')
-  await expect(Locator('.Token.Punctuation', { hasText: ',' })).toHaveText(',')
-  await expect(Locator('.Token.Punctuation', { hasText: '>' })).toHaveText('>')
+  await expect(Locator('.Token.Punctuation', { hasText: '<' })).toHaveCount(2)
+  await expect(Locator('.Token.Punctuation', { hasText: ',' })).toHaveCount(2)
+  await expect(Locator('.Token.Punctuation', { hasText: '>' })).toHaveCount(2)
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
+  await expect(
+    Locator('.Token.Type', { hasText: 'LinuxProcessStat' })
+  ).toHaveCount(2)
+  await expect(
+    Locator('.Token.TypePrimitive', { hasText: 'number' })
+  ).toHaveCount(2)
+  await expect(
+    Locator('.Token.TypePrimitive', { hasText: 'undefined' })
+  ).toHaveText('undefined')
+  await expect(Locator('.Token.Punctuation', { hasText: '[' })).toHaveText('[')
+  await expect(Locator('.Token.Punctuation', { hasText: '|' })).toHaveText('|')
 }
