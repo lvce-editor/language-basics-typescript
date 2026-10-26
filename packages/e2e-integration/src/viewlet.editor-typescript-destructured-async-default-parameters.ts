@@ -38,6 +38,7 @@ export const getBuiltinStatusBarItems = async (
   ]
 }
 const nextValue = 123
+const configureRenderer = (setAsRendererProcess = true) => setAsRendererProcess
 `
   await FileSystem.writeFile(filePath, source)
   await Settings.update({ 'editor.combineWhitespaceTokens': false })
@@ -62,6 +63,23 @@ const nextValue = 123
     Locator('.Token.Function', { hasText: 'getEditorStatusBarItems' })
   ).toHaveText('getEditorStatusBarItems')
   await expect(Locator('.Token.Numeric', { hasText: '123' })).toHaveText('123')
+  await expect(
+    Locator('.Token.LanguageConstant', { hasText: 'true' })
+  ).toHaveText('true')
+
+  const booleanLine = source
+    .split('\n')
+    .findIndex((line) => line.includes('setAsRendererProcess = true'))
+  const booleanColumn =
+    source.split('\n')[booleanLine].indexOf('setAsRendererProcess = ') +
+    'setAsRendererProcess = '.length
+  await Editor.setCursor(booleanLine, booleanColumn)
+  await Editor.type('false')
+
+  await expect(
+    Locator('.Token.LanguageConstant', { hasText: 'false' })
+  ).toHaveText('false')
+  await expect(Locator('.Token.Text')).toHaveCount(0)
 
   const parameterLine = source
     .split('\n')
