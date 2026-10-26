@@ -1594,9 +1594,9 @@ TypePrimitive
 Punctuation
 NewLine
 Whitespace
-VariableName
+Type
 Punctuation
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace
