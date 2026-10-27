@@ -245,11 +245,15 @@ const RE_OPTIONAL_CALLBACK_NAME = /^[\w\d]+(?=\s*\?\:\s*\((?!\s*\())/
 const RE_GENERIC_FUNCTION_CALL_NAME = /^[\w]+(?=<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_FUNCTION_CALL_NAME =
   /^[\w]+(?=\s*(\(|\=\s*function|\=\s*async\b|\=\s*\())/
+const RE_GENERIC_ARROW_FUNCTION_NAME =
+  /^[\w]+(?=\s*=\s*<(?:[^<>\n]|<[^<>\n]*>)+>\s*\()/
 const RE_PARENTHESIZED_AWAIT_VARIABLE_NAME = /^[\w]+(?=\s*=\s*\(\s*await\b)/
 
 const isParenthesizedFunctionDeclaration = (line, index) => {
   const part = line.slice(index)
-  const match = part.match(/^[\w]+\s*=\s*(?:async\s+)?\(/)
+  const match = part.match(
+    /^[\w]+\s*=\s*(?:async\s+)?(?:<(?:[^<>\n]|<[^<>\n]*>)+>\s*)?\(/
+  )
   if (!match) {
     return true
   }
@@ -1048,7 +1052,9 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.VariableName
           state = State.AfterKeywordVariableDeclaration
         } else if (
-          (next = part.match(RE_FUNCTION_CALL_NAME)) &&
+          (next =
+            part.match(RE_FUNCTION_CALL_NAME) ||
+            part.match(RE_GENERIC_ARROW_FUNCTION_NAME)) &&
           isParenthesizedFunctionDeclaration(line, index)
         ) {
           token = TokenType.FunctionName
