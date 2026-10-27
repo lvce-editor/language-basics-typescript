@@ -57,6 +57,10 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-generic-function-type-alias
         shell: bash
+      - name: Test TypeScript generic arrow function names
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-generic-arrow-function-name
+        shell: bash
       - name: Test TypeScript Record generic arguments
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-record-generic-arguments
