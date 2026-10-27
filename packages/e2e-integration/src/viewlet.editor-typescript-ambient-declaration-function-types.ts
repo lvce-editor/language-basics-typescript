@@ -31,7 +31,7 @@ const nextValue = 123
   ).toHaveCount(3)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
-  ).toHaveText('string')
+  ).toHaveCount(2)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'unknown' })
   ).toHaveText('unknown')
