@@ -73,3 +73,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-incomplete-new
         shell: bash
+      - name: Test TypeScript template interpolation contextual keyword
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-template-interpolation-type
+        shell: bash
