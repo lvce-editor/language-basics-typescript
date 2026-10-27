@@ -341,6 +341,8 @@ const RE_TYPED_OBJECT_ARROW_FUNCTION_PARAMETER =
   /^\{\s*(?=[^}]*\w+\s*=\s*[^,}]+)[^}]+\}\s*:\s*[\w$]+/
 const RE_FUNCTION_TYPE_ALIAS =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*(?:<[^>]+>\s*)?\([^)]*\)\s*=>/
+const RE_AMBIENT_FUNCTION_TYPE_DECLARATION =
+  /^\s*(?:export\s+)?declare\s+const\s+\w+\s*:\s*.*=>/
 const RE_GENERIC_FUNCTION_TYPE_ALIAS_START =
   /^\s*(?:export\s+)?type\s+\w+(?:\s*<[^>]+>)?\s*=\s*$/
 const RE_EXPORTED_ARROW_FUNCTION_WITH_NAMED_PARAMETER =
@@ -582,8 +584,12 @@ export const tokenizeLine = (line, lineState) => {
     lineState.isGenericArrowFunctionParameters || false
   let isTypeAssertion = lineState.isTypeAssertion || false
   let isMultilineArrowFunctionParameter = false
+  const isAmbientFunctionTypeDeclaration =
+    RE_AMBIENT_FUNCTION_TYPE_DECLARATION.test(line)
   let isFunctionTypeAlias =
-    lineState.isFunctionTypeAlias || RE_FUNCTION_TYPE_ALIAS.test(line)
+    lineState.isFunctionTypeAlias ||
+    RE_FUNCTION_TYPE_ALIAS.test(line) ||
+    isAmbientFunctionTypeDeclaration
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
   const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
@@ -1301,6 +1307,15 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           state = State.InsideGeneric
         } else if (
+          isAmbientFunctionTypeDeclaration &&
+          (next = part.match(RE_ROUND_OPEN))
+        ) {
+          // Function types can appear as generic arguments, such as
+          // Record<string, (...args: any[]) => any>.
+          stack.push(State.InsideGeneric)
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameters
+        } else if (
           RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
             line.slice(0, index) + part
           ) &&
@@ -1387,7 +1402,9 @@ export const tokenizeLine = (line, lineState) => {
           state = State.TopLevelContent
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
-          isFunctionTypeAlias = false
+          if (!isAmbientFunctionTypeDeclaration) {
+            isFunctionTypeAlias = false
+          }
           if (
             stack.at(-1) === State.AfterTypeExpression &&
             stack.at(-2) === State.InsideTypeObject
@@ -1615,6 +1632,7 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           token = TokenType.Punctuation
           state =
+            isAmbientFunctionTypeDeclaration ||
             isGenericArrowFunctionParameters ||
             RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
               line.slice(0, index) + part
