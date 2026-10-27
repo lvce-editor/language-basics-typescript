@@ -87,4 +87,42 @@ for (const [name, Tokenizer] of [
       tokens.some(([type, text]) => type === 'VariableName' && text === 'after')
     )
   })
+
+  test(`${name} restores arrow function highlighting after a typed template`, () => {
+    const source =
+      'export const getData = (type: string, id: string): string => `${type}:${id}`\n' +
+      '\n' +
+      'export const getId = (type: string, value: string): string | undefined => {\n' +
+      '  const prefix = `${type}:`\n' +
+      '  return value.startsWith(prefix) ? value.slice(prefix.length) : undefined\n' +
+      '}'
+    const tokens = getTokens(Tokenizer, source)
+
+    assert.ok(
+      tokens.some(([type, text]) => type === 'VariableName' && text === 'type')
+    )
+    assert.ok(
+      tokens.some(([type, text]) => type === 'VariableName' && text === 'id')
+    )
+    assert.equal(
+      tokens.filter(([type, text]) => type === 'Punctuation' && text === '${')
+        .length,
+      3
+    )
+    assert.ok(
+      tokens.some(
+        ([type, text]) => type === 'KeywordReturn' && text === 'return'
+      )
+    )
+    assert.ok(
+      tokens.some(
+        ([type, text]) => type === 'Function' && text === 'startsWith'
+      )
+    )
+    assert.ok(
+      tokens.some(
+        ([type, text]) => type === 'LanguageConstant' && text === 'undefined'
+      )
+    )
+  })
 }

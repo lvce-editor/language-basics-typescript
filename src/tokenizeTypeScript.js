@@ -717,7 +717,8 @@ export const tokenizeLine = (line, lineState) => {
           state = State.AfterKeywordVariableDeclaration
         } else if (
           (next = part.match(RE_KEYWORD_TYPE)) &&
-          /\breturn\b.*(?:\[|\$\{|\?|\()\s*$/.test(line.slice(0, index))
+          (stack.includes(State.InsideBacktickString) ||
+            /\breturn\b.*(?:\[|\$\{|\?|\()\s*$/.test(line.slice(0, index)))
         ) {
           token = TokenType.VariableName
           state = State.TopLevelContent
