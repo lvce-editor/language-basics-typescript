@@ -24,7 +24,7 @@ export const test = async ({
   await Main.openUri(filePath)
 
   await expect(Locator('.Token.VariableName', { hasText: 'type' })).toHaveCount(
-    3
+    4
   )
   await expect(Locator('.Token.VariableName', { hasText: 'id' })).toHaveCount(2)
   await expect(Locator('.Token.KeywordReturn')).toHaveText('return')
