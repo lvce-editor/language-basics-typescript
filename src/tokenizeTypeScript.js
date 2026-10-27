@@ -483,6 +483,9 @@ const addTypeOffsets = (offsets, type, typeOffset) => {
 
 const getFunctionParameterTypeOffsets = (line) => {
   const offsets = new Map()
+  if (!line.includes(':')) {
+    return offsets
+  }
   for (const match of line.matchAll(RE_FUNCTION_PARAMETER_TYPE)) {
     const type = match[1]
     const typeOffset = match.index + match[0].lastIndexOf(type)
@@ -536,6 +539,9 @@ const getArrowFunctionTypeOffsets = (line) => {
 
 const getGenericTypeArgumentOffsets = (line) => {
   const offsets = new Map()
+  if (!line.includes('<') || !line.includes(',')) {
+    return offsets
+  }
   for (const match of line.matchAll(RE_GENERIC_TYPE_ARGUMENTS)) {
     for (const argumentIndex of [1, 2]) {
       const typeArguments = match[argumentIndex]
