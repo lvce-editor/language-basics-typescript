@@ -33,5 +33,5 @@ export const test = async ({
   ).toHaveText('startsWith')
   await expect(
     Locator('.Token.LanguageConstant', { hasText: 'undefined' })
-  ).toHaveCount(2)
+  ).toHaveCount(1)
 }
