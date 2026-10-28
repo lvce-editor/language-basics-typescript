@@ -3501,6 +3501,14 @@ export const tokenizeLine = (line, lineState) => {
     tokens.push(token, tokenLength)
   }
   if (
+    state === State.InsideSingleQuoteString &&
+    !/(?:^|[^\\])(?:\\\\)*\\$/.test(line)
+  ) {
+    // An ordinary string ends at a newline unless the newline is escaped.
+    // Recover as if its closing quote had been present on this line.
+    state = stack.pop() || State.TopLevelContent
+  }
+  if (
     state === State.AfterKeywordVariableDeclaration &&
     RE_BINDING_PATTERN_END.test(line)
   ) {

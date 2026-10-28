@@ -85,3 +85,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-template-interpolation-type
         shell: bash
+      - name: Test TypeScript unmatched single quote recovery
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-unmatched-single-quote
+        shell: bash

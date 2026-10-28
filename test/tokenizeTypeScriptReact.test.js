@@ -274,3 +274,33 @@ test('highlights new after spread in returned arrays', () => {
     ['KeywordNew', 'KeywordNew', 'VariableName']
   )
 })
+
+test('preserves apostrophes in JSX children and multiline attributes', () => {
+  const tokens = getTokens(`const view = <div title='first
+second'>don't
+stop</div>
+const after = true`)
+  assert.ok(
+    tokens.some(([type, text]) => type === 'String' && text === 'second')
+  )
+  assert.ok(tokens.some(([type, text]) => type === 'Text' && text === "don't"))
+  assert.ok(tokens.some(([type, text]) => type === 'Text' && text === 'stop'))
+  assert.ok(
+    tokens.some(([type, text]) => type === 'VariableName' && text === 'after')
+  )
+})
+
+test('recovers from unterminated single quotes inside JSX expressions', () => {
+  const tokens = getTokens(`const view = <div>{format('unfinished
+  value)}don't stop</div>
+const after = true`)
+  assert.ok(
+    tokens.some(([type, text]) => type === 'VariableName' && text === 'value')
+  )
+  assert.ok(
+    tokens.some(([type, text]) => type === 'Text' && text === "don't stop")
+  )
+  assert.ok(
+    tokens.some(([type, text]) => type === 'VariableName' && text === 'after')
+  )
+})
