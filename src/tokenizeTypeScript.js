@@ -596,6 +596,7 @@ export const tokenizeLine = (line, lineState) => {
     lineState.isFunctionTypeAlias ||
     RE_FUNCTION_TYPE_ALIAS.test(line) ||
     isAmbientFunctionTypeDeclaration
+  let isReadonlyTupleType = lineState.isReadonlyTupleType || false
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
   const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
@@ -1277,11 +1278,33 @@ export const tokenizeLine = (line, lineState) => {
       case State.InsideTypeExpression:
         if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
+          if (
+            isReadonlyTupleType &&
+            stack.at(-1) === State.AfterTypeExpression
+          ) {
+            stack.pop()
+          }
           state = State.AfterTypeExpression
         } else if ((next = part.match(RE_ANGLE_OPEN))) {
           stack.push(State.InsideTypeExpression)
           token = TokenType.Punctuation
           state = State.InsideGeneric
+        } else if ((next = part.match(RE_KEYWORD_READONLY))) {
+          token = TokenType.KeywordModifier
+          isReadonlyTupleType = /^\s*\[/.test(part.slice(next[0].length))
+          state = State.InsideTypeExpression
+        } else if (
+          isReadonlyTupleType &&
+          (next = part.match(RE_TYPE_PRIMITIVE))
+        ) {
+          token = TokenType.TypePrimitive
+          state = State.InsideTypeExpression
+        } else if (
+          isReadonlyTupleType &&
+          (next = part.match(RE_VARIABLE_NAME))
+        ) {
+          token = TokenType.Type
+          state = State.InsideTypeExpression
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
           state = State.AfterVariableName
@@ -1406,6 +1429,19 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_SEMICOLON))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if (isReadonlyTupleType && (next = part.match(RE_SQUARE_OPEN))) {
+          token = TokenType.Punctuation
+          state = State.AfterTypeExpression
+        } else if (
+          isReadonlyTupleType &&
+          (next = part.match(RE_SQUARE_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          state = State.AfterTypeExpression
+        } else if (isReadonlyTupleType && (next = part.match(RE_COMMA))) {
+          token = TokenType.Punctuation
+          state = stack.pop() || State.TopLevelContent
+          isReadonlyTupleType = false
         } else if ((next = part.match(RE_ARROW))) {
           token = TokenType.Punctuation
           if (!isAmbientFunctionTypeDeclaration) {
@@ -3561,6 +3597,7 @@ export const tokenizeLine = (line, lineState) => {
     isArrowFunctionParameterObjectType,
     isGenericArrowFunctionParameters,
     isFunctionTypeAlias,
+    isReadonlyTupleType,
     isTypeAssertion,
     objectDepth,
     parenthesisDepth,
