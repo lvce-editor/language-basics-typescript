@@ -28,7 +28,11 @@ const text = 'valid'
       Locator('.Token.VariableName', { hasText: 'later' })
     ).toHaveText('later')
     await expect(Locator('.Token.Numeric', { hasText: '42' })).toHaveText('42')
-    await expect(Locator('.Token.Comment')).toHaveText('// keep this comment')
+    await expect(Locator('.Token.Comment')).toHaveCount(2)
+    await expect(Locator('.Token.Comment', { hasText: '//' })).toHaveText('//')
+    await expect(
+      Locator('.Token.Comment', { hasText: 'keep this comment' })
+    ).toHaveText(' keep this comment')
     await expect(Locator('.Token.String', { hasText: 'valid' })).toHaveText(
       'valid'
     )
