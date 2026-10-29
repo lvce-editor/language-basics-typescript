@@ -48,6 +48,14 @@ for (const [language, tokenizer] of [
       ['VariableName', 'rpcId'],
       ['TypePrimitive', 'number'],
       ['Type', 'RendererWorkerOptions'],
+      ['VariableName', 'dispose'],
+      ['VariableName', 'invoke'],
+      ['VariableName', 'initializeRendererWorkerForWorker'],
+      ['VariableName', 'sendMessagePortToEditorWorker'],
+      ['VariableName', 'featureEnabled'],
+      ['VariableName', 'currentValue'],
+      ['VariableName', 'firstHandler'],
+      ['VariableName', 'secondHandler'],
     ]) {
       assert.ok(
         tokens.some((token) => token[0] === type && token[1] === text),

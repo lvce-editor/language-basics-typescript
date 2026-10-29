@@ -16,6 +16,9 @@ export const test = async ({
     `export declare const dispose: () => Promise<void>, invoke: (method: string, ...params: readonly unknown[]) => Promise<any>
 export declare const initializeRendererWorkerForWorker: (commandMap: Readonly<Record<string, (...args: any[]) => any>>) => Promise<void>
 export declare const sendMessagePortToEditorWorker: (port: MessagePort, rpcId: number) => Promise<void>
+declare const featureEnabled: boolean
+declare let currentValue: RendererWorkerOptions
+declare var firstHandler: () => void, secondHandler: (value: string) => void
 // Following declarations keep their own token classifications.
 export interface RendererWorkerOptions { readonly port: MessagePort }
 const nextValue = 123
@@ -28,10 +31,10 @@ const nextValue = 123
   await expect(Locator('.Token.Text')).toHaveCount(0)
   await expect(
     Locator('.Token.KeywordDeclare', { hasText: 'declare' })
-  ).toHaveCount(3)
+  ).toHaveCount(6)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
-  ).toHaveCount(2)
+  ).toHaveCount(3)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'unknown' })
   ).toHaveText('unknown')
@@ -50,6 +53,21 @@ const nextValue = 123
   await expect(Locator('.Token.Type', { hasText: 'Record' })).toHaveText(
     'Record'
   )
+  for (const name of [
+    'dispose',
+    'invoke',
+    'initializeRendererWorkerForWorker',
+    'sendMessagePortToEditorWorker',
+    'featureEnabled',
+    'currentValue',
+    'firstHandler',
+    'secondHandler',
+  ]) {
+    await expect(Locator('.Token.VariableName', { hasText: name })).toHaveText(
+      name
+    )
+    await expect(Locator('.Token.Type', { hasText: name })).toHaveCount(0)
+  }
   await expect(Locator('.Token.VariableName', { hasText: 'rpcId' })).toHaveText(
     'rpcId'
   )
