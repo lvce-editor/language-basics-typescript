@@ -33,7 +33,7 @@ interface NextApi {
   await expect(Locator('.Token.Text')).toHaveCount(0)
   await expect(
     Locator('.Token.KeywordModifier', { hasText: 'readonly' })
-  ).toHaveCount(7)
+  ).toHaveCount(9)
   for (const name of [
     'mockOpenApiRequestGetAll',
     'mockOpenApiRequestReset',
