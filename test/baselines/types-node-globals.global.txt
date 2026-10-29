@@ -1,6 +1,12 @@
 KeywordDeclare
 Whitespace
-Type
+Keyword
 Whitespace
-Text
+VariableName
+Punctuation
+Whitespace
+KeywordOperator
+Whitespace
+VariableName
+Punctuation
 NewLine

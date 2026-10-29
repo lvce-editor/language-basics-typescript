@@ -2,7 +2,7 @@ KeywordDeclare
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 KeywordOperator
@@ -16,7 +16,7 @@ KeywordDeclare
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 KeywordOperator

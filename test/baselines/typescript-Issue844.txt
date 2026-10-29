@@ -2,7 +2,7 @@ KeywordDeclare
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -12,7 +12,7 @@ KeywordDeclare
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 TypePrimitive
@@ -22,7 +22,7 @@ KeywordDeclare
 Whitespace
 Keyword
 Whitespace
-Type
+VariableName
 Punctuation
 Whitespace
 Punctuation

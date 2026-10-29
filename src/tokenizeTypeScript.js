@@ -1949,12 +1949,9 @@ export const tokenizeLine = (line, lineState) => {
         if ((next = part.match(RE_WHITESPACE))) {
           token = TokenType.Whitespace
           state = State.AfterKeywordDeclare
-        } else if ((next = part.match(RE_KEYWORD_CONST))) {
+        } else if ((next = part.match(RE_KEYWORD_VARIABLE_DECLARATION))) {
           token = TokenType.Keyword
-          state = State.AfterKeywordDeclare
-        } else if ((next = part.match(RE_KEYWORD_LET))) {
-          token = TokenType.Keyword
-          state = State.AfterKeywordDeclare
+          state = State.AfterKeywordVariableDeclaration
         } else if ((next = part.match(RE_KEYWORD_ENUM))) {
           token = TokenType.Keyword
           state = State.AfterKeywordEnum
