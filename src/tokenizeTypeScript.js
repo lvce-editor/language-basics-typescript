@@ -1618,9 +1618,12 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
-          // Array suffixes leave an AfterType marker on the stack. Discard it
-          // before closing the containing function parameter list.
-          while (stack.at(-1) === State.AfterType) {
+          // An array parameter leaves an AfterType marker on the stack. Discard
+          // it before closing the containing function parameter list.
+          if (
+            stack.at(-1) === State.AfterType &&
+            stack.at(-2) === State.InsideMethodParameters
+          ) {
             stack.pop()
           }
           if (stack.at(-1) === State.AfterParenthesizedType) {
