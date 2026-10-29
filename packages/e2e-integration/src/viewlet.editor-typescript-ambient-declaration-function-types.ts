@@ -18,7 +18,7 @@ export declare const initializeRendererWorkerForWorker: (commandMap: Readonly<Re
 export declare const sendMessagePortToEditorWorker: (port: MessagePort, rpcId: number) => Promise<void>
 declare const featureEnabled: boolean
 declare let currentValue: RendererWorkerOptions
-declare var firstHandler: () => void, secondHandler: (value: string) => number
+declare var firstHandler: () => void, secondHandler: (value: string) => void
 // Following declarations keep their own token classifications.
 export interface RendererWorkerOptions { readonly port: MessagePort }
 const nextValue = 123
@@ -34,7 +34,7 @@ const nextValue = 123
   ).toHaveCount(6)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'string' })
-  ).toHaveCount(2)
+  ).toHaveCount(3)
   await expect(
     Locator('.Token.TypePrimitive', { hasText: 'unknown' })
   ).toHaveText('unknown')
