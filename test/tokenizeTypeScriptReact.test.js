@@ -66,6 +66,82 @@ const view = (
   ])
 })
 
+test('highlights the Vite React App.tsx scaffold consistently', async () => {
+  const source = await readFile(
+    new URL('./cases/tsx-vite-react-app.tsx', import.meta.url),
+    'utf8'
+  )
+  const tokens = getTokens(source)
+  const tagNames = tokens
+    .filter(([type]) => type === 'TagName')
+    .map(([, value]) => value)
+  const attributes = tokens
+    .filter(([type]) => type === 'AttributeName')
+    .map(([, value]) => value)
+
+  assert.deepEqual(tagNames, [
+    'section',
+    'div',
+    'img',
+    'img',
+    'img',
+    'div',
+    'div',
+    'h1',
+    'h1',
+    'p',
+    'code',
+    'code',
+    'code',
+    'code',
+    'p',
+    'div',
+    'button',
+    'button',
+    'section',
+  ])
+  assert.deepEqual(attributes, [
+    'id',
+    'className',
+    'src',
+    'className',
+    'width',
+    'height',
+    'alt',
+    'src',
+    'className',
+    'alt',
+    'src',
+    'className',
+    'alt',
+    'type',
+    'className',
+    'onClick',
+  ])
+  assert.ok(
+    tokens.some(([type, value]) => type === 'Text' && value === 'Get started')
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'String' && value === 'React logo')
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'Function' && value === 'setCount')
+  )
+  assert.ok(
+    tokens.some(
+      ([type, value]) => type === 'VariableName' && value === 'heroImg'
+    )
+  )
+  assert.ok(
+    tokens.some(([type, value]) => type === 'VariableName' && value === 'count')
+  )
+  assert.ok(
+    tokens.some(
+      ([type, value]) => type === 'VariableName' && value === 'afterScaffold'
+    )
+  )
+})
+
 test('preserves TypeScript generic highlighting in TSX', () => {
   const source = `const identity = <T,>(value: T): T => value
 const list: Array<string> = []
