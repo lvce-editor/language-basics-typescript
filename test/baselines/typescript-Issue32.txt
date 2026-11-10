@@ -61,8 +61,11 @@ Whitespace
 VariableName
 Text
 NewLine
-Text
+Whitespace
+Punctuation
 NewLine
+Whitespace
+VariableName
 Text
 NewLine
 Text
