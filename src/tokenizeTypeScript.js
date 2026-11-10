@@ -150,6 +150,8 @@ export const initialLineState = {
   isArrowFunctionParameters: false,
   isAsyncArrowFunctionParameters: false,
   arrowFunctionParameterObjectDepth: 0,
+  destructuredFunctionTypeParameterDepth: 0,
+  hasDestructuredFunctionTypeParameterAnnotation: false,
   isArrowFunctionParameterObjectType: false,
   isGenericArrowFunctionParameters: false,
   isFunctionTypeAlias: false,
@@ -581,6 +583,10 @@ export const tokenizeLine = (line, lineState) => {
     lineState.hasArrowFunctionParameterDefaultValue || false
   let arrowFunctionParameterObjectDepth =
     lineState.arrowFunctionParameterObjectDepth || 0
+  let destructuredFunctionTypeParameterDepth =
+    lineState.destructuredFunctionTypeParameterDepth || 0
+  let hasDestructuredFunctionTypeParameterAnnotation =
+    lineState.hasDestructuredFunctionTypeParameterAnnotation || false
   let isArrowFunctionParameterObjectType =
     lineState.isArrowFunctionParameterObjectType || false
   let isArrowFunctionParameters = lineState.isArrowFunctionParameters || false
@@ -1630,6 +1636,12 @@ export const tokenizeLine = (line, lineState) => {
             stack.pop()
             state = State.AfterType
           } else if (
+            hasDestructuredFunctionTypeParameterAnnotation &&
+            stack.at(-1) === State.InsideTypeObject
+          ) {
+            hasDestructuredFunctionTypeParameterAnnotation = false
+            state = State.AfterMethodParameters
+          } else if (
             stack.at(-1) === State.InsideMethodParameters &&
             (isGenericArrowFunctionParameters ||
               RE_FUNCTION_PARAMETER_END.test(part))
@@ -2505,9 +2517,19 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_ROUND_CLOSE))) {
           token = TokenType.Punctuation
           state = State.AfterMethodParameters
+        } else if (
+          stack.includes(State.InsideTypeObject) &&
+          (next = part.match(RE_CURLY_OPEN))
+        ) {
+          token = TokenType.Punctuation
+          destructuredFunctionTypeParameterDepth++
+          state = State.InsideMethodParameters
         } else if ((next = part.match(RE_CURLY_CLOSE))) {
           token = TokenType.Punctuation
-          if (
+          if (destructuredFunctionTypeParameterDepth > 0) {
+            destructuredFunctionTypeParameterDepth--
+            state = State.InsideMethodParameters
+          } else if (
             isAsyncArrowFunctionParameters &&
             arrowFunctionParameterObjectDepth > 0
           ) {
@@ -2657,6 +2679,27 @@ export const tokenizeLine = (line, lineState) => {
         break
       case State.InsideMethodParametersAfterVariableName:
         if (
+          destructuredFunctionTypeParameterDepth > 0 &&
+          (next = part.match(RE_WHITESPACE))
+        ) {
+          token = TokenType.Whitespace
+          state = State.InsideMethodParametersAfterVariableName
+        } else if (
+          destructuredFunctionTypeParameterDepth > 0 &&
+          (next = part.match(RE_COMMA))
+        ) {
+          token = TokenType.Punctuation
+          state = State.InsideMethodParameters
+        } else if (
+          destructuredFunctionTypeParameterDepth > 0 &&
+          (next = part.match(RE_CURLY_CLOSE))
+        ) {
+          token = TokenType.Punctuation
+          destructuredFunctionTypeParameterDepth--
+          hasDestructuredFunctionTypeParameterAnnotation =
+            destructuredFunctionTypeParameterDepth === 0
+          state = State.InsideMethodParameters
+        } else if (
           isAsyncArrowFunctionParameters &&
           arrowFunctionParameterObjectDepth > 0 &&
           (next = part.match(RE_COMMA))
@@ -3599,6 +3642,8 @@ export const tokenizeLine = (line, lineState) => {
     isArrowFunctionParameters,
     isAsyncArrowFunctionParameters,
     arrowFunctionParameterObjectDepth,
+    destructuredFunctionTypeParameterDepth,
+    hasDestructuredFunctionTypeParameterAnnotation,
     isArrowFunctionParameterObjectType,
     isGenericArrowFunctionParameters,
     isFunctionTypeAlias,
