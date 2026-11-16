@@ -146,6 +146,9 @@ export const TokenMap = {
 export const initialLineState = {
   functionParameterDepth: 0,
   functionParameterBraceDepth: 0,
+  isObjectMethodParameters: false,
+  isObjectMethodTypeParameters: false,
+  objectMethodTypeObjectDepth: 0,
   hasArrowFunctionParameterDefaultValue: false,
   isArrowFunctionParameters: false,
   isAsyncArrowFunctionParameters: false,
@@ -500,6 +503,19 @@ const getFunctionParameterTypeOffsets = (line) => {
   return offsets
 }
 
+const getObjectTypePrimitiveOffsets = (line) => {
+  const offsets = new Map()
+  const propertyTypePattern = new RegExp(
+    `${IDENTIFIER_PATTERN}\\??\\s*:\\s*(${TYPE_PRIMITIVE_PATTERN})\\b`,
+    'g'
+  )
+  for (const match of line.matchAll(propertyTypePattern)) {
+    const typeOffset = match.index + match[0].lastIndexOf(match[1])
+    offsets.set(typeOffset, TokenType.TypePrimitive)
+  }
+  return offsets
+}
+
 const getArrowFunctionTypeOffsets = (line) => {
   const offsets = new Map()
   if (!line.includes(':') || !line.includes('=>')) {
@@ -579,6 +595,10 @@ export const tokenizeLine = (line, lineState) => {
   let parenthesisDepth = lineState.parenthesisDepth || 0
   let functionParameterDepth = lineState.functionParameterDepth || 0
   let functionParameterBraceDepth = lineState.functionParameterBraceDepth || 0
+  let isObjectMethodParameters = lineState.isObjectMethodParameters || false
+  let isObjectMethodTypeParameters =
+    lineState.isObjectMethodTypeParameters || false
+  let objectMethodTypeObjectDepth = lineState.objectMethodTypeObjectDepth || 0
   let hasArrowFunctionParameterDefaultValue =
     lineState.hasArrowFunctionParameterDefaultValue || false
   let arrowFunctionParameterObjectDepth =
@@ -606,6 +626,7 @@ export const tokenizeLine = (line, lineState) => {
   const arrowFunctionTypeOffsets = getArrowFunctionTypeOffsets(line)
   const genericTypeArgumentOffsets = getGenericTypeArgumentOffsets(line)
   const functionParameterTypeOffsets = getFunctionParameterTypeOffsets(line)
+  const objectTypePrimitiveOffsets = getObjectTypePrimitiveOffsets(line)
   while (index < line.length) {
     const part = line.slice(index)
     let jsxFrame = jsxStack.at(-1)
@@ -701,11 +722,22 @@ export const tokenizeLine = (line, lineState) => {
           state = State.BeforeType
         } else if (
           functionParameterDepth > 0 &&
-          functionParameterBraceDepth === 0 &&
           functionParameterTypeOffsets.has(index) &&
+          ((!isObjectMethodParameters && functionParameterBraceDepth === 0) ||
+            (isObjectMethodTypeParameters &&
+              (functionParameterBraceDepth === 0 ||
+                objectMethodTypeObjectDepth > 0))) &&
           (next = part.match(RE_VARIABLE_NAME))
         ) {
           token = functionParameterTypeOffsets.get(index)
+          state = State.TopLevelContent
+        } else if (
+          isObjectMethodTypeParameters &&
+          objectMethodTypeObjectDepth > 0 &&
+          objectTypePrimitiveOffsets.has(index) &&
+          (next = part.match(RE_VARIABLE_NAME))
+        ) {
+          token = objectTypePrimitiveOffsets.get(index)
           state = State.TopLevelContent
         } else if (
           arrowFunctionTypeOffsets.has(index) &&
@@ -3241,6 +3273,11 @@ export const tokenizeLine = (line, lineState) => {
           state = State.InsideObject
         } else if ((next = part.match(RE_FUNCTION_CALL_NAME))) {
           token = TokenType.FunctionName
+          if (RE_METHOD_NAME.test(part)) {
+            functionParameterDepth = parenthesisDepth + 1
+            functionParameterBraceDepth = 0
+            isObjectMethodParameters = true
+          }
           state = State.TopLevelContent
         } else if ((next = part.match(RE_VARIABLE_NAME))) {
           token = TokenType.VariableName
@@ -3550,11 +3587,18 @@ export const tokenizeLine = (line, lineState) => {
     if (functionParameterDepth > 0 && token === TokenType.Punctuation) {
       if (next[0] === '{') {
         functionParameterBraceDepth++
+        if (isObjectMethodParameters && /:\s*$/.test(line.slice(0, index))) {
+          isObjectMethodTypeParameters = true
+          objectMethodTypeObjectDepth++
+        }
       } else if (next[0] === '}') {
         functionParameterBraceDepth = Math.max(
           0,
           functionParameterBraceDepth - 1
         )
+        if (objectMethodTypeObjectDepth > 0) {
+          objectMethodTypeObjectDepth--
+        }
       }
     }
     if (token === TokenType.Punctuation && next[0] === '(') {
@@ -3564,6 +3608,9 @@ export const tokenizeLine = (line, lineState) => {
       if (parenthesisDepth < functionParameterDepth) {
         functionParameterDepth = 0
         functionParameterBraceDepth = 0
+        isObjectMethodParameters = false
+        isObjectMethodTypeParameters = false
+        objectMethodTypeObjectDepth = 0
       }
     }
     jsxFrame = jsxStack.at(-1)
@@ -3638,6 +3685,9 @@ export const tokenizeLine = (line, lineState) => {
     embeddedLanguageState,
     functionParameterDepth,
     functionParameterBraceDepth,
+    isObjectMethodParameters,
+    isObjectMethodTypeParameters,
+    objectMethodTypeObjectDepth,
     hasArrowFunctionParameterDefaultValue,
     isArrowFunctionParameters,
     isAsyncArrowFunctionParameters,
