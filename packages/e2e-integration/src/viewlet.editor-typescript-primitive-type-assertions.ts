@@ -38,7 +38,7 @@ const later = 42
   }
   await checkAssertions()
 
-  // Retokenize the assertion after an edit on the same line.
+  // Check highlighting after an edit on the same line.
   await Editor.setCursor(0, 'await '.length)
   await Editor.type(' ')
   await checkAssertions()
