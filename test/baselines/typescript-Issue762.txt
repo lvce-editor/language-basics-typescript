@@ -2,7 +2,7 @@ Class
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Punctuation

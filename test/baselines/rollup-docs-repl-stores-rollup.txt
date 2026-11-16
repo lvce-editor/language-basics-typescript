@@ -690,7 +690,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 VariableName

@@ -1885,7 +1885,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 VariableName
@@ -3999,7 +3999,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 KeywordControl
 Whitespace

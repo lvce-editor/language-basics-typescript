@@ -635,7 +635,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 NewLine
@@ -717,7 +717,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 VariableName

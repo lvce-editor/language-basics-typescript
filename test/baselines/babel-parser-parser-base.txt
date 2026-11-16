@@ -685,7 +685,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-LanguageConstant
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
