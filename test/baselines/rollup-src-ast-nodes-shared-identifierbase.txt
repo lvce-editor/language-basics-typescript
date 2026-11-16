@@ -1730,7 +1730,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 Punctuation
@@ -2192,7 +2192,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 NewLine
@@ -2227,7 +2227,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

@@ -204,7 +204,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-LanguageConstant
+TypePrimitive
 Whitespace
 Keyword
 Whitespace

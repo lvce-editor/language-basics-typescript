@@ -384,7 +384,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 KeywordOperator
@@ -429,7 +429,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Whitespace
 KeywordOperator
@@ -2076,7 +2076,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 Punctuation
 Punctuation

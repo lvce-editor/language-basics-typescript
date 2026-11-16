@@ -830,7 +830,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 KeywordControl
 Whitespace

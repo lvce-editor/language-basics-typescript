@@ -179,7 +179,7 @@ LanguageConstant
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Punctuation
 NewLine
 Punctuation

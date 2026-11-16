@@ -1188,7 +1188,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-LanguageConstant
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace
@@ -2043,7 +2043,7 @@ VariableName
 Whitespace
 KeywordControl
 Whitespace
-LanguageConstant
+TypePrimitive
 Punctuation
 NewLine
 Whitespace

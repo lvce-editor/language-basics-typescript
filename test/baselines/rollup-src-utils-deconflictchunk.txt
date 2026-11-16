@@ -1865,7 +1865,7 @@ Punctuation
 Whitespace
 KeywordControl
 Whitespace
-VariableName
+TypePrimitive
 Whitespace
 Punctuation
 Whitespace

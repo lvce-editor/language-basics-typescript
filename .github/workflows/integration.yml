@@ -97,3 +97,7 @@ jobs:
         working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
         run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-unmatched-single-quote
         shell: bash
+      - name: Test TypeScript primitive type assertions
+        working-directory: .tmp/lvce-integration/packages/extension-host-worker-tests
+        run: npm run e2e:headless -- --test-name-prefix=viewlet.editor-typescript-primitive-type-assertions
+        shell: bash

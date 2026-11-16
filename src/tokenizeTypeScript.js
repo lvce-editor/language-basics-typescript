@@ -316,6 +316,9 @@ const RE_KEYWORD_TYPE_PARAMETER_MODIFIER = /^(?:const|in|out|readonly)\b/
 const RE_KEYWORD_ASYNC = /^async\b/
 const RE_KEYWORD_AS = /^as\b/
 const RE_TYPE_ASSERTION = /^as\s+(?:(?:const|readonly)\b|Record\s*<|\{)/
+const RE_PRIMITIVE_TYPE_ASSERTION = new RegExp(
+  `^as\\s+${TYPE_PRIMITIVE_PATTERN}\\b`
+)
 const RE_TYPE_ASSERTION_NEXT_LINE = /^as\s*$/
 const RE_KEYWORD_FROM = /^from\b/
 const RE_KEYWORD_GLOBAL = /^global\b/
@@ -805,7 +808,15 @@ export const tokenizeLine = (line, lineState) => {
               isTypeAssertion =
                 RE_TYPE_ASSERTION.test(part) ||
                 RE_TYPE_ASSERTION_NEXT_LINE.test(part)
-              state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
+              if (RE_PRIMITIVE_TYPE_ASSERTION.test(part)) {
+                // A primitive assertion finishes before the following expression.
+                stack.push(State.TopLevelContent)
+                state = State.BeforeType
+              } else {
+                state = isTypeAssertion
+                  ? State.BeforeType
+                  : State.TopLevelContent
+              }
               break
             case 'break':
             case 'case':
@@ -1842,7 +1853,15 @@ export const tokenizeLine = (line, lineState) => {
               isTypeAssertion =
                 RE_TYPE_ASSERTION.test(part) ||
                 RE_TYPE_ASSERTION_NEXT_LINE.test(part)
-              state = isTypeAssertion ? State.BeforeType : State.TopLevelContent
+              if (RE_PRIMITIVE_TYPE_ASSERTION.test(part)) {
+                // A primitive assertion finishes before the following expression.
+                stack.push(State.TopLevelContent)
+                state = State.BeforeType
+              } else {
+                state = isTypeAssertion
+                  ? State.BeforeType
+                  : State.TopLevelContent
+              }
               break
             case 'break':
             case 'case':
