@@ -183,6 +183,8 @@ const RE_QUOTE_SINGLE = /^'/
 const RE_QUOTE_DOUBLE = /^"/
 const RE_OBJECT_PROPERTY_QUOTE_SINGLE = /^'(?=(?:\\.|[^'\\])*'\s*:)/
 const RE_OBJECT_PROPERTY_QUOTE_DOUBLE = /^"(?=(?:\\.|[^"\\])*"\s*:)/
+const RE_OBJECT_METHOD_QUOTE_SINGLE = /^'(?=(?:\\.|[^'\\])*'\s*\()/
+const RE_OBJECT_METHOD_QUOTE_DOUBLE = /^"(?=(?:\\.|[^"\\])*"\s*\()/
 const RE_STRING_SINGLE_QUOTE_CONTENT = /^[^\\']+/
 const RE_STRING_DOUBLE_QUOTE_CONTENT = /^[^\\"]+/
 const RE_NUMERIC = /^(?:-)?\d+/
@@ -3228,6 +3230,14 @@ export const tokenizeLine = (line, lineState) => {
         } else if ((next = part.match(RE_SPREAD))) {
           token = TokenType.Punctuation
           state = State.TopLevelContent
+        } else if ((next = part.match(RE_OBJECT_METHOD_QUOTE_SINGLE))) {
+          token = TokenType.Punctuation
+          stack.push(State.AfterMethodName)
+          state = State.InsideSingleQuoteString
+        } else if ((next = part.match(RE_OBJECT_METHOD_QUOTE_DOUBLE))) {
+          token = TokenType.Punctuation
+          stack.push(State.AfterMethodName)
+          state = State.InsideDoubleQuoteString
         } else if ((next = part.match(RE_OBJECT_PROPERTY_QUOTE_SINGLE))) {
           token = TokenType.Punctuation
           stack.push(state)
