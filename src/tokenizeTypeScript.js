@@ -160,6 +160,8 @@ export const initialLineState = {
   isFunctionTypeAlias: false,
   isTypeAssertion: false,
   objectDepth: 0,
+  squareBracketDepth: 0,
+  canStartObjectElement: false,
   parenthesisDepth: 0,
   state: State.TopLevelContent,
   /**
@@ -597,6 +599,8 @@ export const tokenizeLine = (line, lineState) => {
   let embeddedLanguageEnd = embeddedLanguage ? line.length : 0
   let embeddedLanguageTag = ''
   let objectDepth = lineState.objectDepth || 0
+  let squareBracketDepth = lineState.squareBracketDepth || 0
+  let canStartObjectElement = lineState.canStartObjectElement || false
   let parenthesisDepth = lineState.parenthesisDepth || 0
   let functionParameterDepth = lineState.functionParameterDepth || 0
   let functionParameterBraceDepth = lineState.functionParameterBraceDepth || 0
@@ -702,6 +706,7 @@ export const tokenizeLine = (line, lineState) => {
       !/^<[A-Za-z_$][\w$]*\s*(?:,|=|extends\b)/.test(part)
     ) {
       jsxStack.push({ kind: 'element', mode: 'tag' })
+      canStartObjectElement = false
       state = State.TopLevelContent
       tokens.push(TokenType.Punctuation, 1)
       index++
@@ -3602,6 +3607,7 @@ export const tokenizeLine = (line, lineState) => {
       (objectDepth > 0 ||
         state === State.InsideObject ||
         state === State.InsideReturnObject ||
+        (state === State.TopLevelContent && canStartObjectElement) ||
         (parenthesisDepth > 0 &&
           RE_OBJECT_ARGUMENT_START.test(line.slice(0, index))))
     ) {
@@ -3655,6 +3661,18 @@ export const tokenizeLine = (line, lineState) => {
           jsxFrame.depth--
         }
       }
+    }
+    if (token === TokenType.Punctuation) {
+      if (next[0] === '[') {
+        squareBracketDepth++
+      } else if (next[0] === ']') {
+        squareBracketDepth = Math.max(0, squareBracketDepth - 1)
+      }
+      // The opening brace of an array element can be on a later line.
+      canStartObjectElement =
+        squareBracketDepth > 0 && (next[0] === '[' || next[0] === ',')
+    } else if (token !== TokenType.Whitespace && token !== TokenType.Comment) {
+      canStartObjectElement = false
     }
     const tokenLength = next[0].length
     index += tokenLength
@@ -3729,6 +3747,8 @@ export const tokenizeLine = (line, lineState) => {
     isReadonlyTupleType,
     isTypeAssertion,
     objectDepth,
+    squareBracketDepth,
+    canStartObjectElement,
     parenthesisDepth,
     state,
     stack,
