@@ -1746,6 +1746,9 @@ export const tokenizeLine = (line, lineState) => {
           state =
             isAmbientFunctionTypeDeclaration ||
             isGenericArrowFunctionParameters ||
+            (isAsyncArrowFunctionParameters &&
+              (stack.at(-1) === State.InsideMethodParameters ||
+                stack.at(-1) === State.AfterArrowFunctionReturnType)) ||
             RE_READONLY_MAP_TYPE_OBJECT_ARGUMENT.test(
               line.slice(0, index) + part
             ) ||
@@ -1788,7 +1791,10 @@ export const tokenizeLine = (line, lineState) => {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideSingleQuoteString
-        } else if (isTypeAssertion && (next = part.match(RE_QUOTE_DOUBLE))) {
+        } else if (
+          (isTypeAssertion || squareBracketDepth > 0) &&
+          (next = part.match(RE_QUOTE_DOUBLE))
+        ) {
           stack.push(state)
           token = TokenType.Punctuation
           state = State.InsideDoubleQuoteString
@@ -2807,7 +2813,8 @@ export const tokenizeLine = (line, lineState) => {
           token = TokenType.Punctuation
           if (
             (hasArrowFunctionParameterDefaultValue ||
-              isGenericArrowFunctionParameters) &&
+              isGenericArrowFunctionParameters ||
+              isAsyncArrowFunctionParameters) &&
             part.includes('=>')
           ) {
             stack.push(State.AfterArrowFunctionReturnType)
