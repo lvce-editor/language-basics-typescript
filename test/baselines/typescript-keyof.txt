@@ -55,7 +55,10 @@ Punctuation
 Whitespace
 Type
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
 Punctuation
 NewLine
 NewLine
@@ -69,7 +72,10 @@ TypePrimitive
 Punctuation
 Punctuation
 Punctuation
-Text
+Punctuation
+String
+Punctuation
+Punctuation
 Punctuation
 NewLine
 Keyword

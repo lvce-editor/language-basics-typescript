@@ -48,7 +48,6 @@ TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
 Punctuation
 NewLine

@@ -46,7 +46,6 @@ TypePrimitive
 Punctuation
 Whitespace
 Punctuation
-Punctuation
 Whitespace
 Punctuation
 Punctuation
@@ -83,7 +82,6 @@ Punctuation
 Type
 Punctuation
 Whitespace
-Punctuation
 Punctuation
 Whitespace
 Punctuation
